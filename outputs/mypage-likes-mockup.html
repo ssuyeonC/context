@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyPage Likes - Improved Design Mockup</title>
+<style>
+  /* === Creatrip Design Tokens === */
+  :root {
+    --primary-50: #00bdad;
+    --primary-60: #00a89a;
+    --primary-5: #e6f9f7;
+    --primary-10: #ccf3f0;
+    --gray-90: #24272b;
+    --gray-80: #3b4047;
+    --gray-50: #838c98;
+    --gray-40: #9da5b0;
+    --gray-20: #d7d9dd;
+    --gray-10: #e9ebee;
+    --gray-5: #f2f3f5;
+    --gray-2: #f7f8fa;
+    --white: #ffffff;
+    --red: #e95162;
+    --orange: #ff6b2c;
+    --yellow: #fdc500;
+    --blue: #2f9bff;
+    --shadow-grey7-20: 0 0.25rem 1.25rem rgba(0,0,0,0.07);
+    --shadow-grey5-20: 0 0 1.25rem rgba(0,0,0,0.05);
+    --shadow-grey2-12: 0 0 0.75rem rgba(0,0,0,0.02);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #ebedf0; color: var(--gray-90); }
+
+  /* Layout */
+  .page { max-width: 960px; margin: 0 auto; display: flex; gap: 32px; padding: 24px 16px; }
+  .sidebar { width: 240px; flex-shrink: 0; }
+  .main { flex: 1; min-width: 0; }
+
+  /* === SIDEBAR: Profile Card === */
+  .profile-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-grey5-20);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .profile-card .avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-50), #00d4c1);
+    padding: 3px; margin: 0 auto 12px;
+  }
+  .profile-card .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--gray-10);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .profile-card .avatar-inner svg { width: 36px; height: 36px; fill: var(--gray-40); }
+  .profile-card .username { font-size: 1rem; font-weight: 700; color: var(--gray-90); margin-bottom: 2px; }
+  .profile-card .email { font-size: 0.75rem; color: var(--gray-50); margin-bottom: 16px; }
+
+  .profile-stats {
+    display: flex; justify-content: center; gap: 24px;
+    padding-top: 16px; border-top: 1px solid var(--gray-10);
+  }
+  .profile-stats .stat { text-align: center; }
+  .profile-stats .stat-value { font-size: 1.125rem; font-weight: 700; color: var(--primary-50); }
+  .profile-stats .stat-label { font-size: 0.6875rem; color: var(--gray-50); margin-top: 2px; }
+
+  /* Sidebar Menu */
+  .sidebar-menu {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow: var(--shadow-grey2-12);
+  }
+  .sidebar-menu .menu-group { padding: 8px 0; }
+  .sidebar-menu .menu-group + .menu-group { border-top: 1px solid var(--gray-10); }
+  .sidebar-menu .menu-group-title { font-size: 0.6875rem; color: var(--gray-40); padding: 8px 12px 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .menu-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 10px; cursor: pointer;
+    font-size: 0.875rem; color: var(--gray-80); transition: all 0.15s;
+  }
+  .menu-item:hover { background: var(--gray-2); }
+  .menu-item.active {
+    background: var(--primary-5);
+    color: var(--primary-50); font-weight: 600;
+  }
+  .menu-item .icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; }
+  .menu-item.active .active-bar {
+    width: 3px; height: 20px; background: var(--primary-50); border-radius: 2px; margin-left: -6px; margin-right: 4px;
+  }
+
+  /* === MAIN CONTENT === */
+
+  /* === CTA Option A: Sticky Bottom Bar === */
+  .sticky-bottom-bar {
+    position: sticky; bottom: 0; left: 0; right: 0; z-index: 10;
+    background: var(--white);
+    border-top: 1px solid var(--gray-10);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+  }
+  .sticky-bottom-bar .bar-left {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sticky-bottom-bar .bar-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--primary-5); color: var(--primary-50);
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  }
+  .sticky-bottom-bar .bar-text { font-size: 0.8125rem; font-weight: 600; color: var(--gray-90); }
+  .sticky-bottom-bar .bar-sub { font-size: 0.6875rem; color: var(--gray-50); }
+  .sticky-bottom-bar .bar-actions { display: flex; gap: 8px; }
+
+  /* Desktop V2 Sticky Bar: Gradient Primary + Gray Secondary */
+  .desktop-sticky-bar {
+    position: sticky; bottom: 0; left: 0; right: 0; z-index: 10;
+    background: var(--white);
+    border-top: 1px solid var(--gray-10);
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+  }
+  .desktop-sticky-bar .dsb-left {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .desktop-sticky-bar .dsb-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--primary-5); color: var(--primary-50);
+    display: flex; align-items: center; justify-content: center; font-size: 1.125rem;
+  }
+  .desktop-sticky-bar .dsb-text { font-size: 0.9375rem; font-weight: 600; color: var(--gray-90); }
+  .desktop-sticky-bar .dsb-sub { font-size: 0.75rem; color: var(--gray-50); }
+  .desktop-sticky-bar .dsb-actions { display: flex; gap: 10px; }
+  .desktop-sticky-bar .dsb-btn-primary {
+    padding: 12px 28px; border-radius: 12px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--primary-50), #00d4c1);
+    color: var(--white);
+    font-size: 0.9375rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,189,173,0.3);
+    transition: all 0.15s;
+  }
+  .desktop-sticky-bar .dsb-btn-primary:hover { box-shadow: 0 6px 20px rgba(0,189,173,0.4); transform: translateY(-1px); }
+  .desktop-sticky-bar .dsb-btn-primary .arrow-icon {
+    width: 22px; height: 22px; background: rgba(255,255,255,0.25);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.8125rem;
+  }
+  .desktop-sticky-bar .dsb-btn-secondary {
+    padding: 12px 24px; border-radius: 12px; cursor: pointer;
+    background: var(--gray-5); color: var(--gray-80);
+    font-size: 0.875rem; font-weight: 600; border: none;
+    transition: all 0.15s;
+  }
+  .desktop-sticky-bar .dsb-btn-secondary:hover { background: var(--gray-10); }
+
+  /* === CTA Option B: Inline Section Header with Action === */
+  .section-header-with-cta {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 14px 18px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--gray-10);
+  }
+  .section-header-with-cta .shc-left {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-header-with-cta .shc-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--gray-90);
+    display: flex; align-items: center; justify-content: center; font-size: 1.125rem;
+  }
+  .section-header-with-cta .shc-title { font-size: 0.9375rem; font-weight: 700; color: var(--gray-90); }
+  .section-header-with-cta .shc-desc { font-size: 0.6875rem; color: var(--gray-50); margin-top: 1px; }
+  .section-header-with-cta .shc-actions { display: flex; gap: 6px; }
+
+  /* === CTA Option C: FAB (Floating Action Button) === */
+  .fab-container {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  }
+  .fab-main {
+    width: 56px; height: 56px; border-radius: 16px;
+    background: var(--gray-90); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; border: none; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+  }
+  .fab-main:hover { transform: scale(1.05); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+  .fab-label {
+    background: var(--gray-90); color: var(--white);
+    font-size: 0.75rem; font-weight: 600;
+    padding: 6px 12px; border-radius: 8px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .fab-tooltip {
+    position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+    background: var(--gray-90); color: var(--white);
+    font-size: 0.75rem; font-weight: 500; padding: 8px 14px; border-radius: 8px;
+    white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .fab-tooltip::after {
+    content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
+    width: 0; height: 0;
+    border-left: 6px solid var(--gray-90);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px 20px; border-radius: 10px;
+    font-size: 0.875rem; font-weight: 600; cursor: pointer;
+    border: none; transition: all 0.15s;
+  }
+  .btn-primary { background: var(--primary-50); color: var(--white); }
+  .btn-primary:hover { background: var(--primary-60); }
+  .btn-secondary { background: var(--white); color: var(--primary-50); border: 1.5px solid var(--primary-50); }
+  .btn-secondary:hover { background: var(--primary-5); }
+  .btn-sm { padding: 8px 14px; font-size: 0.75rem; border-radius: 8px; }
+
+  /* Section Header */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .section-header h2 { font-size: 1.125rem; font-weight: 700; color: var(--gray-90); }
+  .section-header .see-all {
+    font-size: 0.75rem; color: var(--gray-50); cursor: pointer;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .section-header .see-all:hover { color: var(--primary-50); }
+
+  /* Spot Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .spot-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .spot-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-grey7-20);
+  }
+  .spot-card .card-image {
+    position: relative;
+    aspect-ratio: 306 / 240;
+    background: var(--gray-5);
+    overflow: hidden;
+  }
+  .spot-card .heart-btn {
+    position: absolute; top: 8px; right: 8px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  .spot-card .heart-btn svg { width: 18px; height: 18px; }
+  .spot-card .card-content { padding: 12px; }
+  .spot-card .card-region { font-size: 0.6875rem; color: var(--gray-50); margin-bottom: 4px; }
+  .spot-card .card-title { font-size: 0.875rem; font-weight: 600; color: var(--gray-90); margin-bottom: 8px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .spot-card .card-price-row { display: flex; align-items: baseline; gap: 6px; }
+  .spot-card .card-price { font-size: 1rem; font-weight: 700; color: var(--gray-90); }
+  .spot-card .card-original-price { font-size: 0.75rem; color: var(--gray-40); text-decoration: line-through; }
+  .spot-card .card-discount { font-size: 0.75rem; font-weight: 700; color: var(--orange); }
+  .spot-card .card-rating { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+  .spot-card .card-rating svg { width: 12px; height: 12px; }
+  .spot-card .card-rating span { font-size: 0.6875rem; color: var(--gray-50); }
+
+  /* Stay Cards */
+  .stay-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    margin-bottom: 12px;
+  }
+  .stay-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-grey7-20);
+  }
+  .stay-card .card-image {
+    width: 148px; height: 148px; flex-shrink: 0;
+    position: relative; background: var(--gray-5); overflow: hidden;
+  }
+  .stay-card .heart-btn {
+    position: absolute; top: 8px; right: 8px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: none;
+  }
+  .stay-card .heart-btn svg { width: 16px; height: 16px; }
+  .stay-card .card-content { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .stay-card .card-location { font-size: 0.6875rem; color: var(--gray-50); margin-bottom: 4px; }
+  .stay-card .card-title { font-size: 0.875rem; font-weight: 600; color: var(--gray-90); margin-bottom: 4px; }
+  .stay-card .badge { display: inline-flex; align-items: center; gap: 3px; font-size: 0.6875rem; color: var(--blue); background: rgba(47,155,255,0.08); padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; width: fit-content; }
+  .stay-card .card-bottom { display: flex; align-items: flex-end; justify-content: space-between; }
+  .stay-card .card-rating { display: flex; align-items: center; gap: 4px; }
+  .stay-card .card-rating svg { width: 12px; height: 12px; }
+  .stay-card .card-rating span { font-size: 0.6875rem; color: var(--gray-50); }
+  .stay-card .card-price { text-align: right; }
+  .stay-card .card-original-price { font-size: 0.6875rem; color: var(--gray-40); text-decoration: line-through; }
+  .stay-card .card-final-price { font-size: 1rem; font-weight: 700; color: var(--gray-90); }
+
+  /* Placeholder images */
+  .ph { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+  .ph-food { background: linear-gradient(135deg, #f5e6d3, #e8d5c4); }
+  .ph-food::after { content: '\1F35C'; font-size: 2.5rem; }
+  .ph-cafe { background: linear-gradient(135deg, #f5d3d3, #e8c4c4); }
+  .ph-cafe::after { content: '\2615'; font-size: 2.5rem; }
+  .ph-temple { background: linear-gradient(135deg, #d3f5e6, #c4e8d5); }
+  .ph-temple::after { content: '\26E9\FE0F'; font-size: 2.5rem; }
+  .ph-hotel { background: linear-gradient(135deg, #e6d3f5, #d5c4e8); }
+  .ph-hotel::after { content: '\1F3E8'; font-size: 2.5rem; }
+  .ph-park { background: linear-gradient(135deg, #d3f5d3, #c4e8c4); }
+  .ph-park::after { content: '\1F333'; font-size: 2.5rem; }
+
+  /* More Button */
+  .more-btn {
+    display: flex; align-items: center; justify-content: center;
+    padding: 12px; font-size: 0.875rem; color: var(--gray-50); cursor: pointer;
+    border: 1px solid var(--gray-10); border-radius: 10px; background: var(--white);
+  }
+  .more-btn:hover { background: var(--gray-2); color: var(--gray-80); }
+
+  /* === MOBILE === */
+  .mobile-frame {
+    width: 375px;
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    margin: 40px auto;
+  }
+  .mobile-statusbar {
+    height: 44px; background: var(--white);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; font-size: 0.75rem; font-weight: 600;
+  }
+  .mobile-nav {
+    height: 48px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 16px; border-bottom: 1px solid var(--gray-10);
+  }
+  .mobile-nav .nav-title { font-size: 1.125rem; font-weight: 700; }
+  .mobile-nav .nav-icons { display: flex; gap: 16px; }
+  .mobile-nav .nav-icons svg { width: 24px; height: 24px; fill: var(--gray-80); }
+
+  .mobile-content { padding: 0 0 24px; }
+
+  /* Mobile Sticky Bottom Bar - Base */
+  .mobile-sticky-bar {
+    position: sticky; bottom: 0; left: 0; right: 0; z-index: 10;
+    background: var(--white);
+    border-top: 1px solid var(--gray-10);
+    padding: 12px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0));
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  }
+  .mobile-sticky-bar .bar-row {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mobile-sticky-bar .bar-actions { display: flex; gap: 8px; width: 100%; }
+
+  /* Variation 1: Dark Primary + Outlined Secondary */
+  .bar-v1 .btn-bar-primary {
+    flex: 1; padding: 14px 16px; border-radius: 12px; border: none; cursor: pointer;
+    background: var(--gray-90); color: var(--white);
+    font-size: 0.9375rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.15s;
+  }
+  .bar-v1 .btn-bar-primary:hover { background: #1a1d21; }
+  .bar-v1 .btn-bar-primary .btn-icon { font-size: 1rem; }
+  .bar-v1 .btn-bar-secondary {
+    padding: 14px 16px; border-radius: 12px; cursor: pointer;
+    background: var(--white); color: var(--gray-80);
+    font-size: 0.8125rem; font-weight: 600;
+    border: 1.5px solid var(--gray-20);
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .bar-v1 .btn-bar-secondary:hover { border-color: var(--gray-40); }
+
+  /* Variation 2: Primary color gradient + icon badge */
+  .bar-v2 .btn-bar-primary {
+    flex: 1; padding: 14px 16px; border-radius: 12px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--primary-50), #00d4c1);
+    color: var(--white);
+    font-size: 0.9375rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,189,173,0.3);
+    transition: all 0.15s;
+  }
+  .bar-v2 .btn-bar-primary:hover { box-shadow: 0 6px 20px rgba(0,189,173,0.4); }
+  .bar-v2 .btn-bar-primary .arrow-icon {
+    width: 20px; height: 20px; background: rgba(255,255,255,0.25);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+  }
+  .bar-v2 .btn-bar-secondary {
+    padding: 14px 16px; border-radius: 12px; cursor: pointer;
+    background: var(--gray-5); color: var(--gray-80);
+    font-size: 0.8125rem; font-weight: 600; border: none;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .bar-v2 .btn-bar-secondary:hover { background: var(--gray-10); }
+
+  /* Variation 3: Stacked (full-width primary on top, secondary text below) */
+  .bar-v3 { flex-direction: column; gap: 6px; }
+  .bar-v3 .btn-bar-primary {
+    width: 100%; padding: 15px 16px; border-radius: 12px; border: none; cursor: pointer;
+    background: var(--gray-90); color: var(--white);
+    font-size: 1rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.15s;
+  }
+  .bar-v3 .btn-bar-primary:hover { background: #1a1d21; }
+  .bar-v3 .btn-bar-primary .plus-badge {
+    width: 22px; height: 22px; background: var(--primary-50); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.875rem; font-weight: 700;
+  }
+  .bar-v3 .btn-bar-secondary {
+    width: 100%; padding: 8px; border: none; cursor: pointer;
+    background: transparent; color: var(--gray-50);
+    font-size: 0.75rem; font-weight: 500; text-align: center;
+    text-decoration: underline; text-underline-offset: 2px;
+    transition: color 0.15s;
+  }
+  .bar-v3 .btn-bar-secondary:hover { color: var(--gray-80); }
+
+  /* Mobile Inline Section CTA */
+  .mobile-section-cta {
+    margin: 12px 16px; padding: 12px 14px;
+    background: var(--white); border: 1px solid var(--gray-10); border-radius: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .mobile-section-cta .msc-icon {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: var(--gray-90);
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  }
+  .mobile-section-cta .msc-body { flex: 1; }
+  .mobile-section-cta .msc-title { font-size: 0.8125rem; font-weight: 600; color: var(--gray-90); }
+  .mobile-section-cta .msc-desc { font-size: 0.625rem; color: var(--gray-50); }
+  .mobile-section-cta .msc-arrow { color: var(--gray-40); font-size: 1.25rem; }
+
+  /* Mobile FAB */
+  .mobile-fab {
+    position: fixed; bottom: 80px; right: 16px; z-index: 100;
+  }
+  .mobile-fab button {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: var(--gray-90); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; border: none; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+
+  .mobile-section { padding: 0 16px; }
+
+  .mobile-scroll-cards {
+    display: flex; gap: 12px; overflow-x: auto; padding: 0 16px 4px;
+    scrollbar-width: none;
+  }
+  .mobile-scroll-cards::-webkit-scrollbar { display: none; }
+  .mobile-scroll-cards .spot-card { min-width: 160px; max-width: 160px; flex-shrink: 0; }
+  .mobile-scroll-cards .spot-card .card-image { height: 128px; aspect-ratio: auto; }
+
+  .section-divider { height: 8px; background: var(--gray-2); margin: 16px 0; }
+
+  .mobile-stay-card {
+    display: flex; border-radius: 12px; overflow: hidden;
+    margin-bottom: 10px; background: var(--gray-2);
+  }
+  .mobile-stay-card .card-image { width: 112px; height: 112px; flex-shrink: 0; position: relative; overflow: hidden; }
+  .mobile-stay-card .card-content { padding: 10px 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+
+  /* Page Titles */
+  .page-title {
+    text-align: center; padding: 48px 0 16px;
+    font-size: 0.875rem; color: var(--gray-50); letter-spacing: 0.5px;
+  }
+  .page-title span { font-weight: 700; color: var(--gray-90); font-size: 1.25rem; display: block; margin-top: 4px; }
+
+  /* Comparison */
+  .comparison-label {
+    text-align: center; padding: 32px 0 8px;
+    font-size: 0.75rem; color: var(--gray-40);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== -->
+<!-- DESKTOP VERSION       -->
+<!-- ==================== -->
+<div class="page-title">DESKTOP<span>MyPage - Likes (V2 Gradient Sticky Bar)</span></div>
+
+<div style="max-width:960px;margin:0 auto;position:relative;">
+<div class="page">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="profile-card">
+      <div class="avatar">
+        <div class="avatar-inner">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+      </div>
+      <div class="username">Wooseok Kim</div>
+      <div class="email">wooseok.kim@creatrip.com</div>
+      <div class="profile-stats">
+        <div class="stat">
+          <div class="stat-value">23</div>
+          <div class="stat-label">Likes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Plans</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Reviews</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-menu">
+      <div class="menu-group">
+        <div class="menu-item"><div class="icon">🇯🇵</div> Japan</div>
+        <div class="menu-item"><div class="icon">🇰🇷</div> Korea</div>
+      </div>
+      <div class="menu-group">
+        <div class="menu-group-title">Favorites</div>
+        <div class="menu-item active"><div class="active-bar"></div><div class="icon">❤️</div> Likes</div>
+        <div class="menu-item"><div class="icon">✈️</div> Travel</div>
+        <div class="menu-item"><div class="icon">🛍️</div> Shopping</div>
+        <div class="menu-item"><div class="icon">📝</div> My Reviews</div>
+      </div>
+      <div class="menu-group">
+        <div class="menu-group-title">Settings</div>
+        <div class="menu-item"><div class="icon">⚙️</div> Personal Setting</div>
+        <div class="menu-item"><div class="icon">🔒</div> Change Password</div>
+        <div class="menu-item"><div class="icon">🔗</div> Link Account</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- Content starts here, no top banner -->
+
+    <!-- Places & Activities -->
+    <div class="section-header">
+      <h2>Places & Activities</h2>
+      <div class="see-all">모두 보기 ›</div>
+    </div>
+    <div class="cards-grid">
+      <div class="spot-card">
+        <div class="card-image ph ph-food">
+          <button class="heart-btn">
+            <svg viewBox="0 0 24 24" fill="#e95162"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-region">Seoul, Myeongdong</div>
+          <div class="card-title">Myeongdong Kyoja Kalguksu Noodles</div>
+          <div class="card-price-row">
+            <span class="card-discount">15%</span>
+            <span class="card-price">KRW 12,500</span>
+            <span class="card-original-price">KRW 14,700</span>
+          </div>
+          <div class="card-rating">
+            <svg viewBox="0 0 24 24" fill="#fdc500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>4.8 (324)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card">
+        <div class="card-image ph ph-cafe">
+          <button class="heart-btn">
+            <svg viewBox="0 0 24 24" fill="#e95162"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-region">Seoul, Hongdae</div>
+          <div class="card-title">A-Place Cafe & Rooftop Bar</div>
+          <div class="card-price-row">
+            <span class="card-price">KRW 8,900</span>
+          </div>
+          <div class="card-rating">
+            <svg viewBox="0 0 24 24" fill="#fdc500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>4.6 (186)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card">
+        <div class="card-image ph ph-temple">
+          <button class="heart-btn">
+            <svg viewBox="0 0 24 24" fill="#e95162"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-region">Seoul, Jongno</div>
+          <div class="card-title">Gyeongbokgung Palace Tour</div>
+          <div class="card-price-row">
+            <span class="card-discount">20%</span>
+            <span class="card-price">KRW 15,000</span>
+            <span class="card-original-price">KRW 18,750</span>
+          </div>
+          <div class="card-rating">
+            <svg viewBox="0 0 24 24" fill="#fdc500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>4.9 (512)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="more-btn">MORE</div>
+
+    <!-- Stays Section -->
+    <div style="margin-top: 32px;">
+      <div class="section-header">
+        <h2>Stays</h2>
+        <div class="see-all">모두 보기 ›</div>
+      </div>
+
+      <div class="stay-card">
+        <div class="card-image ph ph-hotel">
+          <button class="heart-btn">
+            <svg viewBox="0 0 24 24" fill="#e95162"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-location">Seoul, Myeongdong</div>
+          <div class="card-title" style="font-size:1rem;">Shilla Hotel Seoul</div>
+          <div class="badge">✓ Free Cancellation</div>
+          <div class="card-bottom">
+            <div class="card-rating">
+              <svg viewBox="0 0 24 24" fill="#fdc500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>4.7 (89)</span>
+            </div>
+            <div class="card-price">
+              <div class="card-original-price">KRW 320,000</div>
+              <div class="card-final-price">KRW 256,000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stay-card">
+        <div class="card-image ph ph-park">
+          <button class="heart-btn">
+            <svg viewBox="0 0 24 24" fill="#e95162"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-location">Seoul, Gangnam</div>
+          <div class="card-title" style="font-size:1rem;">L7 Gangnam by Lotte Hotel</div>
+          <div class="badge">✓ Free Cancellation</div>
+          <div class="card-bottom">
+            <div class="card-rating">
+              <svg viewBox="0 0 24 24" fill="#fdc500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>4.5 (142)</span>
+            </div>
+            <div class="card-price">
+              <div class="card-original-price">KRW 198,000</div>
+              <div class="card-final-price">KRW 168,300</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Desktop V2 Sticky Bar -->
+<div style="max-width:960px;margin:0 auto;">
+  <div class="desktop-sticky-bar">
+    <div class="dsb-left">
+      <div class="dsb-icon">📍</div>
+      <div>
+        <div class="dsb-text">좋아요 스팟으로 플랜 만들기</div>
+        <div class="dsb-sub">좋아요를 누른 스팟을 여행 일정에 바로 추가하세요</div>
+      </div>
+    </div>
+    <div class="dsb-actions">
+      <button class="dsb-btn-secondary">플랜에 추가</button>
+      <button class="dsb-btn-primary">플랜 생성하기 <span class="arrow-icon">→</span></button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== -->
+<!-- MOBILE VERSION        -->
+<!-- ==================== -->
+<div class="page-title">MOBILE<span>MyPage - Likes (Improved)</span></div>
+
+<div class="mobile-frame">
+  <div class="mobile-statusbar">
+    <span>9:41</span>
+    <span>●●● 🔋</span>
+  </div>
+
+  <div class="mobile-nav">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gray-80)"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    <span class="nav-title">Likes</span>
+    <div class="nav-icons">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    </div>
+  </div>
+
+  <div class="mobile-content">
+    <!-- Mobile Option A: Inline Section CTA -->
+    <div class="mobile-section-cta">
+      <div class="msc-icon">📍</div>
+      <div class="msc-body">
+        <div class="msc-title">좋아요 스팟으로 플랜 만들기</div>
+        <div class="msc-desc">좋아요 스팟을 여행 일정에 바로 추가</div>
+      </div>
+      <div class="msc-arrow">›</div>
+    </div>
+
+    <div class="mobile-section">
+      <div class="section-header" style="margin-top:8px;">
+        <h2 style="font-size:1rem;">Places & Activities</h2>
+        <div class="see-all">모두 보기 ›</div>
+      </div>
+    </div>
+
+    <div class="mobile-scroll-cards">
+      <div class="spot-card">
+        <div class="card-image ph ph-food" style="height:128px;">
+          <button class="heart-btn" style="width:28px;height:28px;"><svg viewBox="0 0 24 24" fill="#e95162" style="width:15px;height:15px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+        </div>
+        <div class="card-content" style="padding:10px;">
+          <div class="card-region" style="font-size:0.625rem;">Myeongdong</div>
+          <div class="card-title" style="font-size:0.8125rem;">Myeongdong Kyoja</div>
+          <div class="card-price-row">
+            <span class="card-discount" style="font-size:0.6875rem;">15%</span>
+            <span class="card-price" style="font-size:0.875rem;">₩12,500</span>
+          </div>
+        </div>
+      </div>
+      <div class="spot-card">
+        <div class="card-image ph ph-cafe" style="height:128px;">
+          <button class="heart-btn" style="width:28px;height:28px;"><svg viewBox="0 0 24 24" fill="#e95162" style="width:15px;height:15px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+        </div>
+        <div class="card-content" style="padding:10px;">
+          <div class="card-region" style="font-size:0.625rem;">Hongdae</div>
+          <div class="card-title" style="font-size:0.8125rem;">A-Place Cafe</div>
+          <div class="card-price-row">
+            <span class="card-price" style="font-size:0.875rem;">₩8,900</span>
+          </div>
+        </div>
+      </div>
+      <div class="spot-card">
+        <div class="card-image ph ph-temple" style="height:128px;">
+          <button class="heart-btn" style="width:28px;height:28px;"><svg viewBox="0 0 24 24" fill="#e95162" style="width:15px;height:15px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+        </div>
+        <div class="card-content" style="padding:10px;">
+          <div class="card-region" style="font-size:0.625rem;">Jongno</div>
+          <div class="card-title" style="font-size:0.8125rem;">Gyeongbokgung</div>
+          <div class="card-price-row">
+            <span class="card-discount" style="font-size:0.6875rem;">20%</span>
+            <span class="card-price" style="font-size:0.875rem;">₩15,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:8px 16px;">
+      <div class="more-btn" style="font-size:0.8125rem;">MORE</div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="mobile-section">
+      <div class="section-header" style="margin-top:8px;">
+        <h2 style="font-size:1rem;">Stays</h2>
+        <div class="see-all">모두 보기 ›</div>
+      </div>
+
+      <div class="mobile-stay-card">
+        <div class="card-image ph ph-hotel"></div>
+        <div class="card-content">
+          <div>
+            <div style="font-size:0.625rem;color:var(--gray-50);">Myeongdong</div>
+            <div style="font-size:0.8125rem;font-weight:600;margin:2px 0 4px;">Shilla Hotel Seoul</div>
+            <div style="display:inline-flex;font-size:0.625rem;color:var(--blue);background:rgba(47,155,255,0.08);padding:2px 6px;border-radius:3px;">✓ Free Cancel</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+            <div style="display:flex;align-items:center;gap:3px;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#fdc500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span style="font-size:0.625rem;color:var(--gray-50);">4.7</span>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.5625rem;color:var(--gray-40);text-decoration:line-through;">₩320,000</div>
+              <div style="font-size:0.875rem;font-weight:700;">₩256,000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-stay-card">
+        <div class="card-image ph ph-park"></div>
+        <div class="card-content">
+          <div>
+            <div style="font-size:0.625rem;color:var(--gray-50);">Gangnam</div>
+            <div style="font-size:0.8125rem;font-weight:600;margin:2px 0 4px;">L7 Gangnam by Lotte</div>
+            <div style="display:inline-flex;font-size:0.625rem;color:var(--blue);background:rgba(47,155,255,0.08);padding:2px 6px;border-radius:3px;">✓ Free Cancel</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+            <div style="display:flex;align-items:center;gap:3px;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#fdc500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span style="font-size:0.625rem;color:var(--gray-50);">4.5</span>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.5625rem;color:var(--gray-40);text-decoration:line-through;">₩198,000</div>
+              <div style="font-size:0.875rem;font-weight:700;">₩168,300</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- V2 Sticky Bar: Gradient Primary + Gray Secondary -->
+    <div class="mobile-sticky-bar bar-v2" style="position:relative;">
+      <div class="bar-actions">
+        <button class="btn-bar-secondary">플랜에 추가</button>
+        <button class="btn-bar-primary">플랜 생성하기 <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height:60px;"></div>
+</body>
+</html>
