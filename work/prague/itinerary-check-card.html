@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 60px 40px;
+    background: #f5f5f7;
+    font-family: -apple-system, 'Pretendard', 'Noto Sans', sans-serif;
+  }
+
+  .variant-label {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Card base ── */
+  .card {
+    width: 228px;
+    height: 228px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  /* ===== VARIANT A: Glassmorphism + Checklist ===== */
+  .card-a {
+    background: linear-gradient(145deg, #e8f0fe, #d4e4ff, #e0d7f7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px 20px;
+  }
+
+  .card-a .icon-area {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(100,120,200,0.15);
+  }
+
+  .card-a .icon-area svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-a .text-area {
+    text-align: center;
+  }
+
+  .card-a .title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .card-a .subtitle {
+    font-size: 11px;
+    color: #5a6785;
+    line-height: 1.3;
+  }
+
+  .card-a .badge {
+    background: rgba(255,255,255,0.8);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #4a6cf7;
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== VARIANT B: Dark card with highlight ===== */
+  .card-b {
+    background: linear-gradient(160deg, #1a1a2e 0%, #2d2b55 50%, #3a2d6b 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 20px;
+    justify-content: space-between;
+  }
+
+  .card-b .top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #a5b4fc;
+    width: fit-content;
+    backdrop-filter: blur(4px);
+  }
+
+  .card-b .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-b .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .card-b .check-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .card-b .check-item .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-b .check-item .dot.green { background: #34d399; }
+  .card-b .check-item .dot.yellow { background: #fbbf24; }
+  .card-b .check-item .dot.red { background: #f87171; }
+
+  .card-b .check-item .dot svg {
+    width: 8px;
+    height: 8px;
+  }
+
+  .card-b .title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+  }
+
+  .card-b .title em {
+    font-style: normal;
+    background: linear-gradient(90deg, #a5b4fc, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .card-b .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #a5b4fc;
+  }
+
+  /* ===== VARIANT C: Warm illustration style ===== */
+  .card-c {
+    background: linear-gradient(155deg, #fff7ed, #fef3c7, #fde68a);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    position: relative;
+  }
+
+  .card-c::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(251, 191, 36, 0.15);
+  }
+
+  .card-c .clipboard {
+    width: 80px;
+    height: 90px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(180,140,60,0.12);
+    padding: 12px 10px 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card-c .clipboard::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 10px;
+    background: #d4a853;
+    border-radius: 3px;
+  }
+
+  .card-c .clipboard .line {
+    height: 5px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .card-c .clipboard .line .bar {
+    height: 100%;
+    border-radius: 3px;
+    flex: 1;
+  }
+
+  .card-c .clipboard .line .check-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-c .clipboard .line .check-circle svg {
+    width: 7px;
+    height: 7px;
+  }
+
+  .card-c .stamp {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
+    border: 2.5px solid #22c55e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-15deg);
+    opacity: 0.8;
+  }
+
+  .card-c .stamp svg {
+    width: 16px;
+    height: 16px;
+    color: #22c55e;
+  }
+
+  .card-c .text-area {
+    text-align: center;
+  }
+
+  .card-c .title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #78350f;
+    line-height: 1.4;
+    margin-bottom: 2px;
+  }
+
+  .card-c .subtitle {
+    font-size: 10.5px;
+    color: #a16207;
+    line-height: 1.3;
+  }
+
+  /* ===== Name labels ===== */
+  .card-name {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    line-height: 1.4;
+    max-width: 228px;
+  }
+</style>
+</head>
+<body>
+
+<!-- VARIANT A -->
+<div class="card-wrapper">
+  <div class="variant-label">A — Glassmorphism</div>
+  <div class="card card-a">
+    <div class="icon-area">
+      <svg viewBox="0 0 40 40" fill="none">
+        <rect x="6" y="4" width="22" height="28" rx="3" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.5"/>
+        <rect x="12" y="8" width="24" height="28" rx="3" fill="#fff" stroke="#6366f1" stroke-width="1.5"/>
+        <path d="M17 18h14" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+        <path d="M17 23h10" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+        <path d="M17 28h7" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="30" cy="30" r="7" fill="#6366f1"/>
+        <path d="M27.5 30l2 2 3.5-3.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="text-area">
+      <div class="title">Is Your Trip<br>Plan Doable?</div>
+      <div class="subtitle">Expert review in 24h</div>
+    </div>
+    <div class="badge">FREE CHECK &rarr;</div>
+  </div>
+  <div class="card-name">Check My Itinerary</div>
+</div>
+
+<!-- VARIANT B -->
+<div class="card-wrapper">
+  <div class="variant-label">B — Dark Premium</div>
+  <div class="card card-b">
+    <div class="top-badge">
+      <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 5.5H16l-4.5 3.5 1.7 5.5L8 11l-5.2 3.5 1.7-5.5L0 5.5h6z"/></svg>
+      Expert Review
+    </div>
+    <div class="content">
+      <div class="title">Is your trip<br><em>realistic?</em></div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="dot green"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4l2 2 3-3.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          Travel time check
+        </div>
+        <div class="check-item">
+          <div class="dot yellow"><svg viewBox="0 0 8 8" fill="none"><path d="M4 2v3M4 6.2v.1" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          Schedule balance
+        </div>
+        <div class="check-item">
+          <div class="dot red"><svg viewBox="0 0 8 8" fill="none"><path d="M2.5 2.5l3 3M5.5 2.5l-3 3" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          Spot availability
+        </div>
+      </div>
+      <div class="cta">Get free review &rarr;</div>
+    </div>
+  </div>
+  <div class="card-name">Check My Itinerary</div>
+</div>
+
+<!-- VARIANT C -->
+<div class="card-wrapper">
+  <div class="variant-label">C — Warm Clipboard</div>
+  <div class="card card-c">
+    <div class="clipboard">
+      <div class="line">
+        <div class="bar" style="background:#fed7aa; width:70%"></div>
+        <div class="check-circle" style="background:#22c55e"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4l2 2 3-3.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="line">
+        <div class="bar" style="background:#fde68a; width:55%"></div>
+        <div class="check-circle" style="background:#22c55e"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4l2 2 3-3.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="line">
+        <div class="bar" style="background:#fecaca; width:80%"></div>
+        <div class="check-circle" style="background:#f87171"><svg viewBox="0 0 8 8" fill="none"><path d="M4 2v3M4 6.2v.1" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="line">
+        <div class="bar" style="background:#d1fae5; width:45%"></div>
+        <div class="check-circle" style="background:#22c55e"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4l2 2 3-3.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="stamp">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l3 3 5-6"/></svg>
+      </div>
+    </div>
+    <div class="text-area">
+      <div class="title">Get Your Plan<br>Verified</div>
+      <div class="subtitle">Korea travel experts check it</div>
+    </div>
+  </div>
+  <div class="card-name">Check My Itinerary</div>
+</div>
+
+</body>
+</html>
