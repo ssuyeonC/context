@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>스팟 상세 - 랜딩페이지 진입점 프로토타입</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    /* ── Layout ── */
+    .page { max-width: 480px; margin: 0 auto; background: #fff; min-height: 100vh; }
+    .section { padding: 0 16px; }
+    .divider { height: 10px; background: #f2f2f2; }
+    .thin-divider { height: 1px; background: #f2f2f2; margin: 0 16px; }
+
+    /* ── Placeholder Sections (기존 스팟 상세 섹션들) ── */
+    .placeholder {
+      padding: 20px 16px;
+      color: #999;
+      font-size: 13px;
+      text-align: center;
+      border-bottom: 1px solid #f2f2f2;
+    }
+    .placeholder.media {
+      background: #e8e8e8;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: none;
+    }
+
+    /* ── Header Section ── */
+    .spot-header { padding: 16px; }
+    .spot-header .location {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+    .spot-header .name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    .spot-header .review-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .spot-header .stars { color: #ffc107; font-size: 14px; }
+    .spot-header .review-score { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+    .spot-header .review-count { font-size: 13px; color: #999; }
+    .spot-header .price-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .spot-header .discount-rate {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ff2d55;
+    }
+    .spot-header .price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ff2d55;
+    }
+    .spot-header .original-price {
+      font-size: 15px;
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    /* ── Highlight Info (A안 보조 - 이벤트 뱃지) ── */
+    .highlight-info {
+      padding: 0 16px;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 0;
+      border-top: 1px solid #f2f2f2;
+    }
+    .highlight-item:last-child {
+      border-bottom: 1px solid #f2f2f2;
+    }
+    .highlight-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .highlight-icon.pink { background: #ff2d55; color: #fff; }
+    .highlight-icon.gray { background: #f2f2f2; }
+    .highlight-text {
+      font-size: 13px;
+      color: #4a4a4a;
+    }
+    .highlight-text strong { font-weight: 600; }
+
+    /* ── Remarks (기존 패턴 간소화) ── */
+    .remarks {
+      padding: 16px;
+    }
+    .remarks .title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+    .remarks .content {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ── Community Posts Link (기존 패턴) ── */
+    .community-link {
+      margin: 0 16px;
+      padding: 12px 16px;
+      background: #f7f7f7;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .community-link:hover { background: #efefef; }
+    .community-link .left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .community-link .emoji { font-size: 18px; }
+    .community-link .text { font-size: 13px; color: #4a4a4a; }
+    .community-link .arrow { color: #bbb; font-size: 18px; }
+
+    /* ══════════════════════════════════════════
+       NEW: 랜딩페이지 진입점 (텍스트 전용 카드)
+       ══════════════════════════════════════════ */
+    .landing-entry-section {
+      padding: 8px 16px 16px;
+    }
+    .landing-entry-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .landing-entry-card {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: #f7f7f7;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .landing-entry-card:hover {
+      background: #efefef;
+    }
+    .landing-entry-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      flex: 1;
+    }
+    .landing-entry-top-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .landing-entry-badge {
+      display: inline-flex;
+      align-items: center;
+      background: #5856D6;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+    .landing-entry-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .landing-entry-period {
+      font-size: 12px;
+      color: #999;
+    }
+    .landing-entry-arrow {
+      display: flex;
+      align-items: center;
+      color: #bbb;
+      flex-shrink: 0;
+      font-size: 18px;
+      margin-left: auto;
+    }
+
+    /* ── Annotations ── */
+    .annotation {
+      margin: 8px 16px;
+      padding: 10px 14px;
+      background: #fffbe6;
+      border: 1px dashed #e6d96e;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #8a7d20;
+      line-height: 1.5;
+    }
+    .annotation strong {
+      color: #5d5310;
+    }
+    .annotation-new {
+      background: #f0e6ff;
+      border-color: #c9a8f5;
+      color: #5b3a8a;
+    }
+    .annotation-new strong { color: #3d1f6d; }
+
+    /* ── Tab Selector ── */
+    .view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 12px 16px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .view-tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: #999;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .view-tab.active {
+      color: #1a1a1a;
+      border-bottom-color: #1a1a1a;
+    }
+
+    /* ── Label ── */
+    .section-label {
+      position: relative;
+      margin: 0 16px;
+      padding: 4px 0;
+    }
+    .section-label::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #5856D6;
+      border-radius: 2px;
+    }
+    .section-label span {
+      font-size: 11px;
+      font-weight: 700;
+      color: #5856D6;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── Media Section (placeholder) ── -->
+  <div class="placeholder media">스팟 이미지 / 미디어 영역</div>
+
+  <!-- ── Header Section ── -->
+  <div class="spot-header">
+    <div class="location">서울 명동</div>
+    <div class="name">올리브영 명동 본점</div>
+    <div class="review-row">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="review-score">4.8</span>
+      <span class="review-count">(2,847)</span>
+    </div>
+    <div class="price-row">
+      <span class="discount-rate">[15%]</span>
+      <span class="price">17,000원</span>
+      <span class="original-price">20,000원</span>
+    </div>
+  </div>
+
+  <!-- ── Highlight Info ── -->
+  <div class="highlight-info">
+    <div class="highlight-item">
+      <div class="highlight-icon pink">&#8593;</div>
+      <span class="highlight-text"><strong>쇼핑</strong> 카테고리 베스트</span>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon gray">&#127472;&#127479;</div>
+      <span class="highlight-text">한국 여행자 <strong>3,200명</strong> 예약</span>
+    </div>
+
+  </div>
+
+  <!-- ── (기존 섹션들 축약) ── -->
+  <div style="height: 12px;"></div>
+  <div class="divider"></div>
+
+  <div class="placeholder">Notice / 유의사항 영역</div>
+
+  <!-- ── Remarks ── -->
+  <div class="remarks">
+    <div class="title">상세 정보</div>
+    <div class="content">
+      영업시간: 10:00 - 22:00<br />
+      주소: 서울 중구 명동길 53<br />
+      전화번호: 02-1234-5678
+    </div>
+  </div>
+
+  <div class="thin-divider"></div>
+
+  <!-- ── Community Posts Link (기존) ── -->
+  <div style="padding: 12px 0;">
+    <div class="community-link">
+      <div class="left">
+        <span class="emoji">&#128172;</span>
+        <span class="text">커뮤니티 게시글 24건</span>
+      </div>
+      <span class="arrow">&#8250;</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       ★ NEW: 랜딩페이지 진입점 섹션 (B안 - 메인)
+       ══════════════════════════════════════════════════ -->
+  <div class="landing-entry-section">
+
+    <div class="landing-entry-list">
+      <!-- 랜딩페이지 1 -->
+      <a href="#" class="landing-entry-card">
+        <div class="landing-entry-info">
+          <div class="landing-entry-top-row">
+            <span class="landing-entry-badge">EVENT</span>
+            <span class="landing-entry-period">~ 2026.04.30</span>
+          </div>
+          <div class="landing-entry-title">명동 봄맞이 뷰티 페스티벌 2026</div>
+        </div>
+        <div class="landing-entry-arrow">&#8250;</div>
+      </a>
+
+      <!-- 랜딩페이지 2 -->
+      <a href="#" class="landing-entry-card">
+        <div class="landing-entry-info">
+          <div class="landing-entry-top-row">
+            <span class="landing-entry-badge">EVENT</span>
+            <span class="landing-entry-period">~ 2026.05.15</span>
+          </div>
+          <div class="landing-entry-title">외국인 관광객 전용 10% 추가 할인</div>
+        </div>
+        <div class="landing-entry-arrow">&#8250;</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="annotation annotation-new">
+    <strong>NEW - 랜딩페이지 진입점 리스트</strong><br />
+    <strong>위치:</strong> SpotCommunityPostsLink 바로 아래.<br />
+    <strong>패턴:</strong> CommunityPostsLink와 동일한 bg-gray + rounded-lg 스타일. 아이콘/썸네일 없이 텍스트 전용.<br />
+    <strong>데이터:</strong> 랜딩페이지 title, periodTo, (isDisplayPeriod=true일 때만 기간 노출).<br />
+    <strong>복수 대응:</strong> 조건 만족하는 랜딩페이지를 모두 렌더링.
+  </div>
+
+  <!-- ── (이하 기존 섹션 계속) ── -->
+  <div style="height: 8px;"></div>
+  <div class="divider"></div>
+  <div class="placeholder">AI 리뷰 요약 영역</div>
+  <div class="divider"></div>
+  <div class="placeholder">베스트 포토 리뷰 영역</div>
+  <div class="divider"></div>
+  <div class="placeholder">이벤트 정보 / 상세 소개 영역</div>
+  <div class="divider"></div>
+  <div class="placeholder">옵션 선택 / 예약 영역</div>
+  <div class="divider"></div>
+  <div class="placeholder">리뷰 섹션</div>
+  <div class="divider"></div>
+  <div class="placeholder">Q&A 섹션</div>
+  <div class="divider"></div>
+  <div class="placeholder">추천 스팟 / 진행중 프로모션 배너</div>
+
+  <div style="height: 80px;"></div>
+</div>
+
+</body>
+</html>
