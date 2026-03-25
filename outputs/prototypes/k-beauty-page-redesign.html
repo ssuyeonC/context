@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K-Beauty Page Redesign Prototype</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #e9ebee;
+      color: #3b4047;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Design Tokens ── */
+    :root {
+      --primary-2: #f5f9f8;
+      --primary-5: #edf6f5;
+      --primary-10: #e0f2f0;
+      --primary-20: #c8ebe8;
+      --primary-40: #7cd4cc;
+      --primary-50: #00bdad;
+      --primary-60: #009285;
+      --primary-70: #006d63;
+      --gray-2: #f7f8fa;
+      --gray-5: #f2f3f5;
+      --gray-10: #e9ebee;
+      --gray-20: #d7d9dd;
+      --gray-30: #bbc0c6;
+      --gray-40: #9fa6af;
+      --gray-50: #838c98;
+      --gray-60: #69727f;
+      --gray-70: #525963;
+      --gray-80: #3b4047;
+      --gray-90: #24272b;
+      --pink-50: #ff4082;
+      --purple-50: #a35cfe;
+      --orange-50: #ff8a00;
+      --white: #ffffff;
+      --shadow-sm: 0 0 0.75rem rgba(0,0,0,0.02);
+      --shadow-md: 0 0 1.25rem rgba(0,0,0,0.05);
+      --shadow-lg: 0 0.25rem 1.25rem rgba(0,0,0,0.07);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+    }
+
+    /* ══════════════════════════════════════
+       Device Switcher (Top Bar)
+    ══════════════════════════════════════ */
+    .device-bar {
+      position: sticky; top: 0; z-index: 999;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-10);
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px 16px;
+      gap: 8px;
+    }
+    .device-bar-label {
+      font-size: 0.75rem; font-weight: 700; color: var(--gray-40);
+      margin-right: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .device-tab {
+      padding: 6px 20px;
+      border: 1.5px solid var(--gray-10);
+      border-radius: 100px;
+      font-size: 0.8125rem; font-weight: 600;
+      color: var(--gray-50);
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .device-tab:hover { border-color: var(--gray-20); color: var(--gray-70); }
+    .device-tab.active {
+      border-color: var(--primary-50);
+      background: var(--primary-2);
+      color: var(--primary-60);
+    }
+    .device-tab .icon { font-size: 1rem; }
+
+    /* ══════════════════════════════════════
+       Page Shell
+    ══════════════════════════════════════ */
+    .page-wrapper {
+      display: flex; justify-content: center;
+      padding: 24px 0 60px;
+      transition: padding 0.3s;
+    }
+    .page {
+      background: var(--white);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      transition: max-width 0.35s ease, box-shadow 0.3s;
+    }
+    /* Mobile mode */
+    .page-wrapper.mode-mobile .page {
+      max-width: 390px;
+      border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+    }
+    /* Desktop mode */
+    .page-wrapper.mode-desktop .page {
+      max-width: 960px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    /* ── Shared Layout ── */
+    .container { padding: 0 16px; }
+    .section { padding: 24px 16px; }
+    .section-gray { background: var(--gray-2); }
+    .divider { height: 10px; background: var(--gray-5); }
+    .thin-divider { height: 1px; background: var(--gray-10); margin: 0 16px; }
+    .section-gap { height: 24px; }
+    .section-gap-sm { height: 16px; }
+    .section-gap-lg { height: 32px; }
+
+    /* Desktop overrides */
+    .mode-desktop .section { padding: 40px 60px; }
+    .mode-desktop .container { padding: 0 60px; }
+    .mode-desktop .thin-divider { margin: 0 60px; }
+    .mode-desktop .phase-divider { margin: 0 60px; }
+    .mode-desktop .section-gap-lg { height: 40px; }
+
+    /* ── Typography ── */
+    .h3 { font-size: 1.25rem; line-height: 1.375rem; font-weight: 700; color: var(--gray-90); }
+    .h4 { font-size: 1.125rem; line-height: 1.25rem; font-weight: 700; color: var(--gray-80); }
+    .h5 { font-size: 1rem; line-height: 1.125rem; font-weight: 700; color: var(--gray-80); }
+    .body4 { font-size: 0.9375rem; line-height: 1.375rem; color: var(--gray-80); }
+    .body5 { font-size: 0.875rem; line-height: 1.3125rem; color: var(--gray-50); }
+    .body6 { font-size: 0.75rem; line-height: 1.125rem; color: var(--gray-50); }
+    .caption { font-size: 0.6875rem; line-height: 1rem; color: var(--gray-40); }
+    .text-primary { color: var(--primary-50); }
+
+    .mode-desktop .h3 { font-size: 1.5rem; line-height: 1.625rem; }
+    .mode-desktop .h4 { font-size: 1.25rem; line-height: 1.375rem; }
+
+    /* ── Phase Divider ── */
+    .phase-divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary-20) 0%, transparent 100%);
+      margin: 0 16px;
+    }
+
+    /* ══════════════════════════════════════
+       [1-A] Hero
+    ══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0a2e2a 0%, #0d3d38 60%, #104a44 100%);
+    }
+    .mode-desktop .hero { height: 360px; border-radius: 12px 12px 0 0; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);
+      z-index: 1;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; opacity: 0.35;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      height: 100%;
+      padding: 24px 20px;
+      color: var(--white);
+    }
+    .mode-desktop .hero-content { padding: 48px 60px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.6875rem; font-weight: 600;
+      color: var(--primary-40);
+      background: rgba(0,189,173,0.12);
+      border: 1px solid rgba(0,189,173,0.25);
+      padding: 3px 10px; border-radius: 100px;
+      width: fit-content; margin-bottom: 10px;
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 {
+      font-size: 1.5rem; line-height: 1.85rem;
+      font-weight: 800; margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .mode-desktop .hero h1 { font-size: 2.25rem; line-height: 2.6rem; }
+    .hero h1 em { font-style: normal; color: var(--primary-40); }
+    .hero-sub {
+      font-size: 0.8125rem; line-height: 1.25rem;
+      color: rgba(255,255,255,0.72); margin-bottom: 16px;
+    }
+    .mode-desktop .hero-sub { font-size: 0.9375rem; line-height: 1.5rem; }
+    .hero-stats { display: flex; gap: 16px; align-items: center; }
+    .mode-desktop .hero-stats { gap: 24px; }
+    .hero-stat {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.75rem; font-weight: 600;
+      color: rgba(255,255,255,0.88);
+    }
+    .hero-stat .num { color: var(--primary-40); font-weight: 800; font-size: 0.8125rem; }
+    .mode-desktop .hero-stat { font-size: 0.875rem; }
+    .mode-desktop .hero-stat .num { font-size: 1rem; }
+    .hero-stat-divider { width: 1px; height: 12px; background: rgba(255,255,255,0.2); }
+
+    /* ══════════════════════════════════════
+       [1-B] Cashback
+    ══════════════════════════════════════ */
+    .cashback {
+      margin: 16px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, #f0fffe 0%, #e8faf8 50%, #f5f0ff 100%);
+      border: 1px solid var(--primary-10);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; gap: 14px;
+      cursor: pointer; transition: box-shadow 0.2s;
+    }
+    .mode-desktop .cashback { margin: 20px 60px; padding: 20px 24px; }
+    .cashback:hover { box-shadow: 0 2px 12px rgba(0,189,173,0.12); }
+    .cashback-icon {
+      flex-shrink: 0; width: 44px; height: 44px;
+      background: var(--white); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 2px 8px rgba(0,189,173,0.10);
+    }
+    .cashback-text { flex: 1; min-width: 0; }
+    .cashback-title { font-size: 0.875rem; font-weight: 700; color: var(--gray-90); margin-bottom: 2px; }
+    .cashback-title span { color: var(--primary-50); }
+    .cashback-desc { font-size: 0.75rem; line-height: 1.125rem; color: var(--gray-60); }
+    .cashback-arrow { flex-shrink: 0; color: var(--primary-50); font-size: 0.875rem; }
+
+    /* ══════════════════════════════════════
+       [1-C] Trust
+    ══════════════════════════════════════ */
+    .trust-cards {
+      display: flex; gap: 10px;
+      padding: 0 16px 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .trust-cards::-webkit-scrollbar { display: none; }
+    .mode-desktop .trust-cards {
+      padding: 0 60px 24px;
+      gap: 16px;
+      overflow-x: visible;
+    }
+    .trust-card {
+      flex-shrink: 0; width: 150px;
+      padding: 14px;
+      background: var(--gray-2);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-10);
+    }
+    .mode-desktop .trust-card { flex: 1; width: auto; padding: 20px; }
+    .trust-card-icon {
+      width: 32px; height: 32px;
+      background: var(--white); border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+    .trust-card-title { font-size: 0.8125rem; font-weight: 700; color: var(--gray-80); margin-bottom: 3px; }
+    .trust-card-desc { font-size: 0.6875rem; line-height: 1rem; color: var(--gray-50); }
+    .mode-desktop .trust-card-title { font-size: 0.875rem; }
+    .mode-desktop .trust-card-desc { font-size: 0.75rem; line-height: 1.125rem; }
+
+    /* ══════════════════════════════════════
+       [2-A] Trending
+    ══════════════════════════════════════ */
+    .trending-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 14px;
+    }
+    .trending-header .more {
+      font-size: 0.8125rem; color: var(--primary-50);
+      font-weight: 600; text-decoration: none;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .trending-grid {
+      display: flex; gap: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .trending-grid::-webkit-scrollbar { display: none; }
+    .mode-desktop .trending-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      overflow-x: visible;
+    }
+    .trending-card {
+      flex-shrink: 0; width: 140px;
+      background: var(--white);
+      border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      overflow: hidden; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .trending-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .mode-desktop .trending-card { width: auto; }
+    .trending-card-img {
+      width: 100%; height: 100px;
+      background: var(--gray-5);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .mode-desktop .trending-card-img { height: 130px; }
+    .trending-rank {
+      position: absolute; top: 8px; left: 8px;
+      width: 22px; height: 22px;
+      background: rgba(0,0,0,0.65); color: var(--white);
+      font-size: 0.6875rem; font-weight: 800;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .trending-combo-tag {
+      position: absolute; top: 8px; right: 8px;
+      font-size: 0.5625rem; font-weight: 700;
+      color: var(--white); background: var(--purple-50);
+      padding: 2px 6px; border-radius: 4px;
+    }
+    .trending-card-body { padding: 10px 12px; }
+    .trending-card-name { font-size: 0.8125rem; font-weight: 700; color: var(--gray-80); margin-bottom: 3px; line-height: 1.15rem; }
+    .trending-card-sub { font-size: 0.6875rem; color: var(--gray-40); display: flex; align-items: center; gap: 3px; }
+
+    /* ══════════════════════════════════════
+       [2-B] Wizard
+    ══════════════════════════════════════ */
+    .wizard {
+      margin: 0 16px;
+      background: var(--white);
+      border: 1px solid var(--gray-10);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .mode-desktop .wizard { margin: 0 60px; }
+    .wizard-header {
+      padding: 16px 18px 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .wizard-icon { font-size: 1.125rem; }
+    .wizard-title { font-size: 0.9375rem; font-weight: 700; color: var(--gray-80); }
+    .wizard-progress { padding: 0 18px; margin-top: 12px; display: flex; gap: 4px; }
+    .wizard-progress-bar {
+      flex: 1; height: 3px;
+      background: var(--gray-10); border-radius: 2px;
+      overflow: hidden; transition: background 0.25s;
+    }
+    .wizard-progress-bar.active { background: var(--primary-50); }
+    .wizard-step { padding: 16px 18px 18px; }
+    .wizard-step-label { font-size: 0.75rem; font-weight: 600; color: var(--gray-50); margin-bottom: 4px; }
+    .wizard-step-question { font-size: 0.9375rem; font-weight: 700; color: var(--gray-80); margin-bottom: 14px; }
+    .wizard-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .mode-desktop .wizard-options { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .wizard-option {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 14px;
+      background: var(--gray-2);
+      border: 1.5px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      cursor: pointer; transition: all 0.15s;
+      font-size: 0.8125rem; font-weight: 600;
+      color: var(--gray-70);
+    }
+    .wizard-option:hover { border-color: var(--primary-50); background: var(--primary-2); color: var(--primary-60); }
+    .wizard-option.selected { border-color: var(--primary-50); background: var(--primary-2); color: var(--primary-60); }
+    .wizard-option-icon { font-size: 1.125rem; }
+    .wizard-option-text { flex: 1; }
+    .wizard-option-sub { font-size: 0.625rem; font-weight: 400; color: var(--gray-40); display: block; margin-top: 1px; }
+
+    .wizard-results { padding: 0 18px 18px; }
+    .wizard-selected-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .wizard-tag {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.6875rem; font-weight: 600;
+      color: var(--primary-60);
+      background: var(--primary-5);
+      padding: 4px 10px; border-radius: 100px;
+    }
+    .wizard-tag .check { color: var(--primary-50); }
+    .wizard-result-cards {
+      display: flex; gap: 10px;
+      overflow-x: auto; scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .wizard-result-cards::-webkit-scrollbar { display: none; }
+    .mode-desktop .wizard-result-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      overflow-x: visible;
+    }
+    .wizard-result-card {
+      flex-shrink: 0; width: 200px;
+      background: var(--white);
+      border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      overflow: hidden; cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .wizard-result-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .mode-desktop .wizard-result-card { width: auto; }
+    .wizard-result-img { width: 100%; height: 120px; background: var(--gray-5); overflow: hidden; }
+    .mode-desktop .wizard-result-img { height: 150px; }
+    .wizard-result-body { padding: 10px 12px; }
+    .wizard-result-name { font-size: 0.8125rem; font-weight: 700; color: var(--gray-80); margin-bottom: 2px; line-height: 1.15rem; }
+    .wizard-result-location { font-size: 0.6875rem; color: var(--gray-40); margin-bottom: 6px; }
+    .wizard-result-meta { display: flex; align-items: center; justify-content: space-between; }
+    .wizard-result-rating { font-size: 0.6875rem; font-weight: 600; color: var(--orange-50); display: flex; align-items: center; gap: 3px; }
+    .wizard-result-price { font-size: 0.8125rem; font-weight: 800; color: var(--pink-50); }
+    .wizard-actions { display: flex; gap: 8px; padding: 0 18px 16px; }
+    .wizard-btn-reset {
+      flex: 1; padding: 10px;
+      background: var(--gray-2); border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      font-size: 0.8125rem; font-weight: 600; color: var(--gray-60);
+      cursor: pointer; text-align: center;
+    }
+    .wizard-btn-more {
+      flex: 2; padding: 10px;
+      background: var(--primary-50); border: none;
+      border-radius: var(--radius-md);
+      font-size: 0.8125rem; font-weight: 700; color: var(--white);
+      cursor: pointer; text-align: center;
+      transition: background 0.15s;
+    }
+    .wizard-btn-more:hover { background: var(--primary-60); }
+
+    /* ══════════════════════════════════════
+       [2-C] Category Tab + Spots
+    ══════════════════════════════════════ */
+    .category-tabs {
+      display: flex; gap: 16px;
+      padding: 0 16px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin-bottom: 16px;
+    }
+    .category-tabs::-webkit-scrollbar { display: none; }
+    .mode-desktop .category-tabs {
+      padding: 0 60px;
+      justify-content: center;
+      overflow-x: visible;
+    }
+    .category-tab {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      flex-shrink: 0; cursor: pointer;
+    }
+    .category-tab-icon {
+      width: 52px; height: 52px;
+      background: var(--gray-2);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.375rem; transition: all 0.15s;
+    }
+    .mode-desktop .category-tab-icon { width: 64px; height: 64px; font-size: 1.5rem; }
+    .category-tab.active .category-tab-icon { background: var(--primary-2); border-color: var(--primary-50); }
+    .category-tab-label { font-size: 0.6875rem; font-weight: 600; color: var(--gray-50); text-align: center; white-space: nowrap; }
+    .category-tab.active .category-tab-label { color: var(--primary-60); font-weight: 700; }
+
+    .spot-list { display: flex; flex-direction: column; gap: 12px; padding: 0 16px 8px; }
+    .mode-desktop .spot-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 0 60px 8px;
+    }
+    .spot-card {
+      display: flex; gap: 12px;
+      padding: 12px;
+      background: var(--white);
+      border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      cursor: pointer; transition: box-shadow 0.15s;
+    }
+    .spot-card:hover { box-shadow: var(--shadow-md); }
+    .mode-desktop .spot-card {
+      flex-direction: column;
+      gap: 0; padding: 0;
+      overflow: hidden;
+    }
+    .spot-card-img {
+      flex-shrink: 0; width: 100px; height: 100px;
+      background: var(--gray-5);
+      border-radius: var(--radius-md);
+      overflow: hidden; position: relative;
+    }
+    .mode-desktop .spot-card-img {
+      width: 100%; height: 160px;
+      border-radius: 0;
+    }
+    .spot-card-rank {
+      position: absolute; top: 6px; left: 6px;
+      width: 20px; height: 20px;
+      background: rgba(0,0,0,0.6); color: var(--white);
+      font-size: 0.625rem; font-weight: 800;
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .spot-card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+    .mode-desktop .spot-card-body { padding: 14px; }
+    .spot-card-category { font-size: 0.6875rem; font-weight: 600; color: var(--primary-50); margin-bottom: 3px; }
+    .spot-card-name {
+      font-size: 0.875rem; font-weight: 700; color: var(--gray-80);
+      margin-bottom: 2px; line-height: 1.2rem;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .spot-card-location { font-size: 0.6875rem; color: var(--gray-40); margin-bottom: 6px; }
+    .spot-card-bottom { display: flex; align-items: center; justify-content: space-between; }
+    .spot-card-rating { font-size: 0.6875rem; font-weight: 600; color: var(--gray-60); display: flex; align-items: center; gap: 3px; }
+    .spot-card-rating .star { color: var(--orange-50); }
+    .spot-card-price { font-size: 0.875rem; font-weight: 800; color: var(--pink-50); }
+    .spot-card-tags { display: flex; gap: 4px; margin-top: 6px; }
+    .spot-tag {
+      font-size: 0.5625rem; font-weight: 600;
+      padding: 2px 6px; border-radius: 4px;
+      background: var(--gray-5); color: var(--gray-50);
+    }
+    .spot-tag.cashback { background: var(--primary-5); color: var(--primary-60); }
+    .see-all-btn {
+      display: block; text-align: center;
+      padding: 12px; margin: 8px 16px 0;
+      background: var(--white);
+      border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      font-size: 0.8125rem; font-weight: 600;
+      color: var(--gray-60); cursor: pointer;
+      transition: background 0.1s;
+    }
+    .see-all-btn:hover { background: var(--gray-2); }
+    .mode-desktop .see-all-btn { margin: 8px 60px 0; }
+
+    /* ══════════════════════════════════════
+       [2-D] Price Compare
+    ══════════════════════════════════════ */
+    .price-compare {
+      margin: 0 16px;
+      background: linear-gradient(135deg, #fef9f0 0%, #fef5f5 100%);
+      border: 1px solid #fde8d8;
+      border-radius: var(--radius-lg);
+      padding: 18px;
+    }
+    .mode-desktop .price-compare { margin: 0 60px; padding: 24px 32px; }
+    .price-compare-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .price-compare-header .icon { font-size: 1.25rem; }
+    .price-compare-title { font-size: 0.875rem; font-weight: 700; color: var(--gray-80); }
+    .price-compare-table { width: 100%; border-collapse: collapse; }
+    .price-compare-table th { text-align: left; font-size: 0.6875rem; font-weight: 600; color: var(--gray-40); padding: 0 0 8px; }
+    .price-compare-table th:last-child { text-align: right; }
+    .price-compare-table td { padding: 7px 0; border-top: 1px solid rgba(0,0,0,0.06); font-size: 0.8125rem; }
+    .price-compare-table td:first-child { font-weight: 600; color: var(--gray-70); }
+    .price-compare-table .kr-price { font-weight: 700; color: var(--primary-60); }
+    .price-compare-table .us-price { text-align: right; color: var(--gray-40); font-size: 0.75rem; text-decoration: line-through; }
+    .price-compare-note { margin-top: 10px; font-size: 0.625rem; color: var(--gray-40); }
+
+    /* ══════════════════════════════════════
+       [3-A] Reviews
+    ══════════════════════════════════════ */
+    .review-filters { display: flex; gap: 6px; margin-bottom: 14px; }
+    .review-filter {
+      padding: 6px 14px; border: 1px solid var(--gray-10);
+      border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+      color: var(--gray-50); background: var(--white);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .review-filter.active { border-color: var(--primary-50); background: var(--primary-2); color: var(--primary-60); }
+    .review-list { display: flex; flex-direction: column; gap: 12px; }
+    .mode-desktop .review-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+    .review-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .review-user { display: flex; align-items: center; gap: 8px; }
+    .review-flag { font-size: 1rem; }
+    .review-username { font-size: 0.8125rem; font-weight: 600; color: var(--gray-70); }
+    .review-stars { font-size: 0.75rem; color: var(--orange-50); letter-spacing: 1px; }
+    .review-treatment-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.6875rem; font-weight: 600;
+      color: var(--primary-60); background: var(--primary-5);
+      padding: 3px 8px; border-radius: 4px; margin-bottom: 8px;
+    }
+    .review-text {
+      font-size: 0.8125rem; line-height: 1.3rem; color: var(--gray-70);
+      margin-bottom: 8px;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .review-photos { display: flex; gap: 6px; margin-bottom: 8px; }
+    .review-photo { width: 72px; height: 72px; background: var(--gray-5); border-radius: var(--radius-sm); overflow: hidden; }
+    .review-meta { display: flex; align-items: center; justify-content: space-between; }
+    .review-spot { font-size: 0.6875rem; color: var(--gray-40); }
+    .review-date { font-size: 0.6875rem; color: var(--gray-30); }
+
+    /* ══════════════════════════════════════
+       [3-B] Guides
+    ══════════════════════════════════════ */
+    .guide-cards {
+      display: flex; gap: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .guide-cards::-webkit-scrollbar { display: none; }
+    .mode-desktop .guide-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      overflow-x: visible;
+    }
+    .guide-card {
+      flex-shrink: 0; width: 220px;
+      background: var(--white);
+      border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      overflow: hidden; cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .guide-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .mode-desktop .guide-card { width: auto; }
+    .guide-card-img {
+      width: 100%; height: 130px;
+      background: var(--gray-5); overflow: hidden; position: relative;
+    }
+    .guide-card-badge {
+      position: absolute; top: 8px; left: 8px;
+      font-size: 0.5625rem; font-weight: 700;
+      color: var(--white); background: var(--primary-50);
+      padding: 3px 8px; border-radius: 4px;
+    }
+    .guide-card-body { padding: 12px; }
+    .guide-card-title {
+      font-size: 0.875rem; font-weight: 700; color: var(--gray-80);
+      line-height: 1.25rem; margin-bottom: 4px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .guide-card-desc {
+      font-size: 0.6875rem; line-height: 1rem; color: var(--gray-40);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    /* ══════════════════════════════════════
+       [4-A] Map, [4-B] Inquiry
+    ══════════════════════════════════════ */
+    .map-placeholder {
+      margin: 0 16px; height: 200px;
+      background: var(--gray-5); border: 1px solid var(--gray-10);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-30); font-size: 0.8125rem;
+    }
+    .mode-desktop .map-placeholder { margin: 0 60px; height: 280px; }
+
+    .inquiry-form {
+      margin: 0 16px;
+      background: var(--gray-2); border-radius: var(--radius-lg);
+      padding: 20px 18px;
+    }
+    .mode-desktop .inquiry-form { margin: 0 60px; padding: 32px; }
+    .mode-desktop .inquiry-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mode-desktop .inquiry-inner .inquiry-textarea { grid-column: 1 / -1; }
+    .mode-desktop .inquiry-inner .inquiry-submit { grid-column: 1 / -1; }
+    .inquiry-title { font-size: 1rem; font-weight: 700; color: var(--gray-80); margin-bottom: 4px; }
+    .inquiry-desc { font-size: 0.75rem; color: var(--gray-50); margin-bottom: 16px; }
+    .inquiry-input {
+      width: 100%; padding: 11px 14px;
+      border: 1px solid var(--gray-10); border-radius: var(--radius-md);
+      font-size: 0.8125rem; color: var(--gray-80);
+      background: var(--white); outline: none;
+      margin-bottom: 8px; transition: border-color 0.15s;
+    }
+    .inquiry-input:focus { border-color: var(--primary-50); }
+    .inquiry-input::placeholder { color: var(--gray-30); }
+    .inquiry-textarea {
+      width: 100%; padding: 11px 14px;
+      border: 1px solid var(--gray-10); border-radius: var(--radius-md);
+      font-size: 0.8125rem; color: var(--gray-80);
+      background: var(--white); outline: none;
+      resize: vertical; min-height: 80px;
+      margin-bottom: 12px; font-family: inherit;
+    }
+    .inquiry-textarea:focus { border-color: var(--primary-50); }
+    .inquiry-textarea::placeholder { color: var(--gray-30); }
+    .inquiry-submit {
+      width: 100%; padding: 12px;
+      background: var(--primary-50); border: none;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem; font-weight: 700; color: var(--white);
+      cursor: pointer; transition: background 0.15s;
+    }
+    .inquiry-submit:hover { background: var(--primary-60); }
+
+    /* ══════════════════════════════════════
+       Floating Buttons
+    ══════════════════════════════════════ */
+    .floating-btns {
+      position: fixed; bottom: 24px; right: 24px;
+      display: flex; flex-direction: column;
+      gap: 8px; z-index: 100;
+    }
+    .floating-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: none;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: transform 0.15s;
+    }
+    .floating-btn:hover { transform: scale(1.08); }
+    .floating-btn.chat { background: var(--primary-50); color: var(--white); }
+    .floating-btn.email { background: var(--white); color: var(--primary-50); border: 1px solid var(--gray-10); }
+
+    /* ── Placeholder helper ── */
+    .img-placeholder {
+      background: linear-gradient(135deg, var(--gray-5) 25%, var(--gray-10) 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-30); font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ Device Switcher ═══ -->
+<div class="device-bar">
+  <span class="device-bar-label">View</span>
+  <button class="device-tab active" data-mode="mobile" onclick="switchMode('mobile')">
+    <span class="icon">📱</span> Mobile
+  </button>
+  <button class="device-tab" data-mode="desktop" onclick="switchMode('desktop')">
+    <span class="icon">🖥</span> Desktop
+  </button>
+</div>
+
+<!-- ═══ Page Wrapper ═══ -->
+<div class="page-wrapper mode-mobile" id="pageWrapper">
+<div class="page">
+
+  <!-- ════════════════════════════════════════════
+       PHASE 1: 인지
+  ════════════════════════════════════════════ -->
+
+  <!-- [1-A] Hero -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-img img-placeholder" style="opacity:0.35; font-size:0.6875rem; color:rgba(255,255,255,0.3);">Hero Visual — Clinic Interior / Treatment Scene</div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ Curated by Creatrip</div>
+      <h1>K-Beauty,<br/>Curated <em>for You</em></h1>
+      <p class="hero-sub">Expert-verified clinics for skin, lifting,<br/>nail, hair & more in Korea</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">100+</span> Clinics</div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><span class="num">50K+</span> Visitors</div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><span class="num">98%</span> Satisfaction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [1-B] Cashback -->
+  <div class="cashback">
+    <div class="cashback-icon">💰</div>
+    <div class="cashback-text">
+      <div class="cashback-title">Book here, get <span>Cashback</span></div>
+      <div class="cashback-desc">Book → Treatment → Upload receipt = Points back</div>
+    </div>
+    <div class="cashback-arrow">›</div>
+  </div>
+
+  <!-- [1-C] Trust -->
+  <div class="trust-cards">
+    <div class="trust-card">
+      <div class="trust-card-icon">🏥</div>
+      <div class="trust-card-title">Verified Clinics</div>
+      <div class="trust-card-desc">100+ partner clinics with certified authentic devices</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-icon">💎</div>
+      <div class="trust-card-title">Transparent Pricing</div>
+      <div class="trust-card-desc">Local market-based pricing, no hidden fees</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-icon">💬</div>
+      <div class="trust-card-title">24/7 Support</div>
+      <div class="trust-card-desc">Multilingual consultation, anytime you need</div>
+    </div>
+  </div>
+
+  <div class="phase-divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       PHASE 2: 탐색
+  ════════════════════════════════════════════ -->
+
+  <!-- [2-A] Trending -->
+  <section class="section">
+    <div class="trending-header">
+      <div class="h4">🔥 Trending Now</div>
+      <a href="#" class="more">View all ›</a>
+    </div>
+    <div class="trending-grid">
+      <div class="trending-card">
+        <div class="trending-card-img img-placeholder"><div class="trending-rank">1</div></div>
+        <div class="trending-card-body">
+          <div class="trending-card-name">Rejuran Healer</div>
+          <div class="trending-card-sub">🔥 Popular this week</div>
+        </div>
+      </div>
+      <div class="trending-card">
+        <div class="trending-card-img img-placeholder"><div class="trending-rank">2</div><div class="trending-combo-tag">COMBO</div></div>
+        <div class="trending-card-body">
+          <div class="trending-card-name">Ultherapy + Rejuran</div>
+          <div class="trending-card-sub">🔥 Popular this week</div>
+        </div>
+      </div>
+      <div class="trending-card">
+        <div class="trending-card-img img-placeholder"><div class="trending-rank">3</div></div>
+        <div class="trending-card-body">
+          <div class="trending-card-name">Skin Botox + Glow</div>
+          <div class="trending-card-sub">🔥 Popular this week</div>
+        </div>
+      </div>
+      <div class="trending-card">
+        <div class="trending-card-img img-placeholder"><div class="trending-rank">4</div></div>
+        <div class="trending-card-body">
+          <div class="trending-card-name">Juvelook</div>
+          <div class="trending-card-sub">🔥 Rising fast</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [2-B] Wizard -->
+  <div class="section-gap-sm"></div>
+  <div class="wizard" id="wizard">
+    <div class="wizard-header">
+      <span class="wizard-icon">🔍</span>
+      <span class="wizard-title">Find Your Treatment</span>
+    </div>
+    <div class="wizard-progress">
+      <div class="wizard-progress-bar active"></div>
+      <div class="wizard-progress-bar"></div>
+      <div class="wizard-progress-bar"></div>
+    </div>
+    <div class="wizard-step" id="wizard-step1">
+      <div class="wizard-step-label">Step 1 of 3</div>
+      <div class="wizard-step-question">What treatment are you interested in?</div>
+      <div class="wizard-options">
+        <div class="wizard-option" onclick="goToStep2(this,'Skin Care')">
+          <span class="wizard-option-icon">💆</span>
+          <div class="wizard-option-text">Skin Care<span class="wizard-option-sub">Rejuran, Juvelook, Exosome</span></div>
+        </div>
+        <div class="wizard-option" onclick="goToStep2(this,'Lifting')">
+          <span class="wizard-option-icon">🏥</span>
+          <div class="wizard-option-text">Lifting<span class="wizard-option-sub">Ultherapy, Shurink, Thermage</span></div>
+        </div>
+        <div class="wizard-option" onclick="goToStep2(this,'Botox / Filler')">
+          <span class="wizard-option-icon">💉</span>
+          <div class="wizard-option-text">Botox / Filler</div>
+        </div>
+        <div class="wizard-option" onclick="goToStep2(this,'Nail / Semi-Perm')">
+          <span class="wizard-option-icon">💅</span>
+          <div class="wizard-option-text">Nail / Semi-Perm</div>
+        </div>
+        <div class="wizard-option" onclick="goToStep2(this,'Hair')">
+          <span class="wizard-option-icon">💇</span>
+          <div class="wizard-option-text">Hair</div>
+        </div>
+        <div class="wizard-option" onclick="goToStep2(this,'Body / Spa')">
+          <span class="wizard-option-icon">🧖</span>
+          <div class="wizard-option-text">Body / Spa</div>
+        </div>
+      </div>
+    </div>
+    <div class="wizard-step" id="wizard-step2" style="display:none;">
+      <div class="wizard-step-label">Step 2 of 3</div>
+      <div class="wizard-step-question">What's your budget?</div>
+      <div class="wizard-options">
+        <div class="wizard-option" onclick="goToStep3(this,'~₩50K')"><div class="wizard-option-text">~₩50,000</div></div>
+        <div class="wizard-option" onclick="goToStep3(this,'₩50K~100K')"><div class="wizard-option-text">₩50K ~ 100K</div></div>
+        <div class="wizard-option" onclick="goToStep3(this,'₩100K~300K')"><div class="wizard-option-text">₩100K ~ 300K</div></div>
+        <div class="wizard-option" onclick="goToStep3(this,'₩300K+')"><div class="wizard-option-text">₩300,000+</div></div>
+      </div>
+    </div>
+    <div class="wizard-step" id="wizard-step3" style="display:none;">
+      <div class="wizard-step-label">Step 3 of 3</div>
+      <div class="wizard-step-question">Preferred area?</div>
+      <div class="wizard-options">
+        <div class="wizard-option" onclick="showResults(this,'Gangnam')"><div class="wizard-option-text">Gangnam / Sinsa</div></div>
+        <div class="wizard-option" onclick="showResults(this,'Hongdae')"><div class="wizard-option-text">Hongdae / Mapo</div></div>
+        <div class="wizard-option" onclick="showResults(this,'Myeongdong')"><div class="wizard-option-text">Myeongdong</div></div>
+        <div class="wizard-option" onclick="showResults(this,'All Areas')"><div class="wizard-option-text">All Areas</div></div>
+      </div>
+    </div>
+    <div id="wizard-results" style="display:none;">
+      <div class="wizard-results">
+        <div class="wizard-selected-tags" id="wizard-tags"></div>
+        <div class="wizard-result-cards">
+          <div class="wizard-result-card">
+            <div class="wizard-result-img img-placeholder"></div>
+            <div class="wizard-result-body">
+              <div class="wizard-result-name">Abijou Clinic Gangnam</div>
+              <div class="wizard-result-location">📍 Gangnam</div>
+              <div class="wizard-result-meta">
+                <span class="wizard-result-rating">⭐ 4.9 (312)</span>
+                <span class="wizard-result-price">₩89,000~</span>
+              </div>
+            </div>
+          </div>
+          <div class="wizard-result-card">
+            <div class="wizard-result-img img-placeholder"></div>
+            <div class="wizard-result-body">
+              <div class="wizard-result-name">Enbom Clinic Hongdae</div>
+              <div class="wizard-result-location">📍 Hongdae</div>
+              <div class="wizard-result-meta">
+                <span class="wizard-result-rating">⭐ 4.8 (198)</span>
+                <span class="wizard-result-price">₩75,000~</span>
+              </div>
+            </div>
+          </div>
+          <div class="wizard-result-card">
+            <div class="wizard-result-img img-placeholder"></div>
+            <div class="wizard-result-body">
+              <div class="wizard-result-name">Pibu Myeongga Hongdae</div>
+              <div class="wizard-result-location">📍 Hongdae</div>
+              <div class="wizard-result-meta">
+                <span class="wizard-result-rating">⭐ 4.7 (156)</span>
+                <span class="wizard-result-price">₩95,000~</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wizard-actions">
+        <button class="wizard-btn-reset" onclick="resetWizard()">Reset</button>
+        <button class="wizard-btn-more">View More Recommendations</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap-lg"></div>
+
+  <!-- [2-C] Category Tab + Spots -->
+  <div class="category-tabs">
+    <div class="category-tab active"><div class="category-tab-icon">✨</div><div class="category-tab-label">All</div></div>
+    <div class="category-tab"><div class="category-tab-icon">💆</div><div class="category-tab-label">Skin Care</div></div>
+    <div class="category-tab"><div class="category-tab-icon">🏥</div><div class="category-tab-label">Lifting</div></div>
+    <div class="category-tab"><div class="category-tab-icon">💉</div><div class="category-tab-label">Botox</div></div>
+    <div class="category-tab"><div class="category-tab-icon">💅</div><div class="category-tab-label">Nail</div></div>
+    <div class="category-tab"><div class="category-tab-icon">💇</div><div class="category-tab-label">Hair</div></div>
+    <div class="category-tab"><div class="category-tab-icon">🧖</div><div class="category-tab-label">Body</div></div>
+  </div>
+  <div class="spot-list">
+    <div class="spot-card">
+      <div class="spot-card-img img-placeholder"><div class="spot-card-rank">1</div></div>
+      <div class="spot-card-body">
+        <div class="spot-card-category">Skin Care · Rejuran</div>
+        <div class="spot-card-name">Abijou Clinic Myeongdong Global</div>
+        <div class="spot-card-location">📍 Myeongdong</div>
+        <div class="spot-card-bottom">
+          <span class="spot-card-rating"><span class="star">⭐</span> 4.9 (487)</span>
+          <span class="spot-card-price">₩30,000~</span>
+        </div>
+        <div class="spot-card-tags"><span class="spot-tag cashback">💰 Cashback</span><span class="spot-tag">English OK</span></div>
+      </div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-card-img img-placeholder"><div class="spot-card-rank">2</div></div>
+      <div class="spot-card-body">
+        <div class="spot-card-category">Body · Head Spa</div>
+        <div class="spot-card-name">THE SEOL:HA Hanok Head Spa</div>
+        <div class="spot-card-location">📍 Bukchon</div>
+        <div class="spot-card-bottom">
+          <span class="spot-card-rating"><span class="star">⭐</span> 4.8 (234)</span>
+          <span class="spot-card-price">₩89,000~</span>
+        </div>
+        <div class="spot-card-tags"><span class="spot-tag cashback">💰 Cashback</span><span class="spot-tag">Japanese OK</span></div>
+      </div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-card-img img-placeholder"><div class="spot-card-rank">3</div></div>
+      <div class="spot-card-body">
+        <div class="spot-card-category">Semi-Permanent</div>
+        <div class="spot-card-name">Browdoll Gangnam</div>
+        <div class="spot-card-location">📍 Gangnam</div>
+        <div class="spot-card-bottom">
+          <span class="spot-card-rating"><span class="star">⭐</span> 4.7 (156)</span>
+          <span class="spot-card-price">₩120,000~</span>
+        </div>
+        <div class="spot-card-tags"><span class="spot-tag">English OK</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="see-all-btn">View All Clinics ›</div>
+
+  <div class="section-gap-lg"></div>
+
+  <!-- [2-D] Price Compare -->
+  <div class="price-compare">
+    <div class="price-compare-header">
+      <span class="icon">💡</span>
+      <span class="price-compare-title">Korea vs Your Country</span>
+    </div>
+    <table class="price-compare-table">
+      <thead><tr><th>Treatment</th><th>Korea</th><th style="text-align:right">US (avg)</th></tr></thead>
+      <tbody>
+        <tr><td>Rejuran Healer</td><td class="kr-price">₩150,000</td><td class="us-price">$350~500</td></tr>
+        <tr><td>Ultherapy (Full)</td><td class="kr-price">₩500,000</td><td class="us-price">$2,000~4,000</td></tr>
+        <tr><td>Botox (1 area)</td><td class="kr-price">₩50,000</td><td class="us-price">$200~400</td></tr>
+        <tr><td>Thermage</td><td class="kr-price">₩800,000</td><td class="us-price">$2,500~5,000</td></tr>
+      </tbody>
+    </table>
+    <div class="price-compare-note">* Prices vary by clinic. Updated Mar 2026.</div>
+  </div>
+
+  <div class="section-gap-lg"></div>
+  <div class="phase-divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       PHASE 3: 검증
+  ════════════════════════════════════════════ -->
+
+  <!-- [3-A] Reviews -->
+  <section class="section">
+    <div class="trending-header">
+      <div class="h4">⭐ Real Reviews</div>
+      <a href="#" class="more">View all ›</a>
+    </div>
+    <div class="review-filters">
+      <div class="review-filter active">All</div>
+      <div class="review-filter">📸 Photo</div>
+      <div class="review-filter">🎬 Video</div>
+    </div>
+    <div class="review-list">
+      <div class="review-card">
+        <div class="review-card-header">
+          <div class="review-user"><span class="review-flag">🇯🇵</span><span class="review-username">Yuki</span></div>
+          <span class="review-stars">★★★★★</span>
+        </div>
+        <div class="review-treatment-tag">💆 Rejuran HB Plus</div>
+        <div class="review-text">I was worried about the embossing effect, but it completely went away in 3 days. My skin texture has completely changed — so smooth and glowing! Will definitely come back. 🥰</div>
+        <div class="review-photos"><div class="review-photo img-placeholder"></div><div class="review-photo img-placeholder"></div></div>
+        <div class="review-meta"><span class="review-spot">Abijou Clinic Gangnam</span><span class="review-date">2026.03.15</span></div>
+      </div>
+      <div class="review-card">
+        <div class="review-card-header">
+          <div class="review-user"><span class="review-flag">🇺🇸</span><span class="review-username">Sarah M.</span></div>
+          <span class="review-stars">★★★★★</span>
+        </div>
+        <div class="review-treatment-tag">🏥 Ultherapy + Rejuran</div>
+        <div class="review-text">Got the combo package — Ultherapy for lifting and Rejuran for skin regeneration. The doctor explained the PN mechanism in detail. Worth flying from NYC!</div>
+        <div class="review-meta"><span class="review-spot">Pibu Myeongga Hongdae</span><span class="review-date">2026.03.08</span></div>
+      </div>
+      <div class="review-card">
+        <div class="review-card-header">
+          <div class="review-user"><span class="review-flag">🇨🇳</span><span class="review-username">小红</span></div>
+          <span class="review-stars">★★★★☆</span>
+        </div>
+        <div class="review-treatment-tag">🏥 Thermage FLX</div>
+        <div class="review-text">确认了正品贴纸和0shot屏幕。医生很专业，全程用DeepSEE实时影像引导。比国内便宜很多，效果也很好。</div>
+        <div class="review-photos"><div class="review-photo img-placeholder"></div></div>
+        <div class="review-meta"><span class="review-spot">Enbom Clinic Hongdae</span><span class="review-date">2026.03.02</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="thin-divider"></div>
+
+  <!-- [3-B] Guides -->
+  <section class="section">
+    <div class="trending-header">
+      <div class="h4">📖 Treatment Guides</div>
+      <a href="#" class="more">View all ›</a>
+    </div>
+    <div class="guide-cards">
+      <div class="guide-card">
+        <div class="guide-card-img img-placeholder"><div class="guide-card-badge">COMPARE</div></div>
+        <div class="guide-card-body">
+          <div class="guide-card-title">Ultherapy vs Shurink: Which One Should You Choose?</div>
+          <div class="guide-card-desc">MFU vs HIFU — comparing precision, pain, price & results</div>
+        </div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-img img-placeholder"><div class="guide-card-badge">GUIDE</div></div>
+        <div class="guide-card-body">
+          <div class="guide-card-title">Rejuran Complete Guide: Types, Pain, Recovery</div>
+          <div class="guide-card-desc">Healer vs HB Plus vs S vs I — which is right for your skin?</div>
+        </div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-img img-placeholder"><div class="guide-card-badge">NEW</div></div>
+        <div class="guide-card-body">
+          <div class="guide-card-title">Juvelook & Exosome: Next-Gen K-Beauty</div>
+          <div class="guide-card-desc">PDLLA collagen stimulators and stem cell exosome therapy</div>
+        </div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-card-img img-placeholder"><div class="guide-card-badge">COMBO</div></div>
+        <div class="guide-card-body">
+          <div class="guide-card-title">Best Treatment Combos for Maximum Results</div>
+          <div class="guide-card-desc">Ultherapy + Rejuran, Potenza + Exosome and more</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       PHASE 4: 행동
+  ════════════════════════════════════════════ -->
+
+  <section class="section">
+    <div class="h4" style="margin-bottom:14px;">📍 Clinic Locations</div>
+    <div class="map-placeholder">Map — Partner clinic locations in Seoul</div>
+  </section>
+
+  <div class="thin-divider"></div>
+
+  <section class="section" style="padding-bottom:80px;">
+    <div class="inquiry-form">
+      <div class="inquiry-title">Need Help Choosing?</div>
+      <div class="inquiry-desc">Our beauty consultants will recommend the best treatment for you.</div>
+      <div class="inquiry-inner">
+        <input class="inquiry-input" type="email" placeholder="Your email address" />
+        <input class="inquiry-input" type="text" placeholder="Your name (optional)" />
+        <textarea class="inquiry-textarea" placeholder="Tell us about your skin concerns, preferred treatments, budget..."></textarea>
+        <button class="inquiry-submit">Get Free Consultation</button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- .page -->
+</div><!-- .page-wrapper -->
+
+<!-- Floating -->
+<div class="floating-btns">
+  <button class="floating-btn chat" title="Chat">💬</button>
+  <button class="floating-btn email" title="Email">✉️</button>
+</div>
+
+<script>
+  /* ── Device Switcher ── */
+  function switchMode(mode) {
+    const wrapper = document.getElementById('pageWrapper');
+    wrapper.className = 'page-wrapper mode-' + mode;
+    document.querySelectorAll('.device-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-mode="' + mode + '"]').classList.add('active');
+  }
+
+  /* ── Wizard ── */
+  let selections = {};
+  function goToStep2(el, value) {
+    selections.treatment = value;
+    el.classList.add('selected');
+    setTimeout(() => {
+      document.getElementById('wizard-step1').style.display = 'none';
+      document.getElementById('wizard-step2').style.display = 'block';
+      document.querySelectorAll('.wizard-progress-bar')[1].classList.add('active');
+    }, 150);
+  }
+  function goToStep3(el, value) {
+    selections.budget = value;
+    el.classList.add('selected');
+    setTimeout(() => {
+      document.getElementById('wizard-step2').style.display = 'none';
+      document.getElementById('wizard-step3').style.display = 'block';
+      document.querySelectorAll('.wizard-progress-bar')[2].classList.add('active');
+    }, 150);
+  }
+  function showResults(el, value) {
+    selections.area = value;
+    el.classList.add('selected');
+    setTimeout(() => {
+      document.getElementById('wizard-step3').style.display = 'none';
+      document.getElementById('wizard-results').style.display = 'block';
+      const t = document.getElementById('wizard-tags');
+      t.innerHTML = '';
+      Object.values(selections).forEach(v => {
+        t.innerHTML += '<span class="wizard-tag"><span class="check">✓</span> ' + v + '</span>';
+      });
+    }, 150);
+  }
+  function resetWizard() {
+    selections = {};
+    document.getElementById('wizard-step1').style.display = 'block';
+    document.getElementById('wizard-step2').style.display = 'none';
+    document.getElementById('wizard-step3').style.display = 'none';
+    document.getElementById('wizard-results').style.display = 'none';
+    document.querySelectorAll('.wizard-progress-bar').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.wizard-progress-bar')[0].classList.add('active');
+    document.querySelectorAll('.wizard-option').forEach(o => o.classList.remove('selected'));
+  }
+
+  /* ── Tab interactions ── */
+  document.querySelectorAll('.category-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.review-filter').forEach(f => {
+    f.addEventListener('click', () => {
+      document.querySelectorAll('.review-filter').forEach(x => x.classList.remove('active'));
+      f.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
