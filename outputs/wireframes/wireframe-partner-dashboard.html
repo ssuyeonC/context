@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner Dashboard Wireframe</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, 'Noto Sans KR', sans-serif;
+      background: #f0f2f5;
+      color: #3b4047;
+    }
+
+    /* Layout */
+    .layout { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 220px;
+      background: #001529;
+      padding: 20px 0;
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 0 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sidebar-menu { padding: 12px 0; }
+    .sidebar-item {
+      padding: 10px 24px;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .sidebar-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .sidebar-item.active {
+      color: #fff;
+      background: #00bdad;
+      font-weight: 600;
+    }
+    .sidebar-divider {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 8px 0;
+    }
+
+    .main { flex: 1; display: flex; flex-direction: column; }
+    .header {
+      height: 48px;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 24px;
+      font-size: 13px;
+      color: #888;
+    }
+    .content {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 24px;
+    }
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    .page-subtitle {
+      font-size: 13px;
+      color: #999;
+    }
+
+    /* Stat Cards */
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+      position: relative;
+    }
+    .stat-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .stat-card.urgent {
+      border-left: 4px solid #ff4d4f;
+    }
+    .stat-card.today {
+      border-left: 4px solid #faad14;
+    }
+    .stat-card.done {
+      border-left: 4px solid #00bdad;
+    }
+    .stat-card.used {
+      border-left: 4px solid #8c8c8c;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .stat-value.urgent-text { color: #ff4d4f; }
+    .stat-value.today-text { color: #faad14; }
+    .stat-value.done-text { color: #00bdad; }
+    .stat-value.used-text { color: #8c8c8c; }
+    .stat-unit {
+      font-size: 14px;
+      font-weight: 400;
+      margin-left: 2px;
+    }
+    .stat-sub {
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 8px;
+    }
+
+    /* Section */
+    .section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+    .section-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .section-action {
+      font-size: 13px;
+      color: #00bdad;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .section-action:hover { text-decoration: underline; }
+
+    /* Table */
+    .table { width: 100%; border-collapse: collapse; }
+    .table th {
+      text-align: left;
+      padding: 10px 20px;
+      font-size: 12px;
+      color: #999;
+      font-weight: 500;
+      background: #fafafa;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .table td {
+      padding: 12px 20px;
+      font-size: 13px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .table tr:last-child td { border-bottom: none; }
+    .table tr:hover td { background: #fafafa; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .badge.pending { background: #fff1f0; color: #ff4d4f; }
+    .badge.confirmed { background: #e6fffb; color: #00bdad; }
+    .badge.today-badge { background: #fffbe6; color: #d48806; }
+
+    /* Button */
+    .btn {
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-primary {
+      background: #00bdad;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #00a89a; }
+    .btn-outline {
+      background: #fff;
+      color: #00bdad;
+      border: 1px solid #00bdad;
+    }
+
+    /* Spot tabs */
+    .spot-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 12px 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .spot-tab {
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #f5f5f5;
+      color: #666;
+      border: none;
+    }
+    .spot-tab.active {
+      background: #00bdad;
+      color: #fff;
+      font-weight: 600;
+    }
+    .spot-tab .count {
+      font-size: 11px;
+      margin-left: 4px;
+      opacity: 0.8;
+    }
+
+    /* Annotation */
+    .annotation {
+      position: absolute;
+      background: #ffe58f;
+      color: #874d00;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      top: -10px;
+      right: -4px;
+      transform: rotate(2deg);
+      font-weight: 600;
+      white-space: nowrap;
+      z-index: 1;
+    }
+    .wireframe-note {
+      background: #f6ffed;
+      border: 1px dashed #b7eb8f;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: #389e0d;
+      line-height: 1.6;
+    }
+    .wireframe-note strong { color: #237804; }
+
+    /* Empty state */
+    .empty-state {
+      padding: 48px 20px;
+      text-align: center;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    /* Pie Chart Section */
+    .chart-section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .chart-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .chart-dropdown {
+      padding: 6px 12px;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #3b4047;
+      background: #fff;
+      cursor: pointer;
+      appearance: none;
+      padding-right: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+    .chart-dropdown:hover { border-color: #00bdad; }
+    .chart-dropdown.hidden { display: none; }
+
+    .chart-filters {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chart-date-input {
+      padding: 5px 10px;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #3b4047;
+      background: #fff;
+      cursor: pointer;
+      width: 130px;
+    }
+    .chart-date-input:hover,
+    .chart-date-input:focus { border-color: #00bdad; outline: none; }
+    .chart-date-separator {
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    .chart-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .chart-pie-area {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      flex-shrink: 0;
+    }
+    .chart-center-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .chart-center-label .total-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1;
+    }
+    .chart-center-label .total-label {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .chart-legend {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.1s;
+      position: relative;
+    }
+    .legend-item:hover { background: #fafafa; }
+    .legend-item.active { background: #f0faf9; }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .legend-name {
+      font-size: 13px;
+      color: #3b4047;
+      flex: 1;
+    }
+    .legend-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #3b4047;
+      margin-right: 8px;
+    }
+    .legend-percent {
+      font-size: 12px;
+      color: #999;
+      width: 40px;
+      text-align: right;
+    }
+
+    /* Tooltip */
+    .chart-tooltip {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      padding: 14px 16px;
+      min-width: 220px;
+      z-index: 100;
+      pointer-events: none;
+    }
+    .tooltip-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .tooltip-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+    .tooltip-row-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #666;
+    }
+    .tooltip-bar-wrapper {
+      width: 60px;
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .tooltip-bar {
+      height: 100%;
+      border-radius: 3px;
+    }
+    .tooltip-row-right {
+      font-size: 12px;
+      color: #3b4047;
+      font-weight: 600;
+    }
+    .tooltip-hint {
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    /* Single spot note */
+    .single-spot-note {
+      background: #f6ffed;
+      border: 1px dashed #b7eb8f;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: #389e0d;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-logo">Creatrip Admin</div>
+      <div class="sidebar-menu">
+        <div class="sidebar-item active">대시보드</div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-item">스팟 수정 요청</div>
+        <div class="sidebar-item">스팟 등록 요청</div>
+        <div class="sidebar-item">파트너쉽 정산</div>
+        <div class="sidebar-item">스팟 리뷰 관리</div>
+        <div class="sidebar-item">예약내역</div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="header">
+        partner@example.com
+      </div>
+
+      <div class="content">
+        <!-- Wireframe Note -->
+        <div class="wireframe-note">
+          <strong>Wireframe</strong> — 파트너 어드민 대시보드 (TravelPartner 역할 로그인 시 Home 화면)<br>
+          목적: 로그인 즉시 "할 일"이 보이는 경험 제공. Type D(0%) 파트너의 행동 전환 유도.
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title">안녕하세요, 파트너님</div>
+          <div class="page-subtitle">2026년 4월 7일 월요일 기준</div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="stat-cards">
+          <div class="stat-card urgent">
+            <div class="annotation">핵심 지표</div>
+            <div class="stat-label">승인 대기</div>
+            <div class="stat-value urgent-text">5<span class="stat-unit">건</span></div>
+            <div class="stat-sub">지금 바로 처리할 수 있어요</div>
+          </div>
+          <div class="stat-card today">
+            <div class="stat-label">오늘 방문 예정</div>
+            <div class="stat-value today-text">3<span class="stat-unit">건</span></div>
+            <div class="stat-sub">2건 확정 / 1건 미확정</div>
+          </div>
+          <div class="stat-card done">
+            <div class="stat-label">이번 달 확정</div>
+            <div class="stat-value done-text">28<span class="stat-unit">건</span></div>
+            <div class="stat-sub">직접 승인 12건</div>
+          </div>
+          <div class="stat-card used">
+            <div class="stat-label">이번 달 사용완료</div>
+            <div class="stat-value used-text">22<span class="stat-unit">건</span></div>
+            <div class="stat-sub">&nbsp;</div>
+          </div>
+        </div>
+
+        <!-- Product Distribution Pie Chart -->
+        <div class="chart-section" style="position: relative;">
+          <div class="chart-header">
+            <div class="chart-title">상품별 예약 분포</div>
+            <div class="chart-filters">
+              <input type="date" class="chart-date-input" id="dateFrom" />
+              <span class="chart-date-separator">~</span>
+              <input type="date" class="chart-date-input" id="dateTo" />
+              <!-- 복수 스팟 파트너: 드롭다운 표시 -->
+              <select class="chart-dropdown" id="spotDropdown">
+                <option>홍대 스페이스</option>
+                <option>성수 플래그십점</option>
+                <option>강남점</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="chart-body">
+            <!-- Donut Chart (SVG) -->
+            <div class="chart-pie-area">
+              <svg viewBox="0 0 220 220" width="220" height="220">
+                <!-- K-POP 헤어 (42%) -->
+                <circle cx="110" cy="110" r="85" fill="none" stroke="#00bdad" stroke-width="32"
+                  stroke-dasharray="224.9 310.5" stroke-dashoffset="0"
+                  transform="rotate(-90 110 110)"
+                  style="cursor:pointer" />
+                <!-- 메이크업 (28%) -->
+                <circle cx="110" cy="110" r="85" fill="none" stroke="#36cfc9" stroke-width="32"
+                  stroke-dasharray="149.7 385.7" stroke-dashoffset="-224.9"
+                  transform="rotate(-90 110 110)"
+                  style="cursor:pointer" />
+                <!-- 웨딩 촬영 (18%) -->
+                <circle cx="110" cy="110" r="85" fill="none" stroke="#87e8de" stroke-width="32"
+                  stroke-dasharray="96.3 439.1" stroke-dashoffset="-374.6"
+                  transform="rotate(-90 110 110)"
+                  style="cursor:pointer" />
+                <!-- 기타 (12%) -->
+                <circle cx="110" cy="110" r="85" fill="none" stroke="#d9d9d9" stroke-width="32"
+                  stroke-dasharray="64.2 471.2" stroke-dashoffset="-470.9"
+                  transform="rotate(-90 110 110)"
+                  style="cursor:pointer" />
+              </svg>
+              <div class="chart-center-label">
+                <div class="total-value">47</div>
+                <div class="total-label">전체 예약</div>
+              </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="chart-legend">
+              <div class="legend-item active" id="legendHair" onmouseenter="showTooltip()" onmouseleave="hideTooltip()">
+                <div class="legend-dot" style="background: #00bdad;"></div>
+                <span class="legend-name">K-POP 헤어</span>
+                <span class="legend-value">20건</span>
+                <span class="legend-percent">42.6%</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background: #36cfc9;"></div>
+                <span class="legend-name">메이크업</span>
+                <span class="legend-value">13건</span>
+                <span class="legend-percent">27.7%</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background: #87e8de;"></div>
+                <span class="legend-name">웨딩 촬영</span>
+                <span class="legend-value">8건</span>
+                <span class="legend-percent">17.0%</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background: #d9d9d9;"></div>
+                <span class="legend-name">퍼스널컬러 진단</span>
+                <span class="legend-value">6건</span>
+                <span class="legend-percent">12.8%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tooltip (상품 클릭 시 1차 하위 옵션 분포) -->
+          <div class="chart-tooltip" id="optionTooltip" style="display: none; top: 60px; left: 40px;">
+            <div class="tooltip-title">K-POP 헤어 - 옵션별 분포</div>
+            <div class="tooltip-row">
+              <div class="tooltip-row-left">
+                <div class="tooltip-bar-wrapper"><div class="tooltip-bar" style="width: 55%; background: #00bdad;"></div></div>
+                컷 + 스타일링
+              </div>
+              <div class="tooltip-row-right">11건 (55%)</div>
+            </div>
+            <div class="tooltip-row">
+              <div class="tooltip-row-left">
+                <div class="tooltip-bar-wrapper"><div class="tooltip-bar" style="width: 30%; background: #36cfc9;"></div></div>
+                펌 + 스타일링
+              </div>
+              <div class="tooltip-row-right">6건 (30%)</div>
+            </div>
+            <div class="tooltip-row">
+              <div class="tooltip-row-left">
+                <div class="tooltip-bar-wrapper"><div class="tooltip-bar" style="width: 15%; background: #87e8de;"></div></div>
+                염색 + 스타일링
+              </div>
+              <div class="tooltip-row-right">3건 (15%)</div>
+            </div>
+            <div class="tooltip-hint">상품 영역을 클릭하면 옵션별 분포를 확인할 수 있습니다</div>
+          </div>
+
+          <!-- 단일 스팟 파트너 안내 -->
+          <div class="single-spot-note">
+            <strong>Note</strong> — 스팟이 1개만 연결된 파트너의 경우, 상단 스팟 드롭다운은 숨김 처리됩니다.
+          </div>
+        </div>
+
+        <!-- Pending Reservations -->
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">승인 대기 예약</div>
+            <a class="section-action">전체 보기 &rarr;</a>
+          </div>
+
+          <!-- Spot Tabs (복수 스팟 파트너용) -->
+          <div class="spot-tabs">
+            <button class="spot-tab active">전체<span class="count">(5)</span></button>
+            <button class="spot-tab">홍대 스페이스<span class="count">(3)</span></button>
+            <button class="spot-tab">성수 플래그십점<span class="count">(1)</span></button>
+            <button class="spot-tab">강남점<span class="count">(1)</span></button>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:40px"><input type="checkbox" /></th>
+                <th>예약코드</th>
+                <th>스팟</th>
+                <th>예약자</th>
+                <th>방문일</th>
+                <th>방문시간</th>
+                <th>인원</th>
+                <th>상태</th>
+                <th style="width:80px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td style="font-weight:600">R-240407-001</td>
+                <td>홍대 스페이스</td>
+                <td>Tanaka Yui</td>
+                <td>4/8 (화)</td>
+                <td>14:00</td>
+                <td>2명</td>
+                <td><span class="badge pending">승인 대기</span></td>
+                <td><button class="btn btn-primary">승인</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td style="font-weight:600">R-240407-002</td>
+                <td>홍대 스페이스</td>
+                <td>Chen Wei</td>
+                <td>4/8 (화)</td>
+                <td>15:30</td>
+                <td>1명</td>
+                <td><span class="badge pending">승인 대기</span></td>
+                <td><button class="btn btn-primary">승인</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td style="font-weight:600">R-240407-003</td>
+                <td>성수 플래그십점</td>
+                <td>Emily Park</td>
+                <td>4/9 (수)</td>
+                <td>11:00</td>
+                <td>3명</td>
+                <td><span class="badge pending">승인 대기</span></td>
+                <td><button class="btn btn-primary">승인</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td style="font-weight:600">R-240406-012</td>
+                <td>홍대 스페이스</td>
+                <td>Sato Miku</td>
+                <td>4/9 (수)</td>
+                <td>16:00</td>
+                <td>2명</td>
+                <td><span class="badge pending">승인 대기</span></td>
+                <td><button class="btn btn-primary">승인</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td style="font-weight:600">R-240406-015</td>
+                <td>강남점</td>
+                <td>Lisa Nguyen</td>
+                <td>4/10 (목)</td>
+                <td>13:00</td>
+                <td>1명</td>
+                <td><span class="badge pending">승인 대기</span></td>
+                <td><button class="btn btn-primary">승인</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Batch Action -->
+          <div style="padding: 12px 20px; border-top: 1px solid #f0f0f0; display: flex; align-items: center; gap: 12px;">
+            <button class="btn btn-primary" style="padding: 6px 20px; font-size: 13px;">선택 승인</button>
+            <span style="font-size: 12px; color: #999;">체크박스로 여러 예약을 선택하여 일괄 승인할 수 있습니다</span>
+          </div>
+        </div>
+
+        <!-- Today's Visits -->
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">오늘 방문 예정 (4/7)</div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>예약코드</th>
+                <th>스팟</th>
+                <th>예약자</th>
+                <th>방문시간</th>
+                <th>인원</th>
+                <th>상태</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600">R-240405-008</td>
+                <td>홍대 스페이스</td>
+                <td>Wang Xiaoming</td>
+                <td>11:00</td>
+                <td>2명</td>
+                <td><span class="badge confirmed">확정 완료</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">R-240405-011</td>
+                <td>홍대 스페이스</td>
+                <td>Suzuki Hana</td>
+                <td>14:00</td>
+                <td>1명</td>
+                <td><span class="badge confirmed">확정 완료</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">R-240406-003</td>
+                <td>성수 플래그십점</td>
+                <td>John Smith</td>
+                <td>16:30</td>
+                <td>4명</td>
+                <td><span class="badge today-badge">미확정</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    // Set default date range to current month
+    (function initDateFilter() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const lastDay = new Date(year, now.getMonth() + 1, 0).getDate();
+
+      document.getElementById('dateFrom').value = `${year}-${month}-01`;
+      document.getElementById('dateTo').value = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
+    })();
+
+    // Tooltip toggle on legend item click/hover
+    function showTooltip() {
+      document.getElementById('optionTooltip').style.display = 'block';
+    }
+    function hideTooltip() {
+      document.getElementById('optionTooltip').style.display = 'none';
+    }
+
+    // Legend click to toggle tooltip persistently
+    document.querySelectorAll('.legend-item').forEach((item, idx) => {
+      item.addEventListener('click', function () {
+        const tooltip = document.getElementById('optionTooltip');
+        const isVisible = tooltip.style.display === 'block';
+        // Toggle active state
+        document.querySelectorAll('.legend-item').forEach(i => i.classList.remove('active'));
+
+        if (isVisible && this.classList.contains('active')) {
+          tooltip.style.display = 'none';
+        } else {
+          this.classList.add('active');
+          tooltip.style.display = 'block';
+
+          // Update tooltip position relative to clicked item
+          const rect = this.getBoundingClientRect();
+          const section = this.closest('.chart-section').getBoundingClientRect();
+          tooltip.style.top = (rect.top - section.top + rect.height + 8) + 'px';
+          tooltip.style.left = (rect.left - section.left) + 'px';
+        }
+      });
+    });
+
+    // Simulate single-spot partner mode
+    const singleSpotToggle = document.createElement('button');
+    singleSpotToggle.textContent = 'Toggle: 단일 스팟 모드';
+    singleSpotToggle.className = 'btn btn-outline';
+    singleSpotToggle.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:999;padding:8px 16px;font-size:12px;';
+    singleSpotToggle.addEventListener('click', () => {
+      const dd = document.getElementById('spotDropdown');
+      dd.classList.toggle('hidden');
+    });
+    document.body.appendChild(singleSpotToggle);
+  </script>
+</body>
+</html>
