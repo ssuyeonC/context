@@ -277,3 +277,10 @@ https://wireframes-lkb.pages.dev/#partner-admin-dashboard
 
 **User**: 스킬 사용해서 깃헙에 업데이트해줘
 
+**Assistant**: 변경된 파일:
+- **(A)** `attachments/image-v11.png`
+- **(A)** `attachments/pasted_text_2026-04-08_14-35-15.txt` — 파트너 어드민 개선 계획 문서
+- **(A)** `outputs/jira/requirements_partner-admin-dashboard.md` — 대시보드 요구사항
+- **(A)** `work/prague/3a0c9078-...md` — 워크스페이스 컨텍스트
+- **(M)** `work/prague/bcb0eaa5-...md`, `state.json` — 워크스페이스 상태
+
