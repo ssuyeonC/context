@@ -10,7 +10,7 @@
 
 | 트리거 키워드 | 스킬 | 설명 |
 |-------------|------|------|
-| `지라`, `티켓`, `요구사항`, `requirements`, `제안`, `제안서`, `proposal` | `write-doc` | 템플릿 기반 문서(요구사항/제안서) 생성. Jira API 직접 호출 금지, md 파일로 저장 |
+| `지라`, `티켓`, `요구사항`, `requirements`, `제안`, `제안서`, `proposal` | `write-doc` | 템플릿 기반 문서(요구사항/제안서) 생성. Jira API 직접 호출 금지, md 파일로 저장. **제안서일 경우 `.context/templates/planning-frame.md`의 Q1·Q2 자문을 반드시 포함.** |
 | `깃헙에서 가져와`, `context 풀`, `pull context`, `context 동기화` | `pull-context` | GitHub(ssuyeonC/context)에서 최신 .context를 pull하고 심링크 복구 |
 | `깃헙에 업데이트`, `깃헙 업데이트`, `context 푸시`, `sync context` | `sync-context` | .context 변경사항을 GitHub(ssuyeonC/context)에 커밋 & 푸시 |
 | `/followup` (슬래시 커맨드) | `followup` | 회의록 파일에 추가 논의 내용을 append |
