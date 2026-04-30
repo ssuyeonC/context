@@ -1,0 +1,632 @@
+import { useState } from "react";
+
+const NAVY = "#0f1a2e";
+const ACTIVE_BLUE = "#1c64f2";
+
+type ReservationRow = {
+  code: string;
+  spot: string;
+  product: string;
+  partnership: string;
+  bookerName: string;
+  createdAt: string;
+  reservationDate: string;
+  reservationTime: string;
+  status: string;
+};
+
+const mockRows: ReservationRow[] = [
+  { code: "XXXXXXXXX1", spot: "스팟 A", product: "상품명 1", partnership: "파트너사 1", bookerName: "예약자명 1", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "23:59", status: "취소" },
+  { code: "XXXXXXXXX2", spot: "스팟 B", product: "상품명 2", partnership: "파트너사 2", bookerName: "예약자명 2", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "12:00", status: "취소" },
+  { code: "XXXXXXXXX3", spot: "스팟 C", product: "상품명 3", partnership: "파트너사 3", bookerName: "예약자명 3", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "02:00", status: "취소" },
+  { code: "XXXXXXXXX4", spot: "스팟 D", product: "상품명 4", partnership: "파트너사 4", bookerName: "예약자명 4", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "23:59", status: "취소" },
+  { code: "XXXXXXXXX5", spot: "스팟 E", product: "상품명 5", partnership: "파트너사 5", bookerName: "예약자명 5", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "02:00", status: "취소" },
+  { code: "XXXXXXXXX6", spot: "스팟 F", product: "상품명 6", partnership: "파트너사 6", bookerName: "예약자명 6", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "20:00", status: "취소" },
+  { code: "XXXXXXXXX7", spot: "스팟 G", product: "상품명 7", partnership: "파트너사 7", bookerName: "예약자명 7", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "14:00", status: "취소" },
+  { code: "XXXXXXXXX8", spot: "스팟 H", product: "상품명 8", partnership: "파트너사 8", bookerName: "예약자명 8", createdAt: "YYYY-MM-DD", reservationDate: "YYYY-MM-DD", reservationTime: "11:00", status: "취소" },
+];
+
+const LANGUAGE_OPTIONS = [
+  "전체", "한국어", "중국어", "영어", "프랑스어", "스페인어", "홍콩어", "대만어",
+  "태국어", "일본어", "베트남어", "독일어", "러시아어", "이탈리아어", "인도네시아어", "몽골어",
+];
+// 파트너의 스팟 목록 (가장 최근 생성 순)
+const PARTNER_SPOTS = ["스팟 A (가장 최근 생성)", "스팟 B", "스팟 C"];
+
+// 스팟 2개 이상이면 '전체' 옵션 추가, 1개면 그 스팟만 노출
+const SPOT_OPTIONS = PARTNER_SPOTS.length > 1 ? ["전체", ...PARTNER_SPOTS] : PARTNER_SPOTS;
+const DEFAULT_SPOT = SPOT_OPTIONS[0];
+
+const sidebarFav = [
+  { icon: "📋", label: "어학당 < 장기숙소 ..." },
+  { icon: "👤", label: "공통 < 회원" },
+];
+const sidebarTravel = [
+  { icon: "📍", label: "스팟" },
+  { icon: "🗓️", label: "트립 이벤트" },
+  { icon: "📋", label: "예약내역", active: true },
+  { icon: "⭐", label: "스팟 리뷰" },
+  { icon: "❓", label: "QnA" },
+  { icon: "🌐", label: "지역" },
+  { icon: "📦", label: "패키지" },
+];
+
+/* ── Components ── */
+
+function DropdownSelect({ options, value, onChange, width = 180, label }: {
+  options: string[]; value: string; onChange: (v: string) => void; width?: number; label?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ position: "relative", width }}>
+      <div
+        onClick={() => setOpen(!open)}
+        style={{
+          padding: "6px 10px", fontSize: 13, color: "#3b4047",
+          border: "1px solid #d9d9d9", borderRadius: 6, background: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          cursor: "pointer", height: 32, boxSizing: "border-box",
+        }}
+      >
+        <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {label && <span style={{ color: "#999", marginRight: 6 }}>{label}</span>}
+          {value}
+        </span>
+        <span style={{ fontSize: 10, color: "#aaa", marginLeft: 6 }}>▾</span>
+      </div>
+      {open && (
+        <>
+          <div onClick={() => setOpen(false)} style={{ position: "fixed", inset: 0, zIndex: 5 }} />
+          <div style={{
+            position: "absolute", top: "calc(100% + 4px)", left: 0, width: "100%",
+            maxHeight: 280, overflowY: "auto", background: "#fff",
+            border: "1px solid #d9d9d9", borderRadius: 6, zIndex: 10,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+          }}>
+            {options.map((opt) => (
+              <div
+                key={opt}
+                onClick={() => { onChange(opt); setOpen(false); }}
+                style={{
+                  padding: "8px 12px", fontSize: 13, cursor: "pointer",
+                  background: value === opt ? "#e6f0ff" : "#fff",
+                  color: value === opt ? ACTIVE_BLUE : "#3b4047",
+                  fontWeight: value === opt ? 600 : 400,
+                }}
+              >
+                {opt}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function SegmentedControl({ options, value, onChange }: {
+  options: { value: string; label: React.ReactNode }[]; value: string; onChange: (v: string) => void;
+}) {
+  return (
+    <div style={{ display: "inline-flex", border: "1px solid #d9d9d9", borderRadius: 6, overflow: "hidden", height: 32 }}>
+      {options.map((opt, i) => {
+        const active = value === opt.value;
+        return (
+          <button
+            key={opt.value}
+            onClick={() => onChange(opt.value)}
+            style={{
+              padding: "0 14px", fontSize: 13, cursor: "pointer", border: "none",
+              borderLeft: i === 0 ? "none" : "1px solid #d9d9d9",
+              background: active ? ACTIVE_BLUE : "#fff",
+              color: active ? "#fff" : "#3b4047",
+              fontWeight: active ? 600 : 400,
+              display: "flex", alignItems: "center", gap: 4,
+            }}
+          >
+            {opt.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function StatusPill({ active, children, badge, onClick }: {
+  active: boolean; children: React.ReactNode; badge?: number; onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        padding: "6px 14px", fontSize: 13, borderRadius: 16, cursor: "pointer",
+        border: active ? "1px solid " + ACTIVE_BLUE : "1px solid #e5e7eb",
+        background: active ? ACTIVE_BLUE : "#fff",
+        color: active ? "#fff" : "#3b4047",
+        fontWeight: active ? 500 : 400,
+        display: "inline-flex", alignItems: "center", gap: 6, height: 30,
+      }}
+    >
+      {children}
+      {badge !== undefined && badge > 0 && (
+        <span style={{
+          background: active ? "rgba(255,255,255,0.2)" : "#fef2f2",
+          color: active ? "#fff" : "#dc2626",
+          fontSize: 10, fontWeight: 700, padding: "1px 6px", borderRadius: 8,
+        }}>{badge}</span>
+      )}
+    </button>
+  );
+}
+
+/* ── Main ── */
+
+const ORDER_STATUSES = ["전체", "결제대기", "승인대기", "확정", "취소", "부분 환불", "사용 완료"];
+const CHANGE_REQUESTS: { value: string; badge?: number }[] = [
+  { value: "전체" },
+  { value: "파트너 예약 변경 요청", badge: 3 },
+  { value: "유저 예약 변경 요청", badge: 5 },
+  { value: "관리자 예약 변경 요청", badge: 15 },
+  { value: "예약 변경 완료" },
+  { value: "파트너 거절 요청" },
+];
+
+export default function PartnerAdminReservationListImproved() {
+  const [language, setLanguage] = useState("전체");
+  const [spot, setSpot] = useState(DEFAULT_SPOT);
+  const [orderStatus, setOrderStatus] = useState("전체");
+  const [cancelType, setCancelType] = useState("모두");
+  const [precaution, setPrecaution] = useState("모두");
+  const [changeRequest, setChangeRequest] = useState("전체");
+  const [dateType, setDateType] = useState("생성일");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
+
+  const showCancelSubFilter = orderStatus === "취소" || orderStatus === "부분 환불";
+
+  type Chip = { key: string; label: string; onClear: () => void };
+  const chips: Chip[] = [];
+  if (language !== "전체") chips.push({ key: "lang", label: `언어: ${language}`, onClear: () => setLanguage("전체") });
+  if (orderStatus !== "전체") chips.push({ key: "order", label: `상태: ${orderStatus}`, onClear: () => setOrderStatus("전체") });
+  if (showCancelSubFilter && cancelType !== "모두") chips.push({ key: "cancel", label: `취소 사유: ${cancelType}`, onClear: () => setCancelType("모두") });
+  if (precaution !== "모두") chips.push({ key: "prec", label: `${precaution}`, onClear: () => setPrecaution("모두") });
+  if (changeRequest !== "전체") chips.push({ key: "change", label: `변경요청: ${changeRequest}`, onClear: () => setChangeRequest("전체") });
+
+  const handleResetAll = () => {
+    setLanguage("전체"); setOrderStatus("전체"); setCancelType("모두");
+    setPrecaution("모두"); setChangeRequest("전체"); setDateType("생성일"); setSearchQuery("");
+  };
+
+  return (
+    <div style={{
+      display: "flex", minHeight: "100%", background: "#f5f7fa",
+      fontFamily: "-apple-system, 'Noto Sans KR', sans-serif", color: "#3b4047",
+    }}>
+      {/* Sidebar */}
+      <div style={{ width: 240, background: NAVY, color: "#fff", flexShrink: 0, maxHeight: "100vh", overflowY: "auto" }}>
+        <div style={{ padding: "16px 12px 8px" }}>
+          <div style={{
+            display: "flex", alignItems: "center", gap: 10, padding: "10px 14px",
+            borderRadius: 8, fontSize: 14, fontWeight: 600, color: "#fff", background: "rgba(255,255,255,0.05)",
+          }}>🏠 Creatrip</div>
+        </div>
+        <div style={{ padding: "0 12px" }}>
+          <div style={{
+            display: "flex", alignItems: "center", gap: 8, padding: "8px 12px",
+            background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
+            borderRadius: 8, fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 12,
+          }}>🔍 메뉴 검색...</div>
+          <div style={{ color: "#fadb14", fontSize: 14, fontWeight: 600, padding: "10px 14px" }}>★ 즐겨찾기</div>
+          {sidebarFav.map((f) => (
+            <div key={f.label} style={navItem(false)}><span>{f.icon} {f.label}</span></div>
+          ))}
+          <div style={{ color: "rgba(255,255,255,0.85)", fontSize: 14, fontWeight: 600, padding: "10px 14px", marginTop: 8 }}>▦ 여행</div>
+          {sidebarTravel.map((it) => (
+            <div key={it.label} style={navItem(!!it.active)}><span>{it.icon} {it.label}</span></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+        {/* Header */}
+        <div style={{
+          height: 56, background: NAVY, display: "flex", alignItems: "center",
+          justifyContent: "space-between", padding: "0 16px", color: "#fff",
+        }}>
+          <span style={{ fontSize: 18, opacity: 0.8, cursor: "pointer" }}>☰</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <button style={{
+              padding: "6px 12px", background: "transparent",
+              border: "1px solid rgba(255,255,255,0.25)", borderRadius: 6,
+              color: "#fff", fontSize: 13, cursor: "pointer",
+            }}>💬 불편 제보</button>
+            <div style={{
+              padding: "6px 12px", border: "1px solid rgba(255,255,255,0.25)",
+              borderRadius: 6, fontSize: 13, color: "#fff",
+            }}>partner@creatrip.com</div>
+            <div style={{
+              width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center",
+              border: "1px solid rgba(255,255,255,0.25)", borderRadius: 6, cursor: "pointer", fontSize: 14,
+            }}>⚙</div>
+          </div>
+        </div>
+
+        <div style={{ padding: 20 }}>
+          <div style={{ marginBottom: 14 }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: "#1a1a1a" }}>예약내역</div>
+            <div style={{ fontSize: 12, color: "#999", marginTop: 2 }}>파트너 어드민 · 개선안 (UI 최적화)</div>
+          </div>
+
+          {/* Filter Card */}
+          <div style={{ background: "#fff", borderRadius: 8, boxShadow: "0 1px 2px rgba(0,0,0,0.04)", marginBottom: 12, padding: 16 }}>
+            {/* Row 1: search + dropdowns + reset */}
+            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", marginBottom: 14 }}>
+              <div style={{
+                flex: "1 1 320px", minWidth: 280,
+                display: "flex", alignItems: "center", gap: 8,
+                padding: "0 10px", height: 32,
+                border: "1px solid #d9d9d9", borderRadius: 6, background: "#fff",
+              }}>
+                <span style={{ color: "#bbb", fontSize: 13 }}>🔍</span>
+                <input
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="예약 ID, 예약코드, 이름, 이메일, 회원코드"
+                  style={{ flex: 1, border: "none", outline: "none", fontSize: 13, color: "#3b4047", background: "transparent" }}
+                />
+              </div>
+              <DropdownSelect options={LANGUAGE_OPTIONS} value={language} onChange={setLanguage} width={170} label="언어" />
+              <DropdownSelect options={SPOT_OPTIONS} value={spot} onChange={setSpot} width={260} label="스팟" />
+              <button
+                onClick={handleResetAll}
+                style={{
+                  padding: "0 14px", height: 32, fontSize: 13, color: "#666",
+                  border: "1px solid #d9d9d9", background: "#fff", borderRadius: 6, cursor: "pointer",
+                }}
+              >↻ 초기화</button>
+            </div>
+
+            {/* Row 2: date filter */}
+            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", marginBottom: 14 }}>
+              <span style={{ fontSize: 12, color: "#888", fontWeight: 500, width: 60 }}>기간</span>
+              <SegmentedControl
+                options={[
+                  { value: "생성일", label: "생성일" },
+                  { value: "예약일", label: "예약일" },
+                ]}
+                value={dateType}
+                onChange={setDateType}
+              />
+              <div style={{
+                display: "flex", alignItems: "center", gap: 6, height: 32,
+                padding: "0 10px",
+                border: viewMode === "calendar" ? "1px dashed #93c5fd" : "1px solid #d9d9d9",
+                borderRadius: 6,
+                fontSize: 13,
+                color: viewMode === "calendar" ? "#1e3a8a" : "#aaa",
+                background: viewMode === "calendar" ? "#eff6ff" : "#fff",
+              }}>
+                <span>📅</span>
+                {viewMode === "calendar" ? (
+                  <span>2026-04-01 → 2026-04-30 <span style={{ fontSize: 11, marginLeft: 4 }}>(현재 월 자동)</span></span>
+                ) : (
+                  <span>YYYY-MM-DD <span>→</span> YYYY-MM-DD</span>
+                )}
+              </div>
+              {viewMode === "list" && (
+                <div style={{ display: "flex", gap: 4 }}>
+                  {["오늘", "7일", "30일", "이번 달"].map((p) => (
+                    <button key={p} style={{
+                      padding: "4px 10px", fontSize: 11, color: "#666",
+                      border: "1px solid #e5e7eb", background: "#fafafa", borderRadius: 4, cursor: "pointer",
+                    }}>{p}</button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Row 3: order status pills */}
+            <div style={{ display: "flex", gap: 10, alignItems: "flex-start", flexWrap: "wrap", marginBottom: showCancelSubFilter ? 10 : 14 }}>
+              <span style={{ fontSize: 12, color: "#888", fontWeight: 500, width: 60, paddingTop: 7 }}>주문상태</span>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", flex: 1 }}>
+                {ORDER_STATUSES.map((s) => (
+                  <StatusPill key={s} active={orderStatus === s} onClick={() => setOrderStatus(s)}>
+                    {s}
+                  </StatusPill>
+                ))}
+                <div style={{ flex: 1 }} />
+                <DropdownSelect
+                  options={["모두", "특이사항 O", "특이사항 X"]}
+                  value={precaution}
+                  onChange={setPrecaution}
+                  width={130}
+                  label="특이사항"
+                />
+              </div>
+            </div>
+
+            {/* Row 3b: cancel sub-filter (conditional) */}
+            {showCancelSubFilter && (
+              <div style={{
+                display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap",
+                marginBottom: 14, paddingLeft: 70, paddingTop: 4,
+              }}>
+                <span style={{ fontSize: 11, color: "#999" }}>↳ 취소 사유</span>
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                  {["모두", "수동환불", "결제만료", "미환불 취소"].map((c) => (
+                    <StatusPill key={c} active={cancelType === c} onClick={() => setCancelType(c)}>
+                      {c}
+                    </StatusPill>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Row 4: change requests */}
+            <div style={{ display: "flex", gap: 10, alignItems: "flex-start", flexWrap: "wrap" }}>
+              <span style={{ fontSize: 12, color: "#888", fontWeight: 500, width: 60, paddingTop: 7 }}>변경요청</span>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", flex: 1 }}>
+                {CHANGE_REQUESTS.map((c) => (
+                  <StatusPill
+                    key={c.value}
+                    active={changeRequest === c.value}
+                    badge={c.badge}
+                    onClick={() => setChangeRequest(c.value)}
+                  >
+                    {c.value}
+                  </StatusPill>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Active filter chips */}
+          {chips.length > 0 && (
+            <div style={{
+              display: "flex", alignItems: "center", gap: 6, marginBottom: 12,
+              flexWrap: "wrap", padding: "10px 14px", background: "#eff6ff",
+              border: "1px solid #bfdbfe", borderRadius: 6,
+            }}>
+              <span style={{ fontSize: 11, color: "#1e3a8a", fontWeight: 600 }}>적용된 필터 {chips.length}개</span>
+              {chips.map((chip) => (
+                <span key={chip.key} style={{
+                  display: "inline-flex", alignItems: "center", gap: 6,
+                  padding: "3px 4px 3px 10px", background: "#fff", border: "1px solid #93c5fd",
+                  borderRadius: 12, fontSize: 11, color: "#1e3a8a",
+                }}>
+                  {chip.label}
+                  <button
+                    onClick={chip.onClear}
+                    style={{
+                      width: 18, height: 18, padding: 0, border: "none", borderRadius: "50%",
+                      background: "transparent", cursor: "pointer", color: "#1e3a8a", fontSize: 11,
+                    }}
+                  >✕</button>
+                </span>
+              ))}
+              <button
+                onClick={handleResetAll}
+                style={{
+                  marginLeft: "auto", padding: "3px 10px", fontSize: 11,
+                  border: "none", background: "transparent", color: "#1e3a8a",
+                  cursor: "pointer", fontWeight: 600,
+                }}
+              >모두 초기화</button>
+            </div>
+          )}
+
+          {/* Toolbar */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12, gap: 12, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ fontSize: 14, fontWeight: 600 }}>전체 {mockRows.length}건</div>
+              <div style={{ display: "inline-flex", border: "1px solid #d9d9d9", borderRadius: 6, overflow: "hidden", height: 30 }}>
+                <button
+                  onClick={() => setViewMode("list")}
+                  style={{
+                    padding: "0 14px", fontSize: 12, cursor: "pointer", border: "none",
+                    background: viewMode === "list" ? ACTIVE_BLUE : "#fff",
+                    color: viewMode === "list" ? "#fff" : "#3b4047",
+                    fontWeight: viewMode === "list" ? 600 : 400,
+                    display: "flex", alignItems: "center", gap: 4,
+                  }}
+                >☰ 리스트 뷰</button>
+                <button
+                  onClick={() => setViewMode("calendar")}
+                  style={{
+                    padding: "0 14px", fontSize: 12, cursor: "pointer", border: "none",
+                    borderLeft: "1px solid #d9d9d9",
+                    background: viewMode === "calendar" ? ACTIVE_BLUE : "#fff",
+                    color: viewMode === "calendar" ? "#fff" : "#3b4047",
+                    fontWeight: viewMode === "calendar" ? 600 : 400,
+                    display: "flex", alignItems: "center", gap: 4,
+                  }}
+                >📅 캘린더 뷰</button>
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+              {viewMode === "list" && (
+                <>
+                  <DropdownSelect options={["내림차순", "오름차순"]} value="내림차순" onChange={() => {}} width={110} />
+                  <DropdownSelect options={["생성일순", "예약일순", "결제일순"]} value="생성일순" onChange={() => {}} width={120} />
+                </>
+              )}
+              <button style={{
+                padding: "0 14px", height: 32, border: "1px solid #d9d9d9", background: "#fff", color: "#3b4047",
+                borderRadius: 6, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6,
+              }}>📥 패키지 엑셀</button>
+              <button style={{
+                padding: "0 14px", height: 32, border: "none", background: ACTIVE_BLUE, color: "#fff",
+                borderRadius: 6, fontSize: 13, cursor: "pointer", fontWeight: 500,
+                display: "flex", alignItems: "center", gap: 6,
+              }}>📥 예약내역 엑셀</button>
+            </div>
+          </div>
+
+          {/* Table or Calendar */}
+          {viewMode === "list" ? (
+            <div style={{ background: "#fff", borderRadius: 8, boxShadow: "0 1px 2px rgba(0,0,0,0.04)", overflow: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 1400 }}>
+                <thead>
+                  <tr style={{ background: "#fafafa" }}>
+                    <th style={th(130)}>예약 코드</th>
+                    <th style={th(220)}>예약 상점</th>
+                    <th style={th(180)}>예약 상품</th>
+                    <th style={th(160)}>예약자 이름</th>
+                    <th style={th(110)}>예약 생성일</th>
+                    <th style={th(110)}>예약 날짜</th>
+                    <th style={th(96)}>예약 시간</th>
+                    <th style={th(96)}>예약 상태</th>
+                    <th style={th(96)}>예약 언어</th>
+                    <th style={th(140)}>패키지명</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mockRows.map((r) => (
+                    <tr key={r.code}>
+                      <td style={td}>{r.code}</td>
+                      <td style={td}>{r.spot}</td>
+                      <td style={td}>{r.product}</td>
+                      <td style={td}>{r.bookerName}</td>
+                      <td style={td}>{r.createdAt}</td>
+                      <td style={td}>{r.reservationDate}</td>
+                      <td style={td}>{r.reservationTime}</td>
+                      <td style={td}>{r.status}</td>
+                      <td style={td}>—</td>
+                      <td style={td}>—</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <CalendarView spotFilter={spot} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Calendar View ── */
+
+const CALENDAR_YEAR = 2026;
+const CALENDAR_MONTH = 4;
+const CALENDAR_FIRST_DAY = 3; // Wednesday
+const CALENDAR_TOTAL_DAYS = 30;
+const WEEK_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
+
+const RESERVATIONS_BY_DAY: Record<number, ReservationRow[]> = (() => {
+  const dayMap: Record<number, ReservationRow[]> = {};
+  const days = [3, 7, 7, 10, 14, 14, 18, 22, 28];
+  mockRows.forEach((r, i) => {
+    const day = days[i] ?? 1;
+    if (!dayMap[day]) dayMap[day] = [];
+    dayMap[day].push(r);
+  });
+  return dayMap;
+})();
+
+function CalendarView({ spotFilter }: { spotFilter: string }) {
+  const showSpotName = spotFilter === "전체";
+
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < CALENDAR_FIRST_DAY; i++) cells.push(null);
+  for (let d = 1; d <= CALENDAR_TOTAL_DAYS; d++) cells.push(d);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  return (
+    <div style={{ background: "#fff", borderRadius: 8, boxShadow: "0 1px 2px rgba(0,0,0,0.04)", overflow: "hidden" }}>
+      <div style={{
+        padding: "14px 16px", borderBottom: "1px solid #f0f0f0",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <button style={{ width: 28, height: 28, border: "1px solid #d9d9d9", borderRadius: 4, background: "#fff", cursor: "pointer", fontSize: 12 }}>‹</button>
+          <div style={{ fontSize: 16, fontWeight: 700, minWidth: 110, textAlign: "center" }}>{CALENDAR_YEAR}년 {CALENDAR_MONTH}월</div>
+          <button style={{ width: 28, height: 28, border: "1px solid #d9d9d9", borderRadius: 4, background: "#fff", cursor: "pointer", fontSize: 12 }}>›</button>
+          <button style={{ marginLeft: 8, padding: "0 12px", height: 28, border: "1px solid #d9d9d9", borderRadius: 4, background: "#fff", cursor: "pointer", fontSize: 12, color: "#666" }}>오늘</button>
+        </div>
+        <div style={{ fontSize: 11, color: "#999" }}>
+          ⓘ 캘린더 뷰는 예약일 기준 · 기간 필터는 현재 월로 자동 지정됨
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", borderBottom: "1px solid #f0f0f0", background: "#fafafa" }}>
+        {WEEK_LABELS.map((wl, i) => (
+          <div key={wl} style={{
+            padding: "10px 0", textAlign: "center", fontSize: 12, fontWeight: 600,
+            color: i === 0 ? "#ef4444" : i === 6 ? "#3b82f6" : "#666",
+          }}>{wl}</div>
+        ))}
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
+        {cells.map((day, i) => {
+          const reservations = day ? (RESERVATIONS_BY_DAY[day] ?? []) : [];
+          const dayOfWeek = i % 7;
+          const dayColor = day === null ? "#ccc" : dayOfWeek === 0 ? "#ef4444" : dayOfWeek === 6 ? "#3b82f6" : "#3b4047";
+          return (
+            <div
+              key={i}
+              style={{
+                minHeight: 120, padding: 8, borderRight: i % 7 === 6 ? "none" : "1px solid #f0f0f0",
+                borderBottom: i < cells.length - 7 ? "1px solid #f0f0f0" : "none",
+                background: day === null ? "#fafafa" : "#fff",
+              }}
+            >
+              {day !== null && (
+                <>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: dayColor, marginBottom: 6 }}>{day}</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                    {reservations.slice(0, 3).map((r, ri) => (
+                      <div
+                        key={ri}
+                        style={{
+                          fontSize: 10.5, color: "#1e3a8a",
+                          background: "#dbeafe", borderLeft: `3px solid ${ACTIVE_BLUE}`,
+                          padding: "2px 6px", borderRadius: 2,
+                          overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+                          cursor: "pointer",
+                        }}
+                        title={`${r.reservationTime} | ${showSpotName ? r.spot : r.product}`}
+                      >
+                        <span style={{ fontWeight: 600 }}>{r.reservationTime}</span>
+                        <span style={{ color: "#1e40af", margin: "0 4px" }}>|</span>
+                        <span>{showSpotName ? r.spot : r.product}</span>
+                      </div>
+                    ))}
+                    {reservations.length > 3 && (
+                      <div style={{ fontSize: 10, color: "#888", paddingLeft: 6 }}>
+                        +{reservations.length - 3}건 더보기
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const th = (w: number, align: "left" | "center" = "left"): React.CSSProperties => ({
+  width: w, minWidth: w, padding: "10px 12px", fontSize: 12, fontWeight: 600,
+  color: "#666", textAlign: align, borderBottom: "1px solid #e5e7eb", whiteSpace: "nowrap",
+});
+const td: React.CSSProperties = {
+  padding: "12px", fontSize: 12.5, color: "#3b4047",
+  borderBottom: "1px solid #f5f5f5", whiteSpace: "nowrap",
+};
+
+function navItem(active: boolean): React.CSSProperties {
+  return {
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    padding: "8px 14px", borderRadius: 6, cursor: "pointer",
+    color: active ? "#fff" : "rgba(255,255,255,0.7)",
+    background: active ? ACTIVE_BLUE : "transparent",
+    fontSize: 13, fontWeight: active ? 600 : 400,
+  };
+}
