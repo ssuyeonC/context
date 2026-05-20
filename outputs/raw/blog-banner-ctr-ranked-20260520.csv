@@ -1,0 +1,2127 @@
+rank,blog_code,category,impressions,clicks,ctr
+1,14702,unmatched:unpublished(404 likely),50,11,0.220000
+2,13643,unmatched:unpublished(404 likely),71,14,0.197183
+3,10000,unmatched:unpublished(404 likely),1367,177,0.129481
+4,14374,unmatched:unpublished(404 likely),100,11,0.110000
+5,14509,unmatched:unpublished(404 likely),100,11,0.110000
+6,12793,unmatched:unpublished(404 likely),79,8,0.101266
+7,13547,unmatched:unpublished(404 likely),87,8,0.091954
+8,5372,travel:passing,101,8,0.079208
+9,14440,unmatched:unpublished(404 likely),53,4,0.075472
+10,14561,unmatched:unpublished(404 likely),93,7,0.075269
+11,8958,unmatched:unpublished(404 likely),54,4,0.074074
+12,14541,unmatched:unpublished(404 likely),54,4,0.074074
+13,13759,unmatched:unpublished(404 likely),95,7,0.073684
+14,14387,unmatched:unpublished(404 likely),110,8,0.072727
+15,10837,unmatched:unpublished(404 likely),56,4,0.071429
+16,13981,unmatched:unpublished(404 likely),118,8,0.067797
+17,5005,travel:low,107,7,0.065421
+18,6124,travel:passing,64,4,0.062500
+19,13577,unmatched:unpublished(404 likely),64,4,0.062500
+20,14894,unmatched:unpublished(404 likely),64,4,0.062500
+21,12540,unmatched:unpublished(404 likely),192,11,0.057292
+22,8924,unmatched:unpublished(404 likely),71,4,0.056338
+23,13519,unmatched:unpublished(404 likely),73,4,0.054795
+24,14663,unmatched:unpublished(404 likely),131,7,0.053435
+25,9862,unmatched:unpublished(404 likely),75,4,0.053333
+26,14367,unmatched:unpublished(404 likely),75,4,0.053333
+27,6995,travel:low,151,8,0.052980
+28,5398,unmatched:published(non-travel),76,4,0.052632
+29,14988,unmatched:unpublished(404 likely),76,4,0.052632
+30,7169,travel:low,78,4,0.051282
+31,4428,unmatched:unpublished(404 likely),142,7,0.049296
+32,1529,travel:killer,164,8,0.048780
+33,11546,unmatched:unpublished(404 likely),82,4,0.048780
+34,13589,unmatched:unpublished(404 likely),82,4,0.048780
+35,14341,unmatched:unpublished(404 likely),228,11,0.048246
+36,11280,unmatched:unpublished(404 likely),973,46,0.047276
+37,13535,unmatched:unpublished(404 likely),87,4,0.045977
+38,2353,unmatched:published(non-travel),418,19,0.045455
+39,15021,unmatched:unpublished(404 likely),160,7,0.043750
+40,7938,unmatched:unpublished(404 likely),1523,65,0.042679
+41,13520,unmatched:unpublished(404 likely),189,8,0.042328
+42,2901,travel:passing,1474,57,0.038670
+43,2333,travel:passing,208,8,0.038462
+44,10216,unmatched:unpublished(404 likely),208,8,0.038462
+45,14533,unmatched:unpublished(404 likely),104,4,0.038462
+46,5233,travel:killer,106,4,0.037736
+47,10868,unmatched:unpublished(404 likely),107,4,0.037383
+48,11022,unmatched:unpublished(404 likely),107,4,0.037383
+49,6733,travel:passing,482,18,0.037344
+50,14800,unmatched:unpublished(404 likely),112,4,0.035714
+51,9384,unmatched:unpublished(404 likely),113,4,0.035398
+52,14806,unmatched:unpublished(404 likely),121,4,0.033058
+53,15051,unmatched:unpublished(404 likely),121,4,0.033058
+54,14251,unmatched:unpublished(404 likely),129,4,0.031008
+55,6065,travel:passing,131,4,0.030534
+56,11275,unmatched:unpublished(404 likely),132,4,0.030303
+57,8644,unmatched:unpublished(404 likely),135,4,0.029630
+58,5110,travel:passing,136,4,0.029412
+59,14272,unmatched:unpublished(404 likely),137,4,0.029197
+60,7497,unmatched:unpublished(404 likely),138,4,0.028986
+61,4825,travel:low,139,4,0.028777
+62,5549,travel:passing,2991,86,0.028753
+63,13227,unmatched:unpublished(404 likely),146,4,0.027397
+64,9451,unmatched:unpublished(404 likely),954,26,0.027254
+65,13623,unmatched:unpublished(404 likely),148,4,0.027027
+66,14634,unmatched:unpublished(404 likely),148,4,0.027027
+67,3490,travel:killer,150,4,0.026667
+68,11469,unmatched:unpublished(404 likely),150,4,0.026667
+69,13799,unmatched:unpublished(404 likely),450,12,0.026667
+70,14670,unmatched:unpublished(404 likely),153,4,0.026144
+71,11339,unmatched:unpublished(404 likely),154,4,0.025974
+72,6481,unmatched:published(non-travel),155,4,0.025806
+73,4610,travel:low,156,4,0.025641
+74,13741,unmatched:unpublished(404 likely),474,12,0.025316
+75,14881,unmatched:unpublished(404 likely),278,7,0.025180
+76,14674,unmatched:unpublished(404 likely),160,4,0.025000
+77,5671,travel:low,162,4,0.024691
+78,14157,unmatched:unpublished(404 likely),162,4,0.024691
+79,11017,unmatched:unpublished(404 likely),165,4,0.024242
+80,4480,travel:passing,759,18,0.023715
+81,4290,travel:passing,934,22,0.023555
+82,13622,unmatched:unpublished(404 likely),171,4,0.023392
+83,14919,unmatched:unpublished(404 likely),351,8,0.022792
+84,12501,unmatched:unpublished(404 likely),176,4,0.022727
+85,13975,unmatched:unpublished(404 likely),177,4,0.022599
+86,4515,travel:passing,179,4,0.022346
+87,8457,unmatched:unpublished(404 likely),182,4,0.021978
+88,13739,unmatched:unpublished(404 likely),551,12,0.021779
+89,14808,unmatched:unpublished(404 likely),189,4,0.021164
+90,13999,unmatched:unpublished(404 likely),191,4,0.020942
+91,14915,unmatched:unpublished(404 likely),382,8,0.020942
+92,4819,travel:low,195,4,0.020513
+93,10636,unmatched:unpublished(404 likely),195,4,0.020513
+94,5120,travel:passing,391,8,0.020460
+95,14282,unmatched:unpublished(404 likely),588,12,0.020408
+96,13149,unmatched:unpublished(404 likely),197,4,0.020305
+97,14867,unmatched:unpublished(404 likely),563,11,0.019538
+98,4232,travel:passing,564,11,0.019504
+99,4506,travel:passing,213,4,0.018779
+100,14807,unmatched:unpublished(404 likely),383,7,0.018277
+101,14506,unmatched:unpublished(404 likely),219,4,0.018265
+102,14213,unmatched:unpublished(404 likely),229,4,0.017467
+103,4774,travel:passing,231,4,0.017316
+104,14638,unmatched:unpublished(404 likely),410,7,0.017073
+105,13494,unmatched:unpublished(404 likely),415,7,0.016867
+106,12880,unmatched:unpublished(404 likely),422,7,0.016588
+107,3781,travel:killer,671,11,0.016393
+108,14329,unmatched:unpublished(404 likely),435,7,0.016092
+109,13241,unmatched:unpublished(404 likely),684,11,0.016082
+110,10687,unmatched:unpublished(404 likely),691,11,0.015919
+111,6222,travel:passing,252,4,0.015873
+112,14645,unmatched:unpublished(404 likely),694,11,0.015850
+113,8785,unmatched:unpublished(404 likely),253,4,0.015810
+114,10084,unmatched:unpublished(404 likely),255,4,0.015686
+115,13491,unmatched:unpublished(404 likely),256,4,0.015625
+116,12735,unmatched:unpublished(404 likely),258,4,0.015504
+117,14518,unmatched:unpublished(404 likely),258,4,0.015504
+118,13728,unmatched:unpublished(404 likely),259,4,0.015444
+119,10604,unmatched:unpublished(404 likely),260,4,0.015385
+120,867,travel:killer,262,4,0.015267
+121,7936,unmatched:unpublished(404 likely),263,4,0.015209
+122,14616,unmatched:unpublished(404 likely),263,4,0.015209
+123,4728,travel:passing,1012,15,0.014822
+124,14705,unmatched:unpublished(404 likely),270,4,0.014815
+125,9566,unmatched:unpublished(404 likely),273,4,0.014652
+126,14133,unmatched:unpublished(404 likely),274,4,0.014599
+127,14502,unmatched:unpublished(404 likely),274,4,0.014599
+128,4647,travel:killer,483,7,0.014493
+129,13527,unmatched:unpublished(404 likely),556,8,0.014388
+130,13536,unmatched:unpublished(404 likely),488,7,0.014344
+131,10912,unmatched:unpublished(404 likely),280,4,0.014286
+132,14763,unmatched:unpublished(404 likely),986,14,0.014199
+133,13882,unmatched:unpublished(404 likely),283,4,0.014134
+134,9997,unmatched:unpublished(404 likely),289,4,0.013841
+135,13777,unmatched:unpublished(404 likely),292,4,0.013699
+136,12579,unmatched:unpublished(404 likely),595,8,0.013445
+137,5538,travel:passing,1342,18,0.013413
+138,14954,unmatched:unpublished(404 likely),1367,18,0.013168
+139,13244,unmatched:unpublished(404 likely),310,4,0.012903
+140,7376,unmatched:unpublished(404 likely),1199,15,0.012510
+141,14206,unmatched:unpublished(404 likely),322,4,0.012422
+142,14611,unmatched:unpublished(404 likely),323,4,0.012384
+143,385,travel:passing,325,4,0.012308
+144,14216,unmatched:unpublished(404 likely),331,4,0.012085
+145,10293,unmatched:unpublished(404 likely),583,7,0.012007
+146,9513,unmatched:unpublished(404 likely),340,4,0.011765
+147,2041,travel:passing,686,8,0.011662
+148,6269,travel:passing,343,4,0.011662
+149,13822,unmatched:unpublished(404 likely),613,7,0.011419
+150,14404,unmatched:unpublished(404 likely),1242,14,0.011272
+151,5500,travel:low,1962,22,0.011213
+152,8860,unmatched:unpublished(404 likely),358,4,0.011173
+153,14547,unmatched:unpublished(404 likely),2436,27,0.011084
+154,13887,unmatched:unpublished(404 likely),365,4,0.010959
+155,14386,unmatched:unpublished(404 likely),367,4,0.010899
+156,13992,unmatched:unpublished(404 likely),749,8,0.010681
+157,14907,unmatched:unpublished(404 likely),376,4,0.010638
+158,5655,travel:passing,2757,29,0.010519
+159,327,travel:killer,382,4,0.010471
+160,6307,travel:passing,1146,12,0.010471
+161,12033,unmatched:unpublished(404 likely),386,4,0.010363
+162,2692,travel:passing,390,4,0.010256
+163,14239,unmatched:unpublished(404 likely),394,4,0.010152
+164,836,travel:passing,795,8,0.010063
+165,1603,travel:killer,399,4,0.010025
+166,4511,travel:passing,400,4,0.010000
+167,1525,travel:passing,1807,18,0.009961
+168,14605,unmatched:unpublished(404 likely),1112,11,0.009892
+169,8743,unmatched:unpublished(404 likely),405,4,0.009877
+170,8089,unmatched:unpublished(404 likely),3044,30,0.009855
+171,14391,unmatched:unpublished(404 likely),414,4,0.009662
+172,13044,unmatched:unpublished(404 likely),415,4,0.009639
+173,4457,travel:passing,834,8,0.009592
+174,11869,unmatched:unpublished(404 likely),419,4,0.009547
+175,10394,unmatched:unpublished(404 likely),420,4,0.009524
+176,14480,unmatched:unpublished(404 likely),1173,11,0.009378
+177,3591,travel:killer,427,4,0.009368
+178,5325,travel:passing,428,4,0.009346
+179,11092,unmatched:unpublished(404 likely),430,4,0.009302
+180,13375,unmatched:unpublished(404 likely),435,4,0.009195
+181,11851,unmatched:unpublished(404 likely),450,4,0.008889
+182,13326,unmatched:unpublished(404 likely),2035,18,0.008845
+183,13736,unmatched:unpublished(404 likely),455,4,0.008791
+184,14267,unmatched:unpublished(404 likely),468,4,0.008547
+185,2551,travel:passing,472,4,0.008475
+186,14590,unmatched:unpublished(404 likely),475,4,0.008421
+187,9500,unmatched:unpublished(404 likely),491,4,0.008147
+188,13729,unmatched:unpublished(404 likely),984,8,0.008130
+189,11180,unmatched:unpublished(404 likely),495,4,0.008081
+190,11403,unmatched:unpublished(404 likely),502,4,0.007968
+191,13755,unmatched:unpublished(404 likely),1004,8,0.007968
+192,14649,unmatched:unpublished(404 likely),504,4,0.007937
+193,3759,travel:killer,510,4,0.007843
+194,13309,unmatched:unpublished(404 likely),510,4,0.007843
+195,5483,travel:passing,511,4,0.007828
+196,6945,travel:passing,517,4,0.007737
+197,6795,unmatched:published(non-travel),520,4,0.007692
+198,13218,unmatched:unpublished(404 likely),523,4,0.007648
+199,2657,travel:passing,524,4,0.007634
+200,3561,travel:killer,527,4,0.007590
+201,14465,unmatched:unpublished(404 likely),1061,8,0.007540
+202,13498,unmatched:unpublished(404 likely),2012,15,0.007455
+203,14499,unmatched:unpublished(404 likely),542,4,0.007380
+204,1822,travel:passing,551,4,0.007260
+205,14920,unmatched:unpublished(404 likely),551,4,0.007260
+206,5305,travel:killer,555,4,0.007207
+207,12271,unmatched:unpublished(404 likely),555,4,0.007207
+208,2384,travel:passing,556,4,0.007194
+209,7452,unmatched:unpublished(404 likely),559,4,0.007156
+210,14532,unmatched:unpublished(404 likely),560,4,0.007143
+211,9740,unmatched:unpublished(404 likely),576,4,0.006944
+212,14537,unmatched:unpublished(404 likely),580,4,0.006897
+213,11157,unmatched:unpublished(404 likely),583,4,0.006861
+214,12580,unmatched:unpublished(404 likely),589,4,0.006791
+215,13429,unmatched:unpublished(404 likely),591,4,0.006768
+216,2847,travel:passing,1799,12,0.006670
+217,10792,unmatched:unpublished(404 likely),603,4,0.006633
+218,14198,unmatched:unpublished(404 likely),1688,11,0.006517
+219,12643,unmatched:unpublished(404 likely),622,4,0.006431
+220,14726,unmatched:unpublished(404 likely),633,4,0.006319
+221,14029,unmatched:unpublished(404 likely),634,4,0.006309
+222,158,travel:passing,1311,8,0.006102
+223,14879,unmatched:unpublished(404 likely),660,4,0.006061
+224,11694,unmatched:unpublished(404 likely),1333,8,0.006002
+225,14936,unmatched:unpublished(404 likely),1173,7,0.005968
+226,4896,travel:killer,675,4,0.005926
+227,4867,travel:passing,676,4,0.005917
+228,852,travel:killer,686,4,0.005831
+229,1491,travel:passing,2067,12,0.005806
+230,4318,travel:passing,693,4,0.005772
+231,12861,unmatched:unpublished(404 likely),693,4,0.005772
+232,5075,travel:killer,2461,14,0.005689
+233,4620,unmatched:published(non-travel),705,4,0.005674
+234,4468,travel:passing,1995,11,0.005514
+235,14473,unmatched:unpublished(404 likely),726,4,0.005510
+236,5797,travel:passing,2759,15,0.005437
+237,14283,unmatched:unpublished(404 likely),740,4,0.005405
+238,14274,unmatched:unpublished(404 likely),742,4,0.005391
+239,938,travel:killer,760,4,0.005263
+240,5317,travel:passing,779,4,0.005135
+241,13749,unmatched:unpublished(404 likely),779,4,0.005135
+242,5362,travel:passing,788,4,0.005076
+243,14764,unmatched:unpublished(404 likely),788,4,0.005076
+244,9563,unmatched:unpublished(404 likely),1594,8,0.005019
+245,13651,unmatched:unpublished(404 likely),801,4,0.004994
+246,11593,unmatched:unpublished(404 likely),817,4,0.004896
+247,7496,unmatched:unpublished(404 likely),830,4,0.004819
+248,4686,travel:passing,834,4,0.004796
+249,14949,unmatched:unpublished(404 likely),3763,18,0.004783
+250,14342,unmatched:unpublished(404 likely),849,4,0.004711
+251,4199,travel:passing,857,4,0.004667
+252,14552,unmatched:unpublished(404 likely),857,4,0.004667
+253,5164,travel:passing,860,4,0.004651
+254,14493,unmatched:unpublished(404 likely),1757,8,0.004553
+255,14240,unmatched:unpublished(404 likely),3342,15,0.004488
+256,14320,unmatched:unpublished(404 likely),895,4,0.004469
+257,1925,travel:passing,908,4,0.004405
+258,3452,travel:passing,920,4,0.004348
+259,3001,travel:passing,2793,12,0.004296
+260,14265,unmatched:unpublished(404 likely),938,4,0.004264
+261,8390,unmatched:unpublished(404 likely),976,4,0.004098
+262,1399,travel:passing,1715,7,0.004082
+263,14357,unmatched:unpublished(404 likely),4025,16,0.003975
+264,14826,unmatched:unpublished(404 likely),3805,15,0.003942
+265,14878,unmatched:unpublished(404 likely),2841,11,0.003872
+266,5565,travel:passing,1811,7,0.003865
+267,14287,unmatched:unpublished(404 likely),2072,8,0.003861
+268,12857,unmatched:unpublished(404 likely),1053,4,0.003799
+269,13957,unmatched:unpublished(404 likely),1055,4,0.003791
+270,14381,unmatched:unpublished(404 likely),1065,4,0.003756
+271,1435,travel:passing,1068,4,0.003745
+272,8234,unmatched:unpublished(404 likely),1142,4,0.003503
+273,14044,unmatched:unpublished(404 likely),2286,8,0.003500
+274,2527,travel:passing,1213,4,0.003298
+275,8314,unmatched:unpublished(404 likely),1216,4,0.003289
+276,12713,unmatched:unpublished(404 likely),5813,19,0.003269
+277,5604,travel:passing,2214,7,0.003162
+278,14397,unmatched:unpublished(404 likely),1290,4,0.003101
+279,14393,unmatched:unpublished(404 likely),2264,7,0.003092
+280,810,travel:passing,4903,15,0.003059
+281,14233,unmatched:unpublished(404 likely),1310,4,0.003053
+282,9355,unmatched:unpublished(404 likely),1315,4,0.003042
+283,5619,travel:passing,1328,4,0.003012
+284,1796,travel:passing,1332,4,0.003003
+285,4429,unmatched:published(non-travel),1362,4,0.002937
+286,4477,unmatched:published(non-travel),1362,4,0.002937
+287,11676,unmatched:unpublished(404 likely),1391,4,0.002876
+288,13656,unmatched:unpublished(404 likely),1420,4,0.002817
+289,14454,unmatched:unpublished(404 likely),2500,7,0.002800
+290,11826,unmatched:unpublished(404 likely),1479,4,0.002705
+291,10949,unmatched:unpublished(404 likely),2970,8,0.002694
+292,14665,unmatched:unpublished(404 likely),1486,4,0.002692
+293,8890,unmatched:unpublished(404 likely),1505,4,0.002658
+294,3613,travel:passing,1632,4,0.002451
+295,4689,travel:passing,1671,4,0.002394
+296,11583,unmatched:unpublished(404 likely),3004,7,0.002330
+297,9469,unmatched:unpublished(404 likely),4725,11,0.002328
+298,8616,unmatched:unpublished(404 likely),1744,4,0.002294
+299,1740,travel:passing,3076,7,0.002276
+300,14716,unmatched:unpublished(404 likely),3597,8,0.002224
+301,5276,travel:passing,3318,7,0.002110
+302,14382,unmatched:unpublished(404 likely),1904,4,0.002101
+303,14666,unmatched:unpublished(404 likely),1952,4,0.002049
+304,4572,travel:passing,1964,4,0.002037
+305,319,travel:passing,3930,8,0.002036
+306,14439,unmatched:unpublished(404 likely),3461,7,0.002023
+307,2351,travel:passing,1986,4,0.002014
+308,8543,unmatched:unpublished(404 likely),5548,11,0.001983
+309,703,travel:passing,4327,8,0.001849
+310,12640,unmatched:unpublished(404 likely),3820,7,0.001832
+311,5053,travel:passing,4942,8,0.001619
+312,6763,unmatched:published(non-travel),2656,4,0.001506
+313,14349,unmatched:unpublished(404 likely),2688,4,0.001488
+314,14348,unmatched:unpublished(404 likely),2696,4,0.001484
+315,14597,unmatched:unpublished(404 likely),2700,4,0.001481
+316,4723,travel:passing,5796,8,0.001380
+317,13452,unmatched:unpublished(404 likely),7986,11,0.001377
+318,13737,unmatched:unpublished(404 likely),3049,4,0.001312
+319,5223,travel:passing,33253,39,0.001173
+320,13217,unmatched:unpublished(404 likely),4250,4,0.000941
+321,1696,travel:passing,8994,7,0.000778
+322,13065,unmatched:unpublished(404 likely),11221,8,0.000713
+323,14398,unmatched:unpublished(404 likely),6046,4,0.000662
+324,2,travel:killer,2295,0,0.000000
+325,3,travel:hidden,62,0,0.000000
+326,4,travel:passing,64,0,0.000000
+327,14,travel:passing,181,0,0.000000
+328,70,travel:passing,97,0,0.000000
+329,76,travel:hidden,142,0,0.000000
+330,86,travel:hidden,357,0,0.000000
+331,125,travel:hidden,212,0,0.000000
+332,164,travel:passing,2168,0,0.000000
+333,216,travel:killer,317,0,0.000000
+334,304,travel:passing,90,0,0.000000
+335,316,unmatched:published(non-travel),168,0,0.000000
+336,347,travel:passing,2755,0,0.000000
+337,407,travel:passing,130,0,0.000000
+338,414,travel:passing,4368,0,0.000000
+339,429,unmatched:published(non-travel),550,0,0.000000
+340,465,travel:killer,569,0,0.000000
+341,470,travel:passing,652,0,0.000000
+342,507,travel:killer,172,0,0.000000
+343,513,unmatched:published(non-travel),152,0,0.000000
+344,517,travel:passing,146,0,0.000000
+345,545,travel:killer,83,0,0.000000
+346,662,travel:passing,1147,0,0.000000
+347,675,travel:killer,327,0,0.000000
+348,682,travel:passing,600,0,0.000000
+349,696,unmatched:unpublished(404 likely),267,0,0.000000
+350,724,travel:passing,1083,0,0.000000
+351,754,travel:low,53,0,0.000000
+352,756,travel:hidden,160,0,0.000000
+353,762,unmatched:published(non-travel),71,0,0.000000
+354,778,travel:hidden,181,0,0.000000
+355,781,travel:killer,520,0,0.000000
+356,798,travel:passing,352,0,0.000000
+357,823,travel:low,127,0,0.000000
+358,825,travel:hidden,195,0,0.000000
+359,839,travel:passing,261,0,0.000000
+360,860,travel:low,111,0,0.000000
+361,902,travel:passing,417,0,0.000000
+362,923,travel:passing,185,0,0.000000
+363,963,travel:passing,1871,0,0.000000
+364,974,travel:low,124,0,0.000000
+365,975,travel:killer,161,0,0.000000
+366,990,travel:killer,182,0,0.000000
+367,993,travel:killer,277,0,0.000000
+368,996,travel:hidden,125,0,0.000000
+369,999,travel:hidden,142,0,0.000000
+370,1037,travel:passing,115,0,0.000000
+371,1041,travel:passing,253,0,0.000000
+372,1047,travel:low,181,0,0.000000
+373,1052,travel:passing,727,0,0.000000
+374,1074,unmatched:published(non-travel),295,0,0.000000
+375,1085,travel:passing,175,0,0.000000
+376,1088,travel:killer,76,0,0.000000
+377,1116,travel:passing,661,0,0.000000
+378,1154,travel:hidden,61,0,0.000000
+379,1240,travel:killer,189,0,0.000000
+380,1310,travel:low,93,0,0.000000
+381,1366,travel:passing,251,0,0.000000
+382,1374,unmatched:published(non-travel),188,0,0.000000
+383,1378,travel:killer,136,0,0.000000
+384,1401,travel:hidden,64,0,0.000000
+385,1422,travel:killer,227,0,0.000000
+386,1431,travel:passing,497,0,0.000000
+387,1447,travel:hidden,72,0,0.000000
+388,1449,travel:hidden,57,0,0.000000
+389,1458,travel:killer,85,0,0.000000
+390,1466,travel:passing,200,0,0.000000
+391,1493,travel:passing,778,0,0.000000
+392,1505,travel:passing,1516,0,0.000000
+393,1507,travel:hidden,113,0,0.000000
+394,1515,travel:passing,57,0,0.000000
+395,1532,unmatched:published(non-travel),417,0,0.000000
+396,1534,travel:passing,348,0,0.000000
+397,1537,travel:hidden,50,0,0.000000
+398,1552,travel:hidden,131,0,0.000000
+399,1556,travel:passing,744,0,0.000000
+400,1558,unmatched:published(non-travel),124,0,0.000000
+401,1565,travel:hidden,65,0,0.000000
+402,1570,travel:passing,750,0,0.000000
+403,1665,travel:passing,647,0,0.000000
+404,1668,travel:passing,103,0,0.000000
+405,1747,travel:passing,237,0,0.000000
+406,1759,travel:passing,1672,0,0.000000
+407,1769,travel:passing,601,0,0.000000
+408,1775,travel:passing,1838,0,0.000000
+409,1790,travel:passing,170,0,0.000000
+410,1802,travel:hidden,205,0,0.000000
+411,1813,travel:passing,241,0,0.000000
+412,1848,travel:passing,156,0,0.000000
+413,1851,unmatched:published(non-travel),59,0,0.000000
+414,1870,travel:passing,131,0,0.000000
+415,1876,travel:low,53,0,0.000000
+416,1902,travel:passing,145,0,0.000000
+417,1917,travel:passing,597,0,0.000000
+418,1940,travel:passing,518,0,0.000000
+419,1946,travel:passing,114,0,0.000000
+420,1951,travel:passing,817,0,0.000000
+421,1952,travel:passing,687,0,0.000000
+422,1962,travel:passing,251,0,0.000000
+423,1984,travel:low,86,0,0.000000
+424,1993,travel:low,93,0,0.000000
+425,2002,travel:passing,1429,0,0.000000
+426,2020,travel:low,120,0,0.000000
+427,2030,travel:passing,2163,0,0.000000
+428,2043,travel:passing,1331,0,0.000000
+429,2044,travel:low,50,0,0.000000
+430,2049,unmatched:published(non-travel),75,0,0.000000
+431,2052,travel:passing,118,0,0.000000
+432,2071,travel:low,88,0,0.000000
+433,2075,unmatched:published(non-travel),131,0,0.000000
+434,2077,travel:passing,1062,0,0.000000
+435,2091,travel:passing,93,0,0.000000
+436,2103,travel:passing,239,0,0.000000
+437,2166,travel:passing,881,0,0.000000
+438,2175,travel:killer,95,0,0.000000
+439,2186,travel:hidden,71,0,0.000000
+440,2211,travel:passing,87,0,0.000000
+441,2225,travel:hidden,96,0,0.000000
+442,2230,travel:hidden,87,0,0.000000
+443,2237,travel:low,199,0,0.000000
+444,2245,travel:passing,215,0,0.000000
+445,2257,travel:low,65,0,0.000000
+446,2276,travel:low,166,0,0.000000
+447,2294,unmatched:published(non-travel),71,0,0.000000
+448,2302,travel:passing,177,0,0.000000
+449,2304,travel:low,212,0,0.000000
+450,2309,travel:passing,441,0,0.000000
+451,2319,travel:passing,292,0,0.000000
+452,2348,travel:hidden,60,0,0.000000
+453,2360,travel:passing,246,0,0.000000
+454,2381,travel:hidden,74,0,0.000000
+455,2393,travel:passing,106,0,0.000000
+456,2398,travel:passing,468,0,0.000000
+457,2412,travel:passing,908,0,0.000000
+458,2418,travel:killer,440,0,0.000000
+459,2429,travel:hidden,96,0,0.000000
+460,2445,travel:passing,379,0,0.000000
+461,2446,travel:passing,178,0,0.000000
+462,2452,travel:low,202,0,0.000000
+463,2455,travel:hidden,132,0,0.000000
+464,2462,travel:passing,159,0,0.000000
+465,2464,travel:killer,55,0,0.000000
+466,2468,travel:passing,82,0,0.000000
+467,2476,travel:passing,152,0,0.000000
+468,2487,travel:passing,1966,0,0.000000
+469,2492,travel:passing,142,0,0.000000
+470,2505,unmatched:published(non-travel),239,0,0.000000
+471,2514,travel:passing,498,0,0.000000
+472,2528,travel:killer,493,0,0.000000
+473,2532,travel:killer,171,0,0.000000
+474,2544,travel:passing,98,0,0.000000
+475,2552,travel:hidden,55,0,0.000000
+476,2561,travel:passing,1370,0,0.000000
+477,2562,travel:passing,193,0,0.000000
+478,2563,travel:killer,460,0,0.000000
+479,2568,travel:killer,785,0,0.000000
+480,2587,travel:passing,88,0,0.000000
+481,2600,travel:passing,483,0,0.000000
+482,2602,travel:passing,389,0,0.000000
+483,2607,travel:passing,578,0,0.000000
+484,2612,travel:killer,201,0,0.000000
+485,2627,travel:killer,556,0,0.000000
+486,2654,unmatched:published(non-travel),84,0,0.000000
+487,2655,travel:killer,50,0,0.000000
+488,2663,unmatched:published(non-travel),294,0,0.000000
+489,2684,travel:killer,61,0,0.000000
+490,2688,unmatched:published(non-travel),309,0,0.000000
+491,2690,unmatched:published(non-travel),196,0,0.000000
+492,2695,travel:passing,294,0,0.000000
+493,2746,travel:killer,94,0,0.000000
+494,2784,travel:passing,54,0,0.000000
+495,2799,travel:passing,162,0,0.000000
+496,2801,travel:killer,229,0,0.000000
+497,2809,unmatched:published(non-travel),120,0,0.000000
+498,2829,travel:passing,293,0,0.000000
+499,2836,unmatched:published(non-travel),77,0,0.000000
+500,2846,travel:hidden,72,0,0.000000
+501,2849,travel:passing,950,0,0.000000
+502,2872,travel:killer,139,0,0.000000
+503,2884,unmatched:published(non-travel),371,0,0.000000
+504,2914,travel:passing,307,0,0.000000
+505,2945,travel:killer,146,0,0.000000
+506,2952,travel:hidden,99,0,0.000000
+507,2963,unmatched:published(non-travel),303,0,0.000000
+508,2969,travel:killer,166,0,0.000000
+509,2995,travel:killer,154,0,0.000000
+510,3003,unmatched:published(non-travel),105,0,0.000000
+511,3048,travel:passing,461,0,0.000000
+512,3059,travel:passing,1174,0,0.000000
+513,3094,travel:killer,169,0,0.000000
+514,3098,unmatched:published(non-travel),380,0,0.000000
+515,3106,travel:killer,1831,0,0.000000
+516,3116,travel:hidden,131,0,0.000000
+517,3117,travel:passing,56,0,0.000000
+518,3119,unmatched:published(non-travel),74,0,0.000000
+519,3165,travel:passing,4176,0,0.000000
+520,3173,travel:killer,654,0,0.000000
+521,3174,unmatched:published(non-travel),218,0,0.000000
+522,3196,travel:passing,530,0,0.000000
+523,3310,travel:passing,998,0,0.000000
+524,3401,travel:killer,887,0,0.000000
+525,3406,travel:killer,51,0,0.000000
+526,3502,travel:passing,464,0,0.000000
+527,3592,travel:killer,310,0,0.000000
+528,3600,travel:hidden,258,0,0.000000
+529,3625,travel:passing,2539,0,0.000000
+530,3626,travel:killer,196,0,0.000000
+531,3643,travel:passing,242,0,0.000000
+532,3709,travel:passing,446,0,0.000000
+533,3721,travel:hidden,53,0,0.000000
+534,3725,travel:passing,198,0,0.000000
+535,3764,travel:hidden,103,0,0.000000
+536,3768,travel:passing,606,0,0.000000
+537,3782,travel:passing,177,0,0.000000
+538,3818,travel:low,71,0,0.000000
+539,3829,travel:killer,450,0,0.000000
+540,3832,travel:passing,696,0,0.000000
+541,3849,travel:killer,95,0,0.000000
+542,3851,travel:hidden,148,0,0.000000
+543,3899,unmatched:published(non-travel),335,0,0.000000
+544,3904,travel:passing,595,0,0.000000
+545,3908,unmatched:published(non-travel),154,0,0.000000
+546,3909,travel:hidden,86,0,0.000000
+547,3938,travel:low,205,0,0.000000
+548,3951,travel:killer,625,0,0.000000
+549,4001,travel:killer,297,0,0.000000
+550,4024,unmatched:published(non-travel),89,0,0.000000
+551,4027,travel:killer,670,0,0.000000
+552,4126,travel:passing,217,0,0.000000
+553,4145,travel:killer,218,0,0.000000
+554,4155,travel:killer,78,0,0.000000
+555,4156,travel:hidden,219,0,0.000000
+556,4211,unmatched:published(non-travel),61,0,0.000000
+557,4217,travel:killer,118,0,0.000000
+558,4223,travel:low,57,0,0.000000
+559,4233,travel:passing,72,0,0.000000
+560,4238,travel:passing,151,0,0.000000
+561,4239,unmatched:published(non-travel),160,0,0.000000
+562,4248,travel:passing,64,0,0.000000
+563,4249,unmatched:published(non-travel),322,0,0.000000
+564,4251,travel:passing,281,0,0.000000
+565,4256,travel:passing,109,0,0.000000
+566,4258,unmatched:published(non-travel),85,0,0.000000
+567,4264,travel:passing,246,0,0.000000
+568,4265,travel:killer,174,0,0.000000
+569,4267,travel:low,146,0,0.000000
+570,4269,travel:low,152,0,0.000000
+571,4274,travel:low,69,0,0.000000
+572,4278,travel:passing,183,0,0.000000
+573,4283,travel:passing,51,0,0.000000
+574,4295,unmatched:published(non-travel),347,0,0.000000
+575,4302,travel:passing,58,0,0.000000
+576,4304,travel:passing,55,0,0.000000
+577,4308,travel:passing,136,0,0.000000
+578,4310,travel:passing,187,0,0.000000
+579,4316,travel:low,61,0,0.000000
+580,4325,travel:low,82,0,0.000000
+581,4328,travel:hidden,129,0,0.000000
+582,4346,travel:passing,147,0,0.000000
+583,4348,travel:low,100,0,0.000000
+584,4351,travel:passing,1422,0,0.000000
+585,4352,travel:hidden,159,0,0.000000
+586,4356,travel:hidden,75,0,0.000000
+587,4382,travel:passing,77,0,0.000000
+588,4383,travel:low,143,0,0.000000
+589,4391,travel:passing,217,0,0.000000
+590,4395,travel:passing,91,0,0.000000
+591,4396,travel:passing,422,0,0.000000
+592,4402,travel:passing,133,0,0.000000
+593,4414,travel:killer,85,0,0.000000
+594,4415,travel:passing,50,0,0.000000
+595,4419,travel:passing,167,0,0.000000
+596,4425,travel:hidden,86,0,0.000000
+597,4432,travel:low,122,0,0.000000
+598,4437,travel:passing,583,0,0.000000
+599,4444,travel:passing,847,0,0.000000
+600,4445,travel:passing,129,0,0.000000
+601,4460,travel:passing,199,0,0.000000
+602,4463,travel:low,160,0,0.000000
+603,4481,travel:passing,412,0,0.000000
+604,4501,unmatched:published(non-travel),114,0,0.000000
+605,4503,travel:killer,220,0,0.000000
+606,4508,unmatched:published(non-travel),178,0,0.000000
+607,4510,travel:passing,186,0,0.000000
+608,4514,travel:passing,313,0,0.000000
+609,4524,travel:passing,53,0,0.000000
+610,4527,travel:passing,274,0,0.000000
+611,4533,travel:passing,363,0,0.000000
+612,4546,unmatched:published(non-travel),509,0,0.000000
+613,4548,travel:passing,59,0,0.000000
+614,4550,travel:killer,132,0,0.000000
+615,4552,travel:passing,167,0,0.000000
+616,4558,travel:passing,2734,0,0.000000
+617,4559,travel:killer,67,0,0.000000
+618,4560,travel:killer,138,0,0.000000
+619,4561,travel:killer,72,0,0.000000
+620,4562,unmatched:published(non-travel),112,0,0.000000
+621,4566,travel:low,100,0,0.000000
+622,4569,travel:killer,256,0,0.000000
+623,4570,travel:passing,1598,0,0.000000
+624,4576,travel:passing,268,0,0.000000
+625,4577,travel:passing,154,0,0.000000
+626,4589,travel:passing,811,0,0.000000
+627,4594,travel:killer,138,0,0.000000
+628,4603,travel:passing,337,0,0.000000
+629,4606,travel:killer,92,0,0.000000
+630,4613,travel:hidden,54,0,0.000000
+631,4614,travel:killer,51,0,0.000000
+632,4616,travel:passing,675,0,0.000000
+633,4629,travel:passing,59,0,0.000000
+634,4635,travel:passing,129,0,0.000000
+635,4658,travel:passing,657,0,0.000000
+636,4659,travel:killer,179,0,0.000000
+637,4672,travel:low,60,0,0.000000
+638,4674,unmatched:unpublished(404 likely),195,0,0.000000
+639,4683,travel:passing,281,0,0.000000
+640,4698,travel:passing,90,0,0.000000
+641,4700,unmatched:published(non-travel),291,0,0.000000
+642,4702,travel:killer,101,0,0.000000
+643,4703,travel:passing,50,0,0.000000
+644,4710,travel:killer,377,0,0.000000
+645,4713,unmatched:published(non-travel),111,0,0.000000
+646,4716,travel:passing,167,0,0.000000
+647,4736,travel:passing,80,0,0.000000
+648,4739,travel:low,86,0,0.000000
+649,4741,travel:passing,85,0,0.000000
+650,4746,travel:killer,82,0,0.000000
+651,4749,travel:killer,76,0,0.000000
+652,4751,unmatched:unpublished(404 likely),129,0,0.000000
+653,4753,travel:passing,566,0,0.000000
+654,4758,travel:passing,988,0,0.000000
+655,4760,travel:hidden,58,0,0.000000
+656,4766,travel:low,121,0,0.000000
+657,4768,travel:passing,1233,0,0.000000
+658,4770,travel:killer,1365,0,0.000000
+659,4772,travel:killer,319,0,0.000000
+660,4786,travel:passing,124,0,0.000000
+661,4792,travel:low,82,0,0.000000
+662,4794,travel:low,237,0,0.000000
+663,4797,travel:low,53,0,0.000000
+664,4802,travel:passing,324,0,0.000000
+665,4813,travel:killer,72,0,0.000000
+666,4835,travel:low,159,0,0.000000
+667,4840,travel:passing,399,0,0.000000
+668,4844,travel:passing,185,0,0.000000
+669,4852,travel:low,107,0,0.000000
+670,4854,travel:low,107,0,0.000000
+671,4855,travel:passing,234,0,0.000000
+672,4868,travel:passing,152,0,0.000000
+673,4874,unmatched:published(non-travel),157,0,0.000000
+674,4877,travel:passing,125,0,0.000000
+675,4898,travel:passing,529,0,0.000000
+676,4899,travel:killer,233,0,0.000000
+677,4909,travel:passing,192,0,0.000000
+678,4915,travel:passing,259,0,0.000000
+679,4919,travel:low,138,0,0.000000
+680,4927,travel:passing,124,0,0.000000
+681,4951,travel:low,364,0,0.000000
+682,4958,unmatched:published(non-travel),212,0,0.000000
+683,4959,travel:killer,68,0,0.000000
+684,4961,travel:passing,1332,0,0.000000
+685,4964,travel:passing,461,0,0.000000
+686,4971,travel:hidden,118,0,0.000000
+687,4977,travel:low,87,0,0.000000
+688,4980,travel:low,76,0,0.000000
+689,4983,travel:low,89,0,0.000000
+690,4988,travel:hidden,128,0,0.000000
+691,4989,travel:passing,156,0,0.000000
+692,4992,travel:low,62,0,0.000000
+693,5009,travel:passing,185,0,0.000000
+694,5011,travel:killer,165,0,0.000000
+695,5017,travel:hidden,102,0,0.000000
+696,5031,travel:low,76,0,0.000000
+697,5035,travel:low,661,0,0.000000
+698,5037,unmatched:published(non-travel),102,0,0.000000
+699,5044,travel:passing,1139,0,0.000000
+700,5045,travel:low,76,0,0.000000
+701,5048,unmatched:published(non-travel),89,0,0.000000
+702,5057,travel:low,138,0,0.000000
+703,5060,travel:passing,83,0,0.000000
+704,5061,travel:passing,87,0,0.000000
+705,5062,travel:passing,532,0,0.000000
+706,5067,travel:passing,650,0,0.000000
+707,5068,travel:passing,238,0,0.000000
+708,5073,travel:passing,181,0,0.000000
+709,5076,travel:passing,68,0,0.000000
+710,5077,travel:low,51,0,0.000000
+711,5084,travel:passing,916,0,0.000000
+712,5085,travel:low,242,0,0.000000
+713,5090,travel:low,229,0,0.000000
+714,5097,unmatched:published(non-travel),774,0,0.000000
+715,5099,travel:killer,188,0,0.000000
+716,5100,travel:passing,1138,0,0.000000
+717,5113,travel:passing,55,0,0.000000
+718,5115,travel:low,59,0,0.000000
+719,5116,travel:low,102,0,0.000000
+720,5122,travel:killer,125,0,0.000000
+721,5128,travel:passing,301,0,0.000000
+722,5130,travel:passing,286,0,0.000000
+723,5139,unmatched:published(non-travel),122,0,0.000000
+724,5143,travel:passing,154,0,0.000000
+725,5145,travel:low,85,0,0.000000
+726,5148,travel:killer,104,0,0.000000
+727,5154,travel:passing,110,0,0.000000
+728,5156,unmatched:published(non-travel),56,0,0.000000
+729,5161,travel:passing,86,0,0.000000
+730,5163,travel:low,53,0,0.000000
+731,5176,unmatched:published(non-travel),268,0,0.000000
+732,5178,travel:passing,76,0,0.000000
+733,5179,travel:low,103,0,0.000000
+734,5187,travel:killer,86,0,0.000000
+735,5201,travel:passing,192,0,0.000000
+736,5204,travel:passing,459,0,0.000000
+737,5206,travel:passing,107,0,0.000000
+738,5213,unmatched:published(non-travel),898,0,0.000000
+739,5214,travel:passing,136,0,0.000000
+740,5222,travel:low,61,0,0.000000
+741,5256,travel:low,82,0,0.000000
+742,5257,travel:passing,64,0,0.000000
+743,5263,travel:passing,913,0,0.000000
+744,5266,travel:passing,147,0,0.000000
+745,5267,travel:passing,502,0,0.000000
+746,5282,travel:low,57,0,0.000000
+747,5286,travel:hidden,60,0,0.000000
+748,5289,travel:low,58,0,0.000000
+749,5294,travel:passing,694,0,0.000000
+750,5310,travel:passing,195,0,0.000000
+751,5321,travel:low,106,0,0.000000
+752,5326,travel:passing,227,0,0.000000
+753,5332,travel:killer,262,0,0.000000
+754,5343,travel:passing,109,0,0.000000
+755,5351,travel:low,52,0,0.000000
+756,5352,travel:low,75,0,0.000000
+757,5353,travel:passing,1155,0,0.000000
+758,5357,travel:passing,279,0,0.000000
+759,5359,travel:passing,187,0,0.000000
+760,5376,travel:passing,83,0,0.000000
+761,5377,travel:low,357,0,0.000000
+762,5379,travel:killer,117,0,0.000000
+763,5384,travel:passing,51,0,0.000000
+764,5386,travel:passing,3069,0,0.000000
+765,5404,unmatched:published(non-travel),141,0,0.000000
+766,5407,unmatched:published(non-travel),54,0,0.000000
+767,5410,travel:passing,441,0,0.000000
+768,5412,travel:passing,1318,0,0.000000
+769,5420,travel:passing,239,0,0.000000
+770,5433,travel:passing,248,0,0.000000
+771,5439,travel:passing,127,0,0.000000
+772,5446,travel:passing,58,0,0.000000
+773,5448,unmatched:published(non-travel),408,0,0.000000
+774,5486,travel:passing,172,0,0.000000
+775,5495,travel:passing,142,0,0.000000
+776,5507,travel:passing,392,0,0.000000
+777,5512,unmatched:published(non-travel),72,0,0.000000
+778,5518,travel:killer,499,0,0.000000
+779,5523,travel:passing,823,0,0.000000
+780,5525,travel:hidden,82,0,0.000000
+781,5559,travel:hidden,51,0,0.000000
+782,5563,travel:low,160,0,0.000000
+783,5592,travel:low,62,0,0.000000
+784,5603,travel:low,53,0,0.000000
+785,5610,unmatched:published(non-travel),80,0,0.000000
+786,5614,travel:low,136,0,0.000000
+787,5621,travel:hidden,159,0,0.000000
+788,5624,travel:passing,282,0,0.000000
+789,5649,travel:low,92,0,0.000000
+790,5651,travel:low,57,0,0.000000
+791,5661,travel:low,173,0,0.000000
+792,5665,travel:low,138,0,0.000000
+793,5667,travel:low,106,0,0.000000
+794,5674,travel:low,63,0,0.000000
+795,5679,travel:low,74,0,0.000000
+796,5680,travel:passing,925,0,0.000000
+797,5681,travel:passing,354,0,0.000000
+798,5682,travel:low,279,0,0.000000
+799,5683,travel:low,159,0,0.000000
+800,5684,travel:passing,997,0,0.000000
+801,5689,travel:passing,247,0,0.000000
+802,5696,travel:passing,55,0,0.000000
+803,5708,travel:passing,5908,0,0.000000
+804,5711,travel:passing,275,0,0.000000
+805,5713,unmatched:unpublished(404 likely),446,0,0.000000
+806,5731,travel:passing,464,0,0.000000
+807,5734,travel:passing,288,0,0.000000
+808,5751,travel:passing,475,0,0.000000
+809,5752,travel:passing,340,0,0.000000
+810,5756,travel:passing,87,0,0.000000
+811,5761,travel:passing,117,0,0.000000
+812,5762,travel:low,107,0,0.000000
+813,5765,travel:passing,422,0,0.000000
+814,5784,travel:passing,249,0,0.000000
+815,5799,travel:passing,99,0,0.000000
+816,5824,travel:low,97,0,0.000000
+817,5829,travel:passing,206,0,0.000000
+818,5839,travel:low,195,0,0.000000
+819,5846,travel:passing,194,0,0.000000
+820,5852,travel:low,72,0,0.000000
+821,5853,travel:low,64,0,0.000000
+822,5857,travel:passing,89,0,0.000000
+823,5873,travel:passing,727,0,0.000000
+824,5891,travel:low,57,0,0.000000
+825,5908,travel:low,142,0,0.000000
+826,5909,travel:low,216,0,0.000000
+827,5913,travel:low,60,0,0.000000
+828,5962,travel:low,147,0,0.000000
+829,5986,travel:passing,809,0,0.000000
+830,5989,travel:passing,203,0,0.000000
+831,6044,travel:killer,146,0,0.000000
+832,6048,travel:low,124,0,0.000000
+833,6105,travel:low,362,0,0.000000
+834,6115,travel:passing,404,0,0.000000
+835,6116,travel:low,216,0,0.000000
+836,6118,travel:passing,252,0,0.000000
+837,6130,travel:low,54,0,0.000000
+838,6167,travel:low,74,0,0.000000
+839,6204,travel:passing,1380,0,0.000000
+840,6277,travel:low,60,0,0.000000
+841,6308,travel:low,80,0,0.000000
+842,6338,unmatched:published(non-travel),769,0,0.000000
+843,6345,travel:low,89,0,0.000000
+844,6365,travel:low,90,0,0.000000
+845,6388,travel:low,53,0,0.000000
+846,6407,travel:passing,213,0,0.000000
+847,6415,travel:low,77,0,0.000000
+848,6456,travel:low,516,0,0.000000
+849,6484,travel:low,61,0,0.000000
+850,6492,travel:passing,636,0,0.000000
+851,6497,travel:passing,117,0,0.000000
+852,6501,travel:passing,184,0,0.000000
+853,6502,travel:passing,120,0,0.000000
+854,6525,unmatched:published(non-travel),906,0,0.000000
+855,6546,unmatched:published(non-travel),117,0,0.000000
+856,6560,unmatched:published(non-travel),139,0,0.000000
+857,6590,travel:passing,139,0,0.000000
+858,6626,travel:low,54,0,0.000000
+859,6629,unmatched:published(non-travel),64,0,0.000000
+860,6632,unmatched:published(non-travel),77,0,0.000000
+861,6637,travel:low,89,0,0.000000
+862,6638,unmatched:published(non-travel),92,0,0.000000
+863,6655,travel:passing,527,0,0.000000
+864,6690,travel:passing,260,0,0.000000
+865,6702,travel:passing,129,0,0.000000
+866,6721,travel:passing,862,0,0.000000
+867,6752,travel:passing,79,0,0.000000
+868,6755,travel:passing,62,0,0.000000
+869,6760,travel:low,278,0,0.000000
+870,6762,travel:passing,104,0,0.000000
+871,6765,travel:passing,77,0,0.000000
+872,6772,unmatched:published(non-travel),743,0,0.000000
+873,6790,travel:low,53,0,0.000000
+874,6829,travel:passing,130,0,0.000000
+875,6854,travel:passing,221,0,0.000000
+876,6863,unmatched:published(non-travel),58,0,0.000000
+877,6871,travel:low,51,0,0.000000
+878,6881,unmatched:published(non-travel),307,0,0.000000
+879,6883,unmatched:published(non-travel),95,0,0.000000
+880,6896,unmatched:published(non-travel),177,0,0.000000
+881,6906,travel:low,57,0,0.000000
+882,6912,travel:low,61,0,0.000000
+883,6918,travel:passing,276,0,0.000000
+884,6931,unmatched:published(non-travel),150,0,0.000000
+885,6942,travel:low,69,0,0.000000
+886,6943,travel:passing,444,0,0.000000
+887,6946,travel:low,131,0,0.000000
+888,6957,travel:passing,126,0,0.000000
+889,6978,travel:passing,54,0,0.000000
+890,6987,unmatched:published(non-travel),57,0,0.000000
+891,7004,travel:passing,68,0,0.000000
+892,7011,unmatched:unpublished(404 likely),64,0,0.000000
+893,7026,unmatched:published(non-travel),292,0,0.000000
+894,7079,travel:low,62,0,0.000000
+895,7081,unmatched:published(non-travel),80,0,0.000000
+896,7097,unmatched:published(non-travel),77,0,0.000000
+897,7109,travel:low,97,0,0.000000
+898,7115,unmatched:published(non-travel),163,0,0.000000
+899,7124,unmatched:published(non-travel),67,0,0.000000
+900,7132,travel:low,293,0,0.000000
+901,7134,unmatched:published(non-travel),412,0,0.000000
+902,7138,unmatched:published(non-travel),187,0,0.000000
+903,7157,unmatched:published(non-travel),57,0,0.000000
+904,7179,travel:low,72,0,0.000000
+905,7208,travel:low,50,0,0.000000
+906,7209,travel:low,74,0,0.000000
+907,7229,travel:passing,116,0,0.000000
+908,7239,unmatched:published(non-travel),55,0,0.000000
+909,7241,travel:low,180,0,0.000000
+910,7242,unmatched:unpublished(404 likely),141,0,0.000000
+911,7258,travel:low,53,0,0.000000
+912,7278,travel:passing,1465,0,0.000000
+913,7324,unmatched:unpublished(404 likely),70,0,0.000000
+914,7329,unmatched:unpublished(404 likely),58,0,0.000000
+915,7330,unmatched:unpublished(404 likely),58,0,0.000000
+916,7334,unmatched:unpublished(404 likely),74,0,0.000000
+917,7343,unmatched:unpublished(404 likely),241,0,0.000000
+918,7363,unmatched:unpublished(404 likely),57,0,0.000000
+919,7377,unmatched:unpublished(404 likely),475,0,0.000000
+920,7379,unmatched:unpublished(404 likely),272,0,0.000000
+921,7380,unmatched:unpublished(404 likely),76,0,0.000000
+922,7409,unmatched:unpublished(404 likely),86,0,0.000000
+923,7426,unmatched:unpublished(404 likely),85,0,0.000000
+924,7431,unmatched:unpublished(404 likely),83,0,0.000000
+925,7444,unmatched:unpublished(404 likely),51,0,0.000000
+926,7449,unmatched:unpublished(404 likely),67,0,0.000000
+927,7450,unmatched:unpublished(404 likely),407,0,0.000000
+928,7484,unmatched:unpublished(404 likely),287,0,0.000000
+929,7490,unmatched:unpublished(404 likely),54,0,0.000000
+930,7506,unmatched:unpublished(404 likely),215,0,0.000000
+931,7513,unmatched:unpublished(404 likely),73,0,0.000000
+932,7521,unmatched:unpublished(404 likely),316,0,0.000000
+933,7535,unmatched:unpublished(404 likely),57,0,0.000000
+934,7536,unmatched:unpublished(404 likely),131,0,0.000000
+935,7547,unmatched:unpublished(404 likely),62,0,0.000000
+936,7553,unmatched:unpublished(404 likely),246,0,0.000000
+937,7565,unmatched:unpublished(404 likely),364,0,0.000000
+938,7575,unmatched:unpublished(404 likely),322,0,0.000000
+939,7580,unmatched:unpublished(404 likely),81,0,0.000000
+940,7589,unmatched:unpublished(404 likely),53,0,0.000000
+941,7607,unmatched:unpublished(404 likely),70,0,0.000000
+942,7624,unmatched:unpublished(404 likely),70,0,0.000000
+943,7631,unmatched:unpublished(404 likely),89,0,0.000000
+944,7640,unmatched:unpublished(404 likely),698,0,0.000000
+945,7643,unmatched:unpublished(404 likely),50,0,0.000000
+946,7672,unmatched:unpublished(404 likely),188,0,0.000000
+947,7700,unmatched:unpublished(404 likely),255,0,0.000000
+948,7712,unmatched:unpublished(404 likely),310,0,0.000000
+949,7715,unmatched:unpublished(404 likely),114,0,0.000000
+950,7717,unmatched:unpublished(404 likely),159,0,0.000000
+951,7736,unmatched:unpublished(404 likely),85,0,0.000000
+952,7743,unmatched:unpublished(404 likely),67,0,0.000000
+953,7761,unmatched:unpublished(404 likely),115,0,0.000000
+954,7762,unmatched:unpublished(404 likely),56,0,0.000000
+955,7773,unmatched:unpublished(404 likely),312,0,0.000000
+956,7780,unmatched:unpublished(404 likely),96,0,0.000000
+957,7817,unmatched:unpublished(404 likely),114,0,0.000000
+958,7821,unmatched:unpublished(404 likely),64,0,0.000000
+959,7833,unmatched:unpublished(404 likely),106,0,0.000000
+960,7835,unmatched:unpublished(404 likely),106,0,0.000000
+961,7838,unmatched:unpublished(404 likely),81,0,0.000000
+962,7844,unmatched:unpublished(404 likely),93,0,0.000000
+963,7855,unmatched:unpublished(404 likely),277,0,0.000000
+964,7859,unmatched:unpublished(404 likely),260,0,0.000000
+965,7876,unmatched:unpublished(404 likely),108,0,0.000000
+966,7886,unmatched:unpublished(404 likely),96,0,0.000000
+967,7892,unmatched:unpublished(404 likely),54,0,0.000000
+968,7913,unmatched:unpublished(404 likely),64,0,0.000000
+969,7920,unmatched:unpublished(404 likely),113,0,0.000000
+970,7929,unmatched:unpublished(404 likely),723,0,0.000000
+971,7957,unmatched:unpublished(404 likely),86,0,0.000000
+972,7960,unmatched:unpublished(404 likely),198,0,0.000000
+973,7961,unmatched:unpublished(404 likely),68,0,0.000000
+974,7968,unmatched:unpublished(404 likely),104,0,0.000000
+975,7969,unmatched:unpublished(404 likely),53,0,0.000000
+976,7988,unmatched:unpublished(404 likely),159,0,0.000000
+977,8035,unmatched:unpublished(404 likely),807,0,0.000000
+978,8051,unmatched:unpublished(404 likely),182,0,0.000000
+979,8057,unmatched:unpublished(404 likely),76,0,0.000000
+980,8062,unmatched:unpublished(404 likely),67,0,0.000000
+981,8068,unmatched:unpublished(404 likely),61,0,0.000000
+982,8071,unmatched:unpublished(404 likely),93,0,0.000000
+983,8088,unmatched:unpublished(404 likely),75,0,0.000000
+984,8094,unmatched:unpublished(404 likely),99,0,0.000000
+985,8114,unmatched:unpublished(404 likely),65,0,0.000000
+986,8123,unmatched:unpublished(404 likely),61,0,0.000000
+987,8128,unmatched:unpublished(404 likely),122,0,0.000000
+988,8131,unmatched:unpublished(404 likely),74,0,0.000000
+989,8138,unmatched:unpublished(404 likely),85,0,0.000000
+990,8144,unmatched:unpublished(404 likely),50,0,0.000000
+991,8146,unmatched:unpublished(404 likely),370,0,0.000000
+992,8148,unmatched:unpublished(404 likely),232,0,0.000000
+993,8151,unmatched:unpublished(404 likely),549,0,0.000000
+994,8196,unmatched:unpublished(404 likely),94,0,0.000000
+995,8198,unmatched:unpublished(404 likely),121,0,0.000000
+996,8199,unmatched:unpublished(404 likely),68,0,0.000000
+997,8208,unmatched:unpublished(404 likely),192,0,0.000000
+998,8214,unmatched:unpublished(404 likely),184,0,0.000000
+999,8220,unmatched:unpublished(404 likely),1392,0,0.000000
+1000,8238,unmatched:unpublished(404 likely),74,0,0.000000
+1001,8239,unmatched:unpublished(404 likely),114,0,0.000000
+1002,8251,unmatched:unpublished(404 likely),57,0,0.000000
+1003,8257,unmatched:unpublished(404 likely),92,0,0.000000
+1004,8273,unmatched:unpublished(404 likely),194,0,0.000000
+1005,8285,unmatched:unpublished(404 likely),96,0,0.000000
+1006,8286,unmatched:unpublished(404 likely),191,0,0.000000
+1007,8312,unmatched:unpublished(404 likely),108,0,0.000000
+1008,8318,unmatched:unpublished(404 likely),694,0,0.000000
+1009,8321,unmatched:unpublished(404 likely),1139,0,0.000000
+1010,8355,unmatched:unpublished(404 likely),788,0,0.000000
+1011,8379,unmatched:unpublished(404 likely),163,0,0.000000
+1012,8394,unmatched:unpublished(404 likely),1965,0,0.000000
+1013,8397,unmatched:unpublished(404 likely),129,0,0.000000
+1014,8399,unmatched:unpublished(404 likely),149,0,0.000000
+1015,8425,unmatched:unpublished(404 likely),95,0,0.000000
+1016,8480,unmatched:unpublished(404 likely),81,0,0.000000
+1017,8482,unmatched:unpublished(404 likely),588,0,0.000000
+1018,8496,unmatched:unpublished(404 likely),58,0,0.000000
+1019,8499,unmatched:unpublished(404 likely),187,0,0.000000
+1020,8501,unmatched:unpublished(404 likely),163,0,0.000000
+1021,8508,unmatched:unpublished(404 likely),88,0,0.000000
+1022,8520,unmatched:unpublished(404 likely),208,0,0.000000
+1023,8536,unmatched:unpublished(404 likely),71,0,0.000000
+1024,8549,unmatched:unpublished(404 likely),78,0,0.000000
+1025,8551,unmatched:unpublished(404 likely),450,0,0.000000
+1026,8554,unmatched:unpublished(404 likely),78,0,0.000000
+1027,8560,unmatched:unpublished(404 likely),212,0,0.000000
+1028,8566,unmatched:unpublished(404 likely),534,0,0.000000
+1029,8575,unmatched:unpublished(404 likely),147,0,0.000000
+1030,8577,unmatched:unpublished(404 likely),217,0,0.000000
+1031,8578,unmatched:unpublished(404 likely),269,0,0.000000
+1032,8589,unmatched:unpublished(404 likely),653,0,0.000000
+1033,8594,unmatched:unpublished(404 likely),365,0,0.000000
+1034,8604,unmatched:unpublished(404 likely),61,0,0.000000
+1035,8619,unmatched:unpublished(404 likely),518,0,0.000000
+1036,8631,unmatched:unpublished(404 likely),1364,0,0.000000
+1037,8632,unmatched:unpublished(404 likely),371,0,0.000000
+1038,8638,unmatched:unpublished(404 likely),1306,0,0.000000
+1039,8643,unmatched:unpublished(404 likely),55,0,0.000000
+1040,8649,unmatched:unpublished(404 likely),64,0,0.000000
+1041,8653,unmatched:unpublished(404 likely),84,0,0.000000
+1042,8677,unmatched:unpublished(404 likely),176,0,0.000000
+1043,8680,unmatched:unpublished(404 likely),121,0,0.000000
+1044,8702,unmatched:unpublished(404 likely),466,0,0.000000
+1045,8724,unmatched:unpublished(404 likely),50,0,0.000000
+1046,8731,unmatched:unpublished(404 likely),62,0,0.000000
+1047,8739,unmatched:unpublished(404 likely),64,0,0.000000
+1048,8740,unmatched:unpublished(404 likely),404,0,0.000000
+1049,8745,unmatched:unpublished(404 likely),72,0,0.000000
+1050,8753,unmatched:unpublished(404 likely),500,0,0.000000
+1051,8754,unmatched:unpublished(404 likely),67,0,0.000000
+1052,8756,unmatched:unpublished(404 likely),86,0,0.000000
+1053,8757,unmatched:unpublished(404 likely),107,0,0.000000
+1054,8759,unmatched:unpublished(404 likely),67,0,0.000000
+1055,8765,unmatched:unpublished(404 likely),772,0,0.000000
+1056,8789,unmatched:unpublished(404 likely),173,0,0.000000
+1057,8795,unmatched:unpublished(404 likely),67,0,0.000000
+1058,8796,unmatched:unpublished(404 likely),132,0,0.000000
+1059,8819,unmatched:unpublished(404 likely),60,0,0.000000
+1060,8822,unmatched:unpublished(404 likely),86,0,0.000000
+1061,8823,unmatched:unpublished(404 likely),169,0,0.000000
+1062,8825,unmatched:unpublished(404 likely),211,0,0.000000
+1063,8850,unmatched:unpublished(404 likely),124,0,0.000000
+1064,8855,unmatched:unpublished(404 likely),290,0,0.000000
+1065,8859,unmatched:unpublished(404 likely),75,0,0.000000
+1066,8863,unmatched:unpublished(404 likely),200,0,0.000000
+1067,8870,unmatched:unpublished(404 likely),105,0,0.000000
+1068,8881,unmatched:unpublished(404 likely),50,0,0.000000
+1069,8885,unmatched:unpublished(404 likely),166,0,0.000000
+1070,8886,unmatched:unpublished(404 likely),454,0,0.000000
+1071,8888,unmatched:unpublished(404 likely),87,0,0.000000
+1072,8896,unmatched:unpublished(404 likely),78,0,0.000000
+1073,8916,unmatched:unpublished(404 likely),68,0,0.000000
+1074,8937,unmatched:unpublished(404 likely),104,0,0.000000
+1075,8940,unmatched:unpublished(404 likely),152,0,0.000000
+1076,8947,unmatched:unpublished(404 likely),53,0,0.000000
+1077,8954,unmatched:unpublished(404 likely),146,0,0.000000
+1078,8955,unmatched:unpublished(404 likely),81,0,0.000000
+1079,8957,unmatched:unpublished(404 likely),64,0,0.000000
+1080,8962,unmatched:unpublished(404 likely),71,0,0.000000
+1081,8967,unmatched:unpublished(404 likely),64,0,0.000000
+1082,8984,unmatched:unpublished(404 likely),152,0,0.000000
+1083,8987,unmatched:unpublished(404 likely),110,0,0.000000
+1084,8997,unmatched:unpublished(404 likely),135,0,0.000000
+1085,9000,unmatched:unpublished(404 likely),104,0,0.000000
+1086,9001,unmatched:unpublished(404 likely),77,0,0.000000
+1087,9006,unmatched:unpublished(404 likely),99,0,0.000000
+1088,9017,unmatched:unpublished(404 likely),215,0,0.000000
+1089,9018,unmatched:unpublished(404 likely),50,0,0.000000
+1090,9021,unmatched:unpublished(404 likely),88,0,0.000000
+1091,9029,unmatched:unpublished(404 likely),310,0,0.000000
+1092,9050,unmatched:unpublished(404 likely),113,0,0.000000
+1093,9055,unmatched:unpublished(404 likely),173,0,0.000000
+1094,9056,unmatched:unpublished(404 likely),90,0,0.000000
+1095,9057,unmatched:unpublished(404 likely),68,0,0.000000
+1096,9061,unmatched:unpublished(404 likely),272,0,0.000000
+1097,9064,unmatched:unpublished(404 likely),156,0,0.000000
+1098,9077,unmatched:unpublished(404 likely),258,0,0.000000
+1099,9082,unmatched:unpublished(404 likely),78,0,0.000000
+1100,9085,unmatched:unpublished(404 likely),406,0,0.000000
+1101,9095,unmatched:unpublished(404 likely),58,0,0.000000
+1102,9102,unmatched:unpublished(404 likely),78,0,0.000000
+1103,9103,unmatched:unpublished(404 likely),834,0,0.000000
+1104,9111,unmatched:unpublished(404 likely),58,0,0.000000
+1105,9119,unmatched:unpublished(404 likely),163,0,0.000000
+1106,9127,unmatched:unpublished(404 likely),195,0,0.000000
+1107,9137,unmatched:unpublished(404 likely),205,0,0.000000
+1108,9140,unmatched:unpublished(404 likely),208,0,0.000000
+1109,9142,unmatched:unpublished(404 likely),502,0,0.000000
+1110,9147,unmatched:unpublished(404 likely),62,0,0.000000
+1111,9163,unmatched:unpublished(404 likely),423,0,0.000000
+1112,9177,unmatched:unpublished(404 likely),163,0,0.000000
+1113,9191,unmatched:unpublished(404 likely),160,0,0.000000
+1114,9206,unmatched:unpublished(404 likely),117,0,0.000000
+1115,9207,unmatched:unpublished(404 likely),156,0,0.000000
+1116,9209,unmatched:unpublished(404 likely),54,0,0.000000
+1117,9216,unmatched:unpublished(404 likely),83,0,0.000000
+1118,9229,unmatched:unpublished(404 likely),126,0,0.000000
+1119,9238,unmatched:unpublished(404 likely),115,0,0.000000
+1120,9243,unmatched:unpublished(404 likely),152,0,0.000000
+1121,9252,unmatched:unpublished(404 likely),165,0,0.000000
+1122,9275,unmatched:unpublished(404 likely),276,0,0.000000
+1123,9299,unmatched:unpublished(404 likely),401,0,0.000000
+1124,9322,unmatched:unpublished(404 likely),78,0,0.000000
+1125,9333,unmatched:unpublished(404 likely),76,0,0.000000
+1126,9350,unmatched:unpublished(404 likely),113,0,0.000000
+1127,9368,unmatched:unpublished(404 likely),208,0,0.000000
+1128,9370,unmatched:unpublished(404 likely),70,0,0.000000
+1129,9371,unmatched:unpublished(404 likely),71,0,0.000000
+1130,9382,unmatched:unpublished(404 likely),343,0,0.000000
+1131,9403,unmatched:unpublished(404 likely),128,0,0.000000
+1132,9405,unmatched:unpublished(404 likely),224,0,0.000000
+1133,9406,unmatched:unpublished(404 likely),314,0,0.000000
+1134,9410,unmatched:unpublished(404 likely),55,0,0.000000
+1135,9416,unmatched:unpublished(404 likely),235,0,0.000000
+1136,9424,unmatched:unpublished(404 likely),57,0,0.000000
+1137,9434,unmatched:unpublished(404 likely),76,0,0.000000
+1138,9435,unmatched:unpublished(404 likely),192,0,0.000000
+1139,9443,unmatched:unpublished(404 likely),68,0,0.000000
+1140,9444,unmatched:unpublished(404 likely),162,0,0.000000
+1141,9459,unmatched:unpublished(404 likely),137,0,0.000000
+1142,9462,unmatched:unpublished(404 likely),82,0,0.000000
+1143,9464,unmatched:unpublished(404 likely),482,0,0.000000
+1144,9471,unmatched:unpublished(404 likely),122,0,0.000000
+1145,9473,unmatched:unpublished(404 likely),58,0,0.000000
+1146,9483,unmatched:unpublished(404 likely),387,0,0.000000
+1147,9487,unmatched:unpublished(404 likely),53,0,0.000000
+1148,9492,unmatched:unpublished(404 likely),153,0,0.000000
+1149,9519,unmatched:unpublished(404 likely),164,0,0.000000
+1150,9522,unmatched:unpublished(404 likely),100,0,0.000000
+1151,9538,unmatched:unpublished(404 likely),247,0,0.000000
+1152,9539,unmatched:unpublished(404 likely),126,0,0.000000
+1153,9540,unmatched:unpublished(404 likely),64,0,0.000000
+1154,9541,unmatched:unpublished(404 likely),67,0,0.000000
+1155,9545,unmatched:unpublished(404 likely),226,0,0.000000
+1156,9548,unmatched:unpublished(404 likely),131,0,0.000000
+1157,9550,unmatched:unpublished(404 likely),182,0,0.000000
+1158,9552,unmatched:unpublished(404 likely),96,0,0.000000
+1159,9568,unmatched:unpublished(404 likely),202,0,0.000000
+1160,9573,unmatched:unpublished(404 likely),584,0,0.000000
+1161,9582,unmatched:unpublished(404 likely),193,0,0.000000
+1162,9590,unmatched:unpublished(404 likely),645,0,0.000000
+1163,9594,unmatched:unpublished(404 likely),53,0,0.000000
+1164,9603,unmatched:unpublished(404 likely),110,0,0.000000
+1165,9606,unmatched:unpublished(404 likely),106,0,0.000000
+1166,9614,unmatched:unpublished(404 likely),344,0,0.000000
+1167,9630,unmatched:unpublished(404 likely),363,0,0.000000
+1168,9632,unmatched:unpublished(404 likely),64,0,0.000000
+1169,9640,unmatched:unpublished(404 likely),187,0,0.000000
+1170,9642,unmatched:unpublished(404 likely),172,0,0.000000
+1171,9644,unmatched:unpublished(404 likely),389,0,0.000000
+1172,9653,unmatched:unpublished(404 likely),152,0,0.000000
+1173,9665,unmatched:unpublished(404 likely),112,0,0.000000
+1174,9668,unmatched:unpublished(404 likely),256,0,0.000000
+1175,9683,unmatched:unpublished(404 likely),168,0,0.000000
+1176,9691,unmatched:unpublished(404 likely),191,0,0.000000
+1177,9696,unmatched:unpublished(404 likely),74,0,0.000000
+1178,9707,unmatched:unpublished(404 likely),74,0,0.000000
+1179,9708,unmatched:unpublished(404 likely),53,0,0.000000
+1180,9709,unmatched:unpublished(404 likely),57,0,0.000000
+1181,9713,unmatched:unpublished(404 likely),98,0,0.000000
+1182,9734,unmatched:unpublished(404 likely),78,0,0.000000
+1183,9735,unmatched:unpublished(404 likely),167,0,0.000000
+1184,9742,unmatched:unpublished(404 likely),108,0,0.000000
+1185,9745,unmatched:unpublished(404 likely),153,0,0.000000
+1186,9766,unmatched:unpublished(404 likely),117,0,0.000000
+1187,9772,unmatched:unpublished(404 likely),65,0,0.000000
+1188,9814,unmatched:unpublished(404 likely),65,0,0.000000
+1189,9816,unmatched:unpublished(404 likely),296,0,0.000000
+1190,9819,unmatched:unpublished(404 likely),138,0,0.000000
+1191,9833,unmatched:unpublished(404 likely),96,0,0.000000
+1192,9851,unmatched:unpublished(404 likely),79,0,0.000000
+1193,9853,unmatched:unpublished(404 likely),88,0,0.000000
+1194,9859,unmatched:unpublished(404 likely),156,0,0.000000
+1195,9869,unmatched:unpublished(404 likely),50,0,0.000000
+1196,9871,unmatched:unpublished(404 likely),232,0,0.000000
+1197,9885,unmatched:unpublished(404 likely),155,0,0.000000
+1198,9886,unmatched:unpublished(404 likely),356,0,0.000000
+1199,9901,unmatched:unpublished(404 likely),2148,0,0.000000
+1200,9902,unmatched:unpublished(404 likely),342,0,0.000000
+1201,9911,unmatched:unpublished(404 likely),61,0,0.000000
+1202,9918,unmatched:unpublished(404 likely),71,0,0.000000
+1203,9924,unmatched:unpublished(404 likely),673,0,0.000000
+1204,9929,unmatched:unpublished(404 likely),74,0,0.000000
+1205,9943,unmatched:unpublished(404 likely),599,0,0.000000
+1206,9957,unmatched:unpublished(404 likely),915,0,0.000000
+1207,9961,unmatched:unpublished(404 likely),136,0,0.000000
+1208,9984,unmatched:unpublished(404 likely),152,0,0.000000
+1209,9995,unmatched:unpublished(404 likely),146,0,0.000000
+1210,10003,unmatched:unpublished(404 likely),185,0,0.000000
+1211,10012,unmatched:unpublished(404 likely),703,0,0.000000
+1212,10031,unmatched:unpublished(404 likely),54,0,0.000000
+1213,10048,unmatched:unpublished(404 likely),351,0,0.000000
+1214,10060,unmatched:unpublished(404 likely),953,0,0.000000
+1215,10066,unmatched:unpublished(404 likely),62,0,0.000000
+1216,10080,unmatched:unpublished(404 likely),179,0,0.000000
+1217,10100,unmatched:unpublished(404 likely),168,0,0.000000
+1218,10107,unmatched:unpublished(404 likely),219,0,0.000000
+1219,10123,unmatched:unpublished(404 likely),74,0,0.000000
+1220,10130,unmatched:unpublished(404 likely),284,0,0.000000
+1221,10131,unmatched:unpublished(404 likely),93,0,0.000000
+1222,10143,unmatched:unpublished(404 likely),291,0,0.000000
+1223,10151,unmatched:unpublished(404 likely),561,0,0.000000
+1224,10165,unmatched:unpublished(404 likely),174,0,0.000000
+1225,10181,unmatched:unpublished(404 likely),419,0,0.000000
+1226,10187,unmatched:unpublished(404 likely),230,0,0.000000
+1227,10195,unmatched:unpublished(404 likely),138,0,0.000000
+1228,10206,unmatched:unpublished(404 likely),7298,0,0.000000
+1229,10213,unmatched:unpublished(404 likely),167,0,0.000000
+1230,10219,unmatched:unpublished(404 likely),60,0,0.000000
+1231,10229,unmatched:unpublished(404 likely),299,0,0.000000
+1232,10232,unmatched:unpublished(404 likely),53,0,0.000000
+1233,10240,unmatched:unpublished(404 likely),60,0,0.000000
+1234,10253,unmatched:unpublished(404 likely),221,0,0.000000
+1235,10272,unmatched:unpublished(404 likely),73,0,0.000000
+1236,10273,unmatched:unpublished(404 likely),73,0,0.000000
+1237,10281,unmatched:unpublished(404 likely),68,0,0.000000
+1238,10286,unmatched:unpublished(404 likely),78,0,0.000000
+1239,10303,unmatched:unpublished(404 likely),57,0,0.000000
+1240,10312,unmatched:unpublished(404 likely),64,0,0.000000
+1241,10313,unmatched:unpublished(404 likely),88,0,0.000000
+1242,10320,unmatched:unpublished(404 likely),154,0,0.000000
+1243,10324,unmatched:unpublished(404 likely),125,0,0.000000
+1244,10327,unmatched:unpublished(404 likely),165,0,0.000000
+1245,10339,unmatched:unpublished(404 likely),233,0,0.000000
+1246,10345,unmatched:unpublished(404 likely),262,0,0.000000
+1247,10347,unmatched:unpublished(404 likely),479,0,0.000000
+1248,10351,unmatched:unpublished(404 likely),54,0,0.000000
+1249,10356,unmatched:unpublished(404 likely),591,0,0.000000
+1250,10372,unmatched:unpublished(404 likely),136,0,0.000000
+1251,10383,unmatched:unpublished(404 likely),219,0,0.000000
+1252,10393,unmatched:unpublished(404 likely),61,0,0.000000
+1253,10406,unmatched:unpublished(404 likely),51,0,0.000000
+1254,10407,unmatched:unpublished(404 likely),51,0,0.000000
+1255,10412,unmatched:unpublished(404 likely),114,0,0.000000
+1256,10415,unmatched:unpublished(404 likely),396,0,0.000000
+1257,10424,unmatched:unpublished(404 likely),50,0,0.000000
+1258,10432,unmatched:unpublished(404 likely),586,0,0.000000
+1259,10440,unmatched:unpublished(404 likely),283,0,0.000000
+1260,10447,unmatched:unpublished(404 likely),219,0,0.000000
+1261,10449,unmatched:unpublished(404 likely),185,0,0.000000
+1262,10452,unmatched:unpublished(404 likely),67,0,0.000000
+1263,10457,unmatched:unpublished(404 likely),87,0,0.000000
+1264,10459,unmatched:unpublished(404 likely),198,0,0.000000
+1265,10462,unmatched:unpublished(404 likely),357,0,0.000000
+1266,10473,unmatched:unpublished(404 likely),59,0,0.000000
+1267,10474,unmatched:unpublished(404 likely),89,0,0.000000
+1268,10478,unmatched:unpublished(404 likely),78,0,0.000000
+1269,10488,unmatched:unpublished(404 likely),109,0,0.000000
+1270,10504,unmatched:unpublished(404 likely),177,0,0.000000
+1271,10505,unmatched:unpublished(404 likely),51,0,0.000000
+1272,10508,unmatched:unpublished(404 likely),214,0,0.000000
+1273,10512,unmatched:unpublished(404 likely),65,0,0.000000
+1274,10530,unmatched:unpublished(404 likely),145,0,0.000000
+1275,10543,unmatched:unpublished(404 likely),107,0,0.000000
+1276,10561,unmatched:unpublished(404 likely),72,0,0.000000
+1277,10573,unmatched:unpublished(404 likely),58,0,0.000000
+1278,10579,unmatched:unpublished(404 likely),61,0,0.000000
+1279,10590,unmatched:unpublished(404 likely),55,0,0.000000
+1280,10600,unmatched:unpublished(404 likely),295,0,0.000000
+1281,10605,unmatched:unpublished(404 likely),170,0,0.000000
+1282,10608,unmatched:unpublished(404 likely),142,0,0.000000
+1283,10618,unmatched:unpublished(404 likely),123,0,0.000000
+1284,10630,unmatched:unpublished(404 likely),58,0,0.000000
+1285,10631,unmatched:unpublished(404 likely),231,0,0.000000
+1286,10641,unmatched:unpublished(404 likely),99,0,0.000000
+1287,10643,unmatched:unpublished(404 likely),141,0,0.000000
+1288,10644,unmatched:unpublished(404 likely),97,0,0.000000
+1289,10654,unmatched:unpublished(404 likely),193,0,0.000000
+1290,10663,unmatched:unpublished(404 likely),240,0,0.000000
+1291,10666,unmatched:unpublished(404 likely),257,0,0.000000
+1292,10680,unmatched:unpublished(404 likely),324,0,0.000000
+1293,10688,unmatched:unpublished(404 likely),252,0,0.000000
+1294,10704,unmatched:unpublished(404 likely),52,0,0.000000
+1295,10710,unmatched:unpublished(404 likely),277,0,0.000000
+1296,10718,unmatched:unpublished(404 likely),69,0,0.000000
+1297,10726,unmatched:unpublished(404 likely),68,0,0.000000
+1298,10731,unmatched:unpublished(404 likely),68,0,0.000000
+1299,10732,unmatched:unpublished(404 likely),59,0,0.000000
+1300,10743,unmatched:unpublished(404 likely),506,0,0.000000
+1301,10752,unmatched:unpublished(404 likely),201,0,0.000000
+1302,10764,unmatched:unpublished(404 likely),67,0,0.000000
+1303,10782,unmatched:unpublished(404 likely),71,0,0.000000
+1304,10794,unmatched:unpublished(404 likely),53,0,0.000000
+1305,10798,unmatched:unpublished(404 likely),92,0,0.000000
+1306,10803,unmatched:unpublished(404 likely),210,0,0.000000
+1307,10808,unmatched:unpublished(404 likely),106,0,0.000000
+1308,10820,unmatched:unpublished(404 likely),121,0,0.000000
+1309,10826,unmatched:unpublished(404 likely),127,0,0.000000
+1310,10828,unmatched:unpublished(404 likely),54,0,0.000000
+1311,10838,unmatched:unpublished(404 likely),53,0,0.000000
+1312,10846,unmatched:unpublished(404 likely),114,0,0.000000
+1313,10847,unmatched:unpublished(404 likely),573,0,0.000000
+1314,10852,unmatched:unpublished(404 likely),72,0,0.000000
+1315,10858,unmatched:unpublished(404 likely),157,0,0.000000
+1316,10873,unmatched:unpublished(404 likely),241,0,0.000000
+1317,10877,unmatched:unpublished(404 likely),284,0,0.000000
+1318,10888,unmatched:unpublished(404 likely),140,0,0.000000
+1319,10889,unmatched:unpublished(404 likely),962,0,0.000000
+1320,10895,unmatched:unpublished(404 likely),207,0,0.000000
+1321,10897,unmatched:unpublished(404 likely),104,0,0.000000
+1322,10905,unmatched:unpublished(404 likely),511,0,0.000000
+1323,10925,unmatched:unpublished(404 likely),102,0,0.000000
+1324,10926,unmatched:unpublished(404 likely),157,0,0.000000
+1325,10927,unmatched:unpublished(404 likely),153,0,0.000000
+1326,10942,unmatched:unpublished(404 likely),206,0,0.000000
+1327,10946,unmatched:unpublished(404 likely),109,0,0.000000
+1328,10957,unmatched:unpublished(404 likely),1009,0,0.000000
+1329,10988,unmatched:unpublished(404 likely),2943,0,0.000000
+1330,10994,unmatched:unpublished(404 likely),243,0,0.000000
+1331,11001,unmatched:unpublished(404 likely),72,0,0.000000
+1332,11009,unmatched:unpublished(404 likely),116,0,0.000000
+1333,11015,unmatched:unpublished(404 likely),75,0,0.000000
+1334,11019,unmatched:unpublished(404 likely),68,0,0.000000
+1335,11035,unmatched:unpublished(404 likely),108,0,0.000000
+1336,11036,unmatched:unpublished(404 likely),1333,0,0.000000
+1337,11042,unmatched:unpublished(404 likely),93,0,0.000000
+1338,11054,unmatched:unpublished(404 likely),103,0,0.000000
+1339,11056,unmatched:unpublished(404 likely),327,0,0.000000
+1340,11065,unmatched:unpublished(404 likely),387,0,0.000000
+1341,11074,unmatched:unpublished(404 likely),246,0,0.000000
+1342,11076,unmatched:unpublished(404 likely),78,0,0.000000
+1343,11082,unmatched:unpublished(404 likely),69,0,0.000000
+1344,11090,unmatched:unpublished(404 likely),83,0,0.000000
+1345,11093,unmatched:unpublished(404 likely),60,0,0.000000
+1346,11095,unmatched:unpublished(404 likely),83,0,0.000000
+1347,11098,unmatched:unpublished(404 likely),62,0,0.000000
+1348,11102,unmatched:unpublished(404 likely),83,0,0.000000
+1349,11105,unmatched:unpublished(404 likely),186,0,0.000000
+1350,11111,unmatched:unpublished(404 likely),54,0,0.000000
+1351,11114,unmatched:unpublished(404 likely),95,0,0.000000
+1352,11123,unmatched:unpublished(404 likely),92,0,0.000000
+1353,11128,unmatched:unpublished(404 likely),780,0,0.000000
+1354,11129,unmatched:unpublished(404 likely),113,0,0.000000
+1355,11134,unmatched:unpublished(404 likely),159,0,0.000000
+1356,11149,unmatched:unpublished(404 likely),71,0,0.000000
+1357,11194,unmatched:unpublished(404 likely),480,0,0.000000
+1358,11205,unmatched:unpublished(404 likely),81,0,0.000000
+1359,11207,unmatched:unpublished(404 likely),53,0,0.000000
+1360,11208,unmatched:unpublished(404 likely),1778,0,0.000000
+1361,11224,unmatched:unpublished(404 likely),444,0,0.000000
+1362,11228,unmatched:unpublished(404 likely),92,0,0.000000
+1363,11231,unmatched:unpublished(404 likely),94,0,0.000000
+1364,11253,unmatched:unpublished(404 likely),109,0,0.000000
+1365,11254,unmatched:unpublished(404 likely),194,0,0.000000
+1366,11259,unmatched:unpublished(404 likely),833,0,0.000000
+1367,11262,unmatched:unpublished(404 likely),56,0,0.000000
+1368,11273,unmatched:unpublished(404 likely),290,0,0.000000
+1369,11286,unmatched:unpublished(404 likely),68,0,0.000000
+1370,11314,unmatched:unpublished(404 likely),64,0,0.000000
+1371,11317,unmatched:unpublished(404 likely),1412,0,0.000000
+1372,11318,unmatched:unpublished(404 likely),65,0,0.000000
+1373,11324,unmatched:unpublished(404 likely),179,0,0.000000
+1374,11330,unmatched:unpublished(404 likely),70,0,0.000000
+1375,11331,unmatched:unpublished(404 likely),173,0,0.000000
+1376,11337,unmatched:unpublished(404 likely),158,0,0.000000
+1377,11356,unmatched:unpublished(404 likely),92,0,0.000000
+1378,11359,unmatched:unpublished(404 likely),105,0,0.000000
+1379,11360,unmatched:unpublished(404 likely),136,0,0.000000
+1380,11361,unmatched:unpublished(404 likely),331,0,0.000000
+1381,11362,unmatched:unpublished(404 likely),128,0,0.000000
+1382,11367,unmatched:unpublished(404 likely),213,0,0.000000
+1383,11377,unmatched:unpublished(404 likely),50,0,0.000000
+1384,11383,unmatched:unpublished(404 likely),604,0,0.000000
+1385,11386,unmatched:unpublished(404 likely),263,0,0.000000
+1386,11402,unmatched:unpublished(404 likely),104,0,0.000000
+1387,11404,unmatched:unpublished(404 likely),136,0,0.000000
+1388,11414,unmatched:unpublished(404 likely),92,0,0.000000
+1389,11415,unmatched:unpublished(404 likely),171,0,0.000000
+1390,11416,unmatched:unpublished(404 likely),147,0,0.000000
+1391,11420,unmatched:unpublished(404 likely),105,0,0.000000
+1392,11425,unmatched:unpublished(404 likely),139,0,0.000000
+1393,11439,unmatched:unpublished(404 likely),189,0,0.000000
+1394,11444,unmatched:unpublished(404 likely),51,0,0.000000
+1395,11454,unmatched:unpublished(404 likely),530,0,0.000000
+1396,11455,unmatched:unpublished(404 likely),151,0,0.000000
+1397,11460,unmatched:unpublished(404 likely),76,0,0.000000
+1398,11473,unmatched:unpublished(404 likely),78,0,0.000000
+1399,11477,unmatched:unpublished(404 likely),389,0,0.000000
+1400,11497,unmatched:unpublished(404 likely),75,0,0.000000
+1401,11514,unmatched:unpublished(404 likely),81,0,0.000000
+1402,11515,unmatched:unpublished(404 likely),231,0,0.000000
+1403,11518,unmatched:unpublished(404 likely),74,0,0.000000
+1404,11521,unmatched:unpublished(404 likely),362,0,0.000000
+1405,11522,unmatched:unpublished(404 likely),136,0,0.000000
+1406,11534,unmatched:unpublished(404 likely),230,0,0.000000
+1407,11538,unmatched:unpublished(404 likely),265,0,0.000000
+1408,11547,unmatched:unpublished(404 likely),211,0,0.000000
+1409,11548,unmatched:unpublished(404 likely),6213,0,0.000000
+1410,11549,unmatched:unpublished(404 likely),419,0,0.000000
+1411,11550,unmatched:unpublished(404 likely),103,0,0.000000
+1412,11557,unmatched:unpublished(404 likely),434,0,0.000000
+1413,11560,unmatched:unpublished(404 likely),157,0,0.000000
+1414,11569,unmatched:unpublished(404 likely),197,0,0.000000
+1415,11572,unmatched:unpublished(404 likely),253,0,0.000000
+1416,11575,unmatched:unpublished(404 likely),125,0,0.000000
+1417,11577,unmatched:unpublished(404 likely),1065,0,0.000000
+1418,11578,unmatched:unpublished(404 likely),641,0,0.000000
+1419,11592,unmatched:unpublished(404 likely),174,0,0.000000
+1420,11594,unmatched:unpublished(404 likely),89,0,0.000000
+1421,11597,unmatched:unpublished(404 likely),377,0,0.000000
+1422,11598,unmatched:unpublished(404 likely),259,0,0.000000
+1423,11603,unmatched:unpublished(404 likely),96,0,0.000000
+1424,11613,unmatched:unpublished(404 likely),153,0,0.000000
+1425,11621,unmatched:unpublished(404 likely),191,0,0.000000
+1426,11622,unmatched:unpublished(404 likely),89,0,0.000000
+1427,11624,unmatched:unpublished(404 likely),78,0,0.000000
+1428,11627,unmatched:unpublished(404 likely),772,0,0.000000
+1429,11632,unmatched:unpublished(404 likely),71,0,0.000000
+1430,11637,unmatched:unpublished(404 likely),71,0,0.000000
+1431,11638,unmatched:unpublished(404 likely),227,0,0.000000
+1432,11647,unmatched:unpublished(404 likely),87,0,0.000000
+1433,11648,unmatched:unpublished(404 likely),230,0,0.000000
+1434,11657,unmatched:unpublished(404 likely),60,0,0.000000
+1435,11672,unmatched:unpublished(404 likely),338,0,0.000000
+1436,11673,unmatched:unpublished(404 likely),246,0,0.000000
+1437,11679,unmatched:unpublished(404 likely),96,0,0.000000
+1438,11681,unmatched:unpublished(404 likely),217,0,0.000000
+1439,11709,unmatched:unpublished(404 likely),53,0,0.000000
+1440,11722,unmatched:unpublished(404 likely),203,0,0.000000
+1441,11724,unmatched:unpublished(404 likely),290,0,0.000000
+1442,11725,unmatched:unpublished(404 likely),631,0,0.000000
+1443,11726,unmatched:unpublished(404 likely),91,0,0.000000
+1444,11728,unmatched:unpublished(404 likely),196,0,0.000000
+1445,11732,unmatched:unpublished(404 likely),297,0,0.000000
+1446,11733,unmatched:unpublished(404 likely),73,0,0.000000
+1447,11739,unmatched:unpublished(404 likely),57,0,0.000000
+1448,11743,unmatched:unpublished(404 likely),277,0,0.000000
+1449,11749,unmatched:unpublished(404 likely),68,0,0.000000
+1450,11753,unmatched:unpublished(404 likely),57,0,0.000000
+1451,11755,unmatched:unpublished(404 likely),230,0,0.000000
+1452,11769,unmatched:unpublished(404 likely),101,0,0.000000
+1453,11772,unmatched:unpublished(404 likely),60,0,0.000000
+1454,11785,unmatched:unpublished(404 likely),53,0,0.000000
+1455,11789,unmatched:unpublished(404 likely),68,0,0.000000
+1456,11791,unmatched:unpublished(404 likely),244,0,0.000000
+1457,11796,unmatched:unpublished(404 likely),423,0,0.000000
+1458,11799,unmatched:unpublished(404 likely),85,0,0.000000
+1459,11809,unmatched:unpublished(404 likely),60,0,0.000000
+1460,11815,unmatched:unpublished(404 likely),188,0,0.000000
+1461,11818,unmatched:unpublished(404 likely),134,0,0.000000
+1462,11819,unmatched:unpublished(404 likely),135,0,0.000000
+1463,11821,unmatched:unpublished(404 likely),104,0,0.000000
+1464,11824,unmatched:unpublished(404 likely),104,0,0.000000
+1465,11827,unmatched:unpublished(404 likely),82,0,0.000000
+1466,11828,unmatched:unpublished(404 likely),109,0,0.000000
+1467,11831,unmatched:unpublished(404 likely),68,0,0.000000
+1468,11833,unmatched:unpublished(404 likely),113,0,0.000000
+1469,11842,unmatched:unpublished(404 likely),65,0,0.000000
+1470,11843,unmatched:unpublished(404 likely),281,0,0.000000
+1471,11847,unmatched:unpublished(404 likely),60,0,0.000000
+1472,11852,unmatched:unpublished(404 likely),75,0,0.000000
+1473,11860,unmatched:unpublished(404 likely),101,0,0.000000
+1474,11863,unmatched:unpublished(404 likely),463,0,0.000000
+1475,11864,unmatched:unpublished(404 likely),656,0,0.000000
+1476,11874,unmatched:unpublished(404 likely),166,0,0.000000
+1477,11888,unmatched:unpublished(404 likely),103,0,0.000000
+1478,11890,unmatched:unpublished(404 likely),54,0,0.000000
+1479,11901,unmatched:unpublished(404 likely),149,0,0.000000
+1480,11912,unmatched:unpublished(404 likely),187,0,0.000000
+1481,11930,unmatched:unpublished(404 likely),119,0,0.000000
+1482,11931,unmatched:unpublished(404 likely),57,0,0.000000
+1483,11934,unmatched:unpublished(404 likely),85,0,0.000000
+1484,11941,unmatched:unpublished(404 likely),285,0,0.000000
+1485,11960,unmatched:unpublished(404 likely),178,0,0.000000
+1486,11963,unmatched:unpublished(404 likely),131,0,0.000000
+1487,11973,unmatched:unpublished(404 likely),172,0,0.000000
+1488,11983,unmatched:unpublished(404 likely),191,0,0.000000
+1489,11985,unmatched:unpublished(404 likely),156,0,0.000000
+1490,11986,unmatched:unpublished(404 likely),205,0,0.000000
+1491,11988,unmatched:unpublished(404 likely),57,0,0.000000
+1492,11990,unmatched:unpublished(404 likely),267,0,0.000000
+1493,11994,unmatched:unpublished(404 likely),113,0,0.000000
+1494,12002,unmatched:unpublished(404 likely),50,0,0.000000
+1495,12009,unmatched:unpublished(404 likely),168,0,0.000000
+1496,12010,unmatched:unpublished(404 likely),290,0,0.000000
+1497,12022,unmatched:unpublished(404 likely),50,0,0.000000
+1498,12032,unmatched:unpublished(404 likely),475,0,0.000000
+1499,12037,unmatched:unpublished(404 likely),143,0,0.000000
+1500,12043,unmatched:unpublished(404 likely),100,0,0.000000
+1501,12046,unmatched:unpublished(404 likely),57,0,0.000000
+1502,12050,unmatched:unpublished(404 likely),520,0,0.000000
+1503,12053,unmatched:unpublished(404 likely),79,0,0.000000
+1504,12054,unmatched:unpublished(404 likely),132,0,0.000000
+1505,12068,unmatched:unpublished(404 likely),802,0,0.000000
+1506,12071,unmatched:unpublished(404 likely),95,0,0.000000
+1507,12083,unmatched:unpublished(404 likely),105,0,0.000000
+1508,12087,unmatched:unpublished(404 likely),981,0,0.000000
+1509,12088,unmatched:unpublished(404 likely),53,0,0.000000
+1510,12089,unmatched:unpublished(404 likely),328,0,0.000000
+1511,12096,unmatched:unpublished(404 likely),110,0,0.000000
+1512,12116,unmatched:unpublished(404 likely),456,0,0.000000
+1513,12128,unmatched:unpublished(404 likely),103,0,0.000000
+1514,12193,unmatched:unpublished(404 likely),53,0,0.000000
+1515,12245,unmatched:unpublished(404 likely),136,0,0.000000
+1516,12252,unmatched:unpublished(404 likely),67,0,0.000000
+1517,12259,unmatched:unpublished(404 likely),442,0,0.000000
+1518,12268,unmatched:unpublished(404 likely),283,0,0.000000
+1519,12275,unmatched:unpublished(404 likely),117,0,0.000000
+1520,12276,unmatched:unpublished(404 likely),57,0,0.000000
+1521,12291,unmatched:unpublished(404 likely),209,0,0.000000
+1522,12294,unmatched:unpublished(404 likely),134,0,0.000000
+1523,12304,unmatched:unpublished(404 likely),261,0,0.000000
+1524,12312,unmatched:unpublished(404 likely),53,0,0.000000
+1525,12315,unmatched:unpublished(404 likely),81,0,0.000000
+1526,12321,unmatched:unpublished(404 likely),149,0,0.000000
+1527,12328,unmatched:unpublished(404 likely),226,0,0.000000
+1528,12329,unmatched:unpublished(404 likely),56,0,0.000000
+1529,12335,unmatched:unpublished(404 likely),106,0,0.000000
+1530,12341,unmatched:unpublished(404 likely),63,0,0.000000
+1531,12342,unmatched:unpublished(404 likely),102,0,0.000000
+1532,12346,unmatched:unpublished(404 likely),95,0,0.000000
+1533,12362,unmatched:unpublished(404 likely),149,0,0.000000
+1534,12377,unmatched:unpublished(404 likely),531,0,0.000000
+1535,12378,unmatched:unpublished(404 likely),113,0,0.000000
+1536,12383,unmatched:unpublished(404 likely),293,0,0.000000
+1537,12385,unmatched:unpublished(404 likely),71,0,0.000000
+1538,12389,unmatched:unpublished(404 likely),162,0,0.000000
+1539,12390,unmatched:unpublished(404 likely),1051,0,0.000000
+1540,12391,unmatched:unpublished(404 likely),64,0,0.000000
+1541,12392,unmatched:unpublished(404 likely),408,0,0.000000
+1542,12393,unmatched:unpublished(404 likely),57,0,0.000000
+1543,12408,unmatched:unpublished(404 likely),131,0,0.000000
+1544,12420,unmatched:unpublished(404 likely),1555,0,0.000000
+1545,12422,unmatched:unpublished(404 likely),97,0,0.000000
+1546,12424,unmatched:unpublished(404 likely),53,0,0.000000
+1547,12428,unmatched:unpublished(404 likely),302,0,0.000000
+1548,12430,unmatched:unpublished(404 likely),125,0,0.000000
+1549,12447,unmatched:unpublished(404 likely),50,0,0.000000
+1550,12452,unmatched:unpublished(404 likely),85,0,0.000000
+1551,12458,unmatched:unpublished(404 likely),57,0,0.000000
+1552,12462,unmatched:unpublished(404 likely),68,0,0.000000
+1553,12476,unmatched:unpublished(404 likely),61,0,0.000000
+1554,12483,unmatched:unpublished(404 likely),54,0,0.000000
+1555,12503,unmatched:unpublished(404 likely),51,0,0.000000
+1556,12512,unmatched:unpublished(404 likely),145,0,0.000000
+1557,12517,unmatched:unpublished(404 likely),181,0,0.000000
+1558,12533,unmatched:unpublished(404 likely),55,0,0.000000
+1559,12545,unmatched:unpublished(404 likely),94,0,0.000000
+1560,12596,unmatched:unpublished(404 likely),142,0,0.000000
+1561,12606,unmatched:unpublished(404 likely),220,0,0.000000
+1562,12607,unmatched:unpublished(404 likely),3583,0,0.000000
+1563,12617,unmatched:unpublished(404 likely),236,0,0.000000
+1564,12623,unmatched:unpublished(404 likely),107,0,0.000000
+1565,12626,unmatched:unpublished(404 likely),119,0,0.000000
+1566,12633,unmatched:unpublished(404 likely),92,0,0.000000
+1567,12634,unmatched:unpublished(404 likely),681,0,0.000000
+1568,12635,unmatched:unpublished(404 likely),88,0,0.000000
+1569,12638,unmatched:unpublished(404 likely),1416,0,0.000000
+1570,12639,unmatched:unpublished(404 likely),160,0,0.000000
+1571,12652,unmatched:unpublished(404 likely),114,0,0.000000
+1572,12655,unmatched:unpublished(404 likely),244,0,0.000000
+1573,12656,unmatched:unpublished(404 likely),185,0,0.000000
+1574,12659,unmatched:unpublished(404 likely),179,0,0.000000
+1575,12662,unmatched:unpublished(404 likely),338,0,0.000000
+1576,12664,unmatched:unpublished(404 likely),822,0,0.000000
+1577,12668,unmatched:unpublished(404 likely),961,0,0.000000
+1578,12673,unmatched:unpublished(404 likely),484,0,0.000000
+1579,12674,unmatched:unpublished(404 likely),94,0,0.000000
+1580,12676,unmatched:unpublished(404 likely),69,0,0.000000
+1581,12682,unmatched:unpublished(404 likely),64,0,0.000000
+1582,12691,unmatched:unpublished(404 likely),69,0,0.000000
+1583,12696,unmatched:unpublished(404 likely),71,0,0.000000
+1584,12711,unmatched:unpublished(404 likely),86,0,0.000000
+1585,12716,unmatched:unpublished(404 likely),276,0,0.000000
+1586,12722,unmatched:unpublished(404 likely),287,0,0.000000
+1587,12728,unmatched:unpublished(404 likely),223,0,0.000000
+1588,12736,unmatched:unpublished(404 likely),411,0,0.000000
+1589,12748,unmatched:unpublished(404 likely),78,0,0.000000
+1590,12753,unmatched:unpublished(404 likely),394,0,0.000000
+1591,12757,unmatched:unpublished(404 likely),815,0,0.000000
+1592,12758,unmatched:unpublished(404 likely),120,0,0.000000
+1593,12768,unmatched:unpublished(404 likely),53,0,0.000000
+1594,12777,unmatched:unpublished(404 likely),59,0,0.000000
+1595,12778,unmatched:unpublished(404 likely),74,0,0.000000
+1596,12783,unmatched:unpublished(404 likely),136,0,0.000000
+1597,12790,unmatched:unpublished(404 likely),396,0,0.000000
+1598,12799,unmatched:unpublished(404 likely),87,0,0.000000
+1599,12802,unmatched:unpublished(404 likely),213,0,0.000000
+1600,12810,unmatched:unpublished(404 likely),264,0,0.000000
+1601,12813,unmatched:unpublished(404 likely),51,0,0.000000
+1602,12819,unmatched:unpublished(404 likely),170,0,0.000000
+1603,12821,unmatched:unpublished(404 likely),362,0,0.000000
+1604,12829,unmatched:unpublished(404 likely),81,0,0.000000
+1605,12832,unmatched:unpublished(404 likely),223,0,0.000000
+1606,12837,unmatched:unpublished(404 likely),560,0,0.000000
+1607,12841,unmatched:unpublished(404 likely),82,0,0.000000
+1608,12852,unmatched:unpublished(404 likely),76,0,0.000000
+1609,12870,unmatched:unpublished(404 likely),51,0,0.000000
+1610,12872,unmatched:unpublished(404 likely),100,0,0.000000
+1611,12884,unmatched:unpublished(404 likely),178,0,0.000000
+1612,12888,unmatched:unpublished(404 likely),104,0,0.000000
+1613,12900,unmatched:unpublished(404 likely),394,0,0.000000
+1614,12909,unmatched:unpublished(404 likely),60,0,0.000000
+1615,12933,unmatched:unpublished(404 likely),209,0,0.000000
+1616,12945,unmatched:unpublished(404 likely),173,0,0.000000
+1617,12951,unmatched:unpublished(404 likely),262,0,0.000000
+1618,12961,unmatched:unpublished(404 likely),64,0,0.000000
+1619,12972,unmatched:unpublished(404 likely),88,0,0.000000
+1620,12975,unmatched:unpublished(404 likely),80,0,0.000000
+1621,13003,unmatched:unpublished(404 likely),82,0,0.000000
+1622,13012,unmatched:unpublished(404 likely),74,0,0.000000
+1623,13019,unmatched:unpublished(404 likely),247,0,0.000000
+1624,13023,unmatched:unpublished(404 likely),88,0,0.000000
+1625,13026,unmatched:unpublished(404 likely),177,0,0.000000
+1626,13034,unmatched:unpublished(404 likely),237,0,0.000000
+1627,13038,unmatched:unpublished(404 likely),65,0,0.000000
+1628,13039,unmatched:unpublished(404 likely),62,0,0.000000
+1629,13046,unmatched:unpublished(404 likely),98,0,0.000000
+1630,13052,unmatched:unpublished(404 likely),276,0,0.000000
+1631,13090,unmatched:unpublished(404 likely),76,0,0.000000
+1632,13097,unmatched:unpublished(404 likely),59,0,0.000000
+1633,13124,unmatched:unpublished(404 likely),82,0,0.000000
+1634,13125,unmatched:unpublished(404 likely),120,0,0.000000
+1635,13126,unmatched:unpublished(404 likely),802,0,0.000000
+1636,13128,unmatched:unpublished(404 likely),120,0,0.000000
+1637,13129,unmatched:unpublished(404 likely),89,0,0.000000
+1638,13138,unmatched:unpublished(404 likely),332,0,0.000000
+1639,13141,unmatched:unpublished(404 likely),75,0,0.000000
+1640,13144,unmatched:unpublished(404 likely),67,0,0.000000
+1641,13146,unmatched:unpublished(404 likely),96,0,0.000000
+1642,13147,unmatched:unpublished(404 likely),248,0,0.000000
+1643,13148,unmatched:unpublished(404 likely),128,0,0.000000
+1644,13150,unmatched:unpublished(404 likely),53,0,0.000000
+1645,13152,unmatched:unpublished(404 likely),311,0,0.000000
+1646,13154,unmatched:unpublished(404 likely),311,0,0.000000
+1647,13159,unmatched:unpublished(404 likely),698,0,0.000000
+1648,13161,unmatched:unpublished(404 likely),196,0,0.000000
+1649,13168,unmatched:unpublished(404 likely),50,0,0.000000
+1650,13172,unmatched:unpublished(404 likely),417,0,0.000000
+1651,13183,unmatched:unpublished(404 likely),166,0,0.000000
+1652,13186,unmatched:unpublished(404 likely),94,0,0.000000
+1653,13191,unmatched:unpublished(404 likely),149,0,0.000000
+1654,13192,unmatched:unpublished(404 likely),76,0,0.000000
+1655,13193,unmatched:unpublished(404 likely),202,0,0.000000
+1656,13202,unmatched:unpublished(404 likely),501,0,0.000000
+1657,13207,unmatched:unpublished(404 likely),64,0,0.000000
+1658,13210,unmatched:unpublished(404 likely),88,0,0.000000
+1659,13211,unmatched:unpublished(404 likely),2110,0,0.000000
+1660,13212,unmatched:unpublished(404 likely),139,0,0.000000
+1661,13219,unmatched:unpublished(404 likely),3275,0,0.000000
+1662,13250,unmatched:unpublished(404 likely),573,0,0.000000
+1663,13251,unmatched:unpublished(404 likely),173,0,0.000000
+1664,13266,unmatched:unpublished(404 likely),636,0,0.000000
+1665,13269,unmatched:unpublished(404 likely),433,0,0.000000
+1666,13272,unmatched:unpublished(404 likely),248,0,0.000000
+1667,13279,unmatched:unpublished(404 likely),60,0,0.000000
+1668,13281,unmatched:unpublished(404 likely),113,0,0.000000
+1669,13287,unmatched:unpublished(404 likely),64,0,0.000000
+1670,13289,unmatched:unpublished(404 likely),89,0,0.000000
+1671,13290,unmatched:unpublished(404 likely),304,0,0.000000
+1672,13292,unmatched:unpublished(404 likely),332,0,0.000000
+1673,13294,unmatched:unpublished(404 likely),1667,0,0.000000
+1674,13295,unmatched:unpublished(404 likely),153,0,0.000000
+1675,13296,unmatched:unpublished(404 likely),350,0,0.000000
+1676,13299,unmatched:unpublished(404 likely),135,0,0.000000
+1677,13302,unmatched:unpublished(404 likely),138,0,0.000000
+1678,13308,unmatched:unpublished(404 likely),127,0,0.000000
+1679,13313,unmatched:unpublished(404 likely),1185,0,0.000000
+1680,13336,unmatched:unpublished(404 likely),669,0,0.000000
+1681,13338,unmatched:unpublished(404 likely),180,0,0.000000
+1682,13340,unmatched:unpublished(404 likely),156,0,0.000000
+1683,13342,unmatched:unpublished(404 likely),135,0,0.000000
+1684,13344,unmatched:unpublished(404 likely),184,0,0.000000
+1685,13347,unmatched:unpublished(404 likely),134,0,0.000000
+1686,13351,unmatched:unpublished(404 likely),269,0,0.000000
+1687,13352,unmatched:unpublished(404 likely),161,0,0.000000
+1688,13355,unmatched:unpublished(404 likely),387,0,0.000000
+1689,13357,unmatched:unpublished(404 likely),57,0,0.000000
+1690,13361,unmatched:unpublished(404 likely),201,0,0.000000
+1691,13363,unmatched:unpublished(404 likely),300,0,0.000000
+1692,13377,unmatched:unpublished(404 likely),309,0,0.000000
+1693,13380,unmatched:unpublished(404 likely),542,0,0.000000
+1694,13382,unmatched:unpublished(404 likely),132,0,0.000000
+1695,13392,unmatched:unpublished(404 likely),196,0,0.000000
+1696,13409,unmatched:unpublished(404 likely),226,0,0.000000
+1697,13410,unmatched:unpublished(404 likely),285,0,0.000000
+1698,13421,unmatched:unpublished(404 likely),60,0,0.000000
+1699,13433,unmatched:unpublished(404 likely),77,0,0.000000
+1700,13434,unmatched:unpublished(404 likely),60,0,0.000000
+1701,13436,unmatched:unpublished(404 likely),237,0,0.000000
+1702,13441,unmatched:unpublished(404 likely),51,0,0.000000
+1703,13442,unmatched:unpublished(404 likely),213,0,0.000000
+1704,13448,unmatched:unpublished(404 likely),459,0,0.000000
+1705,13460,unmatched:unpublished(404 likely),311,0,0.000000
+1706,13467,unmatched:unpublished(404 likely),69,0,0.000000
+1707,13470,unmatched:unpublished(404 likely),69,0,0.000000
+1708,13485,unmatched:unpublished(404 likely),273,0,0.000000
+1709,13486,unmatched:unpublished(404 likely),60,0,0.000000
+1710,13493,unmatched:unpublished(404 likely),127,0,0.000000
+1711,13499,unmatched:unpublished(404 likely),67,0,0.000000
+1712,13500,unmatched:unpublished(404 likely),2418,0,0.000000
+1713,13501,unmatched:unpublished(404 likely),308,0,0.000000
+1714,13502,unmatched:unpublished(404 likely),64,0,0.000000
+1715,13507,unmatched:unpublished(404 likely),82,0,0.000000
+1716,13513,unmatched:unpublished(404 likely),220,0,0.000000
+1717,13549,unmatched:unpublished(404 likely),157,0,0.000000
+1718,13559,unmatched:unpublished(404 likely),64,0,0.000000
+1719,13560,unmatched:unpublished(404 likely),54,0,0.000000
+1720,13568,unmatched:unpublished(404 likely),438,0,0.000000
+1721,13570,unmatched:unpublished(404 likely),73,0,0.000000
+1722,13572,unmatched:unpublished(404 likely),86,0,0.000000
+1723,13575,unmatched:unpublished(404 likely),387,0,0.000000
+1724,13576,unmatched:unpublished(404 likely),210,0,0.000000
+1725,13582,unmatched:unpublished(404 likely),344,0,0.000000
+1726,13586,unmatched:unpublished(404 likely),143,0,0.000000
+1727,13591,unmatched:unpublished(404 likely),161,0,0.000000
+1728,13592,unmatched:unpublished(404 likely),84,0,0.000000
+1729,13593,unmatched:unpublished(404 likely),213,0,0.000000
+1730,13596,unmatched:unpublished(404 likely),74,0,0.000000
+1731,13600,unmatched:unpublished(404 likely),164,0,0.000000
+1732,13601,unmatched:unpublished(404 likely),288,0,0.000000
+1733,13603,unmatched:unpublished(404 likely),61,0,0.000000
+1734,13605,unmatched:unpublished(404 likely),157,0,0.000000
+1735,13606,unmatched:unpublished(404 likely),365,0,0.000000
+1736,13608,unmatched:unpublished(404 likely),50,0,0.000000
+1737,13612,unmatched:unpublished(404 likely),212,0,0.000000
+1738,13613,unmatched:unpublished(404 likely),570,0,0.000000
+1739,13620,unmatched:unpublished(404 likely),177,0,0.000000
+1740,13627,unmatched:unpublished(404 likely),58,0,0.000000
+1741,13629,unmatched:unpublished(404 likely),354,0,0.000000
+1742,13632,unmatched:unpublished(404 likely),64,0,0.000000
+1743,13637,unmatched:unpublished(404 likely),182,0,0.000000
+1744,13640,unmatched:unpublished(404 likely),93,0,0.000000
+1745,13642,unmatched:unpublished(404 likely),476,0,0.000000
+1746,13647,unmatched:unpublished(404 likely),453,0,0.000000
+1747,13649,unmatched:unpublished(404 likely),249,0,0.000000
+1748,13665,unmatched:unpublished(404 likely),304,0,0.000000
+1749,13667,unmatched:unpublished(404 likely),90,0,0.000000
+1750,13668,unmatched:unpublished(404 likely),50,0,0.000000
+1751,13669,unmatched:unpublished(404 likely),517,0,0.000000
+1752,13674,unmatched:unpublished(404 likely),96,0,0.000000
+1753,13680,unmatched:unpublished(404 likely),68,0,0.000000
+1754,13689,unmatched:unpublished(404 likely),85,0,0.000000
+1755,13690,unmatched:unpublished(404 likely),54,0,0.000000
+1756,13691,unmatched:unpublished(404 likely),104,0,0.000000
+1757,13693,unmatched:unpublished(404 likely),63,0,0.000000
+1758,13695,unmatched:unpublished(404 likely),64,0,0.000000
+1759,13704,unmatched:unpublished(404 likely),361,0,0.000000
+1760,13710,unmatched:unpublished(404 likely),286,0,0.000000
+1761,13713,unmatched:unpublished(404 likely),70,0,0.000000
+1762,13715,unmatched:unpublished(404 likely),142,0,0.000000
+1763,13719,unmatched:unpublished(404 likely),1815,0,0.000000
+1764,13720,unmatched:unpublished(404 likely),688,0,0.000000
+1765,13733,unmatched:unpublished(404 likely),381,0,0.000000
+1766,13742,unmatched:unpublished(404 likely),227,0,0.000000
+1767,13744,unmatched:unpublished(404 likely),146,0,0.000000
+1768,13746,unmatched:unpublished(404 likely),85,0,0.000000
+1769,13756,unmatched:unpublished(404 likely),1184,0,0.000000
+1770,13757,unmatched:unpublished(404 likely),495,0,0.000000
+1771,13758,unmatched:unpublished(404 likely),311,0,0.000000
+1772,13760,unmatched:unpublished(404 likely),64,0,0.000000
+1773,13761,unmatched:unpublished(404 likely),100,0,0.000000
+1774,13769,unmatched:unpublished(404 likely),82,0,0.000000
+1775,13772,unmatched:unpublished(404 likely),167,0,0.000000
+1776,13778,unmatched:unpublished(404 likely),77,0,0.000000
+1777,13780,unmatched:unpublished(404 likely),255,0,0.000000
+1778,13781,unmatched:unpublished(404 likely),91,0,0.000000
+1779,13791,unmatched:unpublished(404 likely),311,0,0.000000
+1780,13794,unmatched:unpublished(404 likely),240,0,0.000000
+1781,13797,unmatched:unpublished(404 likely),628,0,0.000000
+1782,13798,unmatched:unpublished(404 likely),121,0,0.000000
+1783,13800,unmatched:unpublished(404 likely),1589,0,0.000000
+1784,13804,unmatched:unpublished(404 likely),195,0,0.000000
+1785,13809,unmatched:unpublished(404 likely),72,0,0.000000
+1786,13810,unmatched:unpublished(404 likely),287,0,0.000000
+1787,13813,unmatched:unpublished(404 likely),65,0,0.000000
+1788,13815,unmatched:unpublished(404 likely),375,0,0.000000
+1789,13816,unmatched:unpublished(404 likely),145,0,0.000000
+1790,13818,unmatched:unpublished(404 likely),336,0,0.000000
+1791,13821,unmatched:unpublished(404 likely),1934,0,0.000000
+1792,13834,unmatched:unpublished(404 likely),92,0,0.000000
+1793,13835,unmatched:unpublished(404 likely),194,0,0.000000
+1794,13840,unmatched:unpublished(404 likely),1205,0,0.000000
+1795,13841,unmatched:unpublished(404 likely),103,0,0.000000
+1796,13843,unmatched:unpublished(404 likely),3368,0,0.000000
+1797,13845,unmatched:unpublished(404 likely),97,0,0.000000
+1798,13846,unmatched:unpublished(404 likely),474,0,0.000000
+1799,13847,unmatched:unpublished(404 likely),222,0,0.000000
+1800,13852,unmatched:unpublished(404 likely),223,0,0.000000
+1801,13853,unmatched:unpublished(404 likely),229,0,0.000000
+1802,13855,unmatched:unpublished(404 likely),497,0,0.000000
+1803,13858,unmatched:unpublished(404 likely),55,0,0.000000
+1804,13859,unmatched:unpublished(404 likely),99,0,0.000000
+1805,13864,unmatched:unpublished(404 likely),65,0,0.000000
+1806,13869,unmatched:unpublished(404 likely),100,0,0.000000
+1807,13872,unmatched:unpublished(404 likely),67,0,0.000000
+1808,13879,unmatched:unpublished(404 likely),65,0,0.000000
+1809,13880,unmatched:unpublished(404 likely),157,0,0.000000
+1810,13905,unmatched:unpublished(404 likely),69,0,0.000000
+1811,13926,unmatched:unpublished(404 likely),52,0,0.000000
+1812,13935,unmatched:unpublished(404 likely),71,0,0.000000
+1813,13939,unmatched:unpublished(404 likely),237,0,0.000000
+1814,13944,unmatched:unpublished(404 likely),184,0,0.000000
+1815,13946,unmatched:unpublished(404 likely),722,0,0.000000
+1816,13953,unmatched:unpublished(404 likely),1195,0,0.000000
+1817,13956,unmatched:unpublished(404 likely),164,0,0.000000
+1818,13960,unmatched:unpublished(404 likely),124,0,0.000000
+1819,13961,unmatched:unpublished(404 likely),360,0,0.000000
+1820,13964,unmatched:unpublished(404 likely),132,0,0.000000
+1821,13967,unmatched:unpublished(404 likely),251,0,0.000000
+1822,13970,unmatched:unpublished(404 likely),97,0,0.000000
+1823,13976,unmatched:unpublished(404 likely),1099,0,0.000000
+1824,13977,unmatched:unpublished(404 likely),117,0,0.000000
+1825,13985,unmatched:unpublished(404 likely),278,0,0.000000
+1826,13990,unmatched:unpublished(404 likely),317,0,0.000000
+1827,13993,unmatched:unpublished(404 likely),355,0,0.000000
+1828,13994,unmatched:unpublished(404 likely),162,0,0.000000
+1829,13995,unmatched:unpublished(404 likely),54,0,0.000000
+1830,14001,unmatched:unpublished(404 likely),371,0,0.000000
+1831,14002,unmatched:unpublished(404 likely),57,0,0.000000
+1832,14003,unmatched:unpublished(404 likely),201,0,0.000000
+1833,14004,unmatched:unpublished(404 likely),270,0,0.000000
+1834,14005,unmatched:unpublished(404 likely),292,0,0.000000
+1835,14006,unmatched:unpublished(404 likely),180,0,0.000000
+1836,14008,unmatched:unpublished(404 likely),482,0,0.000000
+1837,14009,unmatched:unpublished(404 likely),81,0,0.000000
+1838,14011,unmatched:unpublished(404 likely),78,0,0.000000
+1839,14023,unmatched:unpublished(404 likely),181,0,0.000000
+1840,14024,unmatched:unpublished(404 likely),64,0,0.000000
+1841,14026,unmatched:unpublished(404 likely),585,0,0.000000
+1842,14039,unmatched:unpublished(404 likely),68,0,0.000000
+1843,14095,unmatched:unpublished(404 likely),75,0,0.000000
+1844,14114,unmatched:unpublished(404 likely),53,0,0.000000
+1845,14120,unmatched:unpublished(404 likely),297,0,0.000000
+1846,14121,unmatched:unpublished(404 likely),86,0,0.000000
+1847,14122,unmatched:unpublished(404 likely),57,0,0.000000
+1848,14123,unmatched:unpublished(404 likely),110,0,0.000000
+1849,14125,unmatched:unpublished(404 likely),151,0,0.000000
+1850,14126,unmatched:unpublished(404 likely),103,0,0.000000
+1851,14134,unmatched:unpublished(404 likely),85,0,0.000000
+1852,14136,unmatched:unpublished(404 likely),68,0,0.000000
+1853,14140,unmatched:unpublished(404 likely),123,0,0.000000
+1854,14145,unmatched:unpublished(404 likely),113,0,0.000000
+1855,14149,unmatched:unpublished(404 likely),61,0,0.000000
+1856,14152,unmatched:unpublished(404 likely),192,0,0.000000
+1857,14153,unmatched:unpublished(404 likely),64,0,0.000000
+1858,14156,unmatched:unpublished(404 likely),90,0,0.000000
+1859,14160,unmatched:unpublished(404 likely),85,0,0.000000
+1860,14161,unmatched:unpublished(404 likely),95,0,0.000000
+1861,14162,unmatched:unpublished(404 likely),232,0,0.000000
+1862,14163,unmatched:unpublished(404 likely),59,0,0.000000
+1863,14172,unmatched:unpublished(404 likely),65,0,0.000000
+1864,14174,unmatched:unpublished(404 likely),53,0,0.000000
+1865,14175,unmatched:unpublished(404 likely),96,0,0.000000
+1866,14190,unmatched:unpublished(404 likely),90,0,0.000000
+1867,14192,unmatched:unpublished(404 likely),175,0,0.000000
+1868,14193,unmatched:unpublished(404 likely),218,0,0.000000
+1869,14205,unmatched:unpublished(404 likely),60,0,0.000000
+1870,14210,unmatched:unpublished(404 likely),220,0,0.000000
+1871,14211,unmatched:unpublished(404 likely),230,0,0.000000
+1872,14214,unmatched:unpublished(404 likely),121,0,0.000000
+1873,14218,unmatched:unpublished(404 likely),244,0,0.000000
+1874,14220,unmatched:unpublished(404 likely),165,0,0.000000
+1875,14222,unmatched:unpublished(404 likely),74,0,0.000000
+1876,14230,unmatched:unpublished(404 likely),686,0,0.000000
+1877,14231,unmatched:unpublished(404 likely),170,0,0.000000
+1878,14236,unmatched:unpublished(404 likely),79,0,0.000000
+1879,14238,unmatched:unpublished(404 likely),82,0,0.000000
+1880,14244,unmatched:unpublished(404 likely),245,0,0.000000
+1881,14246,unmatched:unpublished(404 likely),1484,0,0.000000
+1882,14266,unmatched:unpublished(404 likely),1144,0,0.000000
+1883,14268,unmatched:unpublished(404 likely),132,0,0.000000
+1884,14270,unmatched:unpublished(404 likely),184,0,0.000000
+1885,14275,unmatched:unpublished(404 likely),110,0,0.000000
+1886,14278,unmatched:unpublished(404 likely),1304,0,0.000000
+1887,14284,unmatched:unpublished(404 likely),1778,0,0.000000
+1888,14288,unmatched:unpublished(404 likely),1191,0,0.000000
+1889,14290,unmatched:unpublished(404 likely),102,0,0.000000
+1890,14291,unmatched:unpublished(404 likely),89,0,0.000000
+1891,14292,unmatched:unpublished(404 likely),78,0,0.000000
+1892,14294,unmatched:unpublished(404 likely),545,0,0.000000
+1893,14302,unmatched:unpublished(404 likely),789,0,0.000000
+1894,14304,unmatched:unpublished(404 likely),2461,0,0.000000
+1895,14307,unmatched:unpublished(404 likely),131,0,0.000000
+1896,14309,unmatched:unpublished(404 likely),115,0,0.000000
+1897,14312,unmatched:unpublished(404 likely),57,0,0.000000
+1898,14324,unmatched:unpublished(404 likely),157,0,0.000000
+1899,14340,unmatched:unpublished(404 likely),1485,0,0.000000
+1900,14343,unmatched:unpublished(404 likely),386,0,0.000000
+1901,14344,unmatched:unpublished(404 likely),169,0,0.000000
+1902,14345,unmatched:unpublished(404 likely),149,0,0.000000
+1903,14346,unmatched:unpublished(404 likely),121,0,0.000000
+1904,14347,unmatched:unpublished(404 likely),2247,0,0.000000
+1905,14352,unmatched:unpublished(404 likely),724,0,0.000000
+1906,14353,unmatched:unpublished(404 likely),198,0,0.000000
+1907,14354,unmatched:unpublished(404 likely),156,0,0.000000
+1908,14355,unmatched:unpublished(404 likely),159,0,0.000000
+1909,14356,unmatched:unpublished(404 likely),212,0,0.000000
+1910,14360,unmatched:unpublished(404 likely),64,0,0.000000
+1911,14361,unmatched:unpublished(404 likely),1720,0,0.000000
+1912,14363,unmatched:unpublished(404 likely),64,0,0.000000
+1913,14368,unmatched:unpublished(404 likely),65,0,0.000000
+1914,14377,unmatched:unpublished(404 likely),210,0,0.000000
+1915,14383,unmatched:unpublished(404 likely),216,0,0.000000
+1916,14384,unmatched:unpublished(404 likely),138,0,0.000000
+1917,14385,unmatched:unpublished(404 likely),472,0,0.000000
+1918,14388,unmatched:unpublished(404 likely),114,0,0.000000
+1919,14389,unmatched:unpublished(404 likely),227,0,0.000000
+1920,14390,unmatched:unpublished(404 likely),145,0,0.000000
+1921,14400,unmatched:unpublished(404 likely),68,0,0.000000
+1922,14406,unmatched:unpublished(404 likely),355,0,0.000000
+1923,14407,unmatched:unpublished(404 likely),191,0,0.000000
+1924,14408,unmatched:unpublished(404 likely),537,0,0.000000
+1925,14411,unmatched:unpublished(404 likely),367,0,0.000000
+1926,14412,unmatched:unpublished(404 likely),65,0,0.000000
+1927,14413,unmatched:unpublished(404 likely),351,0,0.000000
+1928,14420,unmatched:unpublished(404 likely),68,0,0.000000
+1929,14422,unmatched:unpublished(404 likely),51,0,0.000000
+1930,14423,unmatched:unpublished(404 likely),212,0,0.000000
+1931,14431,unmatched:unpublished(404 likely),1473,0,0.000000
+1932,14432,unmatched:unpublished(404 likely),675,0,0.000000
+1933,14433,unmatched:unpublished(404 likely),291,0,0.000000
+1934,14434,unmatched:unpublished(404 likely),1444,0,0.000000
+1935,14435,unmatched:unpublished(404 likely),460,0,0.000000
+1936,14443,unmatched:unpublished(404 likely),353,0,0.000000
+1937,14444,unmatched:unpublished(404 likely),747,0,0.000000
+1938,14446,unmatched:unpublished(404 likely),1628,0,0.000000
+1939,14447,unmatched:unpublished(404 likely),118,0,0.000000
+1940,14448,unmatched:unpublished(404 likely),87,0,0.000000
+1941,14452,unmatched:unpublished(404 likely),1245,0,0.000000
+1942,14453,unmatched:unpublished(404 likely),478,0,0.000000
+1943,14456,unmatched:unpublished(404 likely),117,0,0.000000
+1944,14459,unmatched:unpublished(404 likely),2500,0,0.000000
+1945,14460,unmatched:unpublished(404 likely),68,0,0.000000
+1946,14463,unmatched:unpublished(404 likely),123,0,0.000000
+1947,14464,unmatched:unpublished(404 likely),381,0,0.000000
+1948,14466,unmatched:unpublished(404 likely),198,0,0.000000
+1949,14467,unmatched:unpublished(404 likely),67,0,0.000000
+1950,14468,unmatched:unpublished(404 likely),92,0,0.000000
+1951,14469,unmatched:unpublished(404 likely),169,0,0.000000
+1952,14470,unmatched:unpublished(404 likely),1019,0,0.000000
+1953,14471,unmatched:unpublished(404 likely),106,0,0.000000
+1954,14475,unmatched:unpublished(404 likely),350,0,0.000000
+1955,14476,unmatched:unpublished(404 likely),53,0,0.000000
+1956,14478,unmatched:unpublished(404 likely),152,0,0.000000
+1957,14483,unmatched:unpublished(404 likely),78,0,0.000000
+1958,14485,unmatched:unpublished(404 likely),258,0,0.000000
+1959,14486,unmatched:unpublished(404 likely),301,0,0.000000
+1960,14488,unmatched:unpublished(404 likely),181,0,0.000000
+1961,14490,unmatched:unpublished(404 likely),51,0,0.000000
+1962,14494,unmatched:unpublished(404 likely),214,0,0.000000
+1963,14495,unmatched:unpublished(404 likely),68,0,0.000000
+1964,14496,unmatched:unpublished(404 likely),640,0,0.000000
+1965,14498,unmatched:unpublished(404 likely),145,0,0.000000
+1966,14505,unmatched:unpublished(404 likely),234,0,0.000000
+1967,14507,unmatched:unpublished(404 likely),67,0,0.000000
+1968,14508,unmatched:unpublished(404 likely),305,0,0.000000
+1969,14510,unmatched:unpublished(404 likely),623,0,0.000000
+1970,14511,unmatched:unpublished(404 likely),188,0,0.000000
+1971,14513,unmatched:unpublished(404 likely),140,0,0.000000
+1972,14515,unmatched:unpublished(404 likely),269,0,0.000000
+1973,14516,unmatched:unpublished(404 likely),72,0,0.000000
+1974,14517,unmatched:unpublished(404 likely),64,0,0.000000
+1975,14520,unmatched:unpublished(404 likely),195,0,0.000000
+1976,14521,unmatched:unpublished(404 likely),164,0,0.000000
+1977,14524,unmatched:unpublished(404 likely),92,0,0.000000
+1978,14531,unmatched:unpublished(404 likely),107,0,0.000000
+1979,14534,unmatched:unpublished(404 likely),81,0,0.000000
+1980,14542,unmatched:unpublished(404 likely),653,0,0.000000
+1981,14543,unmatched:unpublished(404 likely),107,0,0.000000
+1982,14546,unmatched:unpublished(404 likely),470,0,0.000000
+1983,14548,unmatched:unpublished(404 likely),57,0,0.000000
+1984,14553,unmatched:unpublished(404 likely),159,0,0.000000
+1985,14555,unmatched:unpublished(404 likely),518,0,0.000000
+1986,14558,unmatched:unpublished(404 likely),612,0,0.000000
+1987,14559,unmatched:unpublished(404 likely),57,0,0.000000
+1988,14560,unmatched:unpublished(404 likely),72,0,0.000000
+1989,14562,unmatched:unpublished(404 likely),66,0,0.000000
+1990,14563,unmatched:unpublished(404 likely),3198,0,0.000000
+1991,14564,unmatched:unpublished(404 likely),435,0,0.000000
+1992,14568,unmatched:unpublished(404 likely),384,0,0.000000
+1993,14570,unmatched:unpublished(404 likely),234,0,0.000000
+1994,14571,unmatched:unpublished(404 likely),122,0,0.000000
+1995,14574,unmatched:unpublished(404 likely),54,0,0.000000
+1996,14579,unmatched:unpublished(404 likely),68,0,0.000000
+1997,14581,unmatched:unpublished(404 likely),885,0,0.000000
+1998,14584,unmatched:unpublished(404 likely),114,0,0.000000
+1999,14587,unmatched:unpublished(404 likely),128,0,0.000000
+2000,14589,unmatched:unpublished(404 likely),118,0,0.000000
+2001,14592,unmatched:unpublished(404 likely),71,0,0.000000
+2002,14602,unmatched:unpublished(404 likely),166,0,0.000000
+2003,14604,unmatched:unpublished(404 likely),112,0,0.000000
+2004,14607,unmatched:unpublished(404 likely),284,0,0.000000
+2005,14608,unmatched:unpublished(404 likely),57,0,0.000000
+2006,14609,unmatched:unpublished(404 likely),96,0,0.000000
+2007,14610,unmatched:unpublished(404 likely),77,0,0.000000
+2008,14612,unmatched:unpublished(404 likely),142,0,0.000000
+2009,14613,unmatched:unpublished(404 likely),255,0,0.000000
+2010,14617,unmatched:unpublished(404 likely),89,0,0.000000
+2011,14618,unmatched:unpublished(404 likely),290,0,0.000000
+2012,14625,unmatched:unpublished(404 likely),2202,0,0.000000
+2013,14626,unmatched:unpublished(404 likely),251,0,0.000000
+2014,14630,unmatched:unpublished(404 likely),646,0,0.000000
+2015,14632,unmatched:unpublished(404 likely),125,0,0.000000
+2016,14635,unmatched:unpublished(404 likely),178,0,0.000000
+2017,14646,unmatched:unpublished(404 likely),2956,0,0.000000
+2018,14647,unmatched:unpublished(404 likely),322,0,0.000000
+2019,14650,unmatched:unpublished(404 likely),630,0,0.000000
+2020,14651,unmatched:unpublished(404 likely),987,0,0.000000
+2021,14653,unmatched:unpublished(404 likely),120,0,0.000000
+2022,14654,unmatched:unpublished(404 likely),136,0,0.000000
+2023,14659,unmatched:unpublished(404 likely),351,0,0.000000
+2024,14661,unmatched:unpublished(404 likely),60,0,0.000000
+2025,14664,unmatched:unpublished(404 likely),120,0,0.000000
+2026,14673,unmatched:unpublished(404 likely),146,0,0.000000
+2027,14675,unmatched:unpublished(404 likely),580,0,0.000000
+2028,14677,unmatched:unpublished(404 likely),696,0,0.000000
+2029,14678,unmatched:unpublished(404 likely),1038,0,0.000000
+2030,14683,unmatched:unpublished(404 likely),194,0,0.000000
+2031,14686,unmatched:unpublished(404 likely),97,0,0.000000
+2032,14693,unmatched:unpublished(404 likely),710,0,0.000000
+2033,14696,unmatched:unpublished(404 likely),153,0,0.000000
+2034,14697,unmatched:unpublished(404 likely),270,0,0.000000
+2035,14698,unmatched:unpublished(404 likely),194,0,0.000000
+2036,14699,unmatched:unpublished(404 likely),244,0,0.000000
+2037,14707,unmatched:unpublished(404 likely),171,0,0.000000
+2038,14712,unmatched:unpublished(404 likely),50,0,0.000000
+2039,14721,unmatched:unpublished(404 likely),264,0,0.000000
+2040,14723,unmatched:unpublished(404 likely),174,0,0.000000
+2041,14725,unmatched:unpublished(404 likely),173,0,0.000000
+2042,14733,unmatched:unpublished(404 likely),72,0,0.000000
+2043,14735,unmatched:unpublished(404 likely),75,0,0.000000
+2044,14738,unmatched:unpublished(404 likely),128,0,0.000000
+2045,14750,unmatched:unpublished(404 likely),237,0,0.000000
+2046,14760,unmatched:unpublished(404 likely),134,0,0.000000
+2047,14765,unmatched:unpublished(404 likely),99,0,0.000000
+2048,14768,unmatched:unpublished(404 likely),219,0,0.000000
+2049,14771,unmatched:unpublished(404 likely),167,0,0.000000
+2050,14776,unmatched:unpublished(404 likely),325,0,0.000000
+2051,14777,unmatched:unpublished(404 likely),1126,0,0.000000
+2052,14778,unmatched:unpublished(404 likely),337,0,0.000000
+2053,14779,unmatched:unpublished(404 likely),110,0,0.000000
+2054,14782,unmatched:unpublished(404 likely),556,0,0.000000
+2055,14784,unmatched:unpublished(404 likely),88,0,0.000000
+2056,14791,unmatched:unpublished(404 likely),67,0,0.000000
+2057,14792,unmatched:unpublished(404 likely),521,0,0.000000
+2058,14793,unmatched:unpublished(404 likely),53,0,0.000000
+2059,14795,unmatched:unpublished(404 likely),215,0,0.000000
+2060,14798,unmatched:unpublished(404 likely),66,0,0.000000
+2061,14799,unmatched:unpublished(404 likely),171,0,0.000000
+2062,14803,unmatched:unpublished(404 likely),54,0,0.000000
+2063,14804,unmatched:unpublished(404 likely),956,0,0.000000
+2064,14805,unmatched:unpublished(404 likely),95,0,0.000000
+2065,14809,unmatched:unpublished(404 likely),101,0,0.000000
+2066,14816,unmatched:unpublished(404 likely),304,0,0.000000
+2067,14817,unmatched:unpublished(404 likely),1524,0,0.000000
+2068,14818,unmatched:unpublished(404 likely),117,0,0.000000
+2069,14819,unmatched:unpublished(404 likely),92,0,0.000000
+2070,14820,unmatched:unpublished(404 likely),138,0,0.000000
+2071,14821,unmatched:unpublished(404 likely),87,0,0.000000
+2072,14822,unmatched:unpublished(404 likely),107,0,0.000000
+2073,14827,unmatched:unpublished(404 likely),57,0,0.000000
+2074,14831,unmatched:unpublished(404 likely),131,0,0.000000
+2075,14837,unmatched:unpublished(404 likely),330,0,0.000000
+2076,14840,unmatched:unpublished(404 likely),185,0,0.000000
+2077,14841,unmatched:unpublished(404 likely),67,0,0.000000
+2078,14842,unmatched:unpublished(404 likely),75,0,0.000000
+2079,14846,unmatched:unpublished(404 likely),55,0,0.000000
+2080,14850,unmatched:unpublished(404 likely),372,0,0.000000
+2081,14853,unmatched:unpublished(404 likely),107,0,0.000000
+2082,14860,unmatched:unpublished(404 likely),241,0,0.000000
+2083,14863,unmatched:unpublished(404 likely),322,0,0.000000
+2084,14875,unmatched:unpublished(404 likely),125,0,0.000000
+2085,14876,unmatched:unpublished(404 likely),134,0,0.000000
+2086,14882,unmatched:unpublished(404 likely),118,0,0.000000
+2087,14884,unmatched:unpublished(404 likely),141,0,0.000000
+2088,14887,unmatched:unpublished(404 likely),1310,0,0.000000
+2089,14891,unmatched:unpublished(404 likely),496,0,0.000000
+2090,14903,unmatched:unpublished(404 likely),720,0,0.000000
+2091,14906,unmatched:unpublished(404 likely),67,0,0.000000
+2092,14908,unmatched:unpublished(404 likely),958,0,0.000000
+2093,14909,unmatched:unpublished(404 likely),93,0,0.000000
+2094,14910,unmatched:unpublished(404 likely),444,0,0.000000
+2095,14911,unmatched:unpublished(404 likely),89,0,0.000000
+2096,14912,unmatched:unpublished(404 likely),57,0,0.000000
+2097,14913,unmatched:unpublished(404 likely),119,0,0.000000
+2098,14914,unmatched:unpublished(404 likely),91,0,0.000000
+2099,14917,unmatched:unpublished(404 likely),51,0,0.000000
+2100,14923,unmatched:unpublished(404 likely),57,0,0.000000
+2101,14925,unmatched:unpublished(404 likely),78,0,0.000000
+2102,14934,unmatched:unpublished(404 likely),75,0,0.000000
+2103,14937,unmatched:unpublished(404 likely),76,0,0.000000
+2104,14939,unmatched:unpublished(404 likely),55,0,0.000000
+2105,14940,unmatched:unpublished(404 likely),244,0,0.000000
+2106,14948,unmatched:unpublished(404 likely),150,0,0.000000
+2107,14953,unmatched:unpublished(404 likely),111,0,0.000000
+2108,14955,unmatched:unpublished(404 likely),68,0,0.000000
+2109,14956,unmatched:unpublished(404 likely),374,0,0.000000
+2110,14962,unmatched:unpublished(404 likely),653,0,0.000000
+2111,14969,unmatched:unpublished(404 likely),84,0,0.000000
+2112,14977,unmatched:unpublished(404 likely),111,0,0.000000
+2113,14991,unmatched:unpublished(404 likely),136,0,0.000000
+2114,14996,unmatched:unpublished(404 likely),125,0,0.000000
+2115,14997,unmatched:unpublished(404 likely),65,0,0.000000
+2116,15001,unmatched:unpublished(404 likely),50,0,0.000000
+2117,15006,unmatched:unpublished(404 likely),204,0,0.000000
+2118,15007,unmatched:unpublished(404 likely),111,0,0.000000
+2119,15009,unmatched:unpublished(404 likely),107,0,0.000000
+2120,15017,unmatched:unpublished(404 likely),231,0,0.000000
+2121,15019,unmatched:unpublished(404 likely),60,0,0.000000
+2122,15023,unmatched:unpublished(404 likely),324,0,0.000000
+2123,15032,unmatched:unpublished(404 likely),68,0,0.000000
+2124,15048,unmatched:unpublished(404 likely),196,0,0.000000
+2125,15066,unmatched:unpublished(404 likely),100,0,0.000000
+2126,15070,unmatched:unpublished(404 likely),107,0,0.000000
