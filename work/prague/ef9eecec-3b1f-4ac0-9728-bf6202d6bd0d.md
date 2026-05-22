@@ -218,3 +218,56 @@ production의 실제 대시보드 컴포넌트를 확인해서 무엇을 보여�
 
 **User**: 스킬 사용해서 깃헙에 업데이트해
 
+**Assistant**: `sync-context` 스킬 절차를 따르겠습니다.
+## 변경 내역 요약
+
+**신규 산출물:**
+- (A) `outputs/jira/requirements_spot-special-section-collapse-toggle.md` — 스팟 상세 영역 디폴트 펼침 요구사항
+- (A) `outputs/reports/blog-segment-banner-ctr-20260520.md` — 블로그 세그먼트 배너 CTR 리포트
+- (A) `outputs/reports/blog-segment-lookup-travel-pool-20260520.csv` — 블로그 세그먼트 lookup 데이터
+- (A) `outputs/reports/ga4-export-spec-app-install-banner-20260520.md` — GA4 export 스펙
+- (A) `outputs/raw/` 디렉토리
+
+**첨부 데이터:**
+- (A) `attachments/Summary of 세그먼트 블로그 조회*.md` × 2
+- (A) `attachments/download (1~6).csv` — GA4 export CSV 6개
+
+**워크스페이스 세션 상태:**
+- (A/M) `work/prague/*.md` 세션 기록 8건 + `state.json`
+
+CSV는 GA4 export·블로그 segment lookup이며 회원 식별 정보는 포함되지 않은 집계 데이터로 확인됩니다. 그대로 진행합니다.
+
+## 9시 40분 30초
+
+**User**: 스킬 사용해서 깃헙에서 가져와
+
+**Assistant**: `pull-context` 스킬 절차를 따르겠습니다.
+✓ `.context`가 최신 상태로 동기화되었습니다.
+
+## 가져온 변경사항 (`edc093f..0e26e1f`, 23 files, +3,381 lines)
+
+**파트너 어드민 인터뷰 결과 (`outputs/research/`)**:
+- `interview-arihanbok-result-0521.md` (아리한복)
+- `interview-hosudosan-result-0521.md` (호수도산)
+- `interview-medicube-result-0521.md` (메디큐브)
+- `interview-modello-studio-result-0521.md` (모델로 스튜디오)
+- `interview-soonsiki-result-0521.md` (순시키헤어)
+- `interview-tourstory-result-0521.md` (TOURSTORY)
+- `partner-admin-interview-synthesis-0521.md` (인터뷰 종합)
+- `partner-admin-roadmap-0521.md` (로드맵)
+
+**첨부 자료 (`attachments/`)**:
+- 인터뷰 전사 텍스트 4건 (`pasted_text_*.txt`)
+- 어드민 스크린샷 4장 (2026-05-16)
+
+**다른 워크스페이스 세션 (`work/kiev/`)**: 6 파일
+
+## 심링크
+모든 개인 스킬 심링크는 이미 존재해서 새로 복구할 항목 없음:
+- `followup`, `pull-context`, `sync-context`, `write-doc`
+
+## 참고
+로컬 미커밋 변경사항(현재 세션 진행 중 자동 생성된 파일)이 있어 함께 표시되지만 fast-forward 머지로 충돌 없이 적용됐습니다:
+- `work/prague/ef9eecec-...md`, `work/prague/state.json` (수정)
+- `work/prague/10de8554-...md` (신규)
+
