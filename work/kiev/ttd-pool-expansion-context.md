@@ -193,29 +193,126 @@ report.tsv 기준 16개:
 
 ---
 
-## 8. 다음 액션 (우선순위)
+## 8. 모수 확보 액션 플랜 (임팩트순)
 
-### Priority 1 — 즉시 회복 가능
-1. **람다 레포 `google-ttd` 의 Place ID fallback PR 배포 상태 확인**
-2. **TTD 전용 Place ID 23개 백필** (어드민 편집 폼으로)
-   - 대상: 5/11 명단의 매칭 실패 23개
-   - 예상 효과: 가장 큰 모수 회복
+> 전제: 모수 확장 경로는 **(A) 내부 정상화** (DB에 있는 상품 켜기) + **(B) 신규 입점** 두 갈래. (A)부터 처리.
+> POI(Google Maps 카테고리) ≠ Tour Operator GBP(파트너 직접 노출 채널, 우리 모수 아님). 혼동 금지.
 
-### Priority 2 — 모니터링
-3. 5/12 relation_type 정정 18개의 Google 재승인 추적
-4. 5/12 람다 코드 수정 후 데이터 품질 에러 감소 확인
+### Action 1. Tier 1 32개 relation_type 정정 후 토글 — **+25~30**
+- 대상: `is_ttd=0` + 운영 진입 조건 5개 + `spot_google_ttd` 메타까지 보유한 32개
+- 작업: 어드민 `Google Actions → TTD → 상세 Drawer → TtdMetadataSection`에서 relation_type 정정 후 `is_ttd=1` 토글
+- 검수: 투어/택시투어/워킹투어/명상투어/원데이클래스의 ADMISSION_TICKET 오분류 → RELATED_NO_ADMISSION 정정 (오분류 시 `Overtagged admission` → 전체 거부)
+- 제외: 헤어/리조트/렌트카는 카테고리 부적격 — 토글 금지
+- 소요: 운영팀 1~2시간
 
-### Priority 3 — 신규 후보 발굴
-5. DB에서 후보 풀 추출: `is_ttd=0` AND TTD 지원 카테고리 매칭 AND 예약 가능 시간대 존재 AND 어권 공개됨
-6. report에서 Eligible인데 referral 0인 스팟의 컨텐츠/가격 점검
+### Action 2. Tier 2 보수 175개 메타데이터 일괄 입력 — **+150**
+- 대상: TTD 공식 지원 12개 카테고리 + 운영 진입 조건 5개 충족 + `spot_google_ttd` row 없음
+- 카테고리 batch (relation_type + option_categories 매핑):
+  - 원데이클래스 66 / K-POP클래스 6 / 푸드클래스 10 / 한복&스냅 18 / 액티비티&레저 12 / 투어계열(서울근교 11 + 자연 8 + 도시 7 + 전통체험 6 + 프라이빗 5) → `RELATED_NO_ADMISSION`
+  - 명소&입장권 25 → `ADMISSION_TICKET`
+  - Concert 1 → 케이스별
+- 선행 확인: Tier 2처럼 `spot_google_ttd` row 없는 케이스의 "신규 생성" UI 진입점 존재 여부
+- 소요: 운영팀 1~2일
 
-### Priority 4 — 운영 정책 정착
-7. `spot_google_ttd` 잔여 데이터 정리 (313개 비활성 행)
-8. `is_ttd` 자동 토글 룰 도입 (4.8 진입 조건 기반)
+### Action 3. Place ID 매칭 실패 23개 백필 — **+15~20**
+- 대상: §5.3 명단 23개 (TTD 전용 `related_google_place_id`)
+- 분기:
+  - Place ID가 틀린 곳 → 올바른 ID 교체
+  - Place가 일반 사업장 분류 → Google Maps 관광지 카테고리 정정 요청
+  - Place 없음 → 신규 Place 등록 후 ID 발급
+- 선행: 람다 레포 `google-ttd`의 Place ID fallback PR 배포 상태 확인 **필수**
+
+### Action 4. Tier 2 애매 4개 카테고리 314개 단계적 적용 — **+200~250**
+- 진행 순서:
+  1. 투어 26 → RELATED_NO_ADMISSION (안전)
+  2. 체험 148 → RELATED_NO_ADMISSION (안전)
+  3. K-뷰티 160 → 시범 30개 → 승인률 확인 → 확대
+  4. 전문헤어 180 → 보류 (§4.7과 충돌 가능성 가장 큼)
+- 소요: 1~2주 (Google 승인 모니터링 포함)
+
+### Action 5. relation_type 자동 추천 + 어드민 부정합 가드 — **누적 모수 유지**
+- 카테고리 ↔ relation_type 매핑 테이블 정책화
+- 어드민 저장 시 부정합 경고로 신규 오분류 사전 차단
+
+### Action 6. `is_ttd` 자동 토글 룰 — **운영 정착**
+- §4.8 진입 조건 위반 시 자동 `is_ttd=0`, 회복 시 자동 `is_ttd=1`
+- 시즌 상품 자동 회수/재가입
 
 ---
 
-## 9. 참고 슬랙 스레드
+### 누적 임팩트
+
+| 단계 | 누적 활성 모수 | 비고 |
+|---|---:|---|
+| 현재 | 89 | 무효 16개 포함 |
+| + Action 1 | ~115 | 운영 1~2시간 |
+| + Action 2 | ~265 | 운영 1~2일 |
+| + Action 3 | ~280 | 람다 배포 선행 |
+| + Action 4 | **~500** | 1~2주 단계적 |
+
+### 의존성
+
+| 작업 | 선행 |
+|---|---|
+| Action 1 | 어드민 편집 폼 (배포 완료) |
+| Action 2 | 신규 row 생성 UI 진입점 확인 |
+| Action 3 | 람다 `google-ttd` Place ID fallback 배포 |
+| Action 4 | Google 정책 재확인 + 시범 결과 |
+| Action 5,6 | 카테고리-relation_type 매핑 정책 합의 |
+
+---
+
+## 9. relation_type 분류 가이드 (어드민 정정용)
+
+`TtdRelationType` 3종 — Google TTD `related_locations.relation_type`:
+
+| 값 | 정의 | 노출 채널 |
+|---|---|---|
+| `ADMISSION_TICKET` | 상품 = POI 입장권 자체 | Admission Free Listing |
+| `RELATED_NO_ADMISSION` | POI에서/근처 활동·체험·투어 (입장권 미포함) | Experience Free Listing |
+| `SUPPLEMENTARY_ADDON` | POI 방문 보조 (셔틀/오디오가이드/픽업) | 보조 슬롯 (Eligible 카운트 미포함이 정상) |
+
+**결정 트리**
+```
+구매하면 POI 게이트 통과? YES → ADMISSION_TICKET
+                       NO ↓
+주체적 활동(투어/체험/클래스)? YES → RELATED_NO_ADMISSION
+                            NO  → SUPPLEMENTARY_ADDON
+```
+
+**상품 유형별 매핑**
+
+| 유형 | 값 |
+|---|---|
+| 입장권/패스/티켓 단독 | `ADMISSION_TICKET` |
+| 투어/택시투어/프라이빗투어/워킹투어/명상투어 | `RELATED_NO_ADMISSION` |
+| 원데이클래스/체험/한복&스냅 | `RELATED_NO_ADMISSION` |
+| 셔틀버스/픽업/오디오가이드 단독 | `SUPPLEMENTARY_ADDON` |
+| 리조트 패키지/렌트카/헤어샵 | TTD 부적격 — 켜지 말 것 |
+
+---
+
+## 10. 후보 풀 추출 결과 (2026-05-29 production)
+
+§4.8 운영 진입 조건 + POI 매칭 기준 SQL 추출:
+
+| 구분 | 수 | 정의 | 필요 작업 |
+|---|---:|---|---|
+| Tier 1 | **32** | `spot_google_ttd` 메타까지 보유, `is_ttd=0` | 어드민에서 토글만 (relation_type 검수 후) |
+| Tier 2 (보수) | **175** | 공식 지원 12개 카테고리, 메타 없음 | 메타데이터 신규 입력 |
+| Tier 2 (애매) | **314** | 5/12 추가 4개 카테고리 | 단계적 진행 (헤어 제외) |
+| **합계** | **521** | 즉시~단기간 내 활성화 가능 후보 | |
+
+추출 조건:
+- `is_ttd=0` AND `is_in_business=1` AND `is_reservable=1`
+- `google_place_id` 보유
+- TTD 지원 18개 카테고리 중 하나
+- `spot_translation.is_publish=1`인 표준 14언어 중 ≥12개
+- 향후 30일 내 예약 가능 time slot 존재
+
+---
+
+## 11. 참고 슬랙 스레드
 
 `#product-core` (`C05999AP2UU`)
 
