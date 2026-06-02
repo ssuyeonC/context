@@ -65,13 +65,15 @@ cd .context && git status
 
 현재 브랜치가 이미 `main`이면 Step 4를 건너뜁니다.
 
-1. 현재 브랜치명을 변수에 보관: `CURRENT_BRANCH=$(git branch --show-current)`
-2. main으로 전환: `git checkout main`
-3. 원격 main 최신화: `git pull origin main`
-4. fast-forward 머지 시도: `git merge --ff-only "$CURRENT_BRANCH"`
-   - 실패 시 (main이 분기된 상태) 사용자에게 상황을 보고하고 머지 commit 진행 여부를 확인. 임의로 force-push·rebase 하지 않습니다.
-5. main 푸시: `git push origin main`
-6. 원래 브랜치로 복귀: `git checkout "$CURRENT_BRANCH"`
+> **주의**: Conductor 워크스페이스 환경에서는 `main`이 다른 워크트리(예: `/Users/suyeon/conductor/repos/context`)에 체크아웃되어 있어 이 워크스페이스에서 `git checkout main`이 실패합니다. 따라서 로컬 체크아웃 없이 원격에 직접 fast-forward 푸시하는 방식으로 진행합니다.
+
+1. 원격 main 최신 상태 가져오기: `git fetch origin main`
+2. 분기 상태 확인: `git merge-base --is-ancestor origin/main HEAD`
+   - **참(0)**: HEAD가 origin/main을 모두 포함 → Step 4로 바로 진행
+   - **거짓(1)**: origin/main에 HEAD에 없는 커밋이 있음 (예: GitHub UI에서 이전 PR이 머지된 경우) → 현재 브랜치에 `git merge origin/main --no-edit`로 먼저 머지. 충돌 시 사용자에게 보고하고 자동 진행 중단.
+3. 현재 브랜치 푸시 (분기 머지본 반영): `git push origin HEAD`
+4. main으로 fast-forward 푸시: `git push origin HEAD:main`
+   - 실패 시 (rejected non-FF) 사용자에게 상황을 보고. 임의로 force-push 하지 않습니다.
 
 > 작업 브랜치(워크스페이스 브랜치)는 삭제하지 않습니다. Conductor 워크스페이스가 해당 브랜치에 묶여 있어 계속 사용해야 합니다.
 
