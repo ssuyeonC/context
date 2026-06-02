@@ -52,24 +52,40 @@ cd .context && git status
 - ...
 ```
 
-### Step 3: 커밋 & 푸시
+### Step 3: 커밋 & 푸시 (현재 브랜치)
 
 1. 모든 변경사항을 스테이징: `git add -A`
 2. 변경 내용을 요약하여 커밋 메시지 작성
    - 형식: `docs: {변경 요약}`
    - 예: `docs: 파트너 리뷰 답글 요구사항 추가`
 3. 커밋 실행: `git commit -m "{메시지}"`
-4. 푸시 실행: `git push origin main`
+4. 현재 브랜치로 푸시: `git push origin HEAD`
 
-### Step 4: 완료 보고
+### Step 4: main 브랜치로 머지 & 푸시
+
+현재 브랜치가 이미 `main`이면 Step 4를 건너뜁니다.
+
+1. 현재 브랜치명을 변수에 보관: `CURRENT_BRANCH=$(git branch --show-current)`
+2. main으로 전환: `git checkout main`
+3. 원격 main 최신화: `git pull origin main`
+4. fast-forward 머지 시도: `git merge --ff-only "$CURRENT_BRANCH"`
+   - 실패 시 (main이 분기된 상태) 사용자에게 상황을 보고하고 머지 commit 진행 여부를 확인. 임의로 force-push·rebase 하지 않습니다.
+5. main 푸시: `git push origin main`
+6. 원래 브랜치로 복귀: `git checkout "$CURRENT_BRANCH"`
+
+> 작업 브랜치(워크스페이스 브랜치)는 삭제하지 않습니다. Conductor 워크스페이스가 해당 브랜치에 묶여 있어 계속 사용해야 합니다.
+
+### Step 5: 완료 보고
 
 ```
 ✓ .context가 GitHub에 반영되었습니다.
   커밋: {커밋 해시} - {커밋 메시지}
+  머지: {원래 브랜치} → main (fast-forward)
 ```
 
 ## 규칙
 
 - `.DS_Store` 파일은 커밋하지 않습니다. `.context/.gitignore`에 없으면 추가합니다.
-- 푸시 실패 시 에러 내용을 유저에게 보여주고, 강제 푸시는 유저 확인 없이 실행하지 않습니다.
+- 푸시·머지 실패 시 에러 내용을 유저에게 보여주고, 강제 푸시·rebase는 유저 확인 없이 실행하지 않습니다.
 - 커밋 메시지는 한국어로 작성합니다.
+- 작업 브랜치(워크스페이스 브랜치)는 머지 후에도 삭제하지 않습니다.
