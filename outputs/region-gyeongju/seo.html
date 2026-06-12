@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;width:1300px;height:700px;overflow:hidden;}
+  svg{display:block;width:1300px;height:700px;}
+  text{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;}
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1300 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#243b6b"/>
+      <stop offset="34%" stop-color="#4a4f8a"/>
+      <stop offset="60%" stop-color="#b56a86"/>
+      <stop offset="80%" stop-color="#ef9d6b"/>
+      <stop offset="100%" stop-color="#f7c98a"/>
+    </linearGradient>
+    <radialGradient id="sunglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#fff2c8" stop-opacity="1"/>
+      <stop offset="35%" stop-color="#ffe09a" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffd27a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hazeFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6f6a9a" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#6f6a9a" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="42%" r="75%">
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28"/>
+    </radialGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect x="0" y="0" width="1300" height="700" fill="url(#sky)"/>
+
+  <!-- sun glow + disc -->
+  <circle cx="940" cy="300" r="240" fill="url(#sunglow)"/>
+  <circle cx="940" cy="300" r="78" fill="#ffeebb"/>
+
+  <!-- birds -->
+  <g stroke="#1d2a34" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7">
+    <path d="M180 150 q12 -11 24 0 q12 -11 24 0"/>
+    <path d="M250 185 q9 -8 18 0 q9 -8 18 0"/>
+    <path d="M150 205 q9 -8 18 0 q9 -8 18 0"/>
+  </g>
+
+  <!-- far hazy ridge (Namsan) -->
+  <path d="M0 455 C 180 408, 360 440, 560 415 C 760 392, 980 430, 1300 405 L1300 700 L0 700 Z" fill="#6f6a9a" opacity="0.55"/>
+  <rect x="0" y="430" width="1300" height="120" fill="url(#hazeFade)"/>
+
+  <!-- back mounds -->
+  <path d="M-40 540 Q 150 430 360 540 Z" fill="#5d8076"/>
+  <path d="M300 545 Q 540 455 800 545 Z" fill="#557a6f"/>
+  <path d="M720 548 Q 980 470 1280 548 Z" fill="#5d8076"/>
+
+  <!-- mid mounds -->
+  <path d="M-60 600 Q 220 470 540 600 Z" fill="#3f6157"/>
+  <path d="M430 605 Q 760 475 1120 605 Z" fill="#3a5b52"/>
+  <path d="M980 600 Q 1180 505 1360 600 Z" fill="#3f6157"/>
+
+  <!-- Cheomseongdae silhouette (foreground, left of center) -->
+  <g fill="#1c2f2a">
+    <!-- base platform -->
+    <rect x="372" y="556" width="116" height="14" rx="3"/>
+    <!-- bottle body: gentle inward curve -->
+    <path d="M388 556
+             C 384 500, 392 452, 412 430
+             C 420 421, 440 421, 448 430
+             C 468 452, 476 500, 472 556 Z"/>
+    <!-- square well top -->
+    <rect x="414" y="412" width="32" height="22" rx="2"/>
+    <rect x="408" y="406" width="44" height="9" rx="2"/>
+    <!-- small window -->
+    <rect x="424" y="486" width="12" height="16" rx="2" fill="#34504a"/>
+  </g>
+
+  <!-- pine trees foreground -->
+  <g fill="#16241f">
+    <path d="M150 612 l16 -64 l16 64 Z"/>
+    <path d="M158 580 l8 -40 l8 40 Z"/>
+    <rect x="163" y="608" width="6" height="20"/>
+    <path d="M1140 620 l20 -78 l20 78 Z"/>
+    <path d="M1150 582 l10 -46 l10 46 Z"/>
+    <rect x="1157" y="616" width="6" height="22"/>
+  </g>
+
+  <!-- foreground ground -->
+  <path d="M-60 660 Q 650 560 1360 660 L1360 700 L-60 700 Z" fill="#1d332e"/>
+
+  <!-- vignette -->
+  <rect x="0" y="0" width="1300" height="700" fill="url(#vignette)"/>
+
+  <!-- title -->
+  <g>
+    <text x="74" y="476" font-size="150" font-weight="800" fill="#ffffff" letter-spacing="6"
+          style="paint-order:stroke;stroke:#0e1c18;stroke-width:2px;">경주</text>
+    <text x="80" y="528" font-size="40" font-weight="600" fill="#ffe6b8" letter-spacing="14">GYEONGJU</text>
+    <text x="82" y="566" font-size="24" font-weight="500" fill="#f3f0ea" letter-spacing="1" opacity="0.92">천년의 도시 · Thousand-Year Capital of Silla</text>
+  </g>
+</svg>
+</body>
+</html>

@@ -1,0 +1,1073 @@
+{
+  "total_posts": 10000,
+  "date_range": {
+    "from": "2024-10-03",
+    "to": "2025-05-19"
+  },
+  "posts_with_description": 7841,
+  "pct_with_description": 78.4,
+  "need_request_posts": 8316,
+  "pct_need_request": 83.2,
+  "score_stats": {
+    "mean": 2.9,
+    "max": 1137
+  },
+  "comment_stats": {
+    "mean": 1.4,
+    "max": 199
+  },
+  "theme_counts": [
+    [
+      "Destinations - Seoul",
+      4463
+    ],
+    [
+      "Itinerary & Trip Planning",
+      4328
+    ],
+    [
+      "Transport & Getting Around",
+      4315
+    ],
+    [
+      "Money / Budget / Cash & Cards",
+      3716
+    ],
+    [
+      "Tours & Activities / Experiences",
+      2661
+    ],
+    [
+      "Weather & Season / Packing",
+      2656
+    ],
+    [
+      "Food & Dining",
+      2575
+    ],
+    [
+      "Accommodation",
+      2305
+    ],
+    [
+      "Shopping & Cosmetics",
+      2278
+    ],
+    [
+      "Safety / Solo / Etiquette",
+      1547
+    ],
+    [
+      "Destinations - Busan",
+      1515
+    ],
+    [
+      "K-pop / Concerts / Fan",
+      1482
+    ],
+    [
+      "Other Cities & Regions",
+      968
+    ],
+    [
+      "SIM / eSIM / Connectivity",
+      843
+    ],
+    [
+      "Visa & Entry / K-ETA",
+      843
+    ],
+    [
+      "Destinations - Jeju",
+      841
+    ],
+    [
+      "Language & Communication",
+      699
+    ],
+    [
+      "Luggage / Storage",
+      511
+    ],
+    [
+      "Medical / Health / Insurance",
+      291
+    ]
+  ],
+  "theme_in_title": {
+    "Destinations - Jeju": 437,
+    "Money / Budget / Cash & Cards": 944,
+    "Transport & Getting Around": 2087,
+    "Accommodation": 589,
+    "Shopping & Cosmetics": 706,
+    "Destinations - Busan": 647,
+    "Destinations - Seoul": 2064,
+    "Itinerary & Trip Planning": 1413,
+    "K-pop / Concerts / Fan": 385,
+    "Tours & Activities / Experiences": 645,
+    "Medical / Health / Insurance": 65,
+    "Safety / Solo / Etiquette": 431,
+    "Food & Dining": 692,
+    "SIM / eSIM / Connectivity": 201,
+    "Weather & Season / Packing": 805,
+    "Other Cities & Regions": 362,
+    "Luggage / Storage": 184,
+    "Visa & Entry / K-ETA": 263,
+    "Language & Communication": 87
+  },
+  "theme_in_description": {
+    "Tours & Activities / Experiences": 2413,
+    "Destinations - Seoul": 3700,
+    "Destinations - Jeju": 719,
+    "Itinerary & Trip Planning": 3909,
+    "Transport & Getting Around": 3766,
+    "Destinations - Busan": 1308,
+    "Money / Budget / Cash & Cards": 3437,
+    "Safety / Solo / Etiquette": 1357,
+    "Accommodation": 2133,
+    "Weather & Season / Packing": 2398,
+    "Food & Dining": 2361,
+    "Shopping & Cosmetics": 2038,
+    "SIM / eSIM / Connectivity": 789,
+    "Medical / Health / Insurance": 270,
+    "Language & Communication": 663,
+    "Other Cities & Regions": 875,
+    "K-pop / Concerts / Fan": 1358,
+    "Visa & Entry / K-ETA": 711,
+    "Luggage / Storage": 460
+  },
+  "top_theme_cooccurrence": [
+    {
+      "pair": "Destinations - Seoul + Itinerary & Trip Planning",
+      "count": 2515
+    },
+    {
+      "pair": "Itinerary & Trip Planning + Transport & Getting Around",
+      "count": 2406
+    },
+    {
+      "pair": "Destinations - Seoul + Transport & Getting Around",
+      "count": 2226
+    },
+    {
+      "pair": "Money / Budget / Cash & Cards + Transport & Getting Around",
+      "count": 2181
+    },
+    {
+      "pair": "Itinerary & Trip Planning + Money / Budget / Cash & Cards",
+      "count": 2056
+    },
+    {
+      "pair": "Destinations - Seoul + Money / Budget / Cash & Cards",
+      "count": 1976
+    },
+    {
+      "pair": "Itinerary & Trip Planning + Weather & Season / Packing",
+      "count": 1624
+    },
+    {
+      "pair": "Itinerary & Trip Planning + Tours & Activities / Experiences",
+      "count": 1600
+    },
+    {
+      "pair": "Destinations - Seoul + Weather & Season / Packing",
+      "count": 1589
+    },
+    {
+      "pair": "Transport & Getting Around + Weather & Season / Packing",
+      "count": 1568
+    },
+    {
+      "pair": "Accommodation + Itinerary & Trip Planning",
+      "count": 1538
+    },
+    {
+      "pair": "Food & Dining + Itinerary & Trip Planning",
+      "count": 1532
+    },
+    {
+      "pair": "Destinations - Seoul + Food & Dining",
+      "count": 1530
+    },
+    {
+      "pair": "Accommodation + Destinations - Seoul",
+      "count": 1511
+    },
+    {
+      "pair": "Destinations - Busan + Transport & Getting Around",
+      "count": 1510
+    }
+  ],
+  "top_title_terms": [
+    [
+      "seoul",
+      1755
+    ],
+    [
+      "busan",
+      624
+    ],
+    [
+      "jeju",
+      438
+    ],
+    [
+      "trip",
+      422
+    ],
+    [
+      "itinerary",
+      376
+    ],
+    [
+      "airport",
+      353
+    ],
+    [
+      "incheon",
+      342
+    ],
+    [
+      "recommendations",
+      337
+    ],
+    [
+      "south",
+      335
+    ],
+    [
+      "travel",
+      319
+    ],
+    [
+      "day",
+      306
+    ],
+    [
+      "days",
+      291
+    ],
+    [
+      "time",
+      266
+    ],
+    [
+      "best",
+      247
+    ],
+    [
+      "card",
+      240
+    ],
+    [
+      "first",
+      213
+    ],
+    [
+      "looking",
+      206
+    ],
+    [
+      "air",
+      206
+    ],
+    [
+      "stay",
+      194
+    ],
+    [
+      "buy",
+      186
+    ],
+    [
+      "traveling",
+      179
+    ],
+    [
+      "solo",
+      177
+    ],
+    [
+      "advice",
+      162
+    ],
+    [
+      "amp",
+      162
+    ],
+    [
+      "icn",
+      158
+    ],
+    [
+      "hotel",
+      145
+    ],
+    [
+      "food",
+      143
+    ],
+    [
+      "clinic",
+      141
+    ],
+    [
+      "flight",
+      139
+    ],
+    [
+      "places",
+      136
+    ],
+    [
+      "april",
+      132
+    ],
+    [
+      "question",
+      129
+    ],
+    [
+      "tour",
+      128
+    ],
+    [
+      "visit",
+      127
+    ],
+    [
+      "layover",
+      126
+    ],
+    [
+      "myeongdong",
+      119
+    ],
+    [
+      "experience",
+      118
+    ],
+    [
+      "week",
+      113
+    ],
+    [
+      "visiting",
+      113
+    ],
+    [
+      "bus",
+      111
+    ]
+  ],
+  "top_desc_terms": [
+    [
+      "seoul",
+      5958
+    ],
+    [
+      "day",
+      3245
+    ],
+    [
+      "time",
+      2834
+    ],
+    [
+      "i'm",
+      2582
+    ],
+    [
+      "busan",
+      2361
+    ],
+    [
+      "trip",
+      2053
+    ],
+    [
+      "days",
+      1947
+    ],
+    [
+      "amp",
+      1929
+    ],
+    [
+      "one",
+      1779
+    ],
+    [
+      "https",
+      1732
+    ],
+    [
+      "around",
+      1652
+    ],
+    [
+      "removed",
+      1423
+    ],
+    [
+      "visit",
+      1414
+    ],
+    [
+      "looking",
+      1384
+    ],
+    [
+      "jeju",
+      1340
+    ],
+    [
+      "first",
+      1331
+    ],
+    [
+      "good",
+      1325
+    ],
+    [
+      "back",
+      1312
+    ],
+    [
+      "airport",
+      1305
+    ],
+    [
+      "much",
+      1269
+    ],
+    [
+      "places",
+      1265
+    ],
+    [
+      "com",
+      1228
+    ],
+    [
+      "card",
+      1185
+    ],
+    [
+      "before",
+      1137
+    ],
+    [
+      "planning",
+      1123
+    ],
+    [
+      "food",
+      1115
+    ],
+    [
+      "find",
+      1089
+    ],
+    [
+      "travel",
+      1073
+    ],
+    [
+      "see",
+      1069
+    ],
+    [
+      "people",
+      1055
+    ],
+    [
+      "flight",
+      1036
+    ],
+    [
+      "recommendations",
+      1029
+    ],
+    [
+      "take",
+      1026
+    ],
+    [
+      "experience",
+      991
+    ],
+    [
+      "hotel",
+      987
+    ],
+    [
+      "hello",
+      984
+    ],
+    [
+      "stay",
+      965
+    ],
+    [
+      "it's",
+      934
+    ],
+    [
+      "south",
+      921
+    ],
+    [
+      "love",
+      920
+    ]
+  ],
+  "top_title_bigrams": [
+    [
+      "incheon airport",
+      153
+    ],
+    [
+      "seoul busan",
+      138
+    ],
+    [
+      "first time",
+      136
+    ],
+    [
+      "day trip",
+      66
+    ],
+    [
+      "jeju island",
+      65
+    ],
+    [
+      "day itinerary",
+      56
+    ],
+    [
+      "days seoul",
+      47
+    ],
+    [
+      "climate card",
+      47
+    ],
+    [
+      "tax refund",
+      45
+    ],
+    [
+      "trip seoul",
+      44
+    ],
+    [
+      "itinerary check",
+      40
+    ],
+    [
+      "air premia",
+      38
+    ],
+    [
+      "stay seoul",
+      37
+    ],
+    [
+      "credit card",
+      36
+    ],
+    [
+      "seoul station",
+      36
+    ],
+    [
+      "busan seoul",
+      36
+    ],
+    [
+      "cherry blossom",
+      35
+    ],
+    [
+      "new year",
+      35
+    ],
+    [
+      "hour layover",
+      34
+    ],
+    [
+      "busan jeju",
+      34
+    ],
+    [
+      "duty free",
+      34
+    ],
+    [
+      "olive young",
+      31
+    ],
+    [
+      "dmz tour",
+      30
+    ],
+    [
+      "nami island",
+      29
+    ],
+    [
+      "lotte world",
+      29
+    ],
+    [
+      "solo travel",
+      28
+    ],
+    [
+      "best way",
+      28
+    ],
+    [
+      "recommendations seoul",
+      27
+    ],
+    [
+      "traveling seoul",
+      26
+    ],
+    [
+      "solo trip",
+      26
+    ]
+  ],
+  "top_desc_bigrams": [
+    [
+      "https www",
+      709
+    ],
+    [
+      "first time",
+      564
+    ],
+    [
+      "seoul busan",
+      356
+    ],
+    [
+      "tickets available",
+      335
+    ],
+    [
+      "incheon airport",
+      294
+    ],
+    [
+      "day trip",
+      278
+    ],
+    [
+      "hanok village",
+      260
+    ],
+    [
+      "com product",
+      260
+    ],
+    [
+      "www globalinterpark",
+      257
+    ],
+    [
+      "globalinterpark com",
+      257
+    ],
+    [
+      "https preview",
+      250
+    ],
+    [
+      "preview redd",
+      250
+    ],
+    [
+      "auto webp",
+      250
+    ],
+    [
+      "width amp",
+      243
+    ],
+    [
+      "amp format",
+      243
+    ],
+    [
+      "amp auto",
+      243
+    ],
+    [
+      "webp amp",
+      243
+    ],
+    [
+      "https tkglobal",
+      243
+    ],
+    [
+      "tkglobal melon",
+      243
+    ],
+    [
+      "melon com",
+      243
+    ],
+    [
+      "com performance",
+      243
+    ],
+    [
+      "performance index",
+      243
+    ],
+    [
+      "index htm",
+      243
+    ],
+    [
+      "htm langcd",
+      243
+    ],
+    [
+      "jeju island",
+      223
+    ],
+    [
+      "gyeongbokgung palace",
+      207
+    ],
+    [
+      "credit card",
+      205
+    ],
+    [
+      "lotte world",
+      193
+    ],
+    [
+      "seoul station",
+      192
+    ],
+    [
+      "seoul days",
+      188
+    ]
+  ],
+  "title_skewed_terms": [
+    [
+      "men",
+      27,
+      24,
+      1.12
+    ],
+    [
+      "tattoo",
+      34,
+      33,
+      1.03
+    ],
+    [
+      "seeking",
+      21,
+      21,
+      1.0
+    ],
+    [
+      "review",
+      41,
+      45,
+      0.91
+    ],
+    [
+      "premia",
+      39,
+      52,
+      0.75
+    ],
+    [
+      "recommendation",
+      75,
+      103,
+      0.73
+    ],
+    [
+      "foliage",
+      28,
+      42,
+      0.67
+    ],
+    [
+      "itinerary",
+      376,
+      562,
+      0.67
+    ],
+    [
+      "salons",
+      19,
+      30,
+      0.65
+    ],
+    [
+      "report",
+      32,
+      51,
+      0.63
+    ],
+    [
+      "delivery",
+      29,
+      47,
+      0.62
+    ],
+    [
+      "merch",
+      23,
+      39,
+      0.6
+    ],
+    [
+      "gifts",
+      20,
+      34,
+      0.6
+    ],
+    [
+      "seollal",
+      15,
+      26,
+      0.59
+    ],
+    [
+      "layover",
+      126,
+      213,
+      0.59
+    ],
+    [
+      "lunar",
+      20,
+      36,
+      0.57
+    ],
+    [
+      "recs",
+      45,
+      80,
+      0.57
+    ],
+    [
+      "salon",
+      23,
+      45,
+      0.52
+    ],
+    [
+      "storage",
+      27,
+      54,
+      0.51
+    ],
+    [
+      "air",
+      206,
+      405,
+      0.51
+    ],
+    [
+      "traveller",
+      26,
+      53,
+      0.5
+    ],
+    [
+      "baseball",
+      18,
+      37,
+      0.5
+    ],
+    [
+      "gmp",
+      19,
+      39,
+      0.5
+    ],
+    [
+      "massage",
+      23,
+      48,
+      0.49
+    ],
+    [
+      "male",
+      16,
+      34,
+      0.49
+    ]
+  ],
+  "desc_skewed_terms": [
+    [
+      "www",
+      2,
+      754,
+      0.0
+    ],
+    [
+      "redd",
+      0,
+      250,
+      0.0
+    ],
+    [
+      "htm",
+      0,
+      243,
+      0.0
+    ],
+    [
+      "quite",
+      0,
+      338,
+      0.0
+    ],
+    [
+      "there's",
+      0,
+      222,
+      0.0
+    ],
+    [
+      "removed",
+      1,
+      1423,
+      0.0
+    ],
+    [
+      "index",
+      0,
+      265,
+      0.0
+    ],
+    [
+      "though",
+      0,
+      295,
+      0.0
+    ],
+    [
+      "https",
+      6,
+      1732,
+      0.0
+    ],
+    [
+      "langcd",
+      0,
+      243,
+      0.0
+    ],
+    [
+      "prodid",
+      0,
+      243,
+      0.0
+    ],
+    [
+      "seems",
+      1,
+      406,
+      0.0
+    ],
+    [
+      "tkglobal",
+      0,
+      243,
+      0.0
+    ],
+    [
+      "webp",
+      0,
+      252,
+      0.0
+    ],
+    [
+      "deleted",
+      0,
+      370,
+      0.0
+    ],
+    [
+      "globalinterpark",
+      0,
+      257,
+      0.0
+    ],
+    [
+      "width",
+      0,
+      256,
+      0.0
+    ],
+    [
+      "preview",
+      0,
+      256,
+      0.0
+    ],
+    [
+      "sort",
+      0,
+      71,
+      0.01
+    ],
+    [
+      "decided",
+      0,
+      149,
+      0.01
+    ],
+    [
+      "various",
+      0,
+      76,
+      0.01
+    ],
+    [
+      "bit",
+      5,
+      550,
+      0.01
+    ],
+    [
+      "looked",
+      1,
+      163,
+      0.01
+    ],
+    [
+      "we'll",
+      0,
+      89,
+      0.01
+    ],
+    [
+      "correct",
+      0,
+      72,
+      0.01
+    ]
+  ]
+}

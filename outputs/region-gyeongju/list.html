@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;width:229px;height:128px;overflow:hidden;}
+  svg{display:block;width:229px;height:128px;}
+  text{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;}
+</style>
+</head>
+<body>
+<svg viewBox="0 0 229 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#243b6b"/>
+      <stop offset="38%" stop-color="#5a548f"/>
+      <stop offset="66%" stop-color="#bf6f82"/>
+      <stop offset="100%" stop-color="#f3b377"/>
+    </linearGradient>
+    <radialGradient id="sunglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#fff2c8" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffe09a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ffd27a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="40%" r="75%">
+      <stop offset="62%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.30"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="229" height="128" fill="url(#sky)"/>
+
+  <!-- sun -->
+  <circle cx="168" cy="52" r="48" fill="url(#sunglow)"/>
+  <circle cx="168" cy="52" r="16" fill="#ffeebb"/>
+
+  <!-- back mounds -->
+  <path d="M-10 96 Q 50 70 116 96 Z" fill="#5d8076"/>
+  <path d="M96 98 Q 168 72 244 98 Z" fill="#557a6f"/>
+
+  <!-- mid mounds -->
+  <path d="M-14 110 Q 70 80 158 110 Z" fill="#3f6157"/>
+  <path d="M120 112 Q 200 84 250 112 Z" fill="#3a5b52"/>
+
+  <!-- Cheomseongdae silhouette -->
+  <g fill="#1c2f2a">
+    <rect x="60" y="100" width="26" height="4" rx="1.5"/>
+    <path d="M65 100 C 63.5 86, 67 75, 71 70 C 72.6 68, 78.4 68, 80 70 C 84 75, 87.5 86, 86 100 Z"/>
+    <rect x="71" y="64" width="9" height="6" rx="1"/>
+  </g>
+
+  <!-- pine -->
+  <g fill="#16241f">
+    <path d="M34 112 l8 -28 l8 28 Z"/>
+    <rect x="40" y="110" width="3" height="8"/>
+  </g>
+
+  <!-- foreground -->
+  <path d="M-10 120 Q 114 102 244 120 L244 128 L-10 128 Z" fill="#1d332e"/>
+
+  <rect x="0" y="0" width="229" height="128" fill="url(#vignette)"/>
+
+  <!-- label -->
+  <text x="14" y="34" font-size="26" font-weight="800" fill="#ffffff" letter-spacing="1"
+        style="paint-order:stroke;stroke:#0e1c18;stroke-width:1px;">경주</text>
+  <text x="15" y="50" font-size="9" font-weight="600" fill="#ffe6b8" letter-spacing="3">GYEONGJU</text>
+</svg>
+</body>
+</html>

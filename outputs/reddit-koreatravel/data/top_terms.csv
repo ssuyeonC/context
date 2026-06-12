@@ -1,0 +1,201 @@
+scope,term,count
+title_unigram,seoul,1755
+title_unigram,busan,624
+title_unigram,jeju,438
+title_unigram,trip,422
+title_unigram,itinerary,376
+title_unigram,airport,353
+title_unigram,incheon,342
+title_unigram,recommendations,337
+title_unigram,south,335
+title_unigram,travel,319
+title_unigram,day,306
+title_unigram,days,291
+title_unigram,time,266
+title_unigram,best,247
+title_unigram,card,240
+title_unigram,first,213
+title_unigram,looking,206
+title_unigram,air,206
+title_unigram,stay,194
+title_unigram,buy,186
+title_unigram,traveling,179
+title_unigram,solo,177
+title_unigram,advice,162
+title_unigram,amp,162
+title_unigram,icn,158
+title_unigram,hotel,145
+title_unigram,food,143
+title_unigram,clinic,141
+title_unigram,flight,139
+title_unigram,places,136
+title_unigram,april,132
+title_unigram,question,129
+title_unigram,tour,128
+title_unigram,visit,127
+title_unigram,layover,126
+title_unigram,myeongdong,119
+title_unigram,experience,118
+title_unigram,week,113
+title_unigram,visiting,113
+title_unigram,bus,111
+title_unigram,tips,110
+title_unigram,skin,110
+title_unigram,tickets,110
+title_unigram,car,107
+title_unigram,island,105
+title_unigram,free,105
+title_unigram,one,103
+title_unigram,near,101
+title_unigram,hongdae,101
+title_unigram,good,101
+title_unigram,gyeongju,99
+title_unigram,travelling,98
+title_unigram,luggage,97
+title_unigram,questions,97
+title_unigram,check,96
+title_unigram,during,93
+title_unigram,train,92
+title_unigram,find,90
+title_unigram,station,86
+title_unigram,night,84
+desc_unigram,seoul,5958
+desc_unigram,day,3245
+desc_unigram,time,2834
+desc_unigram,i'm,2582
+desc_unigram,busan,2361
+desc_unigram,trip,2053
+desc_unigram,days,1947
+desc_unigram,amp,1929
+desc_unigram,one,1779
+desc_unigram,https,1732
+desc_unigram,around,1652
+desc_unigram,removed,1423
+desc_unigram,visit,1414
+desc_unigram,looking,1384
+desc_unigram,jeju,1340
+desc_unigram,first,1331
+desc_unigram,good,1325
+desc_unigram,back,1312
+desc_unigram,airport,1305
+desc_unigram,much,1269
+desc_unigram,places,1265
+desc_unigram,com,1228
+desc_unigram,card,1185
+desc_unigram,before,1137
+desc_unigram,planning,1123
+desc_unigram,food,1115
+desc_unigram,find,1089
+desc_unigram,travel,1073
+desc_unigram,see,1069
+desc_unigram,people,1055
+desc_unigram,flight,1036
+desc_unigram,recommendations,1029
+desc_unigram,take,1026
+desc_unigram,experience,991
+desc_unigram,hotel,987
+desc_unigram,hello,984
+desc_unigram,stay,965
+desc_unigram,it's,934
+desc_unigram,south,921
+desc_unigram,love,920
+desc_unigram,wondering,917
+desc_unigram,place,912
+desc_unigram,because,897
+desc_unigram,advance,885
+desc_unigram,tickets,879
+desc_unigram,night,864
+desc_unigram,after,863
+desc_unigram,everyone,848
+desc_unigram,since,842
+desc_unigram,bus,823
+desc_unigram,things,820
+desc_unigram,area,815
+desc_unigram,don't,806
+desc_unigram,station,805
+desc_unigram,way,800
+desc_unigram,buy,791
+desc_unigram,i've,778
+desc_unigram,even,778
+desc_unigram,next,774
+desc_unigram,still,774
+title_bigram,incheon airport,153
+title_bigram,seoul busan,138
+title_bigram,first time,136
+title_bigram,day trip,66
+title_bigram,jeju island,65
+title_bigram,day itinerary,56
+title_bigram,days seoul,47
+title_bigram,climate card,47
+title_bigram,tax refund,45
+title_bigram,trip seoul,44
+title_bigram,itinerary check,40
+title_bigram,air premia,38
+title_bigram,stay seoul,37
+title_bigram,credit card,36
+title_bigram,seoul station,36
+title_bigram,busan seoul,36
+title_bigram,cherry blossom,35
+title_bigram,new year,35
+title_bigram,hour layover,34
+title_bigram,busan jeju,34
+title_bigram,duty free,34
+title_bigram,olive young,31
+title_bigram,dmz tour,30
+title_bigram,nami island,29
+title_bigram,lotte world,29
+title_bigram,solo travel,28
+title_bigram,best way,28
+title_bigram,recommendations seoul,27
+title_bigram,traveling seoul,26
+title_bigram,solo trip,26
+title_bigram,sky capsule,25
+title_bigram,color analysis,25
+title_bigram,jeju air,25
+title_bigram,year old,24
+title_bigram,car rental,24
+title_bigram,solo traveler,24
+title_bigram,best place,24
+title_bigram,south itinerary,24
+title_bigram,seoul itinerary,24
+title_bigram,trip report,23
+desc_bigram,https www,709
+desc_bigram,first time,564
+desc_bigram,seoul busan,356
+desc_bigram,tickets available,335
+desc_bigram,incheon airport,294
+desc_bigram,day trip,278
+desc_bigram,hanok village,260
+desc_bigram,com product,260
+desc_bigram,www globalinterpark,257
+desc_bigram,globalinterpark com,257
+desc_bigram,https preview,250
+desc_bigram,preview redd,250
+desc_bigram,auto webp,250
+desc_bigram,width amp,243
+desc_bigram,amp format,243
+desc_bigram,amp auto,243
+desc_bigram,webp amp,243
+desc_bigram,https tkglobal,243
+desc_bigram,tkglobal melon,243
+desc_bigram,melon com,243
+desc_bigram,com performance,243
+desc_bigram,performance index,243
+desc_bigram,index htm,243
+desc_bigram,htm langcd,243
+desc_bigram,jeju island,223
+desc_bigram,gyeongbokgung palace,207
+desc_bigram,credit card,205
+desc_bigram,lotte world,193
+desc_bigram,seoul station,192
+desc_bigram,seoul days,188
+desc_bigram,langcd amp,187
+desc_bigram,amp prodid,187
+desc_bigram,i'm looking,185
+desc_bigram,planning trip,183
+desc_bigram,back seoul,182
+desc_bigram,nami island,168
+desc_bigram,jpg width,168
+desc_bigram,format pjpg,168
+desc_bigram,pjpg amp,164
+desc_bigram,i'm planning,158

@@ -1,0 +1,643 @@
+{
+  "region_posts": 5554,
+  "pct_of_all": 55.5,
+  "need_request_pct": 89.1,
+  "multi_city_compare_posts": 1521,
+  "multi_city_pct": 27.4,
+  "place_frequency": [
+    [
+      "Seoul",
+      4027
+    ],
+    [
+      "Busan",
+      1506
+    ],
+    [
+      "Jeju",
+      841
+    ],
+    [
+      "Myeongdong",
+      528
+    ],
+    [
+      "Hongdae",
+      450
+    ],
+    [
+      "Gyeongju",
+      362
+    ],
+    [
+      "Gyeongbokgung/Palaces",
+      356
+    ],
+    [
+      "Gangnam",
+      300
+    ],
+    [
+      "Jeju Olle/Hallasan",
+      219
+    ],
+    [
+      "DMZ/JSA",
+      210
+    ],
+    [
+      "Namsan/N Seoul Tower",
+      209
+    ],
+    [
+      "Chuncheon/Nami",
+      183
+    ],
+    [
+      "Bukchon Hanok",
+      173
+    ],
+    [
+      "Insadong",
+      158
+    ],
+    [
+      "Itaewon",
+      152
+    ],
+    [
+      "Haeundae",
+      151
+    ],
+    [
+      "Jeonju",
+      151
+    ],
+    [
+      "Nami Island",
+      146
+    ],
+    [
+      "Lotte World",
+      140
+    ],
+    [
+      "Dongdaemun",
+      139
+    ],
+    [
+      "Suwon",
+      115
+    ],
+    [
+      "Sokcho",
+      108
+    ],
+    [
+      "Gamcheon Village",
+      104
+    ],
+    [
+      "Seongsu",
+      93
+    ],
+    [
+      "Gwangjang Market",
+      82
+    ],
+    [
+      "Daegu",
+      78
+    ],
+    [
+      "Gwangalli",
+      69
+    ],
+    [
+      "Andong",
+      63
+    ],
+    [
+      "Gangneung",
+      58
+    ],
+    [
+      "Everland",
+      48
+    ],
+    [
+      "Incheon (city)",
+      43
+    ],
+    [
+      "Yeosu",
+      27
+    ],
+    [
+      "Ikseondong",
+      27
+    ],
+    [
+      "Tongyeong",
+      10
+    ],
+    [
+      "Pyeongchang",
+      2
+    ]
+  ],
+  "subtopic_within_region": [
+    [
+      "볼거리/명소(Things to do)",
+      4028
+    ],
+    [
+      "추천 요청(Recommend)",
+      2959
+    ],
+    [
+      "이동/교통(Transport)",
+      2935
+    ],
+    [
+      "일정/동선(Itinerary)",
+      2531
+    ],
+    [
+      "음식/맛집(Food)",
+      1831
+    ],
+    [
+      "체험/액티비티(Activity)",
+      1766
+    ],
+    [
+      "숙소/입지(Stay)",
+      1563
+    ],
+    [
+      "쇼핑(Shopping)",
+      1399
+    ],
+    [
+      "날씨/시기(Season)",
+      1127
+    ],
+    [
+      "당일치기/근교(Day trip)",
+      607
+    ]
+  ],
+  "city_x_subtopic": {
+    "Seoul": [
+      [
+        "볼거리/명소(Things to do)",
+        2963
+      ],
+      [
+        "추천 요청(Recommend)",
+        2298
+      ],
+      [
+        "이동/교통(Transport)",
+        2074
+      ],
+      [
+        "일정/동선(Itinerary)",
+        1969
+      ],
+      [
+        "음식/맛집(Food)",
+        1454
+      ],
+      [
+        "체험/액티비티(Activity)",
+        1325
+      ],
+      [
+        "숙소/입지(Stay)",
+        1221
+      ],
+      [
+        "쇼핑(Shopping)",
+        1130
+      ],
+      [
+        "날씨/시기(Season)",
+        910
+      ],
+      [
+        "당일치기/근교(Day trip)",
+        571
+      ]
+    ],
+    "Busan": [
+      [
+        "이동/교통(Transport)",
+        1506
+      ],
+      [
+        "볼거리/명소(Things to do)",
+        1145
+      ],
+      [
+        "일정/동선(Itinerary)",
+        932
+      ],
+      [
+        "추천 요청(Recommend)",
+        865
+      ],
+      [
+        "음식/맛집(Food)",
+        546
+      ],
+      [
+        "체험/액티비티(Activity)",
+        541
+      ],
+      [
+        "숙소/입지(Stay)",
+        487
+      ],
+      [
+        "날씨/시기(Season)",
+        476
+      ],
+      [
+        "쇼핑(Shopping)",
+        409
+      ],
+      [
+        "당일치기/근교(Day trip)",
+        318
+      ]
+    ],
+    "Jeju": [
+      [
+        "볼거리/명소(Things to do)",
+        630
+      ],
+      [
+        "이동/교통(Transport)",
+        599
+      ],
+      [
+        "일정/동선(Itinerary)",
+        523
+      ],
+      [
+        "추천 요청(Recommend)",
+        480
+      ],
+      [
+        "체험/액티비티(Activity)",
+        322
+      ],
+      [
+        "음식/맛집(Food)",
+        314
+      ],
+      [
+        "숙소/입지(Stay)",
+        268
+      ],
+      [
+        "날씨/시기(Season)",
+        215
+      ],
+      [
+        "쇼핑(Shopping)",
+        189
+      ],
+      [
+        "당일치기/근교(Day trip)",
+        128
+      ]
+    ]
+  },
+  "top_bigrams": [
+    [
+      "https www",
+      617
+    ],
+    [
+      "first time",
+      549
+    ],
+    [
+      "seoul busan",
+      492
+    ],
+    [
+      "tickets available",
+      330
+    ],
+    [
+      "day trip",
+      318
+    ],
+    [
+      "jeju island",
+      288
+    ],
+    [
+      "hanok village",
+      265
+    ],
+    [
+      "incheon airport",
+      258
+    ],
+    [
+      "com product",
+      257
+    ],
+    [
+      "www globalinterpark",
+      256
+    ],
+    [
+      "globalinterpark com",
+      256
+    ],
+    [
+      "https tkglobal",
+      243
+    ],
+    [
+      "tkglobal melon",
+      243
+    ],
+    [
+      "melon com",
+      243
+    ],
+    [
+      "com performance",
+      243
+    ],
+    [
+      "performance index",
+      243
+    ],
+    [
+      "index htm",
+      243
+    ],
+    [
+      "htm langcd",
+      243
+    ],
+    [
+      "seoul station",
+      228
+    ],
+    [
+      "lotte world",
+      222
+    ],
+    [
+      "seoul days",
+      208
+    ],
+    [
+      "days seoul",
+      199
+    ],
+    [
+      "nami island",
+      197
+    ],
+    [
+      "gyeongbokgung palace",
+      193
+    ],
+    [
+      "trip seoul",
+      192
+    ],
+    [
+      "langcd amp",
+      187
+    ],
+    [
+      "amp prodid",
+      187
+    ],
+    [
+      "back seoul",
+      184
+    ],
+    [
+      "visiting seoul",
+      174
+    ],
+    [
+      "day seoul",
+      174
+    ],
+    [
+      "busan jeju",
+      163
+    ],
+    [
+      "bukchon hanok",
+      160
+    ],
+    [
+      "https preview",
+      157
+    ],
+    [
+      "preview redd",
+      157
+    ],
+    [
+      "auto webp",
+      157
+    ],
+    [
+      "busan seoul",
+      156
+    ],
+    [
+      "width amp",
+      152
+    ],
+    [
+      "amp format",
+      152
+    ],
+    [
+      "amp auto",
+      152
+    ],
+    [
+      "webp amp",
+      152
+    ]
+  ],
+  "top_unigrams": [
+    [
+      "seoul",
+      7713
+    ],
+    [
+      "day",
+      3219
+    ],
+    [
+      "busan",
+      2985
+    ],
+    [
+      "time",
+      2390
+    ],
+    [
+      "trip",
+      1966
+    ],
+    [
+      "days",
+      1905
+    ],
+    [
+      "i'm",
+      1832
+    ],
+    [
+      "jeju",
+      1778
+    ],
+    [
+      "amp",
+      1641
+    ],
+    [
+      "https",
+      1446
+    ],
+    [
+      "around",
+      1414
+    ],
+    [
+      "one",
+      1384
+    ],
+    [
+      "visit",
+      1289
+    ],
+    [
+      "anyone",
+      1217
+    ],
+    [
+      "looking",
+      1195
+    ],
+    [
+      "first",
+      1182
+    ],
+    [
+      "places",
+      1168
+    ],
+    [
+      "good",
+      1119
+    ],
+    [
+      "com",
+      1082
+    ],
+    [
+      "recommendations",
+      1073
+    ],
+    [
+      "airport",
+      1037
+    ],
+    [
+      "much",
+      1001
+    ],
+    [
+      "food",
+      994
+    ],
+    [
+      "travel",
+      988
+    ],
+    [
+      "back",
+      979
+    ],
+    [
+      "stay",
+      968
+    ],
+    [
+      "hotel",
+      909
+    ],
+    [
+      "planning",
+      889
+    ],
+    [
+      "see",
+      873
+    ],
+    [
+      "before",
+      852
+    ],
+    [
+      "myeongdong",
+      851
+    ],
+    [
+      "thank",
+      849
+    ],
+    [
+      "itinerary",
+      842
+    ],
+    [
+      "night",
+      827
+    ],
+    [
+      "find",
+      824
+    ],
+    [
+      "station",
+      810
+    ],
+    [
+      "card",
+      782
+    ],
+    [
+      "take",
+      777
+    ],
+    [
+      "place",
+      771
+    ],
+    [
+      "tickets",
+      771
+    ]
+  ]
+}
