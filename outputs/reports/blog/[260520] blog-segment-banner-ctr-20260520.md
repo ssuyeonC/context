@@ -2,7 +2,7 @@
 
 > **분석 기간**: 2026-03-22 ~ 2026-05-20 (60일)
 > **데이터 소스**: GA4 자유 양식 보고서 — `AppInstallBannerImpression`/`Click` × `pagePathPlusQueryString` × `eventCount`
-> **세그먼트 기준**: [방식 B — 여행 블로그 2,229개 내부에서 NTILE(4)](./blog-segment-ids-travel-pool-20260422.md)
+> **세그먼트 기준**: [방식 B — 여행 블로그 2,229개 내부에서 NTILE(4)](./[260422] blog-segment-ids-travel-pool-20260422.md)
 > **추출 방식**: `pagePathPlusQueryString` (경로+쿼리스트링) → `/blog/(\d+)` 정규식으로 blog_code 추출 → locale 합산
 > **v3 갱신점**: unmatched 4,000개를 DB에서 검증하여 **93.9%(3,757개)가 비공개(is_publish=0) 블로그 = 404 페이지**임을 발견. 404 페이지에서 배너가 부당하게 렌더되는 버그 확인.
 > **v3.1 보강**: GA4 행 상한을 늘려 재추출한 3개 파일 추가 union(`download (4)(5)(6).csv`). 총 imp +0.33% (925,619→928,644), 총 clk +0.48% (2,713→2,726), 404 블로그 +2개 — 결론 무변동. 본 보고서 수치는 모두 v3.1 union 기준.
