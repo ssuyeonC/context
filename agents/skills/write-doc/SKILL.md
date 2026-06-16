@@ -9,10 +9,18 @@ description: 템플릿 기반 문서 생성 - 지라 티켓(요구사항) 또는
 
 ## 문서 타입
 
-| 타입 | 트리거 키워드 | 템플릿 | 저장 경로 | 파일명 패턴 |
-|------|-------------|--------|----------|------------|
-| 요구사항 (지라 티켓) | `지라`, `티켓`, `요구사항`, `requirements` | `.context/templates/requirements-template.md` | `.context/outputs/jira/` | `requirements_{slug}.md` |
-| 제안서 | `제안`, `제안서`, `proposal` | `.context/templates/proposal-template.md` | `.context/outputs/proposals/` | `proposal_{slug}.md` |
+| 타입 | 트리거 키워드 | 템플릿 | 저장 경로 | 파일명 패턴 | 문서 제목(H1) |
+|------|-------------|--------|----------|------------|--------------|
+| 요구사항 (지라 티켓) | `지라`, `티켓`, `요구사항`, `requirements` | `.context/templates/requirements-template.md` | `.context/outputs/jira/{domain}/` | `[{YYMMDD}] {slug}.md` | `# 세부 기획안 요구사항 문서` |
+| 제안서 | `제안`, `제안서`, `proposal` | `.context/templates/proposal-template.md` | `.context/outputs/proposals/` | `[{YYMMDD}] proposal_{slug}.md` | `# {주제} 제안` |
+
+### 파일명·제목 규칙 (기존 문서와 양식 통일)
+
+- **날짜 접두사** `[{YYMMDD}]`: 작성일(오늘) 기준. 예) 2026-06-15 → `[260615]`.
+- **요구사항은 도메인 하위 폴더**에 저장한다. `.context/outputs/jira/` 아래 기존 도메인 폴더(`spot`, `partner`, `reservation`, `admin`, `beauty`, `promotion`, `itinerary`, `map`, `esim`, `fee-schedule`, `cancel-refund`, `etc` 등) 중 주제에 맞는 곳에 넣는다. 적합한 폴더가 없으면 `etc`에 넣고, 새 도메인이 명확하면 유저에게 확인 후 폴더를 만든다.
+- **요구사항 문서 제목(H1)은 항상 `# 세부 기획안 요구사항 문서`** 로 고정한다. 템플릿 첫 줄의 `# ...양식` 문구를 그대로 쓰지 않는다.
+- **제안서 제목(H1)은 `# {주제} 제안`** 형태의 서술형 제목으로 작성한다.
+- 파일명에 `requirements_` 같은 접두사를 붙이지 않는다(날짜 접두사로 구분).
 
 ## 실행 단계
 
@@ -69,25 +77,27 @@ description: 템플릿 기반 문서 생성 - 지라 티켓(요구사항) 또는
    - 예: "럭키드로우 교차 탐색" → `lucky-draw-cross-exploration`
    - 한국어는 의미를 영어로 번역하여 slug 생성
 
-2. **파일명 결정**: `{타입접두사}_{slug}.md`
-   - 요구사항: `requirements_{slug}.md`
-   - 제안서: `proposal_{slug}.md`
+2. **날짜 접두사**: 오늘 날짜를 `YYMMDD`로 만든다(예: 2026-06-15 → `260615`).
 
-3. **문서 작성**: 템플릿 양식에 맞춰 내용을 채워 Write 도구로 저장
-   - 요구사항 → `.context/outputs/jira/requirements_{slug}.md`
-   - 제안서 → `.context/outputs/proposals/proposal_{slug}.md`
+3. **저장 위치·파일명 결정**
+   - 요구사항: 주제에 맞는 도메인 폴더를 고른다 → `.context/outputs/jira/{domain}/[{YYMMDD}] {slug}.md`
+   - 제안서: `.context/outputs/proposals/[{YYMMDD}] proposal_{slug}.md`
+
+4. **문서 작성**: 템플릿 양식에 맞춰 내용을 채워 Write 도구로 저장한다.
+   - 문서 첫 줄(H1)은 위 '문서 타입' 표의 제목 규칙을 따른다. 요구사항은 `# 세부 기획안 요구사항 문서`, 제안서는 `# {주제} 제안`.
 
 ### Step 5: 완료 보고
 
 생성된 파일 경로를 유저에게 알려줍니다.
 
 ```
-문서가 생성되었습니다: .context/outputs/jira/requirements_{slug}.md
+문서가 생성되었습니다: .context/outputs/jira/{domain}/[{YYMMDD}] {slug}.md
 ```
 
 ## 규칙
 
-- 템플릿 양식을 벗어나는 섹션을 임의로 추가하지 않습니다.
+- 템플릿 양식을 벗어나는 섹션을 임의로 추가하지 않습니다. (예: "참고/작성자 메모" 같은 부록 섹션 금지 — 확정 필요 항목은 본문 해당 위치에 `TBD`로 인라인 표기)
+- **파일명·저장 위치·H1 제목은 기존 문서와 반드시 동일한 양식으로 맞춥니다.** 날짜 접두사 `[{YYMMDD}]`, 요구사항은 도메인 하위 폴더, 제목은 '문서 타입' 표의 규칙을 따릅니다.
 - 예시 섹션의 톤과 깊이를 참고하여 실제 내용을 작성합니다.
 - 유저가 제공하지 않은 정보는 `{미정}` 또는 `TBD`로 표시합니다.
 - 기존 파일과 slug가 겹치면 유저에게 확인 후 덮어쓰거나 slug를 변경합니다.
