@@ -562,3 +562,91 @@
 ---
 
 *추가 논의 #2 종료*
+
+---
+
+## 추가 논의 #3 (2026-06-22) — REGION 재정의 확정 및 프로젝트화
+
+### 배경
+
+> 추가논의 #2의 3단 IA를 실제 DB 스키마·product 코드로 검증하는 후속 작업 세션. 검증 과정에서 REGION 엔티티의 성격 자체를 재정의하기로 했고, 이 작업이 단발 페이지 개선이 아니라 **데이터 정비부터 가는 긴 호흡의 프로젝트**임이 분명해져 별도 문서로 분리한다(`outputs/plans/[260622] region-restructure-project.md`).
+
+### A. REGION 재정의 — '여행객이 인지하는 구역'
+
+- REGION을 행정 폴리곤(legal_location)에 매인 단일 동네가 아니라, **여행객이 인지하는 큐레이션 '구역'**으로 재정의한다. 여러 DETAIL_LOCATION을 사람이 손으로 묶는 단위.
+- 예: `강남` REGION = DETAIL_LOCATION `강남구` + `서초구`. `광화문` REGION = `을지로` + `종로구` + `광화문`.
+- 근거: 여행객은 '방이동'(법정동)이 아니라 '잠실/롯데월드'(인지 구역)로 목적지를 파악. **Reddit corpus 실측 검증(2026-06-22)**: 롯데월드(223)+잠실(90) 언급 vs **방이동(Bangi-dong) 0회**, 집계 sub-city 지명 35개 중 법정동 0개. 인지구역이 같은 위치 행정·법정 단위를 1~2 오더 압도(Myeongdong 1,030 vs Jung-gu 22 등). *(별개 facet인 "지역=질문의 좌표계"는 `region_subtopic.csv` 근거 — 네이밍 증거와 분리.)*
+- **스팟 조회 축 전환**: 현재 `region.legal_location_legal_codes`(프리픽스 LIKE) → **`region_has_detail_location → spot_has_category`**. 스팟이 실제 태깅된 운영 분류(②층위)를 직접 사용.
+
+### B. detail_location ↔ legal_location — 행정구 단위만 연결
+
+- 신규 연결은 **행정구역 단위 DETAIL_LOCATION에만** 건다(강남구·종로구·경주시). 이름 기준 분류: **구 49 / 시 2 / 군 5 / 읍면 3 = 약 59개**.
+- **관광지명 DETAIL_LOCATION(약 81개, 홍대·경복궁·명동)은 legal 연결 안 함 → REGION으로 관리.** 단 스팟이 이미 태깅돼 있어 **삭제하지 않고 유지**.
+- 동(18개, 성수동 등)은 행정/구역 판정 후 분기.
+- 카디널리티가 1:1(행정구↔시군구)로 떨어져 **정션 불필요, `category.legal_code` 단일 컬럼으로 충분**(다대다였던 홍대=마포구 6법정동 케이스가 REGION으로 빠지므로).
+
+### C. legal_location 역할 분리 (없어지지 않음)
+
+- legal_location은 사라지지 않고 역할이 둘로 쪼개짐: **스팟 필터 역할만 폐기**, **지도 기하(폴리곤·좌표판정) 역할은 유지**.
+- 폴리곤 소싱: `/region/seoul`급은 **CITY가 자기 legal(서울=11) 직접 보유**, 행정구 묶음 REGION은 detail_location들의 legal **union**, 관광지 REGION은 **마커만**(폴리곤 없음). PO: 폴리곤은 /region/seoul급에서 필요. (`ST_Contains` 인자 반전 버그는 수정 완료)
+
+### D. 4단 IA 확정
+
+```
+① /region                              도시 (서울·부산·제주·경주)
+② /region/seoul                        도시 상세 (구역 리스트 + 도시간 이동)
+③ /region/seoul/gwanghwamun            구역(REGION) 상세 = 연결된 DETAIL_LOCATION 스팟
+④ /region/seoul/gwanghwamun/tickets    구역 × 테마(category)
+```
+- ④ 스팟 쿼리 = (구역의 detail_location들) ∩ (category=tickets). URL slug는 상품 카테고리, 큐레이션 정렬은 Reddit 의도(합의 11 유지).
+
+### E. 비공개 REGION 500개 삭제
+
+- 현재 region 514개 = **공개(is_publish) 13개** + 비공개 501개. 비공개 대부분은 **2025-02-14 자동 스크립트로 일괄 생성(id 25~531)·미관리**.
+- **삭제 기준은 `is_publish=0`이 아니라 `2025-02-14 벌크(id 25~531)`** — 초기 수동 생성분(2024년, id 4~22) 중 비공개 1개를 보호하기 위함.
+- 삭제 전 의존성 검증(region_review·하드코딩 regionId 4·5·15·region_has_*) 선행.
+
+### 검증된 데이터 (이 세션, prod DB)
+
+| 항목 | 값 |
+|---|---|
+| region 총/공개 | 514 / **13** (전부 legal_codes·marker 보유) |
+| region 생성 패턴 | 2024년 개별 14개(id 4~22) + **2025-02-14 벌크 500개(id 25~531)** |
+| legal_location | 5,332행, **2025-01-16 정부 데이터 일괄 적재** |
+| region↔legal 연결 | `legal_location_legal_codes`(JSON 코드배열) + **프리픽스 LIKE**, FK 아님. 컬럼은 2025-01-13 마이그레이션으로 추가 |
+| detail_location | 158개 (행정구59 / 관광지81 / 동18) |
+| detail_location 연결 | 스팟 133 / region 30 / **무연결 25(삭제 후보)** / parent 고아 105(66%) |
+| 중복 detail_location | 서면×3, 성수동×2 |
+| detail_location↔legal | **연결 없음**(category에 legal_code 컬럼 부재) → 신설 대상 |
+| 미태깅 갭 | detail_location 없는 스팟 ~1,700개(도시만 보유) |
+
+### 작업 순서 (PO 제시, 4단계)
+
+1. **데이터 정비** — detail_location 분류/삭제25/중복통합 + 행정구59 legal 연결 + region 500 삭제
+2. **region 생성** — 행정구 묶음 zone 생성 + 기존 13개 `region_has_detail_location` 재배선 (관광지 승격은 구조 완성 후 수동, 트래픽 적어 비긴급)
+3. **필요한 파라미터 추가** — 스팟 조회 축 전환·폴리곤 resolve·slug 라우팅 쿼리 (와이어프레임이 input)
+4. **region 페이지 UI 개선** — 4단 라우팅·301·스팟 섹션 재편·intent 탭·이동 카드·폴리곤 렌더
+
+### 합의 업데이트
+
+**합의 12 (신규): REGION = 큐레이션 구역, 스팟 축을 detail_location으로 전환**
+> REGION을 여행객 인지 구역으로 재정의하고, 스팟 노출을 `legal prefix`에서 `region_has_detail_location → spot_has_category`로 옮긴다. 합의 8의 3단 IA는 4단(④ 테마)으로 확장.
+
+**합의 13 (신규): legal 연결은 행정구 detail_location에만, 단일 컬럼**
+> 행정구 단위 detail_location(~59)에만 `category.legal_code`를 1:1로 건다. 관광지(~81)는 legal 없이 REGION으로 관리하되 스팟 태깅 때문에 삭제하지 않는다. (합의 9의 P0가 "전면 정리"에서 "분류+무연결25 삭제+중복 통합+행정구 legal 연결"로 구체화)
+
+**합의 14 (신규): legal_location은 기하 전용으로 강등(유지)**
+> 스팟 필터 역할만 폐기하고 지도 폴리곤·좌표판정 역할은 유지. 폴리곤은 /region/seoul급(CITY legal 직접)과 행정구 묶음 REGION(legal union)에서만, 관광지 REGION은 마커만.
+
+**합의 15 (신규): 프로젝트화**
+> 단발 개선이 아니라 데이터 정비→생성→파라미터→UI의 긴 호흡 프로젝트로 관리. 별도 문서 `outputs/plans/[260622] region-restructure-project.md`.
+
+### 열린 결정
+
+1. **Phase 2 region 생성 방식** — 스크립트 vs 어드민 손작업(AD 도구 타이밍이 여기 달림).
+2. **동 18개 분류** — 행정/구역 판정.
+3. **DL-4 parent 보정** — 새 모델에선 region.city_slug가 도시묶음을 대신하므로 어드민 피커 편의 수준, 후순위 가능.
+
+---
+
+*추가 논의 #3 종료*
