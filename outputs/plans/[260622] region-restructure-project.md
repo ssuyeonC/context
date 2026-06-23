@@ -187,10 +187,17 @@ DB 타이밍 + 마이그레이션 코드로 확인한 3개 독립 이벤트:
 ### Phase 3 — 필요한 파라미터 추가 *(input: 와이어프레임/개선계획)*
 | ID | 작업 |
 |---|---|
-| BE-1 | 스팟 조회 축 전환 (legal prefix → region_has_detail_location → spot_has_category) |
+| BE-1 | 스팟 조회 축 전환 (legal prefix → region_has_detail_location → spot_has_category) — **지역 페이지뿐 아니라 스팟 리스트 `region=` 필터 + 프론트 변환·서울 도시 분기까지 포함** (↓ 주1) |
 | BE-2 | 폴리곤 resolve (city=자기 legal / 행정구 zone=legal union / 관광지=마커만) |
 | BE-3 | `/region/{city}/{zone}/{category}` slug 쿼리·리졸버 |
 | BE-+ | 개선계획 신규 필드 (intent 탭·도시간 이동 카드 등) |
+
+> **주1 — 스팟 리스트 `region=` 필터가 BE-1 범위인 이유 (코드 확인, 2026-06-23)**
+> 구역 페이지의 "테마 더보기"는 기존 스팟 리스트(`/spot/list`)로 핸드오프하는데, 거기서 축이 어긋나면 *같은 구역인데 다른 스팟*이 나온다. 실측 결과:
+> - **리스트 `region=`은 현재 legacy 축(legal prefix LIKE).** 프론트(`apps/web/.../pages/spot/list/index.tsx:327–348`)가 `region` 파라미터로 해당 region의 `legalLocationLegalCodes`를 꺼내 인자로 전달 → 백엔드(`spot.repo.ts:2297` `addLegalLocationLegalCodesFilter`)가 `legal_location_legal_code LIKE 'code%'`로 필터. `region_has_detail_location → spot_has_category`(신축) 아님.
+> - **theme(`category`/`middleCategory`)는 이미 `spot_has_category` 경유 → 신축과 호환.** 핸드오프 시 그대로 재사용 가능.
+> - **서울 도시는 별도 분기.** 프론트가 `SEOUL_REGION_CITY_SLUG`를 명시적으로 제외(L328–330)하고 legal_codes를 비움 → 서울은 다른 경로로 필터됨. 신축 통합 시 별도 처리 필요.
+> - **결론:** BE-1은 ① 백엔드 `region=` 리졸버를 신축으로 교체(구역 페이지와 **공용 리졸버**) + ② 프론트의 legal_codes 직접 변환 제거(region id 그대로 전달) + ③ 서울 도시 분기 신축 통합 — 까지 덮어야 더보기 핸드오프가 일관됨.
 
 ### Phase 4 — region 페이지 UI 개선
 | ID | 작업 |
