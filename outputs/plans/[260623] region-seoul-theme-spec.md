@@ -1,10 +1,10 @@
 # `/region/seoul` 테마 구성안 — 수요×공급 검증 + 카테고리 매핑
 
 작성일: 2026-06-23
-상태: **와이어프레임/Phase 3~4 입력** (제안 — 인벤토리 실측 기반)
+상태: **와이어프레임/Phase 3~4 입력** (제안 — 인벤토리 실측 기반) · 2026-06-25 노출방식(캐러셀+테마 leaf) 동기화
 출처/근거:
 - `outputs/reddit-koreatravel/[260612] REPORT_region_deepdive.md` (서울 수요 지문)
-- `outputs/plans/[260622] region-restructure-project.md` (4단 IA·BE-1·합의 11)
+- `outputs/plans/[260622] region-restructure-project.md` (테마 leaf+캐러셀 IA·BE-1·합의 11)
 - prod 실측 (BigQuery `datastream_creatrip`, 2026-06-23)
 
 > **한 줄 요약** — `/region/seoul` 하단 = "도시(서울)=CITY 코드 5 스팟을 **테마(MAIN_RESERVATION 대카테고리)**로 묶어 노출". 그런데 **Reddit 수요(명소·교통 1위)와 Creatrip 공급(뷰티·메디컬·체험 1위)이 정반대**라, 테마 우선순위는 수요만이 아니라 **수요×공급 매트릭스**로 정해야 한다.
@@ -79,19 +79,22 @@
 
 ## 4. 테마 → 카테고리 코드 매핑 (핸드오프용)
 
-각 테마 "더보기" → 기존 리스트로 `?category={code}` 전달 (theme 축은 `spot_has_category`라 신축 호환):
+이 매핑이 곧 **master_theme ↔ category 연결**(플랜 §3-6 `region_section_has_category` / `master_theme`)이 된다. 테마는 카테고리를 **여러 개 묶을 수 있어**(예: K-뷰티=5코드) 단일 필터 리스트로는 표현이 안 되므로, 노출은 **테마 leaf 전용 쿼리**로 간다(플랜 §3-5):
 
-```
-체험        → /spot/list?cityCategory=5&category=352
-미식        → ...&category=353
-투어        → ...&category=354
-인생사진     → ...&category=907
-명소&입장권  → ...&category=3071
-K-뷰티      → ...&category=403   (웰니스 묶음은 403,3028,3070,3068,3069 multi)
-K-pop      → ...&category=900
-교통        → (섹션 아님 / 이동 모듈)
-```
-- 서울 스코프는 `cityCategory=5`(CITY) 사용. **구역 페이지(`/region/seoul/{zone}`)는 `region={id}`** 로 전달하되, 그 resolution은 **BE-1로 신축(region→detail_location→spot_has_category) 전환** 필요 (플랜 BE-1 주1 참조).
+| 테마(master_theme) | category code(s) |
+|---|---|
+| 체험 | 352 |
+| 미식 | 353 |
+| 투어 | 354 |
+| 인생사진 | 907 |
+| 명소&입장권 | 3071 |
+| K-뷰티(웰니스 묶음) | 403, 3028, 3070, 3068, 3069 (multi) |
+| K-pop | 900 |
+| 교통 | (섹션 아님 / 이동 모듈) |
+
+- **노출 방식 (플랜 §3-5 갱신 반영):** 각 테마 섹션 = **monthly best 상위 9 캐러셀**, 스팟 10개 이상이면 **"전체 보기" → 테마 leaf** (`/region/seoul/{theme}` city×테마 · `/region/seoul/{zone}/{theme}` zone×테마). 이전 '더보기 → `/spot/list?category=`' 방식은 **폐기**(멀티카테고리 표현 불가 + thin/중복 SEO 리스크).
+- leaf 스팟 = **(지역 detail_location) ∩ (master_theme 카테고리)**. 서울 city 스코프는 CITY 코드 5의 자식 REGION detail_location 합집합. resolution은 **BE-1 신축(region→detail_location→spot_has_category)** 경로(플랜 BE-1 주1).
+- 콘텐츠 임계 10·canonical 가드레일은 플랜 §3-5 따른다.
 
 ## 5. 비-테마 모듈 (별도 — category 섹션 아님)
 - **다도시 배분 + 도시간 이동 카드** (다도시 27.4%, `seoul busan` 492) — 서울 페이지 최상위 가치. 교통 공급 부족을 이 모듈이 보완.
