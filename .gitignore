@@ -1,1 +1,4 @@
 .DS_Store
+
+# Conductor 세션 첨부파일 (문서에서 참조하는 이미지는 별도 관리)
+attachments/

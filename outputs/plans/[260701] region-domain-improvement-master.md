@@ -1,0 +1,268 @@
+# 지역(Region) 도메인 개선 — 통합 기획서
+
+작성일: 2026-07-01
+상태: **통합 정리본** — 기존 산출물(도메인맵·회의록·재구조화 프로젝트·서울 테마스펙·제안서·데이터정비 V-3)을 하나의 기획서로 종합. 개별 문서의 수치·용어 진화를 최신 확정치로 정합.
+설계 갱신(2026-07-01): ① DETAIL_LOCATION을 **구 단위로 단일화**(관광지·동 삭제·REGION 이관), ② granularity는 **REGION "구 연결 + 법정동 선택" + `spot.legal_code` 필터**로 해결(신규 동 row·재태깅 없음), ③ CITY↔REGION은 어드민 '도시 탭'에서 배선. → 원안 T2(스팟 축 category 전환)를 REGION 해상도에 한해 legal로 원복 **(2026-07-01 사인오프 완료, spot.legal 유효 99.7% 검증)**.
+종합한 문서:
+- `outputs/research/[260618] region-domain-map.md` — 지역 4층위 도메인·어드민 운영 분석
+- `outputs/meetings/region/[260619] meeting-region-page-improvement-0619.md` — 본미팅 + 추가논의 #1~#3 (합의 1~15)
+- `outputs/proposals/[260624] proposal_region-domain-renewal.md` — 개념 재정의·역할 분할
+- `outputs/plans/[260622] region-restructure-project.md` — 모델·IA·작업분해 (D1~D10)
+- `outputs/plans/[260623] region-seoul-theme-spec.md` — 서울 테마 구성(수요×공급)
+- `outputs/plans/[260630] region-data-cleanup-spec.md` — 데이터 정비 작업명세 V-3 (검증 확정치)
+- `outputs/jira/spot/[260617] spot-multiple-detail-locations.md` — 외부 선행 게이트
+
+> **한 줄 요약** — 크리에이트립의 '지역'은 목적이 다른 4개 체계(행정·분류·콘텐츠·마케팅)가 역할 없이 겹쳐 방치돼 있다. 이를 **분류(CITY·DETAIL_LOCATION) / 콘텐츠(REGION) / 기하(LEGAL_LOCATION)** 로 역할을 갈라 정립하고, REGION을 '행정 폴리곤에 매인 단일 동네'에서 **여행객이 인지하는 큐레이션 구역**(여러 행정구 DETAIL_LOCATION을 묶은 단위)으로 재정의한다. 그 위에 **테마(의도) 축**과 **도시→구역→테마 IA**를 얹어, 수요(외부 담론 55%)와 페이지(트래픽 3.8%·참여 11초)의 격차를 메운다.
+
+---
+
+## 1. 왜 하나 — 배경·문제
+
+세 가지가 동시에 같은 곳을 가리킨다.
+
+1. **수요 vs 트래픽 격차** — 외부 여행 담론(r/koreatravel 10,001건)의 **55.5%가 '지역'**인데, 지역 페이지는 스팟 리스트 트래픽의 **3.8%**만 받고 평균 **11초**만에 이탈(리스트 49초의 22%). 끝까지 본 5%는 스팟으로 전환됨 → **콘텐츠 가치가 0인 게 아니라 구조가 수요와 어긋남.**
+2. **분류 축 불일치** — 같은 스팟 풀을 '추천·최신·인기'(신선도·인기) 렌즈로 16개 섹션에 반복. 유저가 원하는 **의도(볼거리·교통·투어)·다도시·지역간 이동** 축이 없다.
+3. **도메인 4층위 혼재·방치** — '지역'이 ①행정(legal_location) ②운영분류(category) ③콘텐츠(region) ④마케팅(landing_area)으로 역할 없이 평행 존재. region 514개 중 공개 13개, 대부분 자동생성 후 방치.
+
+부가로 **SEO 미수취** — '도시×테마'(seoul restaurants), '도시×구역'(seoul gangnam) 등 월 1만~10만 대형 키워드(합산 추정 월 ~50만)를 받을 페이지 구조가 없다.
+
+→ 답은 "섹션을 더 쌓는 것"이 아니라 **분류 축을 유저 인지(구역)·의도(테마)로 바꾸고, 4개 개념의 역할을 정립하는 것.**
+
+---
+
+## 2. 개선 방향 (핵심 전환 4가지)
+
+| # | 전환 | Before | After |
+|---|---|---|---|
+| T1 | **REGION 재정의** | 행정 폴리곤에 매인 단일 동네(명동=regionId 4) | **여행객 인지 큐레이션 구역**(강남 = 강남구+서초구) |
+| T2 | **스팟 조회 축** | `region.legal_location_legal_codes` 프리픽스 LIKE (좌표 유도·ST_Contains 버그로 무력) | **REGION 스팟 해상도 = legal(법정동) 유지·복구**(버그 수정 완료) + `spot_has_category`(구)는 라벨·검색용. → 원안의 'category 전환'을 REGION 해상도에 한해 **legal로 원복**(§3-2·§7-3) |
+| T3 | **콘텐츠 축** | 신선도·인기(추천/최신/인기 반복) | **테마(유저 의도) 축** — 운영자가 REGION별 섹션 편성 + 테마 leaf SEO |
+| T4 | **정보구조(IA)** | `/spot/region/{숫자 id}` 평면 | **도시 → 도시상세 → 구역 → 테마** 4단 slug |
+
+이 네 전환의 토대가 **개념 역할 정립(§3)**이고, 그것을 떠받치는 선행 작업이 **데이터 정비(§4)**다.
+
+---
+
+## 3. 개선된 개념 구조 — 각 도메인·개념의 역할 (본 문서의 핵심)
+
+### 3-1. 역할 3분할 — 분류 / 콘텐츠 / 기하·필터
+
+현재는 네 개념이 역할 없이 나란히 있어 겹친다('홍대' 지역과 '홍대' 상세지역이 같은 이름·단위). 아래처럼 **역할을 갈라주면 겹침이 사라진다.**
+
+| 역할 | 개념 | 정체성 | 테이블 |
+|---|---|---|---|
+| **분류 (뼈대)** | CITY · DETAIL_LOCATION | 스팟이 매달리는 꼬리표·라벨. "이 스팟은 서울/성동구". **DETAIL_LOCATION은 구(행정구) 단위만** — 관광지·동은 REGION으로 이관(§3-3②) | `category`(type=CITY/DETAIL_LOCATION) + `spot_has_category` |
+| **콘텐츠 (큐레이션)** | REGION | 유저에게 보여줄 '인지 구역'. **구 연결 + 그 구의 법정동 선택**으로 그림. 테마·블로그·지도 | `region` + `region_has_*` |
+| **기하 + 스팟 필터** | LEGAL_LOCATION | 지도 경계·좌표 **+ 스팟 fine 해상도**. 구 DL에 법정동 1:N, REGION은 선택 법정동으로 스팟 필터·폴리곤 상속 | `legal_location` + `spot.legal_location_legal_code`(97.5%) |
+| *(탐색축)* | SUBWAY | '주요 역' 탭 — 역 주변 스팟 발견(접근·발견) | `category`(type=*_SUBWAY) + `region_has_subway` |
+
+### 3-2. 개념 관계도 · 카디널리티
+
+```mermaid
+flowchart TD
+    CITY["CITY · 도시 (category)<br/>페이지 /region/{city}"]
+    REGION["REGION · 여행객 인지 구역<br/>콘텐츠 레이어(테마·블로그·지도)<br/>페이지 /region/{city}/{zone}"]
+    DL["DETAIL_LOCATION · 구(행정구)<br/>스팟 분류·라벨"]
+    LEGAL["LEGAL_LOCATION · 법정동<br/>폴리곤 + 스팟 fine 해상도"]
+    SPOT["SPOT"]
+
+    CITY -->|"1 : N · region.city FK (어드민 도시탭)"| REGION
+    REGION -->|"N : N · region_has_detail_location (구 연결=범위)"| DL
+    REGION -->|"1 : N · 선택 법정동 (region.legal_location_legal_codes)"| LEGAL
+    DL -->|"1:1 시군구(폴리곤) · 1:N 법정동(pool, prefix)"| LEGAL
+    SPOT -->|"N : 1 · spot.legal_location_legal_code (97.5%)"| LEGAL
+    SPOT -.->|"1:1 CITY · N:N 구(라벨·검색) · spot_has_category"| DL
+
+    classDef content fill:#e8ecff,stroke:#7d8cc4
+    classDef geo fill:#e6f5e6,stroke:#7db07d
+    class REGION content
+    class LEGAL geo
+```
+
+**REGION 스팟 노출 =** 스팟의 `legal_code`가 그 REGION이 선택한 법정동 집합에 속하면 노출. (성수 REGION = 성동구 연결 + {성수동1가·2가} 선택 → 그 2개 법정동에 있는 스팟만, 옥수동 제외.)
+
+| 관계 | 카디널리티 | 연결 |
+|---|---|---|
+| CITY : REGION | 1 : N | `region.city` FK (신설) · 어드민 '도시' 탭에서 배선 |
+| REGION : DETAIL_LOCATION(구) | N : N | `region_has_detail_location` — REGION의 **구 범위**(법정동 picker scope) |
+| REGION : LEGAL(법정동) | 1 : N | REGION이 **선택한 법정동 집합** (`region.legal_location_legal_codes` 재사용) |
+| DETAIL_LOCATION(구) : LEGAL | 1:1(시군구) + **1:N(법정동)** | 1:1=폴리곤 / 1:N=법정동 pool(`legal_code LIKE '구코드%'`로 **자동 도출**) |
+| SPOT : LEGAL(법정동) | N : 1 | `spot.legal_location_legal_code` — **fine 해상도 키**(6,281/6,444=97.5%, 좌표 유도) |
+| SPOT : CITY | 1 : 1 | `spot_has_category` (필수 앵커) |
+| SPOT : DETAIL_LOCATION(구) | N : N | `spot_has_category` — 스팟 카드 라벨·검색 facet |
+
+> ⚠️ **granularity 해법 확정(2026-07-01)** — 관광지·동을 DETAIL_LOCATION에 두지 않고, REGION을 **"구 연결 + 그 구의 법정동 중 선택"**으로 만든다. 스팟은 이미 가진 `legal_code`로 필터되므로(성수동 스팟만, 옥수동 제외) 구 하위 변별이 유지된다. → 신규 동 row·스팟 재태깅 불필요. 단 REGION 스팟 해상도가 legal 기반이라 원안 T2의 'category 전환'을 이 부분에 한해 **legal로 원복**(§7-3).
+
+### 3-3. 개념별 상세 역할
+
+**① CITY (도시) — 분류의 최상위 + 콘텐츠 집계 그릇**
+- `category(type=CITY)` 169개. 모든 스팟의 **필수 단일 앵커**(스팟당 1.0).
+- 개선 후 역할: `/region/{city}` 페이지. **카드 메타(대표이미지·태그·설명)·slug·도시간 이동만 저장**하고, 상세 본문은 **자식 REGION을 master_theme로 집계해 파생**(별도 콘텐츠 테이블 없음).
+- **CITY : REGION 연결은 어드민에서 설정** — 어드민 '지역 관리' 페이지(`/region`)에 **'도시' 탭을 신설**하고, `category(type=CITY)` row를 테이블로 노출한다. 각 CITY row에서 **소속 REGION 연결관계를 설정**(어느 구역들이 이 도시에 속하는지)한다. → 즉 CITY↔REGION은 스크립트가 아니라 **운영자가 도시 탭에서 손으로 배선**한다.
+- 활성화 게이트: ≥1 REGION + image·tags·desc.
+- 폴리곤: CITY가 자기 legal(서울=11) 직접 보유 → `/region/{city}` 도시 경계.
+
+**② DETAIL_LOCATION (상세지역) — 구(행정구) 단위로 단일화**
+- `category(type=DETAIL_LOCATION)` 현재 158개 → **구(행정구, ~55)만 남긴다.** 관광지·동형(103)은 **삭제**, '관광지' 개념은 **REGION으로 이관**(기존 문서의 "관광지 DL 잔존"을 대체 — §4-1 주).
+- 역할: 스팟의 **구 라벨·검색 facet**(`spot_has_category`) + **REGION의 구 범위**(`region_has_detail_location`) + **법정동 pool 보유**(DL:LEGAL 1:N).
+- **granularity는 법정동으로 해결**(§3-2 확정): 관광지 인지구역은 REGION이 "구 연결 + 법정동 선택"으로 표현하고, 스팟은 자기 `legal_code`로 걸린다. → **동을 DETAIL_LOCATION에 만들 필요 없음, 스팟 동 재태깅도 없음.**
+- 스팟 정리: 삭제되는 관광지·동 DL에 걸렸던 스팟은 **소속 구로 `spot_has_category` 재태깅**(라벨용). 소속 구는 `spot.legal_code` prefix(법정동→구)로 도출 가능. ※ granularity는 legal이 담당하므로 이 재태깅은 라벨 정합 수준(과거 granularity 블로커 아님).
+
+**③ REGION (지역) — 여행객 인지 구역 (유일한 '콘텐츠' 자산)**
+- `region` 514개(공개 13). 개선 후 = **구 연결 + 법정동 선택으로 그린 인지 구역**. 두 결:
+  - **광역 묶음형**: `강남` = 강남구+서초구의 법정동들 (여러 구).
+  - **관광지형**: `성수` = 성동구 연결 + {성수동1가·2가} 선택 (한 구의 일부 법정동만, 옥수동·왕십리 제외).
+- 스팟 노출: **선택 법정동에 `legal_code`가 속한 스팟**(§3-2).
+- 콘텐츠: **테마 섹션(어드민 CMS)** · subway · blog · persona 큐레이션.
+- 폴리곤: **선택 법정동들의 union** → 관광지형도 실제 범위(성수동)만큼 정확(구 전체 아님). 광역형은 여러 구 union.
+- 어드민 생성 흐름: ① 구 DETAIL_LOCATION 연결 → ② 그 구의 법정동 pool에서 **선택** → ③ 테마·subway 등 편성.
+
+**④ LEGAL_LOCATION (법정지역) — 지도 기하 + 스팟 fine 해상도**
+- `legal_location` 5,332행(시도17/시군구250/**법정동5,065**), 정부 표준 + GeoJSON. 정부 동기화(관리 대상 아님).
+- 개선 후 역할 **둘**: (a) 지도 폴리곤·좌표판정, (b) **REGION 스팟 fine 해상도** — 스팟이 `spot.legal_location_legal_code`(법정동, 97.5% 보유)로 REGION의 선택 법정동에 매칭.
+- 구 DETAIL_LOCATION과 1:1(시군구 폴리곤) + 1:N(법정동 pool, prefix 자동).
+- ⚠️ `/map` 지역뷰 `ST_Contains` 인자 반전 버그 **수정 완료** → legal 판정 신뢰 가능.
+- ※ `legal_location.category_code`는 전 행 강릉시 default(무의미)로, 이건 **legal→category 방향**이라 위 스팟 해상도(`spot.legal_code`)와 무관(혼동 주의).
+
+**⑤ SUBWAY (지하철) — 접근·발견 탐색축 (독립 유지)**
+- `category(type=MAIN_SUBWAY 11 / MIDDLE_SUBWAY 478)`. 스팟이 인근 역에 다중 태깅(역 5.4/스팟).
+- DETAIL_LOCATION과 **완전 독립**(별도 type·code, parent가 지하철을 안 가리킴). REGION의 '주요 역' 탭으로 활용(`region_has_subway`, region_has_* 중 최다 링크).
+
+### 3-4. Before / After 한눈 비교
+
+| 항목 | 현재 | 개선 후 |
+|---|---|---|
+| REGION 정체 | 행정 폴리곤 = 단일 동네 | 구 연결 + 법정동 선택으로 그린 인지 구역 |
+| DETAIL_LOCATION 범위 | 행정구·관광지·동 혼재(158) | **구만(~55)** — 관광지·동 삭제(개념은 REGION) |
+| REGION 스팟 조회 | legal 프리픽스(버그로 무력) | REGION 선택 법정동 ∩ `spot.legal_code` (legal 유지, 버그 수정) |
+| legal 활용 | region↔legal 프리픽스(무력) + DL↔legal 없음 | 구:법정동 1:N(prefix 자동) + REGION 선택 법정동 + spot.legal 필터 |
+| 콘텐츠 축 | 신선도·인기 | 테마(의도) — 운영자 편성 |
+| CITY | region의 속성(citySlug) | URL 1급 + 콘텐츠 집계 그릇, 어드민 '도시 탭'에서 REGION 배선 |
+| URL | `/spot/region/4` | `/region/seoul/gangnam/restaurants` |
+
+---
+
+## 4. 데이터 정비 (P0 선행) — 개선 구조를 떠받치는 정합성
+
+개선 IA의 '구역 필터'는 DETAIL_LOCATION 위에 서므로, **정합성 정리가 최우선 선행**이다. 상세 작업명세는 `[260630] region-data-cleanup-spec.md`(**V-5**, DETAIL_LOCATION 정리 시퀀스 확정). 요지:
+
+### 4-1. DETAIL_LOCATION 158 최종 분류 (2026-07-01 재검증)
+
+| 분류 | 수 | 처리 (2026-07-01 갱신) | legal |
+|---|---:|---|:---:|
+| 행정구(구·시·군) | **55** | **유일하게 잔존.** REGION 묶음 키 · legal 1:1 | ✅ |
+| 관광지명 | 82 | **삭제** — 스팟을 소속 구로 교체, 개념은 REGION으로 이관 | ❌(삭제) |
+| 동 | 16 | **삭제** — 소속 구로 교체·REGION 이관 | ❌(삭제) |
+| 중복 서면 3→1 / 성수동 2→1 | 5 | 삭제(관광지에 포함) | ❌(삭제) |
+
+> **방향 전환 주의 (기존 문서 대체)** — V-3 정비명세(`[260630]`)까지는 관광지 82·동 16을 **REGION 관리 DETAIL_LOCATION으로 잔존**시켰으나, **2026-07-01 갱신으로 이들을 삭제하고 DETAIL_LOCATION을 구 55로 단일화**한다(스팟은 소속 구로 라벨 재태깅, 관광지 개념은 REGION 흡수). 따라서 잔존 DETAIL_LOCATION = 55. → **`[260630]` 정비명세 = V-5로 개정 완료**(관광지/동 '삭제', 삭제 판정에 스팟·블로그·어학당 3종 링크 확인, 행정구는 무연결이어도 유지, granularity는 REGION 법정동 선택+spot.legal).
+>
+> *(수치 이력: 초기 문서 260618/19/22는 행정구 59/관광지 81/동 18, V-3에서 55/82/16으로 재검증 확정. 본 문서는 V-3 실측치를 기준으로 하되 처리 방침만 위와 같이 갱신.)*
+
+### 4-2. legal 연결 현황·목표 (세 방향 구분 — 혼동 주의)
+
+- **스팟 → legal (`spot.legal_location_legal_code`)**: ✅ **이미 살아있음** — 6,281/6,444=**97.5%**가 법정동 코드 보유, legal_location과 clean 조인. **REGION fine 해상도의 핵심 자산**(신규 작업 아님).
+- **DL(구) → legal (`category.legal_code`, 신설)**: 현재 없음. 구 55개에 붙임 — 시군구(level2) **1:1**(폴리곤) + 법정동(level3) **1:N**(pool, `legal_code LIKE '구코드%'`로 **자동 도출**, 수기 매핑 불필요). 이름 자동매칭 49 자동 / 6 수동(중구·동구·서구·남구·북구 = 동명 복수 / 강서구 = 서울 판별).
+- **legal → category (`legal_location.category_code`)**: 전 행 강릉시 default = **무의미**(방치). 위 두 방향과 무관하니 "legal 연결 없음"과 헷갈리지 말 것.
+
+### 4-3. 그 밖의 정비
+
+- **비-행정구 103 삭제 + 연결 재지정 (핵심)** — 삭제 전 **스팟·블로그·어학당** 3종 연결을 소속 구로 재지정(스팟만 X). 소속 구는 spot.legal prefix로 도출, 필요 시 구/시 생성(예: 강릉시). ※ REGION 노출은 legal이 담당하므로 별도 블로커 없음. 상세 시퀀스·리스트는 `[260630] V-5`.
+- **완전 무연결 즉시삭제** — 스팟·블로그·어학당·region 0인 비-행정구 = **청주공항 1건**. (V-4의 "무연결 12 즉시삭제"는 오류 — 11개가 블로그 보유 → 재연결 후 삭제. 2026-07-01 링크 검증.)
+- **빈 구 13개** — 행정구라 무연결이어도 **유지**(legal 앵커).
+- **RG-1** 비공개 REGION **500개 삭제**(`id 25~531`, 2025-02-14 벌크). 검증: 삭제집합 내 공개 0·하드코딩 id 4·5·15 안전 ✅.
+- **RG-3** `region_spot_area_has_spot` 27링크 정리(스팟 직접 region 연결 해제).
+- **AD-5** 어드민 상세지역 생성에 **상위 도시(parent) 입력 + `createCategory` type 화이트리스트** → 고아·잡값 재오염 차단(근본 원인: 현재 생성 모달에 parent 입력이 없어 무조건 고아로 태어남).
+
+---
+
+## 5. 정보구조(IA) · 페이지 설계
+
+### 5-1. 4단 IA
+
+```
+① /region                                도시 인덱스 (지도 + 도시 선택 + 도시간 이동)
+② /region/{city}                         도시 상세 (구역 그리드 + 도시간 이동 + 블로그 + 테마 캐러셀)
+   └ /region/{city}/{theme}              도시×테마 leaf  ('seoul restaurants' 월 1만~10만) ★
+③ /region/{city}/{zone}                  구역(REGION) 상세 (섹션·subway·persona·지도 + 테마 캐러셀)
+   └ /region/{city}/{zone}/{theme}       구역×테마 leaf  ('gangnam restaurants' 롱테일)
+```
+
+- **3번째 칸(zone/theme 공유)** = city별 슬러그 레지스트리 `(city, slug)→{zone|theme}` + 어드민 유니크 가드로 판정(zone=지명·theme=의도명사라 충돌 사실상 0).
+- 기존 `/spot/region/{숫자 id}` → 새 slug **301 리다이렉트**(498 동네 URL SEO 승계).
+
+### 5-2. 테마 = 운영자 편성 CMS + SEO leaf
+
+- **테마 = master_theme**(전역 사전: 볼거리·미식·쇼핑·K-뷰티…). 카테고리를 **여러 개 묶을 수 있어**(K-뷰티=5코드) 단일 필터 리스트로 표현 불가 → **테마 leaf 전용 쿼리**((지역 detail_location) ∩ (master_theme 카테고리)).
+- REGION 섹션은 **자유 편성**(이름+카테고리+순서), CITY 편집 화면에서 관리자가 소속 섹션을 master_theme로 그룹핑 → CITY 집계.
+- **노출 = 캐러셀 + leaf**: monthly best 상위 9 캐러셀 + 스팟 ≥10이면 "전체 보기"→leaf.
+- **SEO 가드레일(필수)**: 콘텐츠 임계 10(미만 leaf 생성·색인 안 함), 테마 leaf=canonical 정본(`/spot/list?category=` 필터뷰 noindex 양보), 안정 slug, 짧은 에디토리얼 인트로.
+
+### 5-3. 서울 테마 구성 (수요×공급) — 상세: `[260623] region-seoul-theme-spec.md`
+
+- ⚠️ **수요·공급 역전**: Reddit 수요 1·3위(명소 72.5%·교통 52.8%)의 서울 공급은 최하위(명소 50·교통 7). 공급 1~3위는 뷰티/체험 버티컬.
+- 권장 배치: **A 간판**(체험·미식·투어·인생사진, 수요高×공급충분) → **B 노출우선·공급확충**(명소·교통) → **C K-뷰티·웰니스 묶음**(공급高·별도) → **D K-pop**. 쇼핑·숙소는 별도 도메인 크로스셀.
+
+---
+
+## 6. 실행 로드맵
+
+> 의존성: **데이터(P0/P1) → REGION·CITY 생성(P2) → 파라미터(P3) → UI(P4)**. 유저 페이지 배포는 데이터 생성 완료 후 일정.
+
+| Phase | 범위 | 핵심 작업 | 의존성 |
+|---|---|---|---|
+| **P0** | 데이터 정합성 | AD-5(재오염 차단) → DL-3 분류 → DL-1 삭제 → **DL★**(대응 REGION 생성·구연결·법정동선택 → 스팟 구 라벨 재태깅 → 관광지·동 DL 삭제) → LL(구55: 시군구 1:1 + 법정동 1:N 자동) → RG-1(500)·RG-3 | — |
+| **P1** | REGION/CITY 생성 | 행정구 묶음 REGION 생성 + 기존 공개 13개 재배선, CITY 카드메타 입력·활성화 | P0 |
+| **P3** | 파라미터/BE | 조회 축 전환(BE-1) · 폴리곤 resolve(BE-2) · slug 라우팅+레지스트리(BE-3) · 테마 leaf/캐러셀 쿼리(BE-4) · region_section·master_theme(BE-5) · CITY 집계(BE-6) · subway/blog/persona(BE-7·8) | P1, 와이어프레임 |
+| **P4** | UI | 4단 라우팅·301 · CITY/REGION 페이지 · 테마 캐러셀+leaf · 폴리곤 렌더 | P3 |
+| **유입** | 리스트→region 동선 | 스팟 리스트(49초)에 '지역으로 둘러보기' 위젯 → `/region` | P1 출시 + P2 활성화 검증 후 |
+
+**외부 게이트 — 스팟 multi-detail_location(1→2개)** (`[260617] spot-multiple-detail-locations`). **의존도 낮음**: REGION 스팟 해상도는 `spot.legal_code`(단일 법정동)로 처리되므로 재태깅·granularity에 multi-DL이 불필요. multi-DL은 스팟 카드가 **두 구 라벨을 병기**하거나 검색 노출을 넓힐 때의 편의로, 별 트랙으로 진행 가능. (스팟↔상세지역은 이미 다대다 저장 가능, 순서값 추가 + 입력·검색·노출 반영이 실제 작업.)
+
+---
+
+## 7. 성공 지표 · 리스크
+
+### 7-1. 지표 (회의록 합의 6·7 기준)
+
+- 문제는 **활성화(11초)와 유입(3.8%)의 동시 고장**, 전환(5%)은 정상.
+- **1차 = 활성화**: 참여시간 11초→목표·이탈률. 첫 화면(above-the-fold)에 의도 답(테마·이동 카드) 배치로 직격.
+- **후행 = 유입**: 리스트→region 동선. **활성화 검증 후 개방**(깨진 페이지에 트래픽 먼저 붓지 않음).
+- **가드레일**: 스팟 이동률 5% 유지.
+
+### 7-2. 리스크
+
+| 리스크 | 내용 | 대응 |
+|---|---|---|
+| 콘텐츠 공백 | region 514개 중 498 서울, 부산·제주 각 1개 | 도시 페이지를 **category(CITY)+스팟 집계 기반(B-2)**으로 세워 우회, 에디토리얼 후행 |
+| 임팩트 천장 | 3.8% 베이스 → 활성화만으론 전사 임팩트 작음 | 유입 트랙 병행 필수 |
+| RG-1 삭제 | 벌크 500 삭제 안전성 | ✅ V-3에서 공개 0·하드코딩 id 안전 검증 완료 |
+| spot.legal 정확도 | ✅ **점검 완료(2026-07-01, 전수)** — 코드 스팟 6,285 중 경계 내 93.3% + 경계≤55m 6.4% = **유효 99.7%**, 실오배정 20건(0.3%)·dangling 0 | 미코드 159건(2.5%) backfill(좌표→법정동 자동) + 오배정 20건 보정만 하면 충분 |
+| T2 원복 합의 | REGION 스팟 해상도를 category→legal로 되돌림(합의 12·D2 갱신) | ✅ **사인오프 완료(2026-07-01)** — ST_Contains 수정 + legal 유효 99.7%로 정당성 확인, 승인됨 |
+| 미해결 결정 | 보존 13개 empty 구 비노출 여부 / REGION 생성 시 법정동 선택 운영 부담 | cleanup-spec §4 |
+
+### 7-3. granularity 해법 — 확정 (구 연결 + 법정동 선택)
+
+관광지 DL을 삭제해도 구 하위 변별을 잃지 않는다: REGION을 **"구 DETAIL_LOCATION 연결 + 그 구의 법정동 중 선택"**으로 만들고, 스팟은 이미 가진 `legal_code`로 필터한다.
+
+- 예: `성수` REGION = 성동구 연결 → 법정동 pool(17개: 왕십리·옥수·금호1~4가·성수동1가·2가…) 중 **{성수동1가·2가}만 선택** → `legal_code∈{11200114,11200115}`인 스팟만 노출. 옥수동·왕십리 스팟은 제외.
+- **비용**: 신규 동 DL **0** · 스팟 동 재태깅 **0**(legal 이미 97.5% 보유). 구:법정동 pool은 `legal_code` prefix로 자동. 폴리곤도 선택 법정동 union이라 관광지 범위만큼 정확(구 전체 아님).
+
+**남는 확인 2가지**: ① `spot.legal_code` **정확도 점검 완료(2026-07-01, 전수)** — 유효 99.7%(경계 내 93.3% + 경계≤55m 6.4%), 실오배정 20건(0.3%)·dangling 0·좌표순 (경도,위도) 확정. → 리스크 해소, **미코드 159건 backfill(좌표→법정동 자동) + 오배정 20건 보정**만 대상. ② 원안 T2('스팟 축을 category로')를 **REGION 해상도에 한해 legal로 원복** — ✅ **사인오프 완료(2026-07-01)**. 합의 12·D2를 이 방향으로 갱신하며 확정.
+
+*(이전 검토안 A[region_spot_area]·B[multi-DL]·C[읍면동]는 이 확정안으로 대체.)*
+
+---
+
+## 8. 부속 문서 맵
+
+| 층위 | 문서 | 역할 |
+|---|---|---|
+| 근거·현황 | `research/[260618] region-domain-map.md` | 4층위·어드민 운영·CRUD 게이팅·데이터 부채 |
+| 수요 | `reddit-koreatravel/[260612] REPORT_region_deepdive.md` | 지역 수요 55.5%·다도시 27%·도시 지문 |
+| 논의 | `meetings/region/[260619] …0619.md` | 합의 1~15 (문제정의→3단 IA→REGION 재정의→프로젝트화) |
+| 제안 | `proposals/[260624] proposal_region-domain-renewal.md` | 개념 재정의·역할 분할·기획 프레임 자문 |
+| 설계 | `plans/[260622] region-restructure-project.md` | 2레이어 모델·D1~D10·작업분해·IA |
+| 테마 | `plans/[260623] region-seoul-theme-spec.md` | 서울 테마 수요×공급·master_theme 매핑 |
+| 정비 | `plans/[260630] region-data-cleanup-spec.md` | DETAIL_LOCATION 정리 시퀀스 **V-5** (행정구 분류·3종 링크 검증·DL↔LEGAL 연결까지, REGION은 후속) |
+| 게이트 | `jira/spot/[260617] spot-multiple-detail-locations.md` | 스팟 복수 상세지역(DL-5 선행) |
