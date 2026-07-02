@@ -12,6 +12,8 @@
 - `outputs/plans/[260630] region-data-cleanup-spec.md` — 데이터 정비 작업명세 V-3 (검증 확정치)
 - `outputs/jira/spot/[260617] spot-multiple-detail-locations.md` — 외부 선행 게이트
 
+> ⚠️ **2026-07-02 구조 재정렬 (이해관계자 동의 대기)** — 본 문서는 원래 `CITY=시/군` · `DETAIL_LOCATION=손수 관리 구 category`(Path 1) 전제였으나, `[260701] region-geo-model-decision.md` §0으로 재정렬한다: **CITY=시도(L1) · DETAIL_LOCATION=LEGAL 시군구(L2)를 어드민에서 선택해 생성(초기 스크립트 시딩) · 이름은 자유입력 다국어 · REGION은 CITY 1개 아래 DL 묶음 + 그 하위 동(L3) 선택.** 아래 §3의 CITY·DETAIL_LOCATION 레벨·생성방식은 이 기준으로 읽는다. **CITY 승격은 스팟 노출 라벨 변경(예: 스팟 CITY 의왕시→경기도+DL 의왕시)을 수반하므로 회사 이해관계자 승인 후 확정**(승인 전엔 '방향').
+
 > **한 줄 요약** — 크리에이트립의 '지역'은 목적이 다른 4개 체계(행정·분류·콘텐츠·마케팅)가 역할 없이 겹쳐 방치돼 있다. 이를 **분류(CITY·DETAIL_LOCATION) / 콘텐츠(REGION) / 기하(LEGAL_LOCATION)** 로 역할을 갈라 정립하고, REGION을 '행정 폴리곤에 매인 단일 동네'에서 **여행객이 인지하는 큐레이션 구역**(여러 행정구 DETAIL_LOCATION을 묶은 단위)으로 재정의한다. 그 위에 **테마(의도) 축**과 **도시→구역→테마 IA**를 얹어, 수요(외부 담론 55%)와 페이지(트래픽 3.8%·참여 11초)의 격차를 메운다.
 
 ---
@@ -96,13 +98,15 @@ flowchart TD
 ### 3-3. 개념별 상세 역할
 
 **① CITY (도시) — 분류의 최상위 + 콘텐츠 집계 그릇**
+- 🔄 **2026-07-02 재정렬(승인 대기)**: CITY = **시도(L1)** — 경기도·서울특별시. 현재 시/군(169, 잡값 포함)에서 시도로 승격. 생성 = **LEGAL L1 선택(기본) + 자유 텍스트 입력 채널 신설**('한국' 등 legal 없는 전국값 유지, '평양' 등 제거 — D4). 스팟에 직접 노출되는 값이라 라벨 표기가 바뀜 → 이해관계자 확인 필요. 광역시 외 CITY 스팟 일괄 마이그레이션.
 - `category(type=CITY)` 169개. 모든 스팟의 **필수 단일 앵커**(스팟당 1.0).
 - 개선 후 역할: `/region/{city}` 페이지. **카드 메타(대표이미지·태그·설명)·slug·도시간 이동만 저장**하고, 상세 본문은 **자식 REGION을 master_theme로 집계해 파생**(별도 콘텐츠 테이블 없음).
 - **CITY : REGION 연결은 어드민에서 설정** — 어드민 '지역 관리' 페이지(`/region`)에 **'도시' 탭을 신설**하고, `category(type=CITY)` row를 테이블로 노출한다. 각 CITY row에서 **소속 REGION 연결관계를 설정**(어느 구역들이 이 도시에 속하는지)한다. → 즉 CITY↔REGION은 스크립트가 아니라 **운영자가 도시 탭에서 손으로 배선**한다.
 - 활성화 게이트: ≥1 REGION + image·tags·desc.
 - 폴리곤: CITY가 자기 legal(서울=11) 직접 보유 → `/region/{city}` 도시 경계.
 
-**② DETAIL_LOCATION (상세지역) — 구(행정구) 단위로 단일화**
+**② DETAIL_LOCATION (상세지역) — 시군구(L2) 단위, LEGAL에서 선택 생성**
+- 🔄 **2026-07-02 재정렬(승인 대기)**: DETAIL_LOCATION = **LEGAL 시군구(L2) 참조.** 어드민이 **LEGAL_LOCATION에서 시군구를 선택**해 생성하고(상위 CITY 지정, 이름은 자유입력 다국어), 하위 동(L3) pool은 코드 접두어로 자동 도출(읽기전용). 최초 연결은 스크립트 시딩, 이후 신규(분당구·영통구·강릉시…)는 어드민 선택 생성. 구 category를 손으로 관리하던 방식(스크립트 only) 폐기. DL 엔티티(category) 자체는 스팟 라벨·다국어 이름 위해 유지.
 - `category(type=DETAIL_LOCATION)` 현재 158개 → **구(행정구, ~55)만 남긴다.** 관광지·동형(103)은 **삭제**, '관광지' 개념은 **REGION으로 이관**(기존 문서의 "관광지 DL 잔존"을 대체 — §4-1 주).
 - 역할: 스팟의 **구 라벨·검색 facet**(`spot_has_category`) + **REGION의 구 범위**(`region_has_detail_location`) + **법정동 pool 보유**(DL:LEGAL 1:N).
 - **granularity는 법정동으로 해결**(§3-2 확정): 관광지 인지구역은 REGION이 "구 연결 + 법정동 선택"으로 표현하고, 스팟은 자기 `legal_code`로 걸린다. → **동을 DETAIL_LOCATION에 만들 필요 없음, 스팟 동 재태깅도 없음.**
