@@ -9,6 +9,8 @@
 - 와이어프레임: `https://wireframes-lkb.pages.dev/#region-domain-renewal` (2026-06-23)
 - prod DB 실측 + product 모노레포 코드 검증 (2026-06-22~24 세션)
 
+> ⚠️ **후속 결정으로 대체된 부분 (2026-07-06)** — 본 문서(Path 1)의 일부 모델은 이후 문서로 갱신됐다. 최신 확정은 `[260701] region-geo-model-decision.md` §0·§0-3 및 `[260701] region-domain-improvement-master.md`를 따른다: ① **CITY = 시도(L1)** · **DETAIL_LOCATION = 시군구(L2, LEGAL 참조)** (본 문서의 "CITY=시/군, DL=행정구59/관광지81/동18"·"DL:LEGAL 1:1" 서술 대체), ② REGION 스팟 해상도는 `spot_has_category`(구)가 아니라 **legal(법정동) 기반**(§T2 원복), ③ 정비는 **LEGAL 정합·비파괴**(없는 값만 생성·완전 무연결만 제거·관광지 DL 삭제는 REGION 트랙 후속). 아래 D1~D10·작업분해는 이 갱신 위에서 읽는다.
+
 > **한 줄 요약** — REGION을 '행정 폴리곤에 매인 단일 동네'에서 **'여행객이 인지하는 큐레이션 구역'**(여러 행정구 DETAIL_LOCATION을 묶은 단위)으로 재정의한다. 스팟은 `region_has_detail_location → spot_has_category`로 가져오고, legal_location은 행정구 DETAIL_LOCATION에 1:1로 붙어 REGION 폴리곤으로 상속된다. 구조는 **CITY → REGION(평면)** 2단, 테마는 어드민 섹션 CMS로 편성한다.
 
 ---
