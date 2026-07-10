@@ -1,5 +1,7 @@
 # 지도(/map) 지역 뷰 보기 - 좌표 판정 버그 수정
 
+> 🔗 **허브**: `outputs/plans/[260701] region-domain-improvement-master.md` — 지역 도메인 개선 통합 기획서 (전체 문서 맵)
+
 ## 배경
 
 ### 문제 정의

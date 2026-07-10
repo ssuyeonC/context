@@ -1,5 +1,7 @@
 # 세부 기획안 요구사항 문서
 
+> 🔗 **허브**: `outputs/plans/[260701] region-domain-improvement-master.md` — 지역 도메인 개선 통합 기획서 (전체 문서 맵)
+
 작성일: 2026-07-01 · **재개정: 2026-07-06 (LEGAL 정합·비파괴 방식 확정)**
 상태: **확정** — CITY 승격(시/군→시도)은 스팟 라벨을 바꾸는 사안이라 이해관계자 승인을 전제로 했고, **2026-07-08 공유 후 전원 동의로 확정. 실행 착수 가능.**
 관련 문서: `[260701] region-geo-model-decision.md` §0·§0-3 · `[260701] region-domain-improvement-master.md` · `[260630] region-data-cleanup-spec.md`

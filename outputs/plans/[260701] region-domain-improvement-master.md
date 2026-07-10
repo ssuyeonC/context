@@ -12,9 +12,51 @@
 - `outputs/plans/[260630] region-data-cleanup-spec.md` — 데이터 정비 작업명세 V-3 (검증 확정치)
 - `outputs/jira/spot/[260617] spot-multiple-detail-locations.md` — 외부 선행 게이트
 
-> ✅ **2026-07-02 구조 재정렬 · 2026-07-08 이해관계자 동의 완료** — 본 문서는 원래 `CITY=시/군` · `DETAIL_LOCATION=손수 관리 구 category`(Path 1) 전제였으나, `[260701] region-geo-model-decision.md` §0으로 재정렬한다: **CITY=시도(L1) · DETAIL_LOCATION=LEGAL 시군구(L2)를 어드민에서 선택해 생성(초기 스크립트 시딩) · 이름은 자유입력 다국어 · REGION은 CITY 1개 아래 DL 묶음 + 그 하위 동(L3) 선택.** 아래 §3의 CITY·DETAIL_LOCATION 레벨·생성방식은 이 기준으로 읽는다. **CITY 승격은 스팟 노출 라벨 변경(예: 스팟 CITY 의왕시→경기도+DL 의왕시)을 수반해 이해관계자 확인을 전제로 했고, 2026-07-08 공유 후 전원 동의로 확정.**
+> ✅ **2026-07-02 구조 재정렬 · 2026-07-08 이해관계자 동의 완료** — 본 문서는 원래 `CITY=시/군` · `DETAIL_LOCATION=손수 관리 구 category`(Path 1) 전제였으나, `[260701] region-geo-model-decision.md` §0으로 재정렬한다: **CITY=시도(L1) · DETAIL_LOCATION=LEGAL 시군구(L2)를 스크립트로 전량 시딩(어드민 생성 UI 없음, 이름만 다국어 편집 — 2026-07-10 D1 실행 정정) · REGION은 CITY 1개 아래 DL 묶음 + 그 하위 동(L3) 선택.** 아래 §3의 CITY·DETAIL_LOCATION 레벨·생성방식은 이 기준으로 읽는다. **CITY 승격은 스팟 노출 라벨 변경(예: 스팟 CITY 의왕시→경기도+DL 의왕시)을 수반해 이해관계자 확인을 전제로 했고, 2026-07-08 공유 후 전원 동의로 확정.**
 
 > **한 줄 요약** — 크리에이트립의 '지역'은 목적이 다른 4개 체계(행정·분류·콘텐츠·마케팅)가 역할 없이 겹쳐 방치돼 있다. 이를 **분류(CITY·DETAIL_LOCATION) / 콘텐츠(REGION) / 기하(LEGAL_LOCATION)** 로 역할을 갈라 정립하고, REGION을 '행정 폴리곤에 매인 단일 동네'에서 **여행객이 인지하는 큐레이션 구역**(여러 행정구 DETAIL_LOCATION을 묶은 단위)으로 재정의한다. 그 위에 **테마(의도) 축**과 **도시→구역→테마 IA**를 얹어, 수요(외부 담론 55%)와 페이지(트래픽 3.8%·참여 11초)의 격차를 메운다.
+
+---
+
+## 0. 문서 맵 (Region 도메인 개선 허브)
+
+> **이 문서가 허브입니다.** 지역 도메인 개선 트랙의 전체 문서를 아래에 모읍니다. 각 문서 상단에는 이 허브로 돌아오는 🔗 백링크가 있습니다. **현행 기준(★)** 부터 보세요. (위 "종합한 문서"는 V-3 시절 통합 출처로, 아래가 최신 전체 맵입니다.)
+
+**★ 현행 기준 (읽는 순서)**
+
+| 문서 | 역할 | 상태 |
+|---|---|---|
+| `outputs/plans/[260701] region-domain-improvement-master.md` (이 문서) | 통합 기획서 — 배경·방향·IA 전체 그림 | 통합 정리본 |
+| `outputs/plans/[260701] region-geo-model-decision.md` | 지리 모델 **구조 확정 결정본** (CITY=시도·DL=시군구·법정동, D1~D7) | 확정(07-08) |
+| `outputs/plans/[260630] region-data-cleanup-spec.md` | 데이터 정비 작업명세 **V-5** | 개정본 |
+| `outputs/jira/region/[260701] region-detail-location-cleanup.md` | 도시·상세지역 법정동 정합 **요구사항** | 확정(07-08) |
+| `outputs/jira/region/[260708] region-display-and-search.md` | 스팟 표기·검색을 REGION으로 격상 **요구사항** | 진행 |
+
+**제안서**
+- `outputs/proposals/[260702] proposal_region-geo-model-realignment.md` — 지리 체계 재정비 제안 (✅ 승인 07-08)
+- `outputs/proposals/[260624] proposal_region-domain-renewal.md` — 지역 도메인 리뉴얼 제안 (초기안 → geo-model-decision으로 재정렬)
+
+**리서치·근거**
+- `outputs/research/[260618] region-domain-map.md` — 지역 4층위(행정·분류·콘텐츠·마케팅) 도메인 정리
+- `outputs/reddit-koreatravel/[260612] REPORT_region_deepdive.md` — r/koreatravel 지역 수요 55.5% 근거
+- `outputs/reddit-koreatravel/data/region_place_freq.csv`, `outputs/reddit-koreatravel/data/region_subtopic.csv` — 위 분석 원천 데이터
+
+**회의록**
+- `outputs/meetings/region/[260619] meeting-region-page-improvement-0619.md` — 지역 페이지 개선 방향 회의 (합의 1~15)
+
+**초기 산출물 (히스토리 · 후속 결정으로 갱신됨)**
+- `outputs/plans/[260622] region-restructure-project.md` — REGION 재구조화 프로젝트(Path 1, D1~D10) → geo-model-decision으로 대체
+- `outputs/plans/[260623] region-seoul-theme-spec.md` — /region/seoul 테마 구성(수요×공급)
+
+**연관 / 외부 게이트**
+- `outputs/jira/spot/[260617] spot-multiple-detail-locations.md` — 스팟 다중 상세지역 연결 (선행 게이트)
+- `outputs/jira/spot/[260706] spot-list-seoul-busan-region-toggle.md` — 스팟 리스트 서울/부산 지역 토글·ALL 버그
+- `outputs/jira/map/[260305] map_region_view_bug.md` — /map 지역 뷰 좌표 판정 버그
+
+**데이터**
+- `outputs/jira/region/[260709] region-missing-code-spots.csv` — legal_code 미보유·좌표 잡값 스팟 실측 (정비 대상)
+
+> **대체 체인 (한눈에)** — `[260624] 제안서` + `[260622] 재구조화(Path 1)` → *(2026-07-06 갱신)* → `[260701] geo-model-decision §0` + `master` 재정렬 → `[260630] V-5` · `[260701] detail-location-cleanup` 확정 → `[260702] 재정비 제안` 승인(07-08).
 
 ---
 
@@ -100,14 +142,15 @@ flowchart TD
 **① CITY (도시) — 분류의 최상위 + 콘텐츠 집계 그릇**
 - ✅ **2026-07-02 재정렬 · 2026-07-08 승인 완료**: CITY = **시도(L1)** — 경기도·서울특별시. 현재 시/군(169, 잡값 포함)에서 시도로 승격. 생성 = **LEGAL L1 선택(기본) + 자유 텍스트 입력 채널 신설**('한국' 등 legal 없는 전국값 유지, '평양' 등 제거 — D4). 스팟에 직접 노출되는 값이라 라벨 표기가 바뀜 → 이해관계자 확인을 전제로 했고 2026-07-08 전원 동의로 확정. 광역시 외 CITY 스팟 일괄 마이그레이션.
 - `category(type=CITY)` 169개. 모든 스팟의 **필수 단일 앵커**(스팟당 1.0).
-- 개선 후 역할: `/region/{city}` 페이지. **카드 메타(대표이미지·태그·설명)·slug·도시간 이동만 저장**하고, 상세 본문은 **자식 REGION을 master_theme로 집계해 파생**(별도 콘텐츠 테이블 없음).
+- 개선 후 역할: **REGION을 가진 CITY만** `/region/{city}` 페이지로 노출된다. 모든 CITY가 페이지가 되는 게 아니라, **자기 하위 시군구(DL)가 어떤 REGION에 포함된 시/도만** 생성된다(소속은 REGION→DL→CITY로 결정). 페이지는 **카드 메타(대표이미지·태그·설명)·slug·도시간 이동만 저장**하고, 상세 본문은 **자식 REGION을 master_theme로 집계해 파생**(별도 콘텐츠 테이블 없음).
+  - 예: REGION이 **홍대**(서울특별시·마포구·{서교동·동교동}) · **강릉**(강원특별자치도·강릉시·강릉시 전역) · **경주**(경상북도·경주시·경주시 전역)뿐이면 → `/region/{city}`는 **서울특별시·강원특별자치도·경상북도**만 존재(그 REGION들의 시군구를 품은 시/도만). 대구·전라남도 등 REGION 없는 시/도는 페이지 없음.
 - **CITY : REGION 연결은 어드민에서 설정** — 어드민 '지역 관리' 페이지(`/region`)에 **'도시' 탭을 신설**하고, `category(type=CITY)` row를 테이블로 노출한다. 각 CITY row에서 **소속 REGION 연결관계를 설정**(어느 구역들이 이 도시에 속하는지)한다. → 즉 CITY↔REGION은 스크립트가 아니라 **운영자가 도시 탭에서 손으로 배선**한다.
 - 활성화 게이트: ≥1 REGION + image·tags·desc.
 - 폴리곤: CITY가 자기 legal(서울=11) 직접 보유 → `/region/{city}` 도시 경계.
 
 **② DETAIL_LOCATION (상세지역) — 시군구(L2) 단위, LEGAL에서 선택 생성**
-- ✅ **2026-07-02 재정렬 · 2026-07-08 승인 완료**: DETAIL_LOCATION = **LEGAL 시군구(L2) 참조.** 어드민이 **LEGAL_LOCATION에서 시군구를 선택(필수)**해 생성하고(상위 CITY 지정, 이름은 자유입력 다국어), 하위 동(L3) pool은 코드 접두어로 자동 도출(읽기전용). 최초 연결은 스크립트 시딩, 이후 신규(분당구·영통구·강릉시…)는 어드민 선택 생성. 구 category를 손으로 관리하던 방식(스크립트 only) 폐기. DL 엔티티(category) 자체는 스팟 라벨·다국어 이름 위해 유지.
-- **자유 텍스트(임의값) 엔티티 생성은 CITY에만**(2026-07-09, decision doc D1-a): DL은 legal 시군구 선택 필수, 자유 텍스트로 엔티티 생성 불가 — 국내 시군구는 legal이 완전한 원천이라 DL 자유입력은 재오염 경로(고아·관광지·잡값)만 연다. 자유 네이밍은 CITY(legal 없는 그릇)·REGION(큐레이션)에서만. ※ 엔티티 자유생성 ≠ 이름 자유입력(DL 다국어 이름은 유지).
+- ✅ **2026-07-02 재정렬 · 2026-07-08 승인 · 2026-07-10 D1 실행 정정**: DETAIL_LOCATION = **LEGAL 시군구(L2) 참조.** 시군구는 **LEGAL_LOCATION(L2)에서 스크립트로 전량 시딩**하고(상위 CITY·법정동 코드 자동 바인딩), 어드민에는 **시군구 생성 UI를 두지 않는다**(구조·바인딩 read-only). 어드민은 시딩된 시군구의 **이름(다국어)만 편집**. 하위 동(L3) pool은 코드 접두어로 자동 도출(읽기전용). 신규 시군구(행정구역 개편 등)는 시딩으로만 추가. DL 엔티티(category) 자체는 스팟 라벨·다국어 이름 위해 유지.
+- **자유 텍스트(임의값) 엔티티 생성은 CITY에만**(2026-07-09, decision doc D1-a): DL은 legal 시군구 기반(스크립트 전량 시딩), 자유 텍스트로 엔티티 생성 불가 — 국내 시군구는 legal이 완전한 원천이라 DL 자유입력은 재오염 경로(고아·관광지·잡값)만 연다. 자유 네이밍은 CITY(legal 없는 그릇)·REGION(큐레이션)에서만. ※ 엔티티 자유생성 ≠ 이름 자유입력(DL 다국어 이름은 유지).
 - `category(type=DETAIL_LOCATION)` 현재 158개 → **구(행정구, ~55)만 남긴다.** 관광지·동형(103)은 **삭제**, '관광지' 개념은 **REGION으로 이관**(기존 문서의 "관광지 DL 잔존"을 대체 — §4-1 주).
 - 역할: 스팟의 **구 라벨·검색 facet**(`spot_has_category`) + **REGION의 구 범위**(`region_has_detail_location`) + **법정동 pool 보유**(DL:LEGAL 1:N).
 - **granularity는 법정동으로 해결**(§3-2 확정): 관광지 인지구역은 REGION이 "구 연결 + 법정동 선택"으로 표현하고, 스팟은 자기 `legal_code`로 걸린다. → **동을 DETAIL_LOCATION에 만들 필요 없음, 스팟 동 재태깅도 없음.**
@@ -200,10 +243,26 @@ flowchart TD
 
 ### 5-2. 테마 = 운영자 편성 CMS + SEO leaf
 
-- **테마 = master_theme**(전역 사전: 볼거리·미식·쇼핑·K-뷰티…). 카테고리를 **여러 개 묶을 수 있어**(K-뷰티=5코드) 단일 필터 리스트로 표현 불가 → **테마 leaf 전용 쿼리**((지역 detail_location) ∩ (master_theme 카테고리)).
+- **테마 = master_theme**(전역 사전: 볼거리·미식·쇼핑·K-뷰티…). 카테고리를 **여러 개 묶을 수 있어**(K-뷰티=5코드) 단일 필터 리스트로 표현 불가 → **테마 leaf 전용 쿼리**((지역 detail_location) ∩ (master_theme 카테고리)). 🔶 **(§5-2 하단 미결 논의 참조 — home-navigation 재사용으로 master_theme 대체 검토 중, 2026-07-10)**
 - REGION 섹션은 **자유 편성**(이름+카테고리+순서), CITY 편집 화면에서 관리자가 소속 섹션을 master_theme로 그룹핑 → CITY 집계.
 - **노출 = 캐러셀 + leaf**: monthly best 상위 9 캐러셀 + 스팟 ≥10이면 "전체 보기"→leaf.
 - **SEO 가드레일(필수)**: 콘텐츠 임계 10(미만 leaf 생성·색인 안 함), 테마 leaf=canonical 정본(`/spot/list?category=` 필터뷰 noindex 양보), 안정 slug, 짧은 에디토리얼 인트로.
+
+> 🔶 **미결 논의 (2026-07-10 제기 · 다음 세션 이어서) — CITY 테마 축: `master_theme` vs `home-navigation` 재사용**
+>
+> master_theme(전역 사전)를 새로 두지 말고, 기존 **home-navigation**(`/home-navigation`, `home_navigation` 엔티티)을 CITY leaf 페이지(`/region/{city}`)의 테마 축으로 **그대로 재사용**하자는 대안. CITY 스팟 = `(category(CITY)) ∩ (home-nav CATEGORY 아이템의 카테고리)`, 섹션 정렬 = home-nav `priority`, URL 타입 아이템은 제외.
+>
+> **왜 더 좋아 보이나**: (a) 어드민 CMS·순서·다국어가 **이미 존재** → master_theme 관리 화면 신설 불필요, (b) 전역·균일 축, (c) `/`·`/spot`이 이미 이 순서로 `/spot/list` 진입점을 노출 → **의미적 일관성**. ⇒ master_theme 엔티티·region_section↔master_theme 매핑 단계 제거로 모델 단순화.
+>
+> **채택 전 해소할 것 (다음 세션)**:
+> 1. **테마 = 단일 카테고리 vs 다중 묶음** — home-nav 아이템은 카테고리 1개 참조. K-뷰티=5코드처럼 여러 카테고리를 한 테마로 묶어야 하면 불가. (※ 이미 문서 모순: 본 §5-2는 "여러 카테고리 묶음", `[260623]` seoul-spec §1은 "테마=MAIN_RESERVATION 1개" — 이 결정이 그 모순을 정리함.)
+> 2. **전역 순서 vs per-city 큐레이션** — home-nav 순서는 전역 1개 → 도시별 테마 우선순위(seoul-spec 수요×공급 배치) 불가. MVP 전역 순서 허용 여부.
+> 3. **빈 섹션 처리** — 특정 도시에 스팟 <임계(10)인 nav 카테고리 섹션 숨김(렌더 시 count 필터).
+> 4. **SEO leaf slug** — `/region/{city}/{theme}` 정적 slug 필요하나 home-nav는 `?category={id}` 쿼리 기반 → category→안정 slug 매핑 필요.
+>
+> **코드 근거**: `backend/apps/trip/src/modules/home-navigation/` (엔티티 `type`=CATEGORY|URL · `categoryCode`(1개) · `priority`), 프론트 `homeNavigations(language)` 쿼리 · `HomeNavigationItem`(CATEGORY→`/spot/list?category={id}&order=MostViewedInAMonth`) · `filterHomeNavigations.ts`. **REGION 페이지는 이 논의와 무관하게 `region_section`(자유 편성) 유지.**
+>
+> 결정 나면 §5-2·§3-3의 master_theme 서술을 home-navigation 방식으로 교체하고 seoul-spec "테마=MAIN_RESERVATION 1개"와 정합화.
 
 ### 5-3. 서울 테마 구성 (수요×공급) — 상세: `[260623] region-seoul-theme-spec.md`
 

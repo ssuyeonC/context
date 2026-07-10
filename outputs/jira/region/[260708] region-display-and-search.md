@@ -1,5 +1,7 @@
 # 세부 기획안 요구사항 문서
 
+> 🔗 **허브**: `outputs/plans/[260701] region-domain-improvement-master.md` — 지역 도메인 개선 통합 기획서 (전체 문서 맵)
+
 ## 배경
 
 ### 문제 정의

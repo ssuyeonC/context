@@ -1,5 +1,7 @@
 # '지역(목적지)' 테마 심층 분석 — r/koreatravel
 
+> 🔗 **허브**: `outputs/plans/[260701] region-domain-improvement-master.md` — 지역 도메인 개선 통합 기획서 (전체 문서 맵)
+
 **작성일:** 2026-06-12
 **대상:** 1차 분석에서 '목적지' 계열 테마로 분류된 게시물 **5,554개** (전체 10,000개 중 **55.5%**)
 **산출물:** `analyze_region.py`, `data/region_summary.json`, `data/region_place_freq.csv`, `data/region_subtopic.csv`

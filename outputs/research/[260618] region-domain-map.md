@@ -1,5 +1,7 @@
 # 크리에이트립 '지역(Region)' 도메인 정리
 
+> 🔗 **허브**: `outputs/plans/[260701] region-domain-improvement-master.md` — 지역 도메인 개선 통합 기획서 (전체 문서 맵)
+
 작성일: 2026-06-18
 출처: datastream_creatrip DB 스키마/실데이터 + outputs/jira/map, outputs/jira/spot, outputs/reddit-koreatravel
 

@@ -1,5 +1,7 @@
 # 지역 도메인 — 데이터 정비 작업명세서 (V-5)
 
+> 🔗 **허브**: `outputs/plans/[260701] region-domain-improvement-master.md` — 지역 도메인 개선 통합 기획서 (전체 문서 맵)
+
 작성일: 2026-06-30 · **V-5 개정: 2026-07-01**
 상태: **개정본** — DETAIL_LOCATION 정리 시퀀스 확정.
 **범위: DETAIL_LOCATION 정리 + DETAIL_LOCATION↔LEGAL_LOCATION 연결까지.** REGION 생성·연결, 비공개 region 삭제 등은 **후속 트랙**(§2 하단 '관련 트랙'에 참고만).
