@@ -255,7 +255,7 @@ flowchart TD
 > **왜 더 좋아 보이나**: (a) 어드민 CMS·순서·다국어가 **이미 존재** → master_theme 관리 화면 신설 불필요, (b) 전역·균일 축, (c) `/`·`/spot`이 이미 이 순서로 `/spot/list` 진입점을 노출 → **의미적 일관성**. ⇒ master_theme 엔티티·region_section↔master_theme 매핑 단계 제거로 모델 단순화.
 >
 > **채택 전 해소할 것 (다음 세션)**:
-> 1. **테마 = 단일 카테고리 vs 다중 묶음** — home-nav 아이템은 카테고리 1개 참조. K-뷰티=5코드처럼 여러 카테고리를 한 테마로 묶어야 하면 불가. (※ 이미 문서 모순: 본 §5-2는 "여러 카테고리 묶음", `[260623]` seoul-spec §1은 "테마=MAIN_RESERVATION 1개" — 이 결정이 그 모순을 정리함.)
+> 1. ~~테마 = 단일 카테고리 vs 다중 묶음~~ → ✅ **해소 (2026-07-10)** — home-nav CATEGORY 아이템은 **MAIN_RESERVATION 대카테고리만** 참조(어드민 `frontend/apps/admin/src/page/HomeNavigations/useHomeNavigationData.ts:422` = `categories(filter:{type:MAIN_RESERVATION})` 확인). 따라서 **테마 = MAIN_RESERVATION 1개**로 확정 → `[260623]` seoul-spec §1("테마=MAIN_RESERVATION")과 정합, 기존 `/spot/list?category=` 동작과도 일치. master_theme의 "여러 카테고리 묶기(K-뷰티=5코드)"는 폐기(테마 단위 = MAIN_RESERVATION 대카테고리).
 > 2. **전역 순서 vs per-city 큐레이션** — home-nav 순서는 전역 1개 → 도시별 테마 우선순위(seoul-spec 수요×공급 배치) 불가. MVP 전역 순서 허용 여부.
 > 3. **빈 섹션 처리** — 특정 도시에 스팟 <임계(10)인 nav 카테고리 섹션 숨김(렌더 시 count 필터).
 > 4. **SEO leaf slug** — `/region/{city}/{theme}` 정적 slug 필요하나 home-nav는 `?category={id}` 쿼리 기반 → category→안정 slug 매핑 필요.
