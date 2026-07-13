@@ -32,6 +32,9 @@
 | `outputs/jira/region/[260701] region-detail-location-cleanup.md` | 도시·상세지역 법정동 정합 **요구사항** | 확정(07-08) |
 | `outputs/jira/region/[260708] region-display-and-search.md` | 스팟 표기·검색을 REGION으로 격상 **요구사항** | 진행 |
 
+**목표(OKR)**
+- `outputs/plans/[260713] region-domain-q3-okr.md` — 지역 도메인 **Q3 목표(OKR)**. 스코프=지역 도메인의 기여(전사 지표 아님). 헤드라인=지역 페이지發 오가닉 스팟 전환 세션(유입×전환). 서울 비치헤드.
+
 **제안서**
 - `outputs/proposals/[260702] proposal_region-geo-model-realignment.md` — 지리 체계 재정비 제안 (✅ 승인 07-08)
 - `outputs/proposals/[260624] proposal_region-domain-renewal.md` — 지역 도메인 리뉴얼 제안 (초기안 → geo-model-decision으로 재정렬)
