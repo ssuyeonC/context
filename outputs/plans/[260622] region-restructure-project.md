@@ -123,6 +123,8 @@ CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이
 
 ### 3-6. 테마 섹션 = 어드민 CMS (REGION 레벨)
 
+> ⚠️ **스코프 (2026-07-14, 마스터 [260701] §5-2 확정):** 아래 `master_theme`·"여러 카테고리 묶기" 서술은 **REGION(구역) 레벨 전용**이다. **CITY 레벨 테마축은 `home-navigation`(MAIN_RESERVATION 단일 카테고리) 재사용으로 확정** — master_theme 다중묶음은 CITY에 적용 안 함(마스터가 정본).
+
 고정 택소노미가 아니라 운영자가 REGION별로 편성:
 1. REGION 상세 → '섹션 생성'
 2. 섹션명(예: 볼거리·체험) + 연결 카테고리(tickets&attractions, Day tour… 재량) + 저장
