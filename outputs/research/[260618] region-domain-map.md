@@ -1,5 +1,7 @@
 # 크리에이트립 '지역(Region)' 도메인 정리
 
+> 📚 **근거 아카이브** — 도메인 현황·데이터 부채 분석(현황 근거). 최신 기획은 마스터 `[260701]`. 수정 금지.
+
 작성일: 2026-06-18
 출처: datastream_creatrip DB 스키마/실데이터 + outputs/jira/map, outputs/jira/spot, outputs/reddit-koreatravel
 

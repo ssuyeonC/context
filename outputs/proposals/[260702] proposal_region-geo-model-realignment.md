@@ -1,5 +1,7 @@
 # 지역 도메인 지리 체계 재정비 제안
 
+> ⛔ **아카이브 (역할 종료)** — 2026-07-08 승인 완료로 목적 달성. 확정 모델·근거는 `[260701] region-geo-model-decision.md`와 마스터 `[260701]`이 소유. 이 문서는 **승인 기록용**(수정 금지).
+
 작성일: 2026-07-02 · 갱신: 2026-07-08
 상태: ✅ 승인 완료 — 2026-07-08 공유 후 이해관계자 전원 동의
 관련 문서: `outputs/plans/[260701] region-geo-model-decision.md` (§0 확정 구조 · §2-4 실측) · `outputs/plans/[260701] region-domain-improvement-master.md`

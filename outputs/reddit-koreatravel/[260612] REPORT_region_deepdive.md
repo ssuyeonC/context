@@ -1,5 +1,7 @@
 # '지역(목적지)' 테마 심층 분석 — r/koreatravel
 
+> 📚 **근거 아카이브** — 지역 수요 분석(55.5%·다도시 27%). 최신 기획은 마스터 `[260701]`. 수정 금지.
+
 **작성일:** 2026-06-12
 **대상:** 1차 분석에서 '목적지' 계열 테마로 분류된 게시물 **5,554개** (전체 10,000개 중 **55.5%**)
 **산출물:** `analyze_region.py`, `data/region_summary.json`, `data/region_place_freq.csv`, `data/region_subtopic.csv`

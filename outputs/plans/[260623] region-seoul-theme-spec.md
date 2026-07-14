@@ -1,5 +1,7 @@
 # `/region/seoul` 테마 구성안 — 수요×공급 검증 + 카테고리 매핑
 
+> 🧭 **마스터 [260701] §5-3의 상세 스포크** — 서울 **테마→카테고리 매핑** 정본. 노출방식(B-2·캐러셀·leaf) 등 상위 결정은 마스터가 소유.
+
 작성일: 2026-06-23
 상태: **와이어프레임/Phase 3~4 입력** (제안 — 인벤토리 실측 기반) · 2026-06-25 노출방식(캐러셀+테마 leaf) 동기화
 출처/근거:
@@ -93,7 +95,7 @@
 | 교통 | (섹션 아님 / 이동 모듈) |
 
 - **노출 방식 (플랜 §3-5 갱신 반영):** 각 테마 섹션 = **monthly best 상위 9 캐러셀**, 스팟 10개 이상이면 **"전체 보기" → 테마 leaf** (`/region/seoul/{theme}` city×테마 · `/region/seoul/{zone}/{theme}` zone×테마). 이전 '더보기 → `/spot/list?category=`' 방식은 **폐기**(멀티카테고리 표현 불가 + thin/중복 SEO 리스크).
-- leaf 스팟 = **(지역 detail_location) ∩ (master_theme 카테고리)**. 서울 city 스코프는 CITY 코드 5의 자식 REGION detail_location 합집합. resolution은 **BE-1 신축(region→detail_location→spot_has_category)** 경로(플랜 BE-1 주1).
+- leaf 스팟 = **(지역 스코프) ∩ (master_theme 카테고리)**. ~~서울 city 스코프는 CITY 코드 5의 자식 REGION detail_location 합집합~~ → **2026-07-14 B-2 확정: 서울 도시×테마 leaf = CITY 코드 5 스팟 전체 ∩ master_theme**(자식 REGION 집계 아님). 구역×테마 leaf는 REGION 선택 법정동 ∩ master_theme.
 - 콘텐츠 임계 10·canonical 가드레일은 플랜 §3-5 따른다.
 
 ## 5. 비-테마 모듈 (별도 — category 섹션 아님)
