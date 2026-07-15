@@ -89,7 +89,7 @@
 
 ## 1. 어쩌다 여기까지 (맥락)
 
-1. 원래 방향(확정했던 것): DETAIL_LOCATION을 **구 55개로 정리**(관광지·동 삭제 → REGION 이관), REGION 스팟 노출은 **legal(법정동) 기반**으로 전환(= Idea 2 / T2 원복, 사인오프 완료).
+1. 확정: DETAIL_LOCATION을 **구 55개로 정리**(관광지·동 삭제 → REGION 이관), REGION 스팟 노출은 **legal(법정동) 기반**(사인오프 완료).
 2. 그러다 **CITY 레벨 비대칭**을 발견: `CITY → REGION → 구(DETAIL_LOCATION) → 동(LEGAL)` 4계층은 **광역시에만** 성립. 일반시(강릉시·구리시)는 시 아래 구가 없어 **DETAIL_LOCATION이 빈다**.
    - 광역시: 서울시 → 강남구 → 역삼동 ✅
    - 일반시: 구리시 → (구 없음) → 갈매동 ← DETAIL_LOCATION 자리 없음
