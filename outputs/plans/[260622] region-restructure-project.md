@@ -40,7 +40,7 @@
 | D5 | **CITY → REGION 평면 (FK)** | REGION 중첩 없음. `region.city` → `category(CITY)` **FK**. CITY는 **카드 메타만 저장**, ~~상세는 자식 REGION 집계~~ → **상세 스팟 = B-2(CITY 스팟 ∩ 테마), 2026-07-14 확정** |
 | D6 | **IA — 테마 leaf + 캐러셀** | `/region` → `/{city}` → `/{city}/{zone}`, theme은 depth 3·4에 leaf(`/{city}/{theme}`·`/{city}/{zone}/{theme}`). city×theme은 zone과 3번째 칸 공유 → **city별 슬러그 레지스트리**로 판정. 페이지 내 테마 섹션 = **monthly best 9 캐러셀 + 전체보기→leaf**, leaf는 **스팟 10개부터 생성**(가드레일) |
 | D7 | **테마 = REGION 섹션(자유) + master_theme 사전** | REGION 섹션 = 이름+카테고리+순서(자유 편성), REGION 섹션 CMS에서 master_theme에 매핑. ~~CITY 편집 화면에서 관리자가 소속 REGION 테마들을 master_theme로 묶음 → CITY 집계~~ → **CITY 집계는 B-2**(CITY 스팟 ∩ master_theme), REGION 그룹핑 불필요 |
-| D8 | **활성화 게이트** | CITY 활성화 = ≥1 REGION + image·tags·desc / REGION 활성화 = ≥1 행정구 DETAIL_LOCATION |
+| D8 | **활성화 게이트** | CITY 활성화 = image·tags·desc (~~≥1 REGION~~ → B-2로 폐지, §3-7) / REGION 활성화 = ≥1 행정구 DETAIL_LOCATION |
 | D9 | **비공개 REGION 500개 삭제** | 2025-02-14 벌크(id 25~531), 의존성 검증 후 |
 | D10 | **스팟 구 재태깅으로 coverage 해결** | 관광지-only 스팟에 구 detail_location 추가 → REGION 구단위 묶음으로 누락 0 |
 
@@ -123,7 +123,7 @@ CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이
 
 ### 3-6. 테마 섹션 = 어드민 CMS (REGION 레벨)
 
-> ⚠️ **스코프 (2026-07-14, 마스터 [260701] §5-2 확정):** 아래 `master_theme`·"여러 카테고리 묶기" 서술은 **REGION(구역) 레벨 전용**이다. **CITY 레벨 테마축은 `home-navigation`(MAIN_RESERVATION 단일 카테고리) 재사용으로 확정** — master_theme 다중묶음은 CITY에 적용 안 함(마스터가 정본).
+> ⚠️ **스코프 (2026-07-14, 마스터 [260701] §5-2 확정):** 이 문서의 `master_theme`·"여러 카테고리 묶기" 서술은 **REGION(구역) 레벨 전용**이다. **CITY 레벨 테마축은 `home-navigation`(MAIN_RESERVATION 단일 카테고리)로 확정** — 문서 곳곳의 'CITY 집계 = CITY 스팟 ∩ master_theme' 식 표현은 모두 **home-nav MAIN_RESERVATION** 기준으로 읽는다(master_theme 다중묶음은 CITY에 적용 안 함, 마스터가 정본).
 
 고정 택소노미가 아니라 운영자가 REGION별로 편성:
 1. REGION 상세 → '섹션 생성'
@@ -225,7 +225,7 @@ r/koreatravel 10,001건 원문 대조. 인지구역/POI가 같은 위치 행정�
 
 ### Phase 2 — REGION/CITY 생성
 - 행정구 묶음 REGION 생성 (강남=강남구+서초구 …) + 기존 공개 13개 `region_has_detail_location` 재배선
-- CITY 콘텐츠 입력 + 활성화 (≥1 REGION·image·tags·desc)
+- CITY 콘텐츠 입력 + 활성화 (image·tags·desc / ~~≥1 REGION~~ B-2로 폐지)
 - *관광지 REGION 승격은 구조 완성 후 수동(비긴급, 트래픽 낮음)*
 - **생성 = 어드민** (스크립트 아님) → AD 도구가 Phase 2 선행. **유저 페이지(P4) 배포는 데이터 생성 완료 후 일정.**
 

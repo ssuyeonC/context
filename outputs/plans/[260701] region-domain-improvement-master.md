@@ -227,7 +227,7 @@ flowchart TD
 |---|---|---|---|
 | **P0** | 데이터 정합성 | AD-5(재오염 차단) → DL-3 분류 → DL-1 삭제 → **DL★**(대응 REGION 생성·구연결·법정동선택 → 스팟 구 라벨 재태깅 → 관광지·동 DL 삭제) → LL(구55: 시군구 1:1 + 법정동 1:N 자동) → RG-1(500)·RG-3 | — |
 | **P1** | REGION/CITY 생성 | 행정구 묶음 REGION 생성 + 기존 공개 13개 재배선, CITY 카드메타 입력·활성화 | P0 |
-| **P3** | 파라미터/BE | 조회 축 전환(BE-1) · 폴리곤 resolve(BE-2) · slug 라우팅+레지스트리(BE-3) · 테마 leaf/캐러셀 쿼리(BE-4) · region_section·master_theme(BE-5) · CITY 집계(BE-6 = CITY 스팟 ∩ master_theme, B-2) · subway/blog/persona(BE-7·8) | P1, 와이어프레임 |
+| **P3** | 파라미터/BE | 조회 축 전환(BE-1) · 폴리곤 resolve(BE-2) · slug 라우팅+레지스트리(BE-3) · 테마 leaf/캐러셀 쿼리(BE-4) · region_section·master_theme(BE-5) · CITY 집계(BE-6 = CITY 스팟 ∩ home-nav MAIN_RESERVATION, B-2) · subway/blog/persona(BE-7·8) | P1, 와이어프레임 |
 | **P4** | UI | 4단 라우팅·301 · CITY/REGION 페이지 · 테마 캐러셀+leaf · 폴리곤 렌더 | P3 |
 | **유입** | 리스트→region 동선 | 스팟 리스트(49초)에 '지역으로 둘러보기' 위젯 → `/region` | P1 출시 + P2 활성화 검증 후 |
 
