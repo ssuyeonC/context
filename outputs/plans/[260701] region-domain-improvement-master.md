@@ -2,7 +2,7 @@
 
 작성일: 2026-07-01
 상태: **통합 정리본** — 기존 산출물(도메인맵·회의록·재구조화 프로젝트·서울 테마스펙·제안서·데이터정비 V-3)을 하나의 기획서로 종합. 개별 문서의 수치·용어 진화를 최신 확정치로 정합.
-설계 갱신(2026-07-01): ① DETAIL_LOCATION을 **구 단위로 단일화**(관광지·동 삭제·REGION 이관), ② granularity는 **REGION "구 연결 + 법정동 선택" + `spot.legal_code` 필터**로 해결(신규 동 row·재태깅 없음), ③ CITY↔REGION은 어드민 '도시 탭'에서 배선. → 원안 T2(스팟 축 category 전환)를 REGION 해상도에 한해 legal로 원복 **(2026-07-01 사인오프 완료, spot.legal 유효 99.7% 검증)**.
+설계 갱신(2026-07-01): ① DETAIL_LOCATION을 **구 단위로 단일화**(관광지·동 삭제·REGION 이관), ② granularity는 **REGION "구 연결 + 법정동 선택" + `spot.legal_code` 필터**로 해결(신규 동 row·재태깅 없음), ③ REGION→CITY는 REGION 편집에서 DL 공통 상위로 **자동 결정**(수동 배선 아님). → 원안 T2(스팟 축 category 전환)를 REGION 해상도에 한해 legal로 원복 **(2026-07-01 사인오프 완료, spot.legal 유효 99.7% 검증)**.
 종합한 문서:
 - `outputs/research/[260618] region-domain-map.md` — 지역 4층위 도메인·어드민 운영 분석
 - `outputs/meetings/region/[260619] meeting-region-page-improvement-0619.md` — 본미팅 + 추가논의 #1~#3 (합의 1~15)
@@ -70,7 +70,7 @@ flowchart TD
     LEGAL["LEGAL_LOCATION · 법정동<br/>폴리곤 + 스팟 fine 해상도"]
     SPOT["SPOT"]
 
-    CITY -->|"1 : N · region.city FK (어드민 도시탭)"| REGION
+    CITY -->|"1 : N · region.city FK (REGION 편집서 DL 공통상위 자동)"| REGION
     REGION -->|"N : N · region_has_detail_location (구 연결=범위)"| DL
     REGION -->|"1 : N · 선택 법정동 (region.legal_location_legal_codes)"| LEGAL
     DL -->|"1:1 시군구(폴리곤) · 1:N 법정동(pool, prefix)"| LEGAL
@@ -87,7 +87,7 @@ flowchart TD
 
 | 관계 | 카디널리티 | 연결 |
 |---|---|---|
-| CITY : REGION | 1 : N | `region.city` FK (신설) · 어드민 '도시' 탭에서 배선 |
+| CITY : REGION | 1 : N | `region.city` FK · **REGION 편집 시 DL 공통 상위로 자동 결정**(수동 배선 아님) |
 | REGION : DETAIL_LOCATION(구) | N : N | `region_has_detail_location` — REGION의 **구 범위**(법정동 picker scope) |
 | REGION : LEGAL(법정동) | 1 : N | REGION이 **선택한 법정동 집합** (`region.legal_location_legal_codes` 재사용) |
 | DETAIL_LOCATION(구) : LEGAL | 1:1(시군구) + **1:N(법정동)** | 1:1=폴리곤 / 1:N=법정동 pool(`legal_code LIKE '구코드%'`로 **자동 도출**) |
@@ -103,7 +103,8 @@ flowchart TD
 - ✅ **2026-07-02 재정렬 · 2026-07-08 승인 완료**: CITY = **시도(L1)** — 경기도·서울특별시. 현재 시/군(169, 잡값 포함)에서 시도로 승격. 생성 = **LEGAL L1 선택(기본) + 자유 텍스트 입력 채널 신설**('한국' 등 legal 없는 전국값 유지, '평양' 등 제거 — D4). 스팟에 직접 노출되는 값이라 라벨 표기가 바뀜 → 이해관계자 확인을 전제로 했고 2026-07-08 전원 동의로 확정. 광역시 외 CITY 스팟 일괄 마이그레이션.
 - `category(type=CITY)` 169개. 모든 스팟의 **필수 단일 앵커**(스팟당 1.0).
 - 개선 후 역할: `/region/{city}` 페이지. **카드 메타(대표이미지·태그·설명)·slug·도시간 이동만 저장**하고(별도 콘텐츠 테이블 없음), 상세 본문 스팟은 **B-2 = 그 CITY에 `spot_has_category`로 연결된 스팟 전체**를 **home-nav `MAIN_RESERVATION` 테마축**(§5-2)으로 나눠 뿌린다. ~~자식 REGION을 master_theme로 집계해 파생~~ → **2026-07-14 B-2 확정** (CITY 스팟 완전집합이라 항상 충분·부산/제주 공백 자동 해소, REGION 집계 아님). **페이지 존재도 REGION 무관** — 스팟 있는 시/도면 성립(다른 세션의 'REGION 가진 시/도만 페이지' 규칙은 폐기).
-- **CITY : REGION 연결은 어드민에서 설정** — 어드민 '지역 관리' 페이지(`/region`)에 **'도시' 탭을 신설**하고, `category(type=CITY)` row를 테이블로 노출한다. 각 CITY row에서 **소속 REGION 연결관계를 설정**(어느 구역들이 이 도시에 속하는지)한다. → 즉 CITY↔REGION은 스크립트가 아니라 **운영자가 도시 탭에서 손으로 배선**한다.
+- **REGION→CITY 연결 = 자동 도출** (수동 배선 아님) — REGION 편집에서 **구(DL) 선택 → 그 DL들의 공통 상위 CITY로 자동 결정**(다른 시/도의 구 혼합 금지 · `geo-model §0-2`·`jira [260708]`). `region.city` FK가 이 결과를 저장. ~~어드민 '도시' 탭에서 CITY row마다 소속 REGION을 손으로 배선~~ → **폐기** (A-모델 잔재 — CITY leaf를 자식 REGION의 master_theme로 집계하려던 것 → B-2·home-nav로 불필요).
+- **CITY 편집(콘텐츠 레이어) = `/region`** — 지역 페이지에 노출되는 **카드 메타(대표이미지·태그·설명)·slug·도시간 이동·활성화**만 편집. 노출 대상이 지역 페이지라 지역 편집 어드민에 둔다. ※ CITY **엔티티 생성·이름(다국어)**은 분류 레이어 `/location` '도시' 탭(`jira [260701]-cleanup`)이 담당(레이어 분리).
 - 활성화 게이트: image·tags·desc 필수 (~~≥1 REGION~~ → B-2는 REGION 없이 CITY 스팟만으로 성립하므로 REGION 필수 아님).
 - 폴리곤: CITY가 자기 legal(서울=11) 직접 보유 → `/region/{city}` 도시 경계.
 
@@ -144,7 +145,7 @@ flowchart TD
 | REGION 스팟 조회 | legal 프리픽스(버그로 무력) | REGION 선택 법정동 ∩ `spot.legal_code` (legal 유지, 버그 수정) |
 | legal 활용 | region↔legal 프리픽스(무력) + DL↔legal 없음 | 구:법정동 1:N(prefix 자동) + REGION 선택 법정동 + spot.legal 필터 |
 | 콘텐츠 축 | 신선도·인기 | 테마(의도) — 운영자 편성 |
-| CITY | region의 속성(citySlug) | URL 1급 + **CITY 스팟을 테마로 뿌리는 페이지(B-2)**, 어드민 '도시 탭'에서 REGION 배선 |
+| CITY | region의 속성(citySlug) | URL 1급 + **CITY 스팟을 테마로 뿌리는 페이지(B-2)**. 카드메타·도시간이동은 `/region`서 편집, REGION→CITY는 자동 도출 |
 | URL | `/spot/region/4` | `/region/seoul/gangnam/restaurants` |
 
 ---

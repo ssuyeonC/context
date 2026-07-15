@@ -148,7 +148,7 @@ CITY는 상세 콘텐츠를 **저장하지 않는다.** 스팟은 ~~자식 REGIO
 ### 3-8. 어드민 `/region` 설계
 
 - **탭 [CITY | REGION]**
-- **CITY 탭**: `category(type=CITY)` 전체 테이블 → 활성화/비활성화(필수필드 게이트). **CITY 편집 화면 = 카드메타 입력 + REGION 배선**. ~~소속 REGION 테마들을 `master_theme`로 묶는 그룹핑 UI~~ → **B-2 확정으로 CITY 집계에 불필요**(REGION 섹션↔master_theme 매핑은 REGION 섹션 CMS에서).
+- **CITY 탭**: `category(type=CITY)` 전체 테이블 → 활성화/비활성화(필수필드 게이트). **CITY 편집 화면 = 카드메타·slug·도시간이동 입력만.** ~~REGION 배선 + 소속 REGION 테마를 `master_theme`로 묶는 그룹핑 UI~~ → **폐기** (REGION→CITY 자동 도출 / CITY 집계는 B-2·home-nav — 마스터 §3-3①·§5-2). REGION↔master_theme 매핑은 REGION 섹션 CMS에서.
 - **REGION 탭**: REGION 생성 + 행정구 detail_location 매핑 + 섹션 CMS + subway/blog/persona 큐레이션
 - 부수: detail_location 생성/수정에 **상위 도시(parent) 입력** 추가(고아 양산 차단), `createCategory` type 화이트리스트
 
