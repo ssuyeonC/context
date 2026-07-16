@@ -229,7 +229,7 @@ flowchart TD
 
 | Phase | 범위 | 핵심 작업 | 의존성 |
 |---|---|---|---|
-| **P0** | 데이터 정합성 + REGION 생성·cutover | ① CITY/DL legal 정합 + AD-5 `[260701-cleanup]` → ② 스팟 재태깅 1차(일반·CITY승격) `[260701-cleanup]` → ③ RG-1(비공개 REGION 500 삭제)·RG-3(27링크) → ④ REGION 어드민 개선(법정동 picker) → ⑤ 관광지 REGION 생성·연결 + 공개 13개 재배선 → ⑥ 표기·검색 cutover + 관광지 스팟 재태깅·blog·어학당 이관 `[260708]` → ⑦ 관광지형 DL 삭제 | — |
+| **P0** | 데이터 정합성 + REGION 생성·cutover | ① CITY/DL legal 정합 + AD-5 `[260701-cleanup]` → ② 스팟 재태깅 1차(일반·CITY승격) `[260701-cleanup]` → ③ RG-1(비공개 REGION 500 삭제)·RG-3(27링크) → ④ REGION 어드민 개선(법정동 picker) → ⑤ 관광지 REGION 생성·연결 + 공개 13개 재배선 → ⑥ 표기·검색 cutover + 관광지 스팟 재태깅·blog·어학당 이관 `[260715]` → ⑦ 관광지형 DL 삭제 | — |
 | **P1** | CITY 유저페이지 준비 | CITY 카드메타 입력·활성화(image·tags·desc) | P0 |
 | **P3** | 파라미터/BE | 조회 축 전환(BE-1) · 폴리곤 resolve(BE-2) · slug 라우팅+레지스트리(BE-3) · 테마 leaf/캐러셀 쿼리(BE-4) · region_section(BE-5) · CITY 집계(BE-6 = CITY 스팟 ∩ home-nav MAIN_RESERVATION) · subway/blog/persona(BE-7·8) | P1, 와이어프레임 |
 | **P4** | UI | 4단 라우팅·301 · CITY/REGION 페이지 · 테마 캐러셀+leaf · 폴리곤 렌더 | P3 |
@@ -280,8 +280,7 @@ flowchart TD
 | `plans/[260622] region-restructure-project.md` | §6 | 작업분해(Phase/BE/FE/AD)·D1~D10 |
 | `plans/[260623] region-seoul-theme-spec.md` | §5-3 | 서울 테마→카테고리 매핑 |
 | `jira/region/[260701] region-detail-location-cleanup.md` | §4 | DL 정비 실행 요구사항 |
-| `jira/region/[260708] region-display-and-search.md` | §5 | 스팟 지역 표기·검색 요구사항 |
-| `jira/region/[260715] region-creation-and-cutover.md` | §4·§6 | P0 REGION 트랙(어드민 picker·관광지 REGION 생성·RG정리·DL cutover) 요구사항 |
+| `jira/region/[260715] region-creation-and-cutover.md` | §4·§5·§6 | P0 REGION 트랙(③RG정리·④picker·⑤관광지REGION·⑥표기·검색·⑦DL cutover) 요구사항 |
 | `jira/spot/[260706] spot-list-seoul-busan-region-toggle.md` | §5 | 리스트 지역 토글 요구사항 |
 | `jira/spot/[260617] spot-multiple-detail-locations.md` | §6(게이트) | 스팟 복수 상세지역(별트랙) |
 
