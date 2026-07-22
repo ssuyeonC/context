@@ -113,6 +113,7 @@
 - **구:법정동 = 코드 접두어로 자동 도출**(성동구 11200 → 11200xxx). 매핑 테이블 불요.
 - 상세지역 생성 모달(현재): 지역 타입 + **어권별 이름 15칸만**(도시·법정동 입력 없음).
 - 상세지역 참조 링크 3종: 스팟(`spot_has_category`) · 블로그(`blog_has_category`) · 어학당(`language_course.detail_location_category_id`, city는 `city_category_id`).
+- **`region.citySlug` = 앱 쓰기 경로 없는 수동 DB 필드 (현행 부채, 2026-07-15 코드·실측 확인).** 현행 지역 인덱스 `/tips/region-guide`가 서울 지역을 뽑는 유일 근거가 `isSeoul` 필터(`region.repo.ts` → `citySlug='seoul'`)인데, **backend에 citySlug를 세팅하는 코드가 전무** — 컬럼 추가 마이그레이션(`20250206070623-add-region-city-slug`)만 있고 **백필 없음**, 생성·수정 mutation·usecase·어드민 폼 어디에도 쓰기 없음. 실제 분포도 손세팅 흔적: `seoul` **498**(2025-02 벌크 자동생성 zone) · 광역시/도 각 1(`busan`·`jeju`·`gangwon` 소문자 vs `Daegu`·`Daejeon`·`Gwangju`·`Incheon`·`Sejong-si`·`Ulsan` 대문자 — **케이싱 붕괴**) · **null 7**. → 신규 region은 citySlug 자동 부여 안 됨(분류 누락·서울 외 확장 불가). 개편이 이 문자열을 **`region.city` = `category(CITY)` FK(선택 DL 공통상위로 자동 도출)** 로 승격해 부채 해소(§0-1·마스터 §3-4).
 
 ### 2-4. 마이그레이션 규모 (2026-07-02 실측)
 
