@@ -172,7 +172,7 @@ detail_location 158 = 행정59/관광지81/동18. 행정구↔시군구 legal은
 `spot` 테이블에 `region_id` FK 없음. 유일한 직접 연결은 `region_spot_area_has_spot`(6 area / 27 링크). → '스팟의 Region 연결 제거'는 이 27건 정리.
 
 ### 4-6. 전제 검증 — '인지 구역 vs 법정동' (Reddit 실측)
-r/koreatravel 10,001건 원문 대조. 인지구역/POI가 같은 위치 행정·법정 단위를 1~2 오더 압도:
+r/koreatravel 10,001건 원문 대조. region/POI가 같은 위치 행정·법정 단위를 1~2 오더 압도:
 
 | 인지 구역 / POI | 언급 | 행정·법정 단위 | 언급 |
 |---|---:|---|---:|
@@ -201,7 +201,7 @@ r/koreatravel 10,001건 원문 대조. 인지구역/POI가 같은 위치 행정�
 | spot↔CITY / DETAIL_LOCATION | 5,425링크(1.0) / 3,751링크(1.01) |
 | spot↔region 직접 | **없음**(region_id FK 부재) / region_spot_area_has_spot 6 area·27 링크 |
 | detail_location↔legal | **없음** → 신설(행정구만, 단일 컬럼) |
-| 인지구역 vs 법정동(Reddit) | 롯데월드223+잠실90 vs **Bangi-dong 0** / sub-city 35개 중 법정동 0 (§4-6) |
+| region vs 법정동(Reddit) | 롯데월드223+잠실90 vs **Bangi-dong 0** / sub-city 35개 중 법정동 0 (§4-6) |
 
 ---
 

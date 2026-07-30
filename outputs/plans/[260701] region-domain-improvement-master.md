@@ -283,6 +283,8 @@ flowchart TD
 | `plans/[260623] region-seoul-theme-spec.md` | §5-3 | 서울 테마→카테고리 매핑 |
 | `jira/region/[260701] region-detail-location-cleanup.md` | §4 | DL 정비 실행 요구사항 |
 | `jira/region/[260715] region-creation-and-cutover.md` | §4·§5·§6 | P0 REGION 트랙(③RG정리·④picker·⑤관광지REGION·⑥표기·검색·⑦DL cutover) 요구사항 |
+| `jira/region/[260730] tourist-region-drafts-and-link-migration.md` | §4 | 비-행정구 103 DL 구·법정동 초안 pre-run + 지역값 연결 4종 이관 규모·방법(데이터 스포크) |
+| `jira/region/[260730] blog-userblog-academy-region-label.md` | §5 | 블로그·유저블로그·어학당 지역 표기 region 격상(별도 티켓 예정, COM-2557·2559 후행) |
 | `jira/spot/[260706] spot-list-seoul-busan-region-toggle.md` | §5 | 리스트 지역 토글 요구사항 |
 | `jira/spot/[260617] spot-multiple-detail-locations.md` | §6(게이트) | 스팟 복수 상세지역(별트랙) |
 
