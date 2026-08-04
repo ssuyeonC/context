@@ -85,7 +85,8 @@
 | 5 | 주문 필수 추가정보 조회 | `GET .../booking-additional-info/{additionalInfoUid}` | **Booking 전용**, BAC(공통)/TRV(여행자별) |
 | 6 | 주문 생성 | `POST /api/partner/v1.1/orders` | **단일 엔드포인트**, 유형은 상품 `type`으로 분기 |
 | 7 | 주문 조회 | `GET /api/partner/v1.1/orders/{orderNumber}` | referenceNumber로도 조회 |
-| 8 | 주문 취소 | `DELETE /api/partner/v1.1/orders/{orderNumber}` | 주문 전체 단위 |
+| 8 | 주문 취소 | `DELETE /api/partner/v1.1/orders/{orderNumber}` | 주문 전체 단위(부분취소 불가·OpenAPI 확정) |
+| 9 | 바우처 조회 | `GET /api/partner/v1.1/orders/{orderNumber}/vouchers` | 주문 바우처 재조회(OpenAPI 스펙 존재, 공개 md엔 미기재) |
 
 ### 상품 유형별 주문 흐름
 연동 설계의 핵심. 주문 생성은 단일 `POST /orders`이지만, 상품 `type`에 따라 사전 호출과 확정 시점이 다르다. 주문 생성 요청 body 공통 필드: `product`, `option`, `unitAmounts[{ unit, amount }]`, `referenceNumber`(선택, 최대 64자), `voucherSendType`(0~3), traveler 정보(name/email/number/nationality).
@@ -167,7 +168,8 @@
 ### 취소 / 환불
 - 크리에이트립발 취소 시 `DELETE /orders/{orderNumber}` 호출로 공급사 취소를 연동한다(주문 전체 단위).
 - 공급사발 취소(`CANCELED`/`PARTIAL_CANCELED`) 수신 시 `lookup` 대사 후 크리에이트립 취소·환불·CS 흐름과 연결한다.
-- 취소 불가 조건은 `ORDER_EXPIRED` / `ORDER_ALREADY_USED` / `ORDER_ALREADY_CANCELLED` / `ORDER_CANNOT_BE_CANCELED` 에러로 내려오므로, 이 기준으로 취소 가능 시점을 처리한다. 예약 상품의 **취소·환불 정책(기한·수수료)** 문구는 공급사와 확정해 반영한다.
+- 취소 불가 조건은 `ORDER_NOT_FOUND`(404, 주문 없음) / `ORDER_EXPIRED`(만료) / `ORDER_ALREADY_USED`(사용됨) / `ORDER_ALREADY_CANCELLED`(이미 취소됨) / `ORDER_CANNOT_BE_CANCELED`(취소 불가) / `KORAILPASS_ERROR`(코레일패스 사유별 상이) 에러로 내려오므로, 이 기준으로 취소 가능 시점을 처리한다.
+- **취소 기한·환불 수수료**: 공개 API 문서에는 구체적 취소 기한(마감 시각)·수수료율이 **명시돼 있지 않다**(에러 코드로 "취소 불가" 여부만 확인 가능). 이는 API 스펙이 아니라 **상품별 계약·정책** 사항이므로, 예약 상품의 취소·환불 정책 문구는 공급사·계약 기준으로 확정해 반영한다.
 
 ### 어드민 / 오퍼레이션
 - 자동 연동으로 전환되는 상품은 **수동 부킹 단계를 제거/축소**하되, 예약 상품의 승인 대기·거절 건은 어드민에서 상태 확인·개입이 가능해야 한다.
@@ -182,11 +184,11 @@
 ## 확인 필요 사항 (공급사 문의 / TBD)
 
 **공급사(트래볼루션)에 확인**
-1. **rate limit 정책** — overview / responses / error 등 전 문서에 명시 없음. 호출 상한·재시도 설계 전제.
-2. **웹훅 재시도 정책** — 문서상 자동 재전송을 별도로 운영하지 않는 것으로 보임(전송 이력에 Success/Failure/In-Progress 상태만 존재). 자동 재시도가 없다면 **파트너가 `GET /orders/{orderNumber}` 폴링으로 상태를 대사**해야 하므로, 이 전제가 맞는지 확정 필요.
-3. **파트너발 부분취소 가능 여부** — 취소는 `DELETE /orders/{orderNumber}`로 **주문 전체 단위**다. `PARTIAL_CANCELED` 웹훅은 공급사발로 보이며, 파트너가 unit 단위 부분취소를 *요청*할 수 있는지는 취소 요청 body 스펙이 공개 문서에 없어 확인 필요(OpenAPI `partnerApi.json` 확인).
+1. **rate limit 정책** — 공개 문서엔 명시 없으나, 실제 응답 헤더에 `x-ratelimit-limit: 600` / `x-ratelimit-remaining: N`이 내려옴(2026-08-04 실측). **상한 600은 확인됨**. 단 **적용 창(window) 단위(분/시/일)와 초과 시 동작(429 여부·재시도 정책)은 헤더에 없어 확인 필요**. 호출 상한·재시도 설계 전제.
+2. ~~**웹훅 재시도 정책**~~ — **문서 확정됨.** 공식 문서 원문: *"Our server does not currently operate a separate webhook retry policy."* 즉 **공급사는 웹훅 실패 시 자동 재전송을 하지 않는다**(전송 이력에 Success/Failure/In-Progress 상태만 존재). → **파트너가 `GET /orders/{orderNumber}` 폴링·대사로 상태를 보정하는 설계가 필수 전제**로 확정. (문의 항목 아님, 설계 반영 사항)
+3. ~~**파트너발 부분취소 가능 여부**~~ — **OpenAPI 스펙으로 확정됨.** `partnerApi.json`의 `DELETE /orders/{orderNumber}` 오퍼레이션은 파라미터가 **`Authorization` 헤더 + `orderNumber`(path) 뿐, requestBody 없음**(unit·수량·사유 필드 전무). 성공 응답도 `orderNumber`만 반환. → **파트너발 부분취소는 API로 불가능**하며 취소는 **주문 전체 단위만** 가능. `PC`·`PARTIAL_CANCELED`는 **공급사발 전용**. (부분환불 CS는 어드민 수동 처리 또는 "부분취소 불가" 정책으로 설계 — 문의 항목 아님)
 
-*(정책·기타)* 예약 상품 취소·환불 기한·수수료 문구, `Authorization` 토큰의 정확한 포맷(`Bearer` 접두사 유무).
+*(정책·기타)* 예약 상품 취소·환불 기한·수수료 문구(→ API 문서 없음, 계약·정책으로 확정). `Authorization` 토큰 포맷은 **`Bearer <token>`으로 확인됨**(2026-08-04 실측, 문서 원문 `Authorization: Bearer {token}`). 단 **현재 dev 토큰이 `INVALID_TOKEN`으로 반려**되어 재발급 요청 중 — 재발급 토큰으로 200 확인 시 인증 항목 종결.
 
 **내부 결정 (TBD)**
 - 매핑 테이블 스키마·관리 주체
