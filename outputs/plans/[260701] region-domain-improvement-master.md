@@ -280,6 +280,7 @@ flowchart TD
 | `plans/[260701] region-geo-model-decision.md` | §3 | 지리모델 D1~D7 결정·근거 |
 | `plans/[260630] region-data-cleanup-spec.md` (V-5) | §4 | DETAIL_LOCATION 정리 시퀀스·리스트 |
 | `plans/[260622] region-restructure-project.md` | §6 | 작업분해(Phase/BE/FE/AD)·D1~D10 |
+| `plans/[260806] region-epic-task-breakdown.md` | §6 | Jira 재편(1 Epic + 7 Task) 구조·태스크 간 실행 순서·의존성·기존 3 Epic 처리 |
 | `plans/[260623] region-seoul-theme-spec.md` | §5-3 | 서울 테마→카테고리 매핑 |
 | `jira/region/[260701] region-detail-location-cleanup.md` | §4 | DL 정비 실행 요구사항 |
 | `jira/region/[260715] region-creation-and-cutover.md` | §4·§5·§6 | P0 REGION 트랙(③RG정리·④picker·⑤관광지REGION·⑥표기·검색·⑦DL cutover) 요구사항 |

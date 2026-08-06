@@ -38,36 +38,62 @@
 
 ## 연동 대상
 
-### 대상 상품 (개발환경 매핑 완료 · 2026-03-19 기준)
-공급사가 dev 환경에 아래 상품을 매핑해 두었다. 각 상품은 **상품유형** 이 다르며, 이 유형에 따라 주문 흐름이 갈린다(아래 "상품 유형별 주문 흐름" 참고). 유형은 공급사 상품 조회 응답의 `type` 필드(**TK**=Ticket / **BK**=Booking / **PKG**=Package / **PAS**=Pass)로 확정된다. 아래 표의 유형은 기획 레벨 분류이며, 실제 `type`(특히 코레일패스는 PAS일 가능성)은 상품 조회로 확인한다.
+### 대상 상품 (개발환경 매핑 · `GET /products` 실측 2026-08-04 기준)
+공급사가 dev 환경에 매핑해 둔 상품은 **3월 7종 → 현재 18종**으로 확대됐다(코레일패스 373은 제외됨). 아래 표는 `GET /api/partner/v1.1/products?fields=codeType,confirmDeadline` **실측값**이다. 유형은 `type`(**TK**=Ticket / **BK**=Booking)로 확정된다 — 현재 dev엔 **PKG/PAS 타입 상품은 없음**(문서가 추측했던 "코레일패스=PAS"는 373 자체가 빠져 무의미).
 
-| 상품 | product UID | 유형(기획) |
-|---|---|---|
-| [Seoul] NANTA Show Ticket (홍대/명동 극장) | 117 | Booking |
-| [Jeju] Aqua Planet Discount Ticket | 2 | Ticket |
-| [Seoul] COEX Aquarium (SEA LIFE) Ticket | 4 | Ticket |
-| [Seoul] Hanboknam 경복궁점 Hanbok Rental | 18 | Ticket |
-| [Seoul] Yeouido Han River E-land Ferry Cruise | 43 | Booking |
-| [KORAIL PASS] KTX Unlimited Boarding Pass (2~5인 그룹) | 373 | Booking/Pass |
-| [Busan] Centum Spa Land Discount Ticket | 1435 | Booking |
+각 필드: **vch**=voucherType(1=주문당1코드 / 2=unit당1코드 / 3=파일·예약번호) · **code**=codeType(2D=QR / ONVL=코드·파일 없는 수동처리) · **addInfo**=hasBookingAdditionalInfo(예약 추가정보 필요) · **확정리드타임**=confirmDeadline(INSTANT=즉시 / AFTER_ORDER+24h=주문 후 24h, **표시용 안내값·SLA 아님**)
 
-> 위 목록은 dev 테스트용 매핑이며, 실제 연동 상품 범위는 공급사와 확정 필요. NANTA(117)는 실적표에 없는 테스트 상품.
+| product UID | type | vch | code | addInfo | 확정리드타임 | 상품(ko) |
+|---|---|---|---|---|---|---|
+| 1 | TK | 1 | 2D | N | INSTANT | [일산] 아쿠아플라넷 할인티켓 |
+| 2 | TK | 1 | 2D | N | INSTANT | [제주] 한화 아쿠아플라넷 할인 티켓 |
+| 4 | TK | 2 | 2D | N | INSTANT | [서울] 씨라이프 코엑스 아쿠아리움 입장권 |
+| 16 | BK | 1 | 2D | **Y** | INSTANT | [관광할인패스] 디스커버서울패스카드 |
+| 18 | TK | 1 | 2D | N | INSTANT | [서울] 한복남 경복궁점 티켓 |
+| 43 | BK | 1 | 2D | N | INSTANT | [서울] 여의도 이랜드크루즈 |
+| 117 | BK | **3** | **ONVL** | N | AFTER_ORDER+24h | [서울/명동] 난타(Nanta Show) 공연 할인 티켓 |
+| 142 | BK | 1 | 2D | N | AFTER_ORDER+24h | [서울] 한복남 프리미엄 지점 한복 촬영 |
+| 145 | BK | 1 | 2D | N | AFTER_ORDER+24h | [서울] A.H.C SPA 스파 체험 할인 |
+| 210 | BK | 1 | 2D | N | AFTER_ORDER+24h | [서울] OMT 골든블루마리나 한강 요트 정기운항 |
+| 342 | BK | 1 | 2D | N | INSTANT | [충남 아산] 아산 도고 파라다이스 온천 스파 할인 |
+| 367 | BK | 1 | 2D | N | INSTANT | [시티투어버스] 대구 시티투어버스 |
+| 406 | BK | 1 | 2D | **Y** | AFTER_ORDER+24h | (제목없음 · dev 미완성 상품) |
+| 421 | TK | 1 | 2D | N | INSTANT | [서울 강남] 바운스 트램폴린 삼성점 |
+| 427 | TK | 1 | 2D | N | INSTANT | [부산] 바운스 트램폴린 부산점 |
+| 489 | BK | 1 | 2D | **Y** | AFTER_ORDER+24h | [부산] 요트 체험 |
+| 492 | BK | 1 | 2D | N | AFTER_ORDER+24h | [부산] 요트 프라이빗 렌탈 |
+| 1435 | BK | 2 | 2D | N | INSTANT | [부산] 센텀 스파랜드 할인 이용권 |
+
+**실측에서 드러난 포인트**
+- **바우처 코드형식**: 18종 중 17종이 `2D`(QR). **난타(117)만 `ONVL`** — 코드·파일 없는 **수동 처리** 상품이라, 자동발권 흐름에서 예외 취급 필요.
+- **voucherType**: 대부분 `1`(주문당 1코드). **코엑스(4)·센텀스파(1435)는 `2`**(unit당 1코드), **난타(117)는 `3`**(파일/예약번호).
+- **예약 추가정보(addInfo=Y)**: 디스커버서울패스(16)·요트체험(489)·406 → 주문 생성 전 `booking-additional-info` 수집 필수.
+- **확정 리드타임**: TK는 전부 INSTANT. BK 중 스파·온천·시티투어(342·367)는 INSTANT지만, 난타·한복남프리미엄·AHC·요트류는 `AFTER_ORDER+24h` → 유저에게 "확정까지 최대 24h" 안내 필요.
+
+> dev 테스트용 매핑이며 **실제 1차 연동 상품 범위·순서는 공급사와 재확정 필요**(3월 대비 구성 변경됨). 406은 제목 없는 미완성 상품이라 제외 대상. 난타(117)는 실적표에 없는 테스트 상품.
 
 ### 상품 식별 체계 (매핑 키)
 공급사 상품은 **3단 UID 구조**로 식별된다. 크리에이트립 상품/옵션과 이 3키를 잇는 **매핑 테이블**이 연동의 핵심 데이터 작업이다.
 
-- **product UID** → 상품 단위 (예: NANTA = 117), 상품 조회 응답에 `type`(TK/BK/PKG/PAS) 포함
-- **option UID** → 옵션 단위 (예: 홍대극장 = 1035, 명동극장 = 1034)
-- **unit UID** → 요금/좌석 단위 (예: 홍대극장 A석 = 1385, S석 = 1386, VIP석 = 1387)
+- **product UID** → 상품 단위 (예: 난타 = 117), 상품 조회 응답에 `type`(TK/BK) 포함. 상품명은 `titles.{lang}`.
+- **option UID** → 옵션 단위, 이름은 `names.{lang}` (예: 명동 난타극장 = 1034, 홍대극장 = 1035)
+- **unit UID** → 요금/좌석 단위, `names.{lang}` + 가격 필드 포함 (예: 명동극장 A석 = 1382, S석 = 1383, VIP석 = 1384)
 
-예시(코레일패스, product 373): `4일 셀렉트 SAVER Pass` = option 1246 → `Person` = unit 1693.
+**실측 예시 (난타 117 / 명동극장 옵션 1034, 2026-08-04):**
+| unit UID | 좌석 | originalPrice | B2Bprice(공급가) | B2Cprice | currency |
+|---|---|---|---|---|---|
+| 1382 | A석 | 44,000 | 27,500 | 30,000 | KRW |
+| 1383 | S석 | — | 34,500 | 38,000 | KRW |
+| 1384 | VIP석 | — | 45,500 | 50,000 | KRW |
+
+> unit 응답에 **`B2Bprice`(우리 매입가) / `B2Cprice`(권장 판매가) / `originalPrice`(정가)** 가 함께 내려온다. 가격/단위 조회(3단계)로 이 값을 받아 주문 금액·수익 계산에 사용. `minAmount`/`maxAmount`(주문 수량 범위)도 포함.
 
 ---
 
 ## 시스템 연동 규격
 
 ### 인증 / 환경
-- **인증**: 모든 요청에 `Authorization` 헤더로 API 액세스 토큰 전달 + `Content-Type: application/json`. (토큰 포맷 — `Bearer` 접두사 유무 — 만 확인 필요)
+- **인증**: 모든 요청에 `Authorization` 헤더로 API 액세스 토큰 전달 + `Content-Type: application/json`. **⚠️ API 호출 시 `Bearer` 접두어 없이 인증 키 값만** 넣는다(공급사 확정, 2026-08-04). 예: `Authorization: {인증키}` (Bearer 없이). **주의**: 공급사가 우리에게 **웹훅을 보낼 때는 접두어를 포함**하므로 방향에 따라 다르다(공급사 측 향후 양방향 호환 개선 검토 예정). 공개 API 문서엔 `Bearer {token}` 예시가 있으나 실제 호출은 접두어 없이가 맞음(200 확인). 인증 키는 **유효기간 없음**, 재발급은 공급사에 요청.
 - **baseURL**: 개발 `https://dev.bankoftrip.com` / 운영 `https://www.bankoftrip.com` (HTTPS), 공통 경로 prefix **`/api/partner/v1.1`**
 - **개발환경 어카운트**: `partner@creatrip.com` (콘솔 `dev.bankoftrip.com`)
 - **API 가이드**: https://docs.bankoftrip.com (한국어 https://docs.bankoftrip.com/v1.1.4-korean), 최신 버전 v1.1.4
@@ -91,18 +117,39 @@
 ### 상품 유형별 주문 흐름
 연동 설계의 핵심. 주문 생성은 단일 `POST /orders`이지만, 상품 `type`에 따라 사전 호출과 확정 시점이 다르다. 주문 생성 요청 body 공통 필드: `product`, `option`, `unitAmounts[{ unit, amount }]`, `referenceNumber`(선택, 최대 64자), `voucherSendType`(0~3), traveler 정보(name/email/number/nationality).
 
-**① Ticket (TK · 즉시발권)** — 제주 아쿠아플라넷, COEX 아쿠아리움, 한복남
+**① Ticket (TK · 즉시발권)** — 제주·일산 아쿠아플라넷, COEX 아쿠아리움, 한복남 경복궁, 바운스 트램폴린 (실측 TK 6종)
 1. 상품(1) → 옵션(2) → 가격/단위(3) 조회
 2. 주문 생성 `POST /orders`
 3. **즉시 확정 → 응답의 `voucherInfo`로 실시간 바우처 발급/전달**
 
-**② Booking (BK · 예약·재고관리)** — 크루즈, 센텀스파, 난타 (코레일패스는 유형 확인 필요)
+**② Booking (BK · 예약·재고관리)** — 여의도 크루즈, 센텀스파, 난타, 디스커버서울패스, 스파·온천·요트류 등 (실측 BK 12종)
 1. 상품(1) → 옵션(2) → 가격/단위(3) 조회
 2. **스케줄·재고 조회(4)** + **주문 필수 추가정보 조회(5)** ← 예약 상품만 필수
 3. 주문 생성 `POST /orders` (`bookingDate`, `bookingTime`, `bookingAdditionalInfo` 포함)
 4. **생성 직후 `bookingStatus=PD`(승인 대기)** → 웹훅으로 `BOOKING_ACCEPTED`(→ AC) / `BOOKING_REJECTED`(→ RJ) 수신 후 확정/거절 처리 (즉시 확정 아님)
 
-**③ Pass & Package (PAS/PKG)**: `POST /orders` 사용, `option`은 `"PAS"`/`"PKG"`, product당 1 option·1 unit 제약. 코레일패스 등 패스류가 이 유형에 해당할 수 있음(상품 `type`으로 확정).
+**③ Pass & Package (PAS/PKG)**: `POST /orders` 사용, `option`은 `"PAS"`/`"PKG"`, product당 1 option·1 unit 제약. 단 **현재 dev 매핑 18종엔 PAS/PKG 타입 상품이 없음**(2026-08-04 실측, 전부 TK/BK). 3월에 있던 코레일패스(373)가 빠지면서 이 유형 대상이 사라짐 → 향후 패스류 재공급 시 이 흐름 적용.
+
+### Booking 상품 사전 조회 상세 (스케줄·추가정보) — 실측 2026-08-04
+BK 상품은 주문 생성 전에 아래 두 조회가 필수다. **주문 화면 UI 설계의 직접 근거**가 되므로 응답 구조를 실측으로 확정했다.
+
+**④ 스케줄·재고 조회** `GET .../options/{optionUid}/booking-schedules`
+- 쿼리(선택): `date`(YYYY-MM-DD), `time`(HH:mm) — 특정 날짜만 필터 가능
+- 응답: `[{ date, time, stock }]` 배열. `stock`=실시간 재고(예: 여의도 크루즈 43은 `9999`=사실상 무제한)
+- 실측 예(43/2573 달빛뮤직크루즈): `[{"date":"2026-08-07","time":"14:00","stock":9999}, {"date":"2026-08-07","time":"17:00",...}]` — 날짜×시간 슬롯별로 재고를 준다.
+- 스케줄 없으면 `404 SCHEDULE_NOT_FOUND`(시즌 종료·미운영). → **유저 날짜/시간 선택 UI는 이 응답으로 구성**, `stock=0`이면 마감 처리.
+
+**⑤ 주문 필수 추가정보 조회** `GET .../options/{optionUid}/booking-additional-info/{additionalInfoUid}`
+- **`additionalInfoUid`는 선택(생략 가능)** — 생략하면 **해당 옵션의 추가정보 항목 전체 목록**이 배열로 내려옴(먼저 목록으로 받아 항목을 파악하는 게 정석).
+- 각 항목 구조: `{ uid, type, answerType, titles{lang}, options[] }`
+  - **`type`**: `BAC`=주문당 1회 입력(수량 무관 공통) / `TRV`=여행자별 입력(수량만큼 반복) / `PAS`. *(dev 샘플은 전부 BAC, TRV는 스펙엔 존재)*
+  - **`answerType`**: `SEL`=선택형(→ `options[]`에서 고름) / `IPU`=자유 입력
+  - `options[]`(SEL일 때): `{ titles{lang}, value }` — 선택지. `value`가 주문 시 넘길 값(UID).
+- 실측 예:
+  - 디스커버서울패스(16): `BAC`·`SEL` — "픽업장소를 선택해주세요" → 옵션 `인천공항 T1`(value=8f5b7866…) / `T2` …
+  - 요트체험(489): `BAC`·`IPU` — "연락받으실 메신저 종류 및 아이디를 써주세요" (자유 입력)
+  - 406: 항목 2개 — `SEL`(가이드 언어: 영어/중국어) + `IPU`(메신저 아이디)
+- → **주문 생성 요청의 `bookingAdditionalInfo`에 이 값들을 실어 보낸다.** 프론트는 항목별 `answerType`에 따라 셀렉트박스 vs 입력창을 렌더링해야 함.
 
 ### 주문/예약 상태 값
 - **주문 `status`**: `AV`(사용 가능) / `AP`(사용 완료) / `CR`(취소 요청) / `CL`(전체 취소) / `PC`(부분 취소) / `EP`(만료)
@@ -128,14 +175,18 @@
 - **사용 통지**: 여행자가 바우처를 사용하면 `REDEEMED` 웹훅 수신 → 주문 `status` AP(사용 완료). 사용 취소·복구는 `RESTORED`.
 
 ### 웹훅 (파트너 구현 필수)
-공급사 → 크리에이트립 서버로 **주문 상태 변경을 HTTPS POST(application/json)** 로 통지한다. 크리에이트립이 수신 엔드포인트를 구현하고 URL을 `dev@bankoftrip.com`에 등록·승인받아야 한다.
+공급사 → 크리에이트립 서버로 **주문 상태 변경을 HTTPS POST(application/json)** 로 통지한다. **웹훅은 우리가 쏜 주문의 "즉답"이 아니라, 주문 이후 요청/응답 사이클 바깥에서 발생하는 상태변화(승인·사용·취소 등)를 비동기로 알려주는 이벤트 스트림**이다(예: `REDEEMED`는 고객이 실제 바우처를 쓰는 시점 — 주문 한참 뒤일 수 있음). 크리에이트립이 수신 엔드포인트를 구현하고 URL을 등록·승인받아야 한다.
 
 - **이벤트 종류**: `BOOKING_ACCEPTED`(예약 승인), `BOOKING_REJECTED`(예약 거절), `CANCELED`(전체 취소), `PARTIAL_CANCELED`(부분 취소), `REDEEMED`(사용 완료), `RESTORED`(사용 취소·복구)
-- **페이로드**(JSON): `eventType`, `createdAt`(`YYYY-MM-DD HH:mm:ss`), `data { orderNumber(TV로 시작하는 공급사 주문번호), referenceNumber(크리에이트립 주문번호), dateAt }`
+- **등록 절차 (문서 확정)**: 사용할 웹훅 URL을 **`dev@bankoftrip.com`에 메일로 요청** → 공급사 개발팀이 검토 후 등록 결과 회신. 콘솔 직접 등록이 아니라 **메일 요청 방식**. 중단도 메일 요청. *(승인 소요 기간·dev/prod URL 별도 등록 여부는 문서에 없어 확인 필요 — 2차 문의 대상)*
+- **페이로드**(JSON): `eventType`, `createdAt`(문서 표기 `YYYY-MM-DD HH:mm:ss`, 필드 설명엔 ISO8601 병기 — 실제 포맷 수신 시 확인), `data { orderNumber(TV로 시작하는 공급사 주문번호), referenceNumber(크리에이트립 주문번호), dateAt }`. **6개 이벤트 모두 동일 구조**(payload는 이 3개 필드만).
 - **페이로드는 최소 정보만 담긴다** — 어느 unit·몇 개가 취소/사용됐는지 등 상세는 페이로드에 없으므로, 웹훅 수신 후 **`GET /orders/{orderNumber}` 재조회로 `unitAmounts`·`voucherInfo`·`status`를 대사**해 반영한다.
-- **보안**: `Authorization` Bearer 토큰(옵션, 파트너 제공) + `x-nonce`(재전송·변조 방지용 일회성 난수, 필수)
-- **수신 요구**: HTTPS 전용, JSON 처리 가능한 엔드포인트. 로컬 테스트는 ngrok 등 활용.
-- **전송 이력**: 공급사 콘솔 웹훅 전송 이력 페이지에서 상태(In Progress / Success / Failure) 확인 가능.
+- **보안 (문서 확정)**:
+  - `x-nonce` — **매 요청 포함되는 일회성 난수**(예 `Bpc6plJEpM1yfNWQKjSMXSz9Hpa1n39O`, 32자 영숫자). 재전송·변조 방지용. **별도 서명(HMAC) 스킴은 문서에 없음** → 수신 측은 **본 적 있는 nonce면 중복으로 버리는 멱등 처리**만 하면 됨. *(서명 스킴 유무는 2차 문의로 재확인)*
+  - `Authorization` — **옵션**. `Bearer {파트너가 사전 제공한 토큰}` 형식. **이 토큰은 우리(파트너)가 정해서 공급사에 미리 전달**하면, 공급사가 모든 웹훅에 그대로 실어 보냄 → 수신 측은 **들어온 값이 우리가 준 토큰과 일치하는지 검증**. (공급사가 포맷을 지정하는 게 아니라 우리가 정하는 값)
+- **자동 재전송 없음 (문서 확정)**: 공급사는 웹훅 실패 시 자동 재전송을 운영하지 않음 → 누락 대비 **`GET /orders` 폴링·대사**로 상태 보정 설계 필수.
+- **수신 요구**: HTTPS 전용, JSON 처리 가능한 엔드포인트. **로컬 불가**(외부 접근 주소 필요) → 로컬 테스트는 **ngrok**으로 Forwarding URL 생성해 등록.
+- **전송 이력**: 공급사 콘솔 웹훅 전송 이력 페이지(`www.bankoftrip.com/ko/webhook/histories`)에서 상태(In Progress / Success / Failure) 확인 가능.
 
 ---
 
@@ -167,10 +218,13 @@
 
 ### 취소 / 환불
 - 크리에이트립발 취소 시 `DELETE /orders/{orderNumber}` 호출로 공급사 취소를 연동한다(주문 전체 단위).
-- **부분환불/부분취소 (미해결 · 공급사 조치 필요)**: 크리에이트립은 실제 운영에서 **부분환불(부분취소) 요청이 발생**한다(예: 다인 예약 중 일부 인원 취소). 그러나 파트너 API(`DELETE /orders`)는 **전체 취소만** 지원하므로, 어드민조차 API로는 부분취소를 실행할 수 없다. 따라서 "어드민 수동 처리"는 곧 **공급사(트래볼루션) 측 처리 요청**을 의미하며, 이는 **공급사의 조치·운영 채널 합의가 필요한 열린 항목**이다(아래 "확인 필요 사항" 참고). `PARTIAL_CANCELED` 웹훅은 공급사가 부분취소를 처리했을 때만 수신된다.
+- **부분환불/부분취소 (공급사 확정 · 오퍼레이션 채널 처리)**: 파트너 API(`DELETE /orders`)는 **전체 취소만** 지원하며, **부분취소 API는 없고 개발 계획도 없음**(공급사 확정, 2026-08-04). 실제 운영에서 부분환불 요청 발생 시 처리 절차는 아래와 같이 **양사 오퍼레이션팀 커뮤니케이션으로 처리**(기존 방식 유지):
+  - **가격·재고 문제 없으면** → 기존 주문 **전체 취소 후 재주문**으로 안내.
+  - **가격·재고 변동으로 재주문 어려우면** → 취소후재주문 불가. 고객 협의 후 **당일 최종 사용 완료 이후 주문을 부분취소(PC) 상태로 변경** 처리.
+  - `PC`/`PARTIAL_CANCELED` 상태가 발생하는 경우: ① 공급사 취소·환불 규정상 일부 금액만 환불, ② 양사 오퍼팀 협의로 부분취소 결정된 경우. → **자동화 대상 아님**, 어드민이 공급사 오퍼팀에 요청하는 수동 플로우로 설계. `PARTIAL_CANCELED` 웹훅은 그 결과를 수신하는 용도.
 - 공급사발 취소(`CANCELED`/`PARTIAL_CANCELED`) 수신 시 `lookup` 대사 후 크리에이트립 취소·환불·CS 흐름과 연결한다.
 - 취소 불가 조건은 `ORDER_NOT_FOUND`(404, 주문 없음) / `ORDER_EXPIRED`(만료) / `ORDER_ALREADY_USED`(사용됨) / `ORDER_ALREADY_CANCELLED`(이미 취소됨) / `ORDER_CANNOT_BE_CANCELED`(취소 불가) / `KORAILPASS_ERROR`(코레일패스 사유별 상이) 에러로 내려오므로, 이 기준으로 취소 가능 시점을 처리한다.
-- **취소 기한·환불 수수료**: 공개 API 문서에는 구체적 취소 기한(마감 시각)·수수료율이 **명시돼 있지 않다**(에러 코드로 "취소 불가" 여부만 확인 가능). 이는 API 스펙이 아니라 **상품별 계약·정책** 사항이므로, 예약 상품의 취소·환불 정책 문구는 공급사·계약 기준으로 확정해 반영한다.
+- **취소 기한·환불 수수료**: 공개 API 문서에는 구체적 취소 기한(마감 시각)·수수료율이 명시돼 있지 않다(에러 코드로 "취소 불가" 여부만 확인 가능). 단 **이 정책은 이미 트래볼루션으로부터 공급받아 크리에이트립 스팟(상품)에 기입돼 운영 중**이므로, 신규로 공급사에 문의할 필요 없이 **기존 스팟 데이터의 취소·환불 정책 값을 활용**한다. (연동 신규 상품이 생기면 그 시점에만 정책 확인)
 
 ### 어드민 / 오퍼레이션
 - 자동 연동으로 전환되는 상품은 **수동 부킹 단계를 제거/축소**하되, 예약 상품의 승인 대기·거절 건은 어드민에서 상태 확인·개입이 가능해야 한다.
@@ -185,20 +239,24 @@
 ## 확인 필요 사항 (공급사 문의 / TBD)
 
 **공급사(트래볼루션)에 확인**
-1. **rate limit 정책** — 공개 문서엔 명시 없으나, 실제 응답 헤더에 `x-ratelimit-limit: 600` / `x-ratelimit-remaining: N`이 내려옴(2026-08-04 실측). **상한 600은 확인됨**. 단 **적용 창(window) 단위(분/시/일)와 초과 시 동작(429 여부·재시도 정책)은 헤더에 없어 확인 필요**. 호출 상한·재시도 설계 전제.
+1. ~~**rate limit 정책**~~ — **공급사 확정됨(2026-08-04).** 호출 한도 **분당 600회**(600 requests / 1 minute), **개발·운영 환경 동일**. 정상 응답엔 `X-RateLimit-Limit` / `X-RateLimit-Remaining` 헤더 제공. **초과 시**: LIMIT 헤더 없이 `HTTP 429` + body `{"code":"INTERNAL_ERROR","message":"Too Many Attempts."}` 반환. 단 이 수치는 고정 보장 아님(서버 운영 상황 따라 조정 가능) → 클라이언트에 **429 대비 백오프·재시도** 구현 권장.
 2. ~~**웹훅 재시도 정책**~~ — **문서 확정됨.** 공식 문서 원문: *"Our server does not currently operate a separate webhook retry policy."* 즉 **공급사는 웹훅 실패 시 자동 재전송을 하지 않는다**(전송 이력에 Success/Failure/In-Progress 상태만 존재). → **파트너가 `GET /orders/{orderNumber}` 폴링·대사로 상태를 보정하는 설계가 필수 전제**로 확정. (문의 항목 아님, 설계 반영 사항)
-3. **부분환불(부분취소) 처리 방안** — **(API 사실, 확정)** `partnerApi.json`의 `DELETE /orders/{orderNumber}`는 `Authorization` 헤더 + `orderNumber`(path)뿐 requestBody 없음(unit·수량·사유 필드 전무), 성공 응답도 `orderNumber`만 반환 → **파트너발 부분취소는 API로 불가능**하며 취소는 **주문 전체 단위만** 가능. `PC`·`PARTIAL_CANCELED`는 **공급사발 전용**. **(→ 공급사 확인 필요)** 크리에이트립은 실제로 부분환불이 필요한 주문 케이스가 있는데 API로는 전체취소만 가능하므로, 다음을 확인해야 한다:
-   - (a) **트래볼루션 측에서 우리 요청을 받아 부분취소를 처리해줄 수 있는지** — 요청 채널(콘솔/메일/전용 엔드포인트), 처리 리드타임, 처리 결과가 `PARTIAL_CANCELED` 웹훅으로 우리에게 통지되는지
-   - (b) 아니면 **파트너발 부분취소 API 지원 계획**이 있는지(추가 파라미터로 unit·수량 취소)
-   - (c) 둘 다 불가라면, **전체취소 후 잔여 재주문** 외에 권장하는 운영 방법이 있는지(재주문 시 재고·가격·좌석 보장 이슈 포함)
+3. ~~**부분환불(부분취소) 처리 방안**~~ — **공급사 확정됨(2026-08-04).** `DELETE /orders/{orderNumber}`는 requestBody 없이 전체 취소만 지원(OpenAPI 확정) → **파트너발 부분취소 API는 없고 개발 계획도 없음**. 부분취소는 **양사 오퍼레이션팀 커뮤니케이션으로 처리**(가격·재고 문제없으면 전체취소 후 재주문 안내 / 재주문 어려우면 당일 사용완료 후 `PC` 상태로 변경). `PC`·`PARTIAL_CANCELED`는 공급사발 전용, 결과 수신 용도. → 상세는 위 "취소/환불" 섹션. (자동화 아님, 어드민 수동 플로우로 설계)
 
-*(정책·기타)* 예약 상품 취소·환불 기한·수수료 문구(→ API 문서 없음, 계약·정책으로 확정). `Authorization` 토큰 포맷은 **`Bearer <token>`으로 확인됨**(2026-08-04 실측, 문서 원문 `Authorization: Bearer {token}`). 단 **현재 dev 토큰이 `INVALID_TOKEN`으로 반려**되어 재발급 요청 중 — 재발급 토큰으로 200 확인 시 인증 항목 종결.
+4. ~~**인증 토큰 포맷**~~ — **확정(2026-08-04).** API 호출은 **접두어 없이 키만**(웹훅 수신 시엔 `Bearer` 접두어 포함). dev 키 재발급 완료·`GET /products` 200 확인. 키 유효기간 없음.
+5. ~~**취소 기한·환불 수수료**~~ — **문의 불필요.** 이미 트래볼루션에서 공급받아 **크리에이트립 스팟 데이터에 기입돼 운영 중** → 기존 값 활용(위 "취소/환불" 참고).
+
+**2차 문의 (2026-08-06 발송 · 회신 대기)** — 개발팀(전원식) 대상, 문서에 없는 것만
+1. **웹훅 등록**: 승인·반영 소요 기간 / dev·prod URL 별도 등록 여부 *(등록=메일요청 방식 자체는 문서 확정)*
+2. **웹훅 검증**: `x-nonce`에 별도 서명(HMAC) 스킴이 있는지, 아니면 중복(멱등)만 확인하면 되는지 / `Authorization`은 파트너가 준 Bearer 토큰을 그대로 실어보내는 구조가 맞는지
+3. **운영(prod) 전환**: prod API 토큰 발급 절차 / prod 웹훅 등록 절차 / prod 상품 UID가 dev와 동일한지·다르면 운영 상품 목록 확인법
 
 **내부 결정 (TBD)**
 - 매핑 테이블 스키마·관리 주체
 - 자동 연동 주문 ↔ 기존 수동 주문 **상태 모델 통합 방식**
 - 웹훅 수신 서버 구현 위치
-- 롤아웃 단위/순서(예: 즉시발권 티켓 우선 → 예약 상품 확장)
+- 바우처 발송 주체(공급사 직발송 vs 크리에이트립 자체 발송 `voucherSendType`)
+- **1차 연동 상품 범위·롤아웃 순서** — 3월 7종→dev 18종 변경(코레일패스 제외). **내부 논의 먼저 → 확정 후 공급사와 최종 정렬** (운영 이슈라 공급사 선문의 대신 내부 결정 우선)
 
 ---
 
