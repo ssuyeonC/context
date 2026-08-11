@@ -280,13 +280,17 @@ flowchart TD
 | `plans/[260701] region-geo-model-decision.md` | §3 | 지리모델 D1~D7 결정·근거 |
 | `plans/[260630] region-data-cleanup-spec.md` (V-5) | §4 | DETAIL_LOCATION 정리 시퀀스·리스트 |
 | `plans/[260622] region-restructure-project.md` | §6 | 작업분해(Phase/BE/FE/AD)·D1~D10 |
-| `plans/[260806] region-epic-task-breakdown.md` | §6 | Jira 재편(1 Epic + 7 Task) 구조·태스크 간 실행 순서·의존성·기존 3 Epic 처리 |
+| `plans/[260806] region-epic-task-breakdown.md` | §6 | **Jira 실생성본 COM-2574~2581(Epic+T1~T7)** 구조·의존성·티켓 내부 충돌 분석. 미러 = `[260806] region-jira-paste.md` |
 | `plans/[260623] region-seoul-theme-spec.md` | §5-3 | 서울 테마→카테고리 매핑 |
 | `jira/region/[260701] region-detail-location-cleanup.md` | §4 | DL 정비 실행 요구사항 |
 | `jira/region/[260715] region-creation-and-cutover.md` | §4·§5·§6 | P0 REGION 트랙(③RG정리·④picker·⑤관광지REGION·⑥표기·검색·⑦DL cutover) 요구사항 |
 | `jira/region/[260730] tourist-region-drafts-and-link-migration.md` | §4 | 비-행정구 103 DL 구·법정동 초안 pre-run + 지역값 연결 4종 이관 규모·방법(데이터 스포크) |
 | `jira/region/[260730] blog-userblog-academy-region-label.md` | §5 | 블로그·유저블로그·어학당 지역 표기 region 격상(별도 티켓 예정, COM-2557·2559 후행) |
+| `jira/region/[260807] region-t2-structure-migration.md` | §3·§4 | REGION 구조(상위 구 필수+동 옵셔널·미선택=구 전체)·관광지형 지명 생성·이관 (재편 T2 정본) |
+| `jira/region/[260807] region-t3-publish-language-sync.md` | §5 | region 공개 상태 언어 간 동기화(**Jira 재편에서 제외 — 후속 별건 보류**) |
+| `jira/region/[260807] spot-legal-code-mapping-backfill.md` | §4 | 스팟 legal_code 미보유 179 백필(유효129·이상치5·해외무효45)·매핑 자동화 (재편 T5 정본) |
 | `jira/spot/[260706] spot-list-seoul-busan-region-toggle.md` | §5 | 리스트 지역 토글 요구사항 |
+| `jira/region/[260811] spot-list-region-filter-restructure.md` | §5 | 스팟 리스트 지역 필터 CITY+REGION 재구성(Epic COM-2574 하위 신규 **T4**, 섹션 2 REGION 정비, 선행 T1·T2·T3 동반) |
 | `jira/spot/[260617] spot-multiple-detail-locations.md` | §6(게이트) | 스팟 복수 상세지역(별트랙) |
 
 **📚 아카이브 — 역사·근거 (수정 금지)**
