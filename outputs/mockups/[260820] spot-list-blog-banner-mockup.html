@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>피부과 리스트 · 블로그 홍보 배너 목업 (모바일/데스크탑)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400..800;1,6..12,400..800&family=Noto+Sans+KR:wght@400..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#00BDAD; --primary-5:#EDF6F5; --primary-60:#009285;
+    --ink:#3B4047; --gray-90:#24272B; --gray-60:#69727F; --gray-50:#838C98; --gray-40:#9FA6AF;
+    --gray-10:#E9EBEE; --gray-5:#F2F3F5; --gray-2:#F7F8FA;
+    --pink-50:#FF4082; --pink-5:#FFF5F0; --blue-50:#2F9BFF; --blue-5:#F0FBFF;
+    --purple-70:#5E2EB6; --purple-50:#A35CFE; --purple-30:#D09DFE; --purple-5:#F8EFFE;
+    --font:'Nunito Sans','Noto Sans KR','Noto Sans TC','Roboto',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:#e9ebee;color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;padding:24px 12px 60px;-webkit-font-smoothing:antialiased}
+
+  /* ── 개발 미리보기 툴바 ── */
+  .toolbar{width:100%;max-width:640px;background:#111827;color:#fff;border-radius:14px;padding:14px 16px;margin-bottom:18px}
+  .toolbar h2{font-size:13px;font-weight:700;margin-bottom:8px}
+  .ctlrow{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ctlrow:last-child{margin-bottom:0}
+  .ctlrow .lb{font-size:11px;color:#9ca3af;width:52px;flex-shrink:0}
+  .seg{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+  .seg button{border:1px solid #374151;background:#1f2937;color:#d1d5db;
+    font-size:12px;font-weight:600;padding:8px 12px;border-radius:9px;cursor:pointer;transition:.15s;font-family:var(--font)}
+  .seg.dev button.on{background:#4b5563;border-color:#6b7280;color:#fff}
+  .seg.ban button.on{background:var(--primary);border-color:var(--primary);color:#fff}
+
+  /* ── 프레임 ── */
+  .frame{background:#fff;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.16)}
+  .frame.is-mobile{width:430px;border-radius:26px}
+  .frame.is-desktop{width:min(1040px,96vw);border-radius:14px}
+
+  /* GNB */
+  .gnb{padding:11px 16px 10px;border-bottom:1px solid var(--gray-5);display:flex;align-items:center;gap:10px}
+  .gnb .back{font-size:22px;color:var(--ink);line-height:1}
+  .gnb .logo{display:none;font-size:20px;font-weight:800;color:var(--primary);letter-spacing:-.5px;margin-right:8px}
+  .gnb .search{flex:1;background:var(--gray-5);border-radius:9999px;padding:9px 14px;font-size:13px;color:var(--gray-40);display:flex;align-items:center;gap:7px}
+  .gnb .dmenu{display:none;gap:20px;font-size:14px;font-weight:600;color:var(--ink)}
+  .is-desktop .gnb{padding:14px 24px}
+  .is-desktop .gnb .back{display:none}
+  .is-desktop .gnb .logo{display:block}
+  .is-desktop .gnb .dmenu{display:flex}
+  .is-desktop .gnb .search{max-width:280px;margin-left:auto;flex:none;width:280px}
+
+  /* 카테고리 탭 */
+  .tabs{display:flex;gap:18px;padding:0 16px;border-bottom:1px solid var(--gray-5);overflow-x:auto}
+  .is-desktop .tabs{padding:0 24px;gap:28px}
+  .tabs .tab{white-space:nowrap;font-size:14px;color:var(--gray-40);padding:13px 0;font-weight:600;position:relative}
+  .is-desktop .tabs .tab{font-size:15px;padding:15px 0}
+  .tabs .tab.on{color:var(--ink);font-weight:800}
+  .tabs .tab.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink);border-radius:2px}
+
+  /* 필터 칩 */
+  .filters{display:flex;gap:6px;padding:12px 16px;overflow-x:auto;align-items:center}
+  .is-desktop .filters{padding:14px 24px;gap:8px}
+  .chip{white-space:nowrap;display:inline-flex;align-items:center;gap:4px;min-height:32px;border:1px solid var(--gray-10);
+    background:#fff;color:var(--ink);font-size:13px;font-weight:600;padding:6px 10px;border-radius:9999px}
+  .chip .ar{font-size:9px;opacity:.55}
+  .chip.active{border-color:var(--primary);background:var(--primary-5);color:var(--primary)}
+  .chip.active .ar{opacity:1}
+  .vdiv{width:1px;height:24px;background:var(--gray-10);flex-shrink:0;margin:0 2px}
+
+  /* 결과 수 + 정렬 */
+  .listhead{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 4px}
+  .is-desktop .listhead{padding:16px 24px 4px}
+  .listhead .cnt{font-size:12px;font-weight:700;color:var(--ink)}
+  .is-desktop .listhead .cnt{font-size:14px}
+  .listhead .sort{font-size:12px;color:var(--ink);display:flex;align-items:center;gap:4px}
+  .is-desktop .listhead .sort{font-size:14px}
+  .listhead .sort .ic{font-size:13px;color:var(--gray-50)}
+
+  /* 리스트 */
+  .list{padding:12px 16px 20px;display:flex;flex-direction:column;gap:20px}
+  .is-desktop .list{display:grid;grid-template-columns:1fr 1fr;gap:20px 24px;padding:16px 24px 28px}
+
+  .card{display:flex;gap:12px;position:relative}
+  .card .thumb{position:relative;width:152px;height:137px;flex-shrink:0;border-radius:4px;overflow:hidden;background-size:cover;background-position:center}
+  .is-desktop .card .thumb{width:192px;height:173px}
+  .card .heart{position:absolute;right:8px;bottom:8px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+    font-size:16px;color:var(--pink-50);filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
+  .card .flag{position:absolute;left:0;top:0;width:32px;height:32px;background:rgba(0,189,173,.8);color:#fff;
+    font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border-top-left-radius:4px;border-bottom-right-radius:8px}
+  .card .content{display:flex;flex-direction:column;flex:1;min-width:0}
+  .card .locrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;gap:8px}
+  .card .loc{font-size:12px;line-height:18px;color:var(--gray-40);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .card .adbadge{flex-shrink:0;width:30px;height:22px;border:1px solid var(--gray-10);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray-40)}
+  .card .title{font-size:12px;line-height:18px;font-weight:700;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .is-desktop .card .title{font-size:14px;line-height:21px}
+  .card .pricerow{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:6px 0}
+  .card .price{font-size:14px;line-height:21px;font-weight:800;color:var(--primary)}
+  .is-desktop .card .price{font-size:16px}
+  .card .orig{font-size:12px;color:var(--gray-40);text-decoration:line-through}
+  .card .bottom{margin-top:auto;display:flex;flex-direction:column;gap:6px}
+  .card .stats{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--gray-40)}
+  .card .stats .star{color:var(--primary);font-size:12px}
+  .card .stats .rt{font-weight:700;color:var(--ink)}
+  .card .tags{display:flex;flex-wrap:wrap;gap:4px}
+  .card .tag{font-size:12px;line-height:18px;padding:0 4px;border-radius:4px}
+  .tag.new{background:var(--pink-5);color:var(--pink-50)}
+  .tag.now{background:var(--blue-5);color:var(--blue-50)}
+  .tag.cash{background:#A35CFE;color:#fff}
+  .tag.lang{background:var(--gray-5);color:var(--gray-60)}
+
+  /* ══════════ 배너 변형 ══════════ */
+
+  /* A. 상단 와이드 (풀폭 후킹배너 · 퍼플) */
+  .bannerA{margin:12px 16px 0;border-radius:8px;padding:16px;position:relative;overflow:hidden;
+    background:linear-gradient(120deg,#B57BFF 0%,#A35CFE 55%,#7C3AED 100%);color:#fff}
+  .is-desktop .bannerA{margin:16px 24px 0;padding:22px 26px}
+  .bannerA .kicker{font-size:12px;line-height:18px;font-weight:700;opacity:.95;margin-bottom:6px}
+  .bannerA h3{font-size:18px;line-height:24px;font-weight:800;margin-bottom:6px}
+  .is-desktop .bannerA h3{font-size:22px;line-height:28px}
+  .bannerA p{font-size:12px;line-height:18px;opacity:.92;margin-bottom:13px}
+  .is-desktop .bannerA p{font-size:13px}
+  .bannerA .ctas{display:flex;gap:8px}
+  .is-desktop .bannerA .ctas{max-width:420px}
+  .bannerA .cta{flex:1;text-align:center;font-size:13px;font-weight:800;padding:10px;border-radius:8px;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.55);color:#fff}
+  .bannerA .cta.solid{background:#fff;color:var(--purple-70);border-color:#fff}
+  .bannerA .glow{position:absolute;right:-30px;top:-34px;width:150px;height:150px;background:radial-gradient(circle,rgba(255,255,255,.32),transparent 70%);border-radius:50%}
+  .bannerA .ad{position:absolute;right:10px;bottom:8px;font-size:9px;opacity:.6}
+
+  /* D. 상단 카드형 (상단에 카드 2장) */
+  .bannerD{margin:12px 16px 0}
+  .is-desktop .bannerD{margin:16px 24px 0}
+  .bannerD .dh{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+  .bannerD .dh h3{font-size:14px;line-height:21px;font-weight:800;color:var(--ink)}
+  .is-desktop .bannerD .dh h3{font-size:16px}
+  .bannerD .dh .pill{font-size:11px;background:var(--purple-5);color:var(--purple-50);font-weight:700;padding:2px 8px;border-radius:9999px}
+  .bannerD .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .is-desktop .bannerD .grid{gap:16px}
+  .pcard{border:1px solid var(--gray-10);border-radius:8px;overflow:hidden;background:#fff;text-decoration:none;color:inherit;display:block}
+  .pcard .pimg{height:96px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px}
+  .is-desktop .pcard .pimg{height:140px;font-size:20px}
+  .pcard.v .pimg{background:linear-gradient(135deg,#B57BFF,#7C3AED)}
+  .pcard.f .pimg{background:linear-gradient(135deg,#5AC8FA,#2F6BFF)}
+  .pcard .pbody{padding:10px 12px 12px}
+  .is-desktop .pcard .pbody{padding:14px 16px 16px}
+  .pcard .ptype{font-size:11px;color:var(--purple-50);font-weight:700;margin-bottom:3px}
+  .is-desktop .pcard .ptype{font-size:12px}
+  .pcard .ptitle{font-size:13px;line-height:18px;font-weight:800;color:var(--ink);margin-bottom:8px}
+  .is-desktop .pcard .ptitle{font-size:15px;line-height:21px}
+  .pcard .pgo{font-size:12px;font-weight:700;color:var(--purple-70)}
+
+  /* B. 인피드 카드형 (뷰티필터배너 스타일) */
+  .bannerB{display:flex;align-items:center;gap:10px;background:var(--purple-5);border-radius:8px;padding:12px 20px;position:relative}
+  .is-desktop .bannerB{grid-column:1/-1;padding:16px 24px;gap:16px}
+  .bannerB .txt{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+  .bannerB .t{font-size:14px;line-height:21px;font-weight:800;color:var(--purple-70)}
+  .is-desktop .bannerB .t{font-size:16px}
+  .bannerB .s{font-size:12px;line-height:18px;color:var(--purple-50)}
+  .is-desktop .bannerB .s{font-size:13px}
+  .bannerB .img{width:56px;height:56px;flex-shrink:0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;text-align:center;line-height:1.15;background:linear-gradient(135deg,#B57BFF,#7C3AED)}
+  .is-desktop .bannerB .img{width:72px;height:72px;font-size:14px}
+  .bannerB .ad{position:absolute;right:8px;top:8px;font-size:9px;color:var(--purple-50);opacity:.7}
+
+  .hidden{display:none !important}
+  .note{max-width:640px;font-size:11px;color:#6b7280;margin-top:14px;line-height:1.6;text-align:center}
+</style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <h2>피부과 리스트 · 블로그 홍보 배너 미리보기</h2>
+    <div class="ctlrow">
+      <span class="lb">디바이스</span>
+      <div class="seg dev">
+        <button data-d="mobile" class="on">📱 모바일</button>
+        <button data-d="desktop">🖥️ 데스크탑</button>
+      </div>
+    </div>
+    <div class="ctlrow">
+      <span class="lb">배너</span>
+      <div class="seg ban">
+        <button data-v="A" class="on">A · 상단 와이드</button>
+        <button data-v="D">D · 상단 카드형</button>
+        <button data-v="B">B · 인피드 카드</button>
+        <button data-v="OFF">OFF · 원본</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="frame is-mobile" id="frame">
+    <!-- GNB -->
+    <div class="gnb">
+      <span class="back">‹</span>
+      <span class="logo">creatrip</span>
+      <div class="dmenu"><span>홈</span><span>뷰티</span><span>투어</span><span>맛집</span></div>
+      <div class="search">🔍 시술·병원 검색</div>
+    </div>
+
+    <!-- 카테고리 탭 -->
+    <div class="tabs">
+      <span class="tab on">피부과</span>
+      <span class="tab">성형외과</span>
+      <span class="tab">치과</span>
+      <span class="tab">건강검진</span>
+      <span class="tab">한의원</span>
+    </div>
+
+    <!-- 필터 칩 -->
+    <div class="filters">
+      <span class="chip map">🗺️ 지도</span>
+      <span class="vdiv"></span>
+      <span class="chip">지역 <span class="ar">▾</span></span>
+      <span class="chip">날짜 <span class="ar">▾</span></span>
+      <span class="chip">품절 제외</span>
+      <span class="chip active">시술 필터 <span class="ar">▾</span></span>
+    </div>
+
+    <!-- A: 상단 와이드 -->
+    <div id="A" class="bannerA">
+      <div class="glow"></div>
+      <div class="kicker">🔥 지금 서울에서 가장 핫한 리프팅</div>
+      <h3>볼뉴머 · 포트라, 통증·다운타임 없이 탄력 UP</h3>
+      <p>여행 중에도 부담 없이. RF·레이저 리프팅 완벽 가이드를 확인해 보세요.</p>
+      <div class="ctas">
+        <a class="cta solid">볼뉴머 알아보기</a>
+        <a class="cta">포트라 알아보기</a>
+      </div>
+      <span class="ad">AD</span>
+    </div>
+
+    <!-- D: 상단 카드형 -->
+    <div id="D" class="bannerD hidden">
+      <div class="dh"><h3>지금 뜨는 리프팅 시술 가이드</h3><span class="pill">에디터 PICK</span></div>
+      <div class="grid">
+        <a class="pcard v">
+          <div class="pimg">볼뉴머</div>
+          <div class="pbody">
+            <div class="ptype">RF 리프팅</div>
+            <div class="ptitle">통증·다운타임 낮은 볼뉴머란?</div>
+            <div class="pgo">블로그 보기 →</div>
+          </div>
+        </a>
+        <a class="pcard f">
+          <div class="pimg">포트라</div>
+          <div class="pbody">
+            <div class="ptype">4파장 레이저</div>
+            <div class="ptitle">한국에서만 받는 포트라 리프팅</div>
+            <div class="pgo">블로그 보기 →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 결과 수 + 정렬 -->
+    <div class="listhead">
+      <span class="cnt">전체 128</span>
+      <span class="sort"><span class="ic">⇅</span> 평점순 ▾</span>
+    </div>
+
+    <!-- 리스트 -->
+    <div class="list">
+      <div class="card">
+        <div class="thumb" style="background:linear-gradient(135deg,#c8d6e5,#8395a7)"><span class="flag">단독</span><span class="heart">♥</span></div>
+        <div class="content">
+          <div class="locrow"><span class="loc">서울 강남구 · 압구정로데오</span><span class="adbadge">AD</span></div>
+          <div class="title">청담 리프팅 피부과의원 · 볼뉴머 프리미엄</div>
+          <div class="pricerow"><span class="price">₩730,000</span><span class="orig">₩890,000</span></div>
+          <div class="bottom"><div class="stats"><span class="star">★</span> <span class="rt">4.9</span> (1,204)</div><div class="tags"><span class="tag new">New</span><span class="tag now">즉시확정</span></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb" style="background:linear-gradient(135deg,#f8a5c2,#f78fb3)"><span class="heart">♡</span></div>
+        <div class="content">
+          <div class="locrow"><span class="loc">서울 중구 · 명동역 1분</span></div>
+          <div class="title">명동 글로우 클리닉 · 포트라 4파장 리프팅</div>
+          <div class="pricerow"><span class="price">₩900,000</span><span class="orig">₩1,200,000</span></div>
+          <div class="bottom"><div class="stats"><span class="star">★</span> <span class="rt">4.8</span> (3,051)</div><div class="tags"><span class="tag cash">뷰티캐시백</span><span class="tag lang">🇨🇳 중국어</span></div></div>
+        </div>
+      </div>
+
+      <!-- B: 인피드 카드 배너 -->
+      <div id="B" class="bannerB hidden">
+        <div class="txt"><span class="t">요즘 서울에서 난리난 RF 리프팅, 볼뉴머란?</span><span class="s">물냉각으로 통증·다운타임은 낮추고 탄력은 UP · 완벽 가이드</span></div>
+        <div class="img">볼뉴머</div>
+        <span class="ad">AD</span>
+      </div>
+
+      <div class="card">
+        <div class="thumb" style="background:linear-gradient(135deg,#c7ecee,#a5b1c2)"><span class="heart">♡</span></div>
+        <div class="content">
+          <div class="locrow"><span class="loc">서울 강남구 · 신논현역 5분</span></div>
+          <div class="title">강남 세로라인 피부과 · 올리지오 400샷</div>
+          <div class="pricerow"><span class="price">₩540,000</span><span class="orig">₩600,000</span></div>
+          <div class="bottom"><div class="stats"><span class="star">★</span> <span class="rt">4.7</span> (842)</div><div class="tags"><span class="tag now">즉시확정</span><span class="tag lang">🇬🇧 영어</span></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb" style="background:linear-gradient(135deg,#dff9fb,#c8d6e5)"><span class="heart">♡</span></div>
+        <div class="content">
+          <div class="locrow"><span class="loc">서울 강남구 · 신사역 2분</span></div>
+          <div class="title">신사 더마 스튜디오 · 티타늄 리프팅</div>
+          <div class="pricerow"><span class="price">₩1,200,000</span><span class="orig">₩1,500,000</span></div>
+          <div class="bottom"><div class="stats"><span class="star">★</span> <span class="rt">4.9</span> (2,190)</div><div class="tags"><span class="tag new">New</span><span class="tag cash">뷰티캐시백</span></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb" style="background:linear-gradient(135deg,#ffeaa7,#fab1a0)"><span class="heart">♡</span></div>
+        <div class="content">
+          <div class="locrow"><span class="loc">서울 강남구 · 강남역 3분</span></div>
+          <div class="title">라라클리닉 · 슈링크 유니버스</div>
+          <div class="pricerow"><span class="price">₩350,000</span><span class="orig">₩420,000</span></div>
+          <div class="bottom"><div class="stats"><span class="star">★</span> <span class="rt">4.6</span> (1,530)</div><div class="tags"><span class="tag now">즉시확정</span><span class="tag lang">🇯🇵 일본어</span></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb" style="background:linear-gradient(135deg,#a29bfe,#dfe6e9)"><span class="heart">♡</span></div>
+        <div class="content">
+          <div class="locrow"><span class="loc">서울 서초구 · 교대역 1분</span></div>
+          <div class="title">서초 스킨랩 · 리쥬란 힐러</div>
+          <div class="pricerow"><span class="price">₩280,000</span><span class="orig">₩350,000</span></div>
+          <div class="bottom"><div class="stats"><span class="star">★</span> <span class="rt">4.8</span> (960)</div><div class="tags"><span class="tag new">New</span><span class="tag lang">🇬🇧 영어</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    ※ 병원·이미지·가격은 더미. 배너 카피·썸네일·링크(landing-area/3531·3537)는 실제 콘텐츠로 교체 예정.<br>
+    컬러·폰트·카드구조·배너 하우스스타일은 실제 product 토큰 기준 (브랜드=틸 #00BDAD, 뷰티배너=퍼플). 데스크탑=2열 그리드·썸네일 192×173.
+  </div>
+
+<script>
+  const frame=document.getElementById('frame');
+  const devBtns=document.querySelectorAll('.seg.dev button');
+  const banBtns=document.querySelectorAll('.seg.ban button');
+  const banners={A:document.getElementById('A'),D:document.getElementById('D'),B:document.getElementById('B')};
+  function setDevice(d){frame.classList.toggle('is-mobile',d==='mobile');frame.classList.toggle('is-desktop',d==='desktop');
+    devBtns.forEach(b=>b.classList.toggle('on',b.dataset.d===d));}
+  function setBanner(v){Object.entries(banners).forEach(([k,el])=>el.classList.toggle('hidden',k!==v));
+    banBtns.forEach(b=>b.classList.toggle('on',b.dataset.v===v));}
+  devBtns.forEach(b=>b.addEventListener('click',()=>setDevice(b.dataset.d)));
+  banBtns.forEach(b=>b.addEventListener('click',()=>setBanner(b.dataset.v)));
+  setDevice('mobile');setBanner('A');
+</script>
+</body>
+</html>
