@@ -7,7 +7,7 @@
 
 ## Phase 구분
 - **Phase 1 (본 에픽 T1~T8)**: CITY·DL·REGION 재정비 + 필터·표기 전환
-- **Phase 2 (별도, TBD)**: /region/* 어드민 개선·유저페이지 UI·테마·SEO
+- **Phase 2**: /region 어드민·유저페이지 UI·테마·SEO — 정본 = `plans/[260831] region-phase2-breakdown.md` (4축 정리: 어드민·유저페이지·테마·SEO + 순서·열린결정·티켓 초안)
 
 ## 태스크 (T1~T8) · Epic 4섹션
 

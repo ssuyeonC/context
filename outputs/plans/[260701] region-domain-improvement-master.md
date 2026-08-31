@@ -99,8 +99,9 @@ flowchart TD
 - **레벨**: 시도(L1) — 서울특별시·경기도. 현재 시/군(169, 잡값 포함)에서 시도로 승격(이해관계자 동의 완료 2026-07-08). 스팟에 직접 노출되는 값이라 라벨 표기가 바뀜(예: 스팟 CITY `의왕시` → `경기도` + DL `의왕시`) → 광역시 외 CITY 스팟 일괄 마이그레이션.
 - **엔티티**: `category(type=CITY)`. 모든 스팟의 **필수 단일 앵커**(스팟당 1.0). 생성 = LEGAL L1 선택 + 자유 텍스트 채널('한국' 등 legal 없는 값 유지, '평양' 제거 — D4).
 - **페이지 `/region/{city}`**: 카드 메타(대표이미지·태그·설명)·slug·도시간 이동만 저장. 상세 본문 스팟 = **B-2**(그 CITY에 `spot_has_category`로 연결된 스팟 전체)를 **home-nav MAIN_RESERVATION 테마축**(§5-2)으로 분할. 완전집합이라 항상 충분(부산·제주 공백 자동 해소).
-- **페이지 성립 ≠ 노출 (게이트 = 카드메타)** — 성립: 스팟 있는 시/도면 가능(REGION 무관). 노출: **카드메타(image·tags·desc) 활성화된 것만.** 스팟이 있어도 카드메타 없으면 비노출 → 전남·전북 등이 자동으로 뜨지 않음. 운영자가 활성화한 도시만 노출(REGION 유무와 무관).
-- **운영 불변식(가드)**: **REGION 노출 ⟹ 부모 CITY 활성화(카드메타).** REGION 게시 시 부모 CITY가 미활성이면 차단 + CITY 편집 유도(상세 `[260715]`) → "REGION만 켜고 도시 메타 누락"인 고아 상태 구조적 차단. CITY 편집 탭은 유지(부산처럼 REGION 없이 활성화되는 CITY 편집용).
+- **페이지 성립 ≠ 노출 (게이트 = 카드메타)** — 성립: 스팟 있는 시/도면 가능(REGION 무관). 노출: **카드메타(image·tags·desc) 활성화된 것만.** 스팟이 있어도 카드메타 없으면 비노출 → 전남·전북 등이 자동으로 뜨지 않음.
+- **CITY 노출 = 2단 게이트 (개정 2026-08-31)** — ① 어드민 도시 탭 등장 = **자식 REGION ≥1 보유** CITY만 · ② 유저 그리드 선택 가능 = ① + 카드메타 활성화. 즉 자식 REGION 없는 CITY는 그리드 비노출(이전 "REGION 유무와 무관" 서술 개정). 부산도 T3에서 서면·감천 등 zone REGION을 얻어 이 경로로 노출. **정본 = `[260831] region-phase2-breakdown.md` §2-1.**
+- **운영 불변식(가드)**: **REGION 노출 ⟹ 부모 CITY 활성화(카드메타).** REGION 게시 시 부모 CITY가 미활성이면 차단 + CITY 편집 유도(상세 `[260715]`) → "REGION만 켜고 도시 메타 누락"인 고아 상태 구조적 차단.
 - **REGION→CITY = 자동 도출** — REGION 편집에서 구(DL) 선택 → 그 DL들의 공통 상위 CITY로 자동 결정(다른 시/도 구 혼합 금지). `region.city` FK가 저장.
 - **CITY 편집(콘텐츠 레이어) = `/region`** — 카드메타·slug·도시간 이동·활성화만 편집(지역 페이지 노출값이라 지역 어드민에 둠). 엔티티 생성·이름(다국어)은 분류 레이어 `/location` '도시' 탭.
 - **활성화 게이트**: image·tags·desc.
@@ -214,7 +215,7 @@ flowchart TD
 - **CITY 레벨 테마 = `home-navigation`(MAIN_RESERVATION 단일 카테고리) 재사용.** 신규 CMS 없이 기존 home-nav(CATEGORY 아이템·`categoryCode` 1개·`priority`)를 CITY 페이지 테마축으로 씀.
   - CITY×테마 = `category(CITY) ∩ home-nav MAIN_RESERVATION 카테고리` → 단일 카테고리라 `/spot/list?category={id}&order=MostViewedInAMonth`로 표현 가능. 섹션 순서 = home-nav `priority` 전역 1개(도시별 정렬은 후속). URL 타입 아이템 제외.
   - 코드 근거: `backend/apps/trip/src/modules/home-navigation/`, 프론트 `homeNavigations(language)`·`HomeNavigationItem`·`filterHomeNavigations.ts`.
-- **REGION(zone) 레벨 테마 = `region_section`(자유 편성: 이름+카테고리+순서, 멀티카테고리 가능).** 구역×테마 leaf = REGION 선택 법정동 ∩ 섹션 카테고리. 멀티카테고리라 `/spot/list` 단일필터로 표현 불가 → leaf 전용 쿼리.
+- **REGION(zone) 레벨 테마 = 예약 택소노미 자동 그룹핑 + 선택적 대-레벨 묶음 (개정 2026-08-31, 하이브리드 C · 정본 `[260831]` §3).** 기본: (d) region 스팟을 예약 대카테고리로, (e) leaf는 중카테고리로 자동 그룹(CMS 불필요). 옵션: `region_section` = zone별 **예약 대카테고리 묶음 override**(이름·slug·순서, leaf 생성). ~~자유 편성·멀티카테고리 leaf~~는 이 재정의로 대체. 중-레벨(중카) 커스텀 묶음은 후속(스키마 nesting만).
 - **노출 = 캐러셀 + leaf**: monthly best 상위 9 캐러셀 + 스팟 ≥10이면 "전체 보기" → leaf.
 - **SEO 가드레일(필수)**: 콘텐츠 임계 10(미만 leaf 생성·색인 안 함), 테마 leaf = canonical 정본(`/spot/list?category=` 필터뷰 noindex 양보), 안정 slug(home-nav `?category={id}` 쿼리 → `/region/{city}/{theme}` 정적 slug 위해 category→slug 매핑 필요), 짧은 에디토리얼 인트로.
 
@@ -281,6 +282,7 @@ flowchart TD
 | `plans/[260630] region-data-cleanup-spec.md` (V-5) | §4 | DETAIL_LOCATION 정리 시퀀스·리스트 |
 | `plans/[260622] region-restructure-project.md` | §6 | 작업분해(Phase/BE/FE/AD)·D1~D10 |
 | `plans/[260806] region-epic-task-breakdown.md` | §6 | **Jira 실생성본 COM-2574~2581(Epic+T1~T7)** 구조·의존성·티켓 내부 충돌 분석. 미러 = `[260806] region-jira-paste.md` |
+| `plans/[260831] region-phase2-breakdown.md` | §5·§6 | **Phase 2 정본** — /region 어드민·유저페이지·테마·SEO 4축 정리(순서·열린결정·P2 티켓 초안). Phase 1(T1~T8) 위에 올릴 유저 표면 트랙 |
 | `plans/[260623] region-seoul-theme-spec.md` | §5-3 | 서울 테마→카테고리 매핑 |
 | `jira/region/[260701] region-detail-location-cleanup.md` | §4 | DL 정비 실행 요구사항 |
 | `jira/region/[260715] region-creation-and-cutover.md` | §4·§5·§6 | P0 REGION 트랙(③RG정리·④picker·⑤관광지REGION·⑥표기·검색·⑦DL cutover) 요구사항 |

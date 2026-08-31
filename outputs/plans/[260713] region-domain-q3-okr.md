@@ -101,7 +101,7 @@ KR1 (데이터 정합 → 서울 페이지 라이브)
 - **전국 확장** (서울 외 도시 REGION/페이지) — Q4.
 - **관광지·동 DL 최종 삭제(REGION cutover)** — 후속 트랙.
 - **스팟 상세·검색 region 표기·검색** (`[260715] region-creation-and-cutover` — 구 `[260708]`에서 통합) — 병렬로 계속하되 본 목표의 KR은 아님.
-- **home-navigation vs master_theme** 테마 축 결정 — Q3 내 결정, 전면 적용은 후속(master §5-2 미결).
+- **CITY 테마축 = home-nav 전역 1개 확정**(master §5-2) — 모든 `/region/{city}` 공유. 남은 후속만: master_theme 통일 여부 · 도시별 커스텀 정렬(상세 `[260831]` 열린결정 #3).
 - 오가닉 세션 lagging 본격 상향 · 오가닉 트래픽 기준 전환 재측정 — Q4.
 
 ## 7. 리스크
