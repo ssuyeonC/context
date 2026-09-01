@@ -215,7 +215,7 @@ flowchart TD
 - **CITY 레벨 테마 = `home-navigation`(MAIN_RESERVATION 단일 카테고리) 재사용.** 신규 CMS 없이 기존 home-nav(CATEGORY 아이템·`categoryCode` 1개·`priority`)를 CITY 페이지 테마축으로 씀.
   - CITY×테마 = `category(CITY) ∩ home-nav MAIN_RESERVATION 카테고리` → 단일 카테고리라 `/spot/list?category={id}&order=MostViewedInAMonth`로 표현 가능. 섹션 순서 = home-nav `priority` 전역 1개(도시별 정렬은 후속). URL 타입 아이템 제외.
   - 코드 근거: `backend/apps/trip/src/modules/home-navigation/`, 프론트 `homeNavigations(language)`·`HomeNavigationItem`·`filterHomeNavigations.ts`.
-- **REGION(zone) 레벨 테마 = 예약 택소노미 자동 그룹핑 + 선택적 대-레벨 묶음 (개정 2026-08-31, 하이브리드 C · 정본 `[260831]` §3).** 기본: (d) region 스팟을 예약 대카테고리로, (e) leaf는 중카테고리로 자동 그룹(CMS 불필요). 옵션: `region_section` = zone별 **예약 대카테고리 묶음 override**(이름·slug·순서, leaf 생성). ~~자유 편성·멀티카테고리 leaf~~는 이 재정의로 대체. 중-레벨(중카) 커스텀 묶음은 후속(스키마 nesting만).
+- **REGION(zone) 레벨 테마 = 예약 택소노미 자동 그룹핑 + 선택적 대-레벨 묶음 (개정 2026-08-31, 하이브리드 C · 정본 `[260831]` §3).** 기본: (d) region 스팟을 예약 대카테고리로, (e) leaf는 중카테고리로 자동 그룹(CMS 불필요). 옵션: `region_section` = zone별 **예약 대카테고리 묶음 override**(이름·slug·순서, leaf 생성). ~~자유 편성·멀티카테고리 leaf~~는 이 재정의로 대체. 중-레벨(중카) 커스텀 묶음은 후속(nesting 컬럼도 v1엔 미리 안 달고 필요 시 additive 추가, v1은 zone-scoped 배타성 + 부모참조 하드코딩 금지만; 정본 `[260831]` §3-2).
 - **노출 = 캐러셀 + leaf**: monthly best 상위 9 캐러셀 + 스팟 ≥10이면 "전체 보기" → leaf.
 - **SEO 가드레일(필수)**: 콘텐츠 임계 10(미만 leaf 생성·색인 안 함), 테마 leaf = canonical 정본(`/spot/list?category=` 필터뷰 noindex 양보), 안정 slug(home-nav `?category={id}` 쿼리 → `/region/{city}/{theme}` 정적 slug 위해 category→slug 매핑 필요), 짧은 에디토리얼 인트로.
 

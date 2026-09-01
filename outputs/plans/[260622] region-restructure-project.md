@@ -143,7 +143,7 @@ CITY는 상세 콘텐츠를 **저장하지 않는다.** 스팟은 **B-2 = 그 CI
 - **CITY 상세 페이지 본문 = 파생**:
   - **스팟** = **그 CITY에 `spot_has_category`로 연결된 스팟 전체를 테마(home-nav MAIN_RESERVATION) 기준으로 묶어 노출(B-2)**. REGION 커버리지와 무관하게 완전집합이라 항상 충분.
   - **블로그** = theme와 **독립.** `블로그.detail_location → REGION → CITY` 경로로 집계해 **정렬 기준으로 별도 섹션** 노출(테마 묶음 아님).
-- **활성화 게이트**: 카드 메타(image·tags·desc) 필수. **REGION 없이 CITY 스팟만으로 페이지 성립**(부산·제주 즉시 활성화). REGION은 있으면 zone 그리드에 노출.
+- **활성화 게이트**: 카드 메타(image·tags·desc) 필수. ⚠️ **CITY 노출 = 2단 게이트로 개정(2026-08-31, 정본 `[260831]` §2-1)** — ① 어드민 도시 탭 등장 = **자식 REGION ≥1 보유** · ② 유저 그리드 선택 = ① + 카드메타. 즉 ~~REGION 없이 CITY 스팟만으로 즉시 활성화~~는 폐기 — **자식 REGION 없는 CITY는 그리드 비노출**. 부산·제주도 T3에서 zone REGION(서면·감천 등)을 얻어야 노출. (페이지 성립 자체는 스팟만으로 가능하나 노출은 별개.)
 - **zone 그리드**(강남·홍대…)는 **네비게이션용 유지** — "지역구분 없이 theme"는 스팟 콘텐츠 묶음 방식이지 `/region/{city}/{zone}` 진입 제거가 아님
 
 ### 3-8. 어드민 `/region` 설계
@@ -237,7 +237,7 @@ r/koreatravel 10,001건 원문 대조. region/POI가 같은 위치 행정·법�
 | BE-2 | 폴리곤 resolve (city 경계 / 행정구 union / 관광지 마커) |
 | BE-3 | slug 라우팅·리졸버 + **city별 슬러그 레지스트리**(`(city,slug)→{zone|theme}`, 유니크) — `/region/{city}/{zone\|theme}`(3번째 칸 공유 판정) + zone×theme leaf `/{city}/{zone}/{theme}` |
 | BE-4 | **테마 leaf 쿼리**(지역 detail_location ∩ master_theme 카테고리, 멀티카테고리) + **테마 섹션 캐러셀 쿼리**(monthly best 상위 9) + **콘텐츠 임계 10·canonical**(`/spot/list?category=` 필터뷰 noindex 양보) |
-| BE-5 | **(경량화 2026-08-31)** `region_group`(zone별 대-레벨 묶음: 이름 다국어·slug·순서, nullable=미묶음시 택소노미 폴백) + `region_group_has_category`(대카 배타). ~~master_theme 전역 사전·section→master 매핑~~ 폐기, 전역은 카테고리→slug 매핑만. 스키마는 nesting(그룹→하위그룹) 허용하되 중-레벨은 후속. 정본 `[260831]` §3-2 |
+| BE-5 | **(경량화 2026-08-31)** `region_group`(zone별 대-레벨 묶음: 이름 다국어·slug·순서, nullable=미묶음시 택소노미 폴백) + `region_group_has_category`(대카 배타). ~~master_theme 전역 사전·section→master 매핑~~ 폐기, 전역은 카테고리→slug 매핑만. 중-레벨(중카)은 후속 — nesting 컬럼도 v1엔 미리 안 달고(필요 시 additive 추가), v1은 zone-scoped 배타성 + 부모참조 하드코딩 금지만 지킴. 정본 `[260831]` §3-2 |
 | BE-6 | **CITY 카드메타+slug+도시간이동 테이블** + **상세 스팟 쿼리**(CITY 스팟 ∩ home-nav MAIN_RESERVATION, B-2) + `region.city` FK |
 | BE-7 | subway('주요 역') · blog(detail_location 기준) · persona 큐레이션 영역 |
 | BE-8 | **CITY 블로그 섹션** — `블로그.detail_location → REGION → CITY` 집계, 정렬 기준 노출 (theme 독립) |
