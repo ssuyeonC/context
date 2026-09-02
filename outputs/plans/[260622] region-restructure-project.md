@@ -39,7 +39,7 @@
 | D4 | **2레이어 구조** | 기반 분류(category: CITY·DETAIL_LOCATION·SUBWAY) 위에 REGION 도메인(콘텐츠) 얹기 |
 | D5 | **CITY → REGION 평면 (FK)** | REGION 중첩 없음. `region.city` → `category(CITY)` **FK**(REGION 편집서 DL 공통상위 자동). CITY는 **카드 메타만 저장**, 상세 스팟 = **B-2**(CITY 스팟 ∩ 테마) |
 | D6 | **IA — 테마 leaf + 캐러셀** | `/region` → `/{city}` → `/{city}/{zone}`, theme은 depth 3·4에 leaf(`/{city}/{theme}`·`/{city}/{zone}/{theme}`). city×theme은 zone과 3번째 칸 공유 → **city별 슬러그 레지스트리**로 판정. 페이지 내 테마 섹션 = **monthly best 9 캐러셀 + 전체보기→leaf**, leaf는 **스팟 10개부터 생성**(가드레일) |
-| D7 | **테마 = 예약 택소노미 + 선택적 묶음** (개정 2026-08-31, 정본 `[260831]` §3) | REGION(zone) = 예약 대카(zone)/중카(leaf) **자동 그룹핑** + zone별 선택적 **대-레벨 묶음**(`region_section` override, 이름·slug·순서). ~~자유 편성·master_theme 사전~~ 폐기(전역은 "카테고리→slug 매핑 사전"만). **CITY 집계는 B-2**(home-nav §5-2). 중-레벨 묶음은 후속 |
+| D7 | **테마 = 예약 택소노미 + 페이지별 순서 변경** (개정 2026-09-02 미팅, 정본 `[260831]` §3) | REGION(zone) = 예약 대카(zone)/중카(leaf) **자동 그룹핑**. 큐레이션 = **각 페이지 카테고리 순서 재정렬만**. ~~자유 편성·master_theme 사전·대-레벨 묶음(region_section)·중카 묶기~~ 폐기(관리 부담, 영업/제휴팀 의견 — 추가 여지만). 전역은 "카테고리→slug 매핑 사전"만. **CITY 집계는 B-2**(home-nav §5-2) |
 | D8 | **활성화 게이트** | CITY 활성화 = image·tags·desc (REGION 불요, §3-7) / REGION 활성화 = ≥1 행정구 DETAIL_LOCATION |
 | D9 | **비공개 REGION 500개 삭제** | 2025-02-14 벌크(id 25~531), 의존성 검증 후 |
 | D10 | **스팟 구 재태깅으로 coverage 해결** | 관광지-only 스팟에 구 detail_location 추가 → REGION 구단위 묶음으로 누락 0 |
@@ -130,7 +130,7 @@ CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이
 2. 섹션명(예: 볼거리·체험) + 연결 카테고리(tickets&attractions, Day tour… 재량) + 저장
 3. 섹션 간 순서 드래그
 
-- ⚠️ **아래 데이터 모델은 2026-08-31 개정으로 대체됨** — 정본 = `[260831]` §3-2·BE-5. 요지: `master_theme` 전역 사전·`region_section` 자유편성 폐기 → **zone별 대-레벨 묶음(`region_group`, nullable=택소노미 폴백)** + 전역은 "예약 카테고리→slug 매핑 사전"만. (구 서술 보존, 수정 금지)
+- ⚠️ **아래 데이터 모델은 개정으로 대체됨 (최종 2026-09-02 미팅)** — 정본 = `[260831]` §3-2·BE-5. 요지: `master_theme`·`region_section`·묶기(grouping) **전부 폐기** → **페이지별 카테고리 순서(`region_category_order`)** + 전역 "예약 카테고리→slug 매핑 사전"만. 묶기는 후속 추가 여지. (구 서술 보존, 수정 금지)
 - ~~데이터 모델(구): `region_section`(region_id·name(다국어, **자유**)·priority) + `region_section_has_category`(section↔category_code) + **`master_theme`(전역 사전: id·name 다국어·아이콘·**slug**)** + `region_section.master_theme_id`(nullable). master_theme.slug는 테마 leaf URL·타이틀에 사용.~~
 - **CITY 집계는 REGION 섹션 그룹핑에 의존하지 않는다**(B-2 = CITY 스팟 ∩ 테마). master_theme는 전역 테마 사전(테마↔카테고리)·테마 leaf 정의용, REGION 섹션은 자유 편성(강남'쇼핑·패션', 홍대'쇼핑'). REGION 페이지 자체는 master_theme 안 씀.
 - → category→intent 매핑 테이블 불필요. **"intent 척추 vs vibe" 분리는 시스템 강제 아님 → 권장 프리셋(§6 부록)으로 제공.**
@@ -237,7 +237,7 @@ r/koreatravel 10,001건 원문 대조. region/POI가 같은 위치 행정·법�
 | BE-2 | 폴리곤 resolve (city 경계 / 행정구 union / 관광지 마커) |
 | BE-3 | slug 라우팅·리졸버 + **city별 슬러그 레지스트리**(`(city,slug)→{zone|theme}`, 유니크) — `/region/{city}/{zone\|theme}`(3번째 칸 공유 판정) + zone×theme leaf `/{city}/{zone}/{theme}` |
 | BE-4 | **테마 leaf 쿼리**(지역 detail_location ∩ master_theme 카테고리, 멀티카테고리) + **테마 섹션 캐러셀 쿼리**(monthly best 상위 9) + **콘텐츠 임계 10·canonical**(`/spot/list?category=` 필터뷰 noindex 양보) |
-| BE-5 | **(경량화 2026-08-31)** `region_group`(zone별 대-레벨 묶음: 이름 다국어·slug·순서, nullable=미묶음시 택소노미 폴백) + `region_group_has_category`(대카 배타). ~~master_theme 전역 사전·section→master 매핑~~ 폐기, 전역은 카테고리→slug 매핑만. 중-레벨(중카)은 후속 — nesting 컬럼도 v1엔 미리 안 달고(필요 시 additive 추가), v1은 zone-scoped 배타성 + 부모참조 하드코딩 금지만 지킴. 정본 `[260831]` §3-2 |
+| BE-5 | **(재경량화 2026-09-02 미팅)** `region_category_order(scope_type[city\|zone], scope_id, parent_category, category_code, order)` — `parent_category` NULL=대카 순서 / 대카값=그 대카 leaf의 중카 순서. 도시·지역 상세에서 독립 설정(D). 미설정=폴백(대카 home-nav priority / 중카 category.priority, flat·상속無). ~~region_group 묶음·master_theme·section→master~~ **전부 폐기**(묶기 제거). 묶기 재도입은 후속(순서 저장 위 additive 레이어). 정본 `[260831]` §3-2 |
 | BE-6 | **CITY 카드메타+slug+도시간이동 테이블** + **상세 스팟 쿼리**(CITY 스팟 ∩ home-nav MAIN_RESERVATION, B-2) + `region.city` FK |
 | BE-7 | subway('주요 역') · blog(detail_location 기준) · persona 큐레이션 영역 |
 | BE-8 | **CITY 블로그 섹션** — `블로그.detail_location → REGION → CITY` 집계, 정렬 기준 노출 (theme 독립) |

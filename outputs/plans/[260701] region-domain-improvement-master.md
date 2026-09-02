@@ -213,9 +213,9 @@ flowchart TD
 ### 5-2. 테마 — CITY 축과 REGION 축이 다름
 
 - **CITY 레벨 테마 = `home-navigation`(MAIN_RESERVATION 단일 카테고리) 재사용.** 신규 CMS 없이 기존 home-nav(CATEGORY 아이템·`categoryCode` 1개·`priority`)를 CITY 페이지 테마축으로 씀.
-  - CITY×테마 = `category(CITY) ∩ home-nav MAIN_RESERVATION 카테고리` → 단일 카테고리라 `/spot/list?category={id}&order=MostViewedInAMonth`로 표현 가능. 섹션 순서 = home-nav `priority` 전역 1개(도시별 정렬은 후속). URL 타입 아이템 제외.
+  - CITY×테마 = `category(CITY) ∩ home-nav MAIN_RESERVATION 카테고리` → 단일 카테고리라 `/spot/list?category={id}&order=MostViewedInAMonth`로 표현 가능. 섹션 순서 = home-nav `priority` **기본 + 페이지별 순서 변경 가능**(2026-09-02 미팅, 도시별 정렬 v1 승격). URL 타입 아이템 제외.
   - 코드 근거: `backend/apps/trip/src/modules/home-navigation/`, 프론트 `homeNavigations(language)`·`HomeNavigationItem`·`filterHomeNavigations.ts`.
-- **REGION(zone) 레벨 테마 = 예약 택소노미 자동 그룹핑 + 선택적 대-레벨 묶음 (개정 2026-08-31, 하이브리드 C · 정본 `[260831]` §3).** 기본: (d) region 스팟을 예약 대카테고리로, (e) leaf는 중카테고리로 자동 그룹(CMS 불필요). 옵션: `region_section` = zone별 **예약 대카테고리 묶음 override**(이름·slug·순서, leaf 생성). ~~자유 편성·멀티카테고리 leaf~~는 이 재정의로 대체. 중-레벨(중카) 커스텀 묶음은 후속(nesting 컬럼도 v1엔 미리 안 달고 필요 시 additive 추가, v1은 zone-scoped 배타성 + 부모참조 하드코딩 금지만; 정본 `[260831]` §3-2).
+- **REGION(zone) 레벨 테마 = 예약 택소노미 자동 그룹핑 + 페이지별 순서 변경 (개정 2026-09-02 미팅 · 정본 `[260831]` §3).** 기본: (d) region 스팟을 예약 대카테고리로, (e) leaf는 중카테고리로 자동 그룹. 큐레이션 = **각 페이지 카테고리 섹션 순서 재정렬만**(도시·지역·leaf). ~~하이브리드 C의 대카 묶음(region_section)·중카 묶기~~는 **제거**(도시·지역별 관리 부담, 영업/제휴팀 의견) — 추가 여지만 남김. leaf slug = 예약 카테고리 slug 고정.
 - **노출 = 캐러셀 + leaf**: monthly best 상위 9 캐러셀 + 스팟 ≥10이면 "전체 보기" → leaf.
 - **SEO 가드레일(필수)**: 콘텐츠 임계 10(미만 leaf 생성·색인 안 함), 테마 leaf = canonical 정본(`/spot/list?category=` 필터뷰 noindex 양보), 안정 slug(home-nav `?category={id}` 쿼리 → `/region/{city}/{theme}` 정적 slug 위해 category→slug 매핑 필요), 짧은 에디토리얼 인트로.
 
@@ -234,7 +234,7 @@ flowchart TD
 |---|---|---|---|
 | **P0** | 데이터 정합성 + REGION 생성·cutover | ① CITY/DL legal 정합 + AD-5 `[260701-cleanup]` → ② 스팟 재태깅 1차(일반·CITY승격) `[260701-cleanup]` → ③ RG-1(비공개 REGION 500 삭제)·RG-3(27링크) → ④ REGION 어드민 개선(법정동 picker) → ⑤ 관광지 REGION 생성·연결 + 공개 13개 재배선 → ⑥ 표기·검색 cutover + 관광지 스팟 재태깅·blog·어학당 이관 `[260715]` → ⑦ 관광지형 DL 삭제 | — |
 | **P1** | CITY 유저페이지 준비 | CITY 카드메타 입력·활성화(image·tags·desc) | P0 |
-| **P3** | 파라미터/BE | 조회 축 전환(BE-1) · 폴리곤 resolve(BE-2) · slug 라우팅+레지스트리(BE-3) · 테마 leaf/캐러셀 쿼리(BE-4) · region_section(BE-5) · CITY 집계(BE-6 = CITY 스팟 ∩ home-nav MAIN_RESERVATION) · subway/blog/persona(BE-7·8) | P1, 와이어프레임 |
+| **P3** | 파라미터/BE | 조회 축 전환(BE-1) · 폴리곤 resolve(BE-2) · slug 라우팅+레지스트리(BE-3) · 테마 leaf/캐러셀 쿼리(BE-4) · 페이지별 카테고리 순서(BE-5) · CITY 집계(BE-6 = CITY 스팟 ∩ home-nav MAIN_RESERVATION) · subway/blog/persona(BE-7·8) | P1, 와이어프레임 |
 | **P4** | UI | 4단 라우팅·301 · CITY/REGION 페이지 · 테마 캐러셀+leaf · 폴리곤 렌더 | P3 |
 | **유입** | 리스트→region 동선 | 스팟 리스트(49초)에 '지역으로 둘러보기' 위젯 → `/region` | P1 출시 + 활성화 검증 후 |
 

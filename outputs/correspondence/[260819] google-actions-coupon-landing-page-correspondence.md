@@ -16,10 +16,11 @@
 - Creatrip 입장: 조건은 랜딩페이지 **설명 텍스트 안에** 이미 기술돼 있음(예: "…and free tea or coffee with coupon on orders over 20,000 won"). 다만 별도 전용 영역으로 부각돼 있진 않음.
 - **미해결 쟁점**: 설명 텍스트 내 기술로 충분한지, 아니면 별도 전용 영역으로 가시성을 강화해야 통과되는지. + 조건이 아예 없는 오퍼는 "조건 없음"을 명시해야 하는지 생략 가능한지.
 
-## 현재 상태 (2026-08-19)
+## 현재 상태 (2026-09-02)
 
-- 마지막으로 Suyeon이 7/31 발신 → Momo 무응답(약 3주).
-- 2026-08-19, Suyeon 후속(명확화) 메일 발송. **위치/포맷/조건 없음 케이스 확정 요청.**
+- 7/31 발신 → Momo 무응답(약 3주) → 8/19 Suyeon 후속(명확화) 메일 발송. **위치/포맷/조건 없음 케이스 확정 요청.**
+- 8/19 발송 직후 Momo **OOO 자동응답**(8/24 복귀 예정, 복귀 후 순차 대응) 수신.
+- 2026-09-02, Momo 복귀(8/24) 후 9일 무응답 → Suyeon **팔로업(bump) 메일 발송.** 회신 대기 중.
 
 ---
 
@@ -131,11 +132,43 @@
 > Best regards,
 > Suyeon
 
+### 7. Momo → Suyeon (OOO 자동응답, 8/19 발송 직후)
+
+> Hi,
+>
+> I'm out of office. I will have limited access to email during this time. (Returning on the 24th of August)
+>
+> 2026年8月24日まで不在にしております。その期間いただいたメールは、出社次第順次対応させて頂きます。
+>
+> For enquiries on Hotel Ads and free booking links, please use the "Contact Us" form in the Help Center.
+>
+> Cheers,
+> Momo
+
+- 자동응답 하단 Hotel Ads/free booking links 안내는 범용 서명 푸터 → Offers 건과 무관.
+
+### 8. Suyeon → Momo (2026-09-02, 팔로업 bump — 발송 완료)
+
+> Subject: Re: Coupon integration — confirming landing page eligibility display
+>
+> Hi Momo,
+>
+> Following up on my note from August 19. Could you confirm three points so we can implement the dedicated "Coupon conditions" section and share the updated pages for review?
+>
+> 1. **Position** — a required placement (e.g. near the offer CTA), or anywhere clearly visible?
+> 2. **Fields** — which restrictions should we always render (minimum spend, valid days/times, usage limit, etc.)?
+> 3. **No-condition offers** — show the section with a "no conditions apply" note, or omit it entirely?
+>
+> An approved example or checklist would help too, if you have one.
+>
+> Best,
+> Suyeon
+
 ---
 
 ## 다음 액션
 
-- [ ] Momo 회신 대기 — 아래 3가지 확정 목표:
+- [ ] Momo 회신 대기 (9/2 팔로업 발송 완료) — 아래 3가지 확정 목표:
   1. 노출 위치 (CTA 인근 / 상단 등 지정 여부)
   2. 항상 렌더해야 하는 조건 항목 범위
   3. 조건 없는 오퍼 처리 ("조건 없음" 명시 vs 생략)
