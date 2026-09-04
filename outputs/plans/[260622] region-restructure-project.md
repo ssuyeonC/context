@@ -139,7 +139,7 @@ CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이
 ### 3-7. CITY tier (카드 메타만 저장, 스팟은 B-2로 뿌림)
 
 CITY는 상세 콘텐츠를 **저장하지 않는다.** 스팟은 **B-2 = 그 CITY에 `spot_has_category`로 연결된 스팟 전체 ∩ 테마**로 뿌린다:
-- **CITY가 저장하는 것**: `slug`(라우팅) · **카드 메타**(대표 이미지·태그·설명 — `/region` 인덱스 카드용) · **도시간 이동**(도시쌍 테이블) · 폴리곤(시 경계). hero/긴 설명 같은 상세 에디토리얼은 저장 X.
+- **CITY가 저장하는 것**: `slug`(라우팅) · **카드 메타**(대표 이미지·태그·설명 — `/region` 인덱스 카드용) · **이동**(도시쌍 + **지역쌍** 테이블, 공항 노드 엔드포인트 — `[260831]` §1-2) · 폴리곤(시 경계). hero/긴 설명 같은 상세 에디토리얼은 저장 X.
 - **CITY 상세 페이지 본문 = 파생**:
   - **스팟** = **그 CITY에 `spot_has_category`로 연결된 스팟 전체를 테마(home-nav MAIN_RESERVATION) 기준으로 묶어 노출(B-2)**. REGION 커버리지와 무관하게 완전집합이라 항상 충분.
   - **블로그** = theme와 **독립.** `블로그.detail_location → REGION → CITY` 경로로 집계해 **정렬 기준으로 별도 섹션** 노출(테마 묶음 아님).
@@ -149,7 +149,7 @@ CITY는 상세 콘텐츠를 **저장하지 않는다.** 스팟은 **B-2 = 그 CI
 ### 3-8. 어드민 `/region` 설계
 
 - **탭 [CITY | REGION]**
-- **CITY 탭**: `category(type=CITY)` 전체 테이블 → 활성화/비활성화(필수필드 게이트). **CITY 편집 화면 = 카드메타·slug·도시간이동 입력만** (REGION→CITY는 자동 도출, CITY 집계는 B-2·home-nav — 마스터 §3-3①·§5-2). REGION↔master_theme 매핑은 REGION 섹션 CMS에서.
+- **CITY 탭**: `category(type=CITY)` 전체 테이블 → 활성화/비활성화(필수필드 게이트). **CITY 편집 화면 = 카드메타·slug·이동(도시쌍 + 지역쌍) 입력만** (REGION→CITY는 자동 도출, CITY 집계는 B-2·home-nav — 마스터 §3-3①·§5-2). REGION↔master_theme 매핑은 REGION 섹션 CMS에서.
 - **REGION 탭**: REGION 생성 + 행정구 detail_location 매핑 + 섹션 CMS + subway/blog/persona 큐레이션
 - 부수: detail_location 생성/수정에 **상위 도시(parent) 입력** 추가(고아 양산 차단), `createCategory` type 화이트리스트
 
@@ -238,7 +238,7 @@ r/koreatravel 10,001건 원문 대조. region/POI가 같은 위치 행정·법�
 | BE-3 | slug 라우팅·리졸버 + **city별 슬러그 레지스트리**(`(city,slug)→{zone|theme}`, 유니크) — `/region/{city}/{zone\|theme}`(3번째 칸 공유 판정) + zone×theme leaf `/{city}/{zone}/{theme}` |
 | BE-4 | **테마 leaf 쿼리**(지역 detail_location ∩ master_theme 카테고리, 멀티카테고리) + **테마 섹션 캐러셀 쿼리**(monthly best 상위 9) + **콘텐츠 임계 10·canonical**(`/spot/list?category=` 필터뷰 noindex 양보) |
 | BE-5 | **(재경량화 2026-09-02 미팅)** `region_category_order(scope_type[city\|zone], scope_id, parent_category, category_code, order)` — `parent_category` NULL=대카 순서 / 대카값=그 대카 leaf의 중카 순서. 도시·지역 상세에서 독립 설정(D). 미설정=폴백(대카 home-nav priority / 중카 category.priority, flat·상속無). ~~region_group 묶음·master_theme·section→master~~ **전부 폐기**(묶기 제거). 묶기 재도입은 후속(순서 저장 위 additive 레이어). 정본 `[260831]` §3-2 |
-| BE-6 | **CITY 카드메타+slug+도시간이동 테이블** + **상세 스팟 쿼리**(CITY 스팟 ∩ home-nav MAIN_RESERVATION, B-2) + `region.city` FK |
+| BE-6 | **CITY 카드메타+slug+이동 테이블(도시쌍 + 지역쌍, 공항 노드 엔드포인트 — `[260831]` §1-2)** + **상세 스팟 쿼리**(CITY 스팟 ∩ home-nav MAIN_RESERVATION, B-2) + `region.city` FK |
 | BE-7 | subway('주요 역') · blog(detail_location 기준) · persona 큐레이션 영역 |
 | BE-8 | **CITY 블로그 섹션** — `블로그.detail_location → REGION → CITY` 집계, 정렬 기준 노출 (theme 독립) |
 

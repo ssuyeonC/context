@@ -16,11 +16,14 @@
 - Creatrip 입장: 조건은 랜딩페이지 **설명 텍스트 안에** 이미 기술돼 있음(예: "…and free tea or coffee with coupon on orders over 20,000 won"). 다만 별도 전용 영역으로 부각돼 있진 않음.
 - **미해결 쟁점**: 설명 텍스트 내 기술로 충분한지, 아니면 별도 전용 영역으로 가시성을 강화해야 통과되는지. + 조건이 아예 없는 오퍼는 "조건 없음"을 명시해야 하는지 생략 가능한지.
 
-## 현재 상태 (2026-09-02)
+## 현재 상태 (2026-09-04)
 
 - 7/31 발신 → Momo 무응답(약 3주) → 8/19 Suyeon 후속(명확화) 메일 발송. **위치/포맷/조건 없음 케이스 확정 요청.**
 - 8/19 발송 직후 Momo **OOO 자동응답**(8/24 복귀 예정, 복귀 후 순차 대응) 수신.
-- 2026-09-02, Momo 복귀(8/24) 후 9일 무응답 → Suyeon **팔로업(bump) 메일 발송.** 회신 대기 중.
+- 2026-09-02, Momo 복귀(8/24) 후 9일 무응답 → Suyeon **팔로업(bump) 메일 발송.**
+- 2026-09-04, Momo 회신 — 랜딩페이지 3종엔 답 없이 **화제 전환: "deal 부서가 food/appointment와 siloed냐"** 질의. → **계정 프로비저닝(신규 Offers 계정 생성 중) 맥락으로 해석.**
+  - Creatrip 측 사실: Actions Center 계정이 버티컬별로 분리(**Creatrip TTD / Creatrip Appointments / Creatrip Inc.**), action별 role-based 접근. 조직상 제휴팀 내 카테고리 담당자 분리(뷰티=A, 식당=B).
+  - **미확정 쟁점**: Offers가 별도 계정이어야 하는지 vs 기존 버티컬(예: Dining Reserve)에 붙일 수 있는지. 공식 문서상 Offers는 Dining/Food/Shopping 버티컬의 "옵션"으로 등장 → 별도 silo가 아닐 가능성. **Momo에게 계정 구조 역질문 발송 완료(9/4), 회신 대기 중.**
 
 ---
 
@@ -164,11 +167,47 @@
 > Best,
 > Suyeon
 
+### 9. Momo → Suyeon (2026-09-04, 부서 siloing 질의 — 화제 전환)
+
+> Sorry for the delay.
+>
+> Could you please confirm
+> - Is your deal departement siloed from the food/appointment departement ?
+> - Is your food departement siloed from the appointment departement ?
+>
+> Best,
+> Momo
+
+- 랜딩페이지 3종(위치/항목/조건없음)엔 **미답변**. 화제를 계정/부서 구조로 전환.
+- 첨부(Actions Center 계정 스위처): **Creatrip (TTD) / Creatrip Appointments / Creatrip Inc.** 3개 계정 확인 → 버티컬별 계정 분리 상태.
+- 해석: 신규 Offers 계정 생성 절차 중 발생한 질의 → Offers를 별도 silo로 팔지, 기존 버티컬에 묶을지 확인 목적으로 추정.
+
+### 10. Suyeon → Momo (2026-09-04, 우리 구조 전달 + 계정 구조 역질문 — 발송 완료)
+
+> Hi Momo,
+>
+> No worries, and thanks for getting back to me.
+>
+> To give you the picture on our side: each of our existing verticals runs under its own separate Actions Center account — **Creatrip (TTD)**, **Creatrip Appointments**, and our Dining Reserve setup — with role-based access per action, so food and appointments are managed independently.
+>
+> For the deal/Offers integration, we're still in the process of setting up the account, so this is a good moment to align on structure. Our understanding was that each action typically requires its own account — but could you confirm how Offers should be set up? Specifically:
+> - Should Offers have its own dedicated account, or can/should it be attached to an existing vertical (e.g. our Dining Reserve account)?
+> - If it shares an account, is that what you mean by the deal/food/appointment departments being "siloed" — i.e. are you checking whether they can be combined or must stay separate?
+>
+> Once we're aligned on the account structure, I'd also like to close out the landing-page eligibility point from my earlier notes (position, required fields, and how to handle no-condition offers) so we can implement. Happy to proceed however you recommend.
+>
+> Best,
+> Suyeon
+
 ---
 
 ## 다음 액션
 
-- [ ] Momo 회신 대기 (9/2 팔로업 발송 완료) — 아래 3가지 확정 목표:
+- [ ] **Momo 회신 대기 (9/4 계정 구조 역질문 발송 완료)** — 확정 목표:
+  1. Offers = 별도 계정 vs 기존 버티컬(Dining Reserve 등)에 부착 가능 여부
+  2. "siloed" 질문의 실제 의도 (결합 가능한지 vs 분리 필수인지 확인 목적)
+- [ ] 계정 구조 확정 → 신규 Offers 계정 생성 절차 완료
+- [ ] (계정 완료 후) 랜딩페이지 3종 재확정 목표 — **여전히 미해결, 다음 턴에 클로징**:
   1. 노출 위치 (CTA 인근 / 상단 등 지정 여부)
   2. 항상 렌더해야 하는 조건 항목 범위
   3. 조건 없는 오퍼 처리 ("조건 없음" 명시 vs 생략)
