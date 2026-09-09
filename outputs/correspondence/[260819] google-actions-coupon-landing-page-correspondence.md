@@ -199,15 +199,72 @@
 > Best,
 > Suyeon
 
+### 11. Momo → Suyeon (2026-09-09, 예약 계정에 Offers 부착 제안)
+
+> Hi Suyeon,
+>
+> We are trying to determine how to set up your deals account. Can we add this deals and promotions features to the account that handles the reservation?
+>
+> Best,
+> Momo
+
+- 9/4 계정 구조 역질문에 대한 답 → **구글도 별도 silo 안 만들고 기존 예약 계정(Dining Reserve)에 Offers 부착하는 방향 제안.** 우리 추정("Offers는 Dining/Food/Shopping의 옵션 → 별도 silo 아닐 가능성")과 일치. 신규 계정 프로비저닝 불필요 → 진행 간소화.
+
+### 12. Suyeon → Momo (2026-09-09, 부착 동의 + 카테고리 범위 1점 확인 — 발송 완료)
+
+> Hi Momo,
+>
+> Thanks — that works for us, and it's simpler than spinning up a separate account.
+>
+> One quick check before we confirm, since our Offers aren't limited to dining: if deals & promotions are added to our reservation (Dining Reserve) account, can we register offers across all our categories (e.g. beauty as well as restaurants), or would offers on that account be scoped to dining only?
+>
+> If it covers all categories, please go ahead and add it to the reservation account.
+>
+> Best,
+> Suyeon
+
+- 접근 권한(role-based) 건은 **우리 내부에서 Dining Reserve 계정에 인원 추가로 해결 가능** → 구글에 안 물음.
+- 랜딩페이지 3문항은 **이번 메일에서 의도적으로 제외**(저쪽이 현재 문제 삼지 않음, 계정 건에 집중해 빠른 회신 유도). 단 "해결"이 아니라 "미답변·잠복" 상태 → 검수 단계 전 우리가 먼저 클로징하도록 트래킹 유지.
+
+### 13. Momo → Suyeon (2026-09-09, 계정 셋업 착수 + 단계적 런칭 + 오퍼 전체 공유 요청)
+
+> Thank you! I have forwarded your account details to our setup team.
+>
+> We plan to launch Food and Local Shopping first, but we will also support Beauty and other offer categories in the future. It would be great if you could share all of your available offers so we are ready to launch as additional categories become available.
+>
+> The relevant team will reach out to you once the account setup is complete, which usually takes 1 to 2 weeks.
+>
+> Best,
+> Momo
+
+- **계정 구조 트랙 마무리** — 우리 계정 정보 셋업팀 전달. **셋업 1~2주 소요**, 완료 시 담당팀이 연락.
+- **카테고리 답 = 전 카테고리 지원(단계적)** — 런칭 순서 **Food + Local Shopping 먼저**, **Beauty 등 나머지 이후 순차**. dining 한정 우려 해소.
+- **요청**: 카테고리 오픈 시 즉시 런칭 가능하도록 **가용 오퍼 전체 미리 공유**.
+
+### 14. Suyeon → Momo (2026-09-09, 단계적 런칭 확인 + 오퍼 공유 포맷/채널 역질의 — 발송 완료)
+
+> Hi Momo,
+>
+> Thanks for the update — good to hear the setup is underway.
+>
+> Understood on the phased rollout: Food and Local Shopping first, with Beauty and other categories to follow. We'll prepare our full offer inventory across all categories so we're ready as each one becomes available.
+>
+> Could you let us know how you'd like us to share the offers — a specific feed/template format, or directly through the account once access is provisioned? And if there's anything category-specific you need for the Food and Local Shopping launch, happy to line that up.
+>
+> Best,
+> Suyeon
+
 ---
 
 ## 다음 액션
 
-- [ ] **Momo 회신 대기 (9/4 계정 구조 역질문 발송 완료)** — 확정 목표:
-  1. Offers = 별도 계정 vs 기존 버티컬(Dining Reserve 등)에 부착 가능 여부
-  2. "siloed" 질문의 실제 의도 (결합 가능한지 vs 분리 필수인지 확인 목적)
-- [ ] 계정 구조 확정 → 신규 Offers 계정 생성 절차 완료
-- [ ] (계정 완료 후) 랜딩페이지 3종 재확정 목표 — **여전히 미해결, 다음 턴에 클로징**:
+- [ ] **계정 셋업 대기 (~1~2주, ≈2026-09-23 전후)** — 완료 시 구글 담당팀이 연락 예정. 별도 계정 생성 불필요 / 예약(Dining Reserve) 계정에 deals & promotions 부착으로 확정.
+- [ ] **Momo 회신 대기 (9/9 오퍼 공유 포맷/채널 질의 발송 완료)** — 확정 목표:
+  1. 오퍼 공유 방식 = 별도 피드/템플릿 vs 계정 프로비저닝 후 계정 직접 업로드
+  2. Food/Local Shopping 런칭에 카테고리별 별도 요구사항 유무
+- [ ] **우리 쪽 준비: 전 카테고리 오퍼 인벤토리 정리** (Food/Local Shopping 우선, Beauty 등 순차 대비 전체 포함) → 포맷 확정 시 공유
+- [ ] (부착 후, 필요 시 뷰티 등 담당자 role-based 접근 권한 우리 쪽에서 추가)
+- [ ] **랜딩페이지 3종 — 여전히 미해결(잠복), 검수 전 우리가 먼저 클로징**:
   1. 노출 위치 (CTA 인근 / 상단 등 지정 여부)
   2. 항상 렌더해야 하는 조건 항목 범위
   3. 조건 없는 오퍼 처리 ("조건 없음" 명시 vs 생략)
