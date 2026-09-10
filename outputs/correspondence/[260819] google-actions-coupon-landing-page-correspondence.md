@@ -254,15 +254,75 @@
 > Best,
 > Suyeon
 
+### 15. Momo → Suyeon (2026-09-10, 오퍼 공유 = 피드 방식 확정 + 샘플 제공)
+
+> Hi Suyeon,
+>
+> Thank you! Please see below. I think you may not need entity feed as you should already have Merchant feed if you are already on GAC.
+>
+> **Technical Requirements and Integration**
+> To ensure correct merchant mapping and offer details, partners must provide the following:
+> - Entity feed
+> - Merchant feed (Offer)
+>
+> Please see the samples here.
+>
+> For entity-feed:
+> - Dining: https://developers.google.com/actions-center/verticals/reservations/offers/reference/feeds/entity-feed#samples
+> - Shopping: https://developers.google.com/actions-center/verticals/shopping/offers/reference/feeds/entity-feed#samples
+>
+> Offer feed:
+> - Dining: https://developers.google.com/actions-center/verticals/reservations/offers/reference/feeds/offers-feed#samples
+> - Shopping: https://developers.google.com/actions-center/verticals/shopping/offers/reference/feeds/offers-feed#samples
+>
+> Best,
+> Momo
+
+- **#14 회신** — 오퍼 공유 방식 = **피드 기반 확정**(계정 직접 업로드 아님).
+- 필요 피드 2종: **Entity feed** + **Merchant feed(Offer)**(= Offers feed).
+- **핵심 힌트**: "이미 GAC 위에 있으면 Merchant feed 이미 있을 테니 **entity feed는 불필요할 수도**." → 기존 예약(Dining Reserve) 연동의 merchant feed가 엔티티/머천트 매핑을 이미 제공 → **실질적으로 Offers feed만 신규 구축**하면 될 가능성. 단 Momo가 "I think / should" 로 헤지 → **확정 필요**.
+- 버티컬별 샘플 제공(Dining=reservations, Shopping) → 단계적 런칭(Food + Local Shopping 우선)과 정합.
+
+**샘플 링크 실사(2026-09-10 확인):**
+- **전달 방식 = SFTP**(매일 전체 갱신, 자격증명은 Partner Portal > Configuration > Feeds) 또는 API. 상태는 Feeds > History 대시보드. Entity feed는 별도 descriptor `.filesetdesc.json`(`"name": "reservewithgoogle.entity"`) 동반 필요.
+- **Entity feed 대체 근거 없음**: 공식 문서엔 "기존 merchant feed로 entity feed를 대체한다"는 언급 없음 → Momo의 "안 필요할 수도"는 실무 판단. **명시 확인 필수.**
+- **Offers feed 필드 = 우리 쿠폰·랜딩 조건과 직접 매핑**: `min_spend_value`(최소주문), `max_discount_value`, `validity_periods`(요일·시간), `max_redemption_count`(사용횟수), `special_conditions`/`offer_restrictions`, `terms`, `offer_details`, `offer_url`. → **랜딩페이지 조건 3종과 동일 필드셋** → 피드 매핑표 = 랜딩 조건영역 스펙 겸용.
+- **⚠ Shopping 버티컬 리스크**: shopping/offers는 **기프트카드·매장내 중심**(`action_type=SHOPPING_IN_STORE`, `offer_modes=GIFT_CARD_PURCHASE`, `gift_card_info` 필수). 우리 로컬쇼핑 쿠폰이 **할인쿠폰이면 이 스키마에 안 맞을 수 있음** → 비-기프트카드 로컬쇼핑 오퍼를 어떤 action_type/mode로 넣는지 Momo에 확인 필요.
+- **미정(우리가 물어야)**: ① entity feed 스킵 확정 ② 피드 채널 = 기존 예약 계정 Partner Portal SFTP 그대로인지(offers 부착 후) ③ 로컬쇼핑 비-기프트카드 오퍼 표현 방법.
+
+### 16. Suyeon → Momo (2026-09-10, 피드 후속 3점 질의 — 발송 완료)
+
+> Subject: Re: Coupon integration — offer feeds
+>
+> Hi Momo,
+>
+> Thank you — this is really helpful, and the feed approach works well for us. I went through the entity-feed and offers-feed samples. A few points to confirm before we build:
+>
+> 1. **Entity feed** — you mentioned we may not need it since we're already on GAC. Could you confirm that the merchant/entity data from our existing reservation account will cover the offers' entity mapping, so we can skip building a separate entity feed and focus on the offers feed? If a separate entity feed is still required in any case, let us know.
+>
+> 2. **Feed delivery** — the docs point to SFTP (daily full refresh, credentials under Partner Portal → Configuration → Feeds), with API as an alternative. Once offers is attached to our reservation account, will the offers-feed SFTP credentials appear in that same Partner Portal, or is a separate setup involved? And do you have a preference between SFTP and API, plus an expected refresh cadence?
+>
+> 3. **Local Shopping mapping** — the shopping offers feed samples look oriented around in-store gift-card deals (`ACTION_TYPE_SHOPPING_IN_STORE`, gift-card modes). Many of our local-shopping offers are standard discount coupons rather than gift cards. Could you advise how we should represent non-gift-card local-shopping offers — which `action_type` / `offer_mode` to use? Our dining offers map cleanly to the reservations offers feed, so it's mainly the shopping side we want to get right.
+>
+> We'll prepare our full offer inventory mapped to these schemas so we're ready as each category goes live.
+>
+> Best,
+> Suyeon
+
+- 샘플 링크 실사 근거로 3점 질의: ① entity feed 스킵 확정 ② 전달 채널(기존 예약 Partner Portal SFTP 재사용 여부·SFTP vs API·갱신주기) ③ 로컬쇼핑 비-기프트카드 오퍼 표현(action_type/offer_mode).
+
 ---
 
 ## 다음 액션
 
 - [ ] **계정 셋업 대기 (~1~2주, ≈2026-09-23 전후)** — 완료 시 구글 담당팀이 연락 예정. 별도 계정 생성 불필요 / 예약(Dining Reserve) 계정에 deals & promotions 부착으로 확정.
-- [ ] **Momo 회신 대기 (9/9 오퍼 공유 포맷/채널 질의 발송 완료)** — 확정 목표:
-  1. 오퍼 공유 방식 = 별도 피드/템플릿 vs 계정 프로비저닝 후 계정 직접 업로드
-  2. Food/Local Shopping 런칭에 카테고리별 별도 요구사항 유무
-- [ ] **우리 쪽 준비: 전 카테고리 오퍼 인벤토리 정리** (Food/Local Shopping 우선, Beauty 등 순차 대비 전체 포함) → 포맷 확정 시 공유
+- [x] ~~**오퍼 공유 방식 질의(9/9)**~~ — **회신됨(9/10)**: 피드 기반 확정. Entity feed + Offers feed, 단 기존 GAC merchant feed로 **entity feed 스킵 가능성**. Dining/Shopping 샘플 제공.
+- [ ] **Momo 회신 대기 (9/10 피드 후속 3점 질의 #16 발송 완료)** — 확정 목표:
+  1. **Entity feed 스킵 확정** — 기존 예약(Dining Reserve) merchant feed가 Offers 엔티티 매핑을 커버하는지 (문서 근거 없음·Momo 헤지 → 명시 확인)
+  2. **피드 채널** — 기존 예약 계정 Partner Portal의 SFTP를 그대로 쓰는지(offers 부착 후 자격증명 발급 위치), SFTP vs API 선호, 갱신 주기
+  3. **로컬쇼핑 비-기프트카드 오퍼 표현** — shopping/offers가 기프트카드 중심인데, 우리 할인쿠폰형 로컬쇼핑 오퍼를 어떤 action_type/offer_mode로 넣는지
+- [ ] **우리 쪽 준비: 전 카테고리 오퍼 인벤토리 정리** (Food/Local Shopping 우선, Beauty 등 순차 대비 전체 포함) → **Offers feed 스키마(reservations/shopping)에 매핑**해서 공유
+- [ ] **피드 스키마 매핑표 작성**: offers-feed 필드(`min_spend_value`·`validity_periods`·`max_redemption_count`·`special_conditions` 등) ↔ 우리 쿠폰 데이터. **랜딩페이지 3종 조건영역과 동일 필드셋 → 한 번에 정리**(피드 매핑 = 랜딩 조건 스펙 겸용)
 - [ ] (부착 후, 필요 시 뷰티 등 담당자 role-based 접근 권한 우리 쪽에서 추가)
 - [ ] **랜딩페이지 3종 — 여전히 미해결(잠복), 검수 전 우리가 먼저 클로징**:
   1. 노출 위치 (CTA 인근 / 상단 등 지정 여부)
