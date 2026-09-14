@@ -30,7 +30,7 @@
 - 공개 토글 변경 시 선택 언어의 `isPublish`만 변경하고 다른 언어의 공개 상태는 유지
 - 기존 `isShownMap`을 사용하는 어드민·유저 프론트엔드의 조회 조건과 파라미터를 `isPublish`로 일괄 변경
 - `/tips/region-guide` 페이지를 제거하고, 기존 내부 진입점은 신규 `/region` 허브로 교체
-- 번역 추가·복사·AI 번역과 공통/번역 필드의 상세 화면 구성은 P2-T2에서 정의
+- 언어 탭과 공통/번역 필드의 상세 화면 구성은 P2-T2에서 정의
 
 ### 백엔드 요구사항
 
@@ -49,7 +49,7 @@
     - DB·ORM의 `is_shown_map` 필드는 데이터 이관 후 제거
     - GraphQL 조회·필터 파라미터를 `isShownMap`에서 `isPublish`로 변경
     - 변경된 `isPublish` 파라미터를 사용하는 모든 호출부에 동일한 공개 판정 적용
-- **언어별 공개 판정** — 요청 언어의 `region_translation.is_publish=true` + canonical 필수값 충족 + 해당 번역의 name·태그·description 충족 + 부모 CITY 활성화를 목록·필터·지도·검색·상세의 공통 노출 조건으로 적용
+- **언어별 공개 판정** — 요청 언어의 `region_translation.is_publish=true` + canonical 필수값 충족 + 해당 번역의 name·태그·description 충족 + 부모 CITY 활성화를 목록·필터·지도·검색·상세의 공통 노출 조건으로 적용. 한 줄 소개는 선택 입력
 - **비공개 처리** — 요청 언어의 번역이 없거나 `is_publish=false`이면 다른 언어로 대체 노출하지 않고 직접 상세 URL 접근도 차단
 - **AI 번역 생성** — 새 번역을 `is_translated_by_ai=true`, `is_publish=false`로 생성하고 운영자 검수 후 공개 가능
 - **리뷰 노출 설정** — `is_shown_review`를 제거하고 `region_review` 테이블과 적재는 유지

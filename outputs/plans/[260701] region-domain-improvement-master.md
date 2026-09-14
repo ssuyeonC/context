@@ -103,7 +103,7 @@ flowchart TD
 - **CITY 노출 = 2단 게이트 (개정 2026-08-31)** — ① 어드민 도시 탭 등장 = **자식 REGION ≥1 보유** CITY만 · ② 유저 그리드 선택 가능 = ① + 카드메타 활성화. 즉 자식 REGION 없는 CITY는 그리드 비노출(이전 "REGION 유무와 무관" 서술 개정). 부산도 T3에서 서면·감천 등 zone REGION을 얻어 이 경로로 노출. **정본 = `[260831] region-phase2-breakdown.md` §2-1.**
 - **운영 불변식(가드)**: **REGION 노출 ⟹ 부모 CITY 활성화(카드메타).** REGION 게시 시 부모 CITY가 미활성이면 차단 + CITY 편집 유도(상세 `[260715]`) → "REGION만 켜고 도시 메타 누락"인 고아 상태 구조적 차단.
 - **REGION→CITY = 자동 도출** — REGION 편집에서 구(DL) 선택 → 그 DL들의 공통 상위 CITY로 자동 결정(다른 시/도 구 혼합 금지). `region.city` FK가 저장.
-- **CITY 편집(콘텐츠 레이어) = `/region`** — 카드메타·slug·도시간 이동·활성화만 편집(지역 페이지 노출값이라 지역 어드민에 둠). 엔티티 생성·이름(다국어)은 분류 레이어 `/location` '도시' 탭.
+- **CITY 편집(콘텐츠 레이어) = `/region`** — 카드메타·도시쌍·지역쌍 이동·활성화만 편집(지역 페이지 노출값이라 지역 어드민에 둠). slug 입력·표시 UI 없음. 엔티티 생성·이름(다국어)은 분류 레이어 `/location` '도시' 탭.
 - **활성화 게이트**: image·tags·desc.
 - **폴리곤**: CITY가 자기 legal(서울=11) 보유 → 도시 경계.
 
@@ -123,6 +123,8 @@ flowchart TD
 - **콘텐츠**: 테마 섹션(어드민 CMS) · subway · blog · persona 큐레이션.
 - **폴리곤**: 선택 법정동들의 union → 관광지형도 실제 범위(성수동)만큼 정확. 광역형은 여러 구 union.
 - **어드민 생성 흐름**: ① 구(DL) 연결 → ② 그 구의 법정동 pool에서 선택 → ③ 테마·subway 편성. (CITY는 ①의 공통 상위로 자동)
+- **범위 저장 조건**: 구 연결 시 법정동 전체 선택으로 시작하고 일부 해제로 범위 축소. 선택한 구마다 법정동 최소 1개 필수이며 빈 값은 구 전체 범위로 폴백하지 않음
+- **공개 조건**: 부모 CITY 활성화 + 선택 언어의 히어로 이미지·태그·설명 충족. 한 줄 소개와 대표 키워드는 선택 입력
 
 **④ LEGAL_LOCATION (법정지역) — 지도 기하 + 스팟 fine 해상도**
 - `legal_location` 5,332행(시도17/시군구250/법정동5,065), 정부 표준 + GeoJSON. 정부 동기화(관리 대상 아님).
@@ -206,7 +208,7 @@ flowchart TD
    └ /region/{city}/{zone}/{theme}       구역×테마 leaf  ('gangnam restaurants' 롱테일)
 ```
 
-- **3번째 칸(zone/theme 공유)** = city별 슬러그 레지스트리 `(city, slug)→{zone|theme}` + 어드민 유니크 가드로 판정(zone=지명·theme=의도명사라 충돌 사실상 0).
+- **3번째 칸(zone/theme 공유)** = P2-T3 라우팅 리졸버에서 zone 또는 theme 판정. `/region` 어드민에는 slug 관련 입력·표시·검증 UI를 두지 않음.
 - 기존 `/spot/region/{숫자 id}` → 새 slug **301 리다이렉트**(498 동네 URL SEO 승계).
 - **① 인덱스 = 활성화 CITY만** (REGION 직접 미노출). REGION은 **② 도시상세의 구역 그리드/지도**에서 노출하고, 인덱스에서 도시 선택 시 **우측 패널에 그 CITY의 활성화 REGION 진입점**(예: 경북 → 경주 지름길)을 둔다. → REGION은 항상 활성화된 부모 CITY 아래에서만 도달(경주는 경상북도 CITY 활성화가 전제).
 
@@ -288,7 +290,7 @@ flowchart TD
 | `jira/region/[260715] region-creation-and-cutover.md` | §4·§5·§6 | P0 REGION 트랙(③RG정리·④picker·⑤관광지REGION·⑥표기·검색·⑦DL cutover) 요구사항 |
 | `jira/region/[260730] tourist-region-drafts-and-link-migration.md` | §4 | 비-행정구 103 DL 구·법정동 초안 pre-run + 지역값 연결 4종 이관 규모·방법(데이터 스포크) |
 | `jira/region/[260730] blog-userblog-academy-region-label.md` | §5 | 블로그·유저블로그·어학당 지역 표기 region 격상(별도 티켓 예정, COM-2557·2559 후행) |
-| `jira/region/[260807] region-t2-structure-migration.md` | §3·§4 | REGION 구조(상위 구 필수+동 옵셔널·미선택=구 전체)·관광지형 지명 생성·이관 (재편 T2 정본) |
+| `jira/region/[260807] region-t2-structure-migration.md` | §3·§4 | REGION 구조(상세지역 연결 + 구별 법정동 최소 1개, 빈 값 폴백 없음)·관광지형 지명 생성·이관 (재편 T2 정본) |
 | `jira/region/[260807] region-t3-publish-language-sync.md` | §5 | region 공개 상태 언어 간 동기화(**Jira 재편에서 제외 — 후속 별건 보류**) |
 | `jira/region/[260807] spot-legal-code-mapping-backfill.md` | §4 | 스팟 legal_code 미보유 179 백필(유효129·이상치5·해외무효45)·매핑 자동화 (재편 T5 정본) |
 | `jira/spot/[260706] spot-list-seoul-busan-region-toggle.md` | §5 | 리스트 지역 토글 요구사항 |

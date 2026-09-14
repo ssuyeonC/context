@@ -40,7 +40,7 @@
 | D5 | **CITY → REGION 평면 (FK)** | REGION 중첩 없음. `region.city` → `category(CITY)` **FK**(REGION 편집서 DL 공통상위 자동). CITY는 **카드 메타만 저장**, 상세 스팟 = **B-2**(CITY 스팟 ∩ 테마) |
 | D6 | **IA — 테마 leaf + 캐러셀** | `/region` → `/{city}` → `/{city}/{zone}`, theme은 depth 3·4에 leaf(`/{city}/{theme}`·`/{city}/{zone}/{theme}`). city×theme은 zone과 3번째 칸 공유 → **city별 슬러그 레지스트리**로 판정. 페이지 내 테마 섹션 = **monthly best 9 캐러셀 + 전체보기→leaf**, leaf는 **스팟 10개부터 생성**(가드레일) |
 | D7 | **테마 = 예약 택소노미 + 페이지별 순서 변경** (개정 2026-09-02 미팅, 정본 `[260831]` §3) | REGION(zone) = 예약 대카(zone)/중카(leaf) **자동 그룹핑**. 큐레이션 = **각 페이지 카테고리 순서 재정렬만**. ~~자유 편성·master_theme 사전·대-레벨 묶음(region_section)·중카 묶기~~ 폐기(관리 부담, 영업/제휴팀 의견 — 추가 여지만). 전역은 "카테고리→slug 매핑 사전"만. **CITY 집계는 B-2**(home-nav §5-2) |
-| D8 | **활성화 게이트** | CITY 활성화 = image·tags·desc (REGION 불요, §3-7) / REGION 활성화 = ≥1 행정구 DETAIL_LOCATION |
+| D8 | **활성화 게이트** | CITY 유저 노출 = 자식 REGION ≥1 + image·tags·desc / REGION 공개 = 부모 CITY 활성화 + 선택 언어의 hero·tags·desc + 선택 구별 법정동 ≥1. tagline은 선택 입력 |
 | D9 | **비공개 REGION 500개 삭제** | 2025-02-14 벌크(id 25~531), 의존성 검증 후 |
 | D10 | **스팟 구 재태깅으로 coverage 해결** | 관광지-only 스팟에 구 detail_location 추가 → REGION 구단위 묶음으로 누락 0 |
 
@@ -58,7 +58,7 @@ category
   └ SUBWAY           ─ spot_has_category ─ spot     (지하철 노선11·역478 — '주요 역' 탭)
 
 [REGION 도메인 레이어 — 콘텐츠/프레젠테이션, 위에 얹힘]
-CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이트
+CITY(활성화)   ← 대표이미지·tags·desc / 자식 REGION 보유 + 카드메타 게이트
   └ REGION (= 1개 이상의 '행정구' DETAIL_LOCATION 묶음, CITY 하위·평면)
         - 행정구 DETAIL_LOCATION.legal_code → legal_location(1:1) → REGION 폴리곤 = union
         - 테마 섹션(어드민 CMS) · subway · blog · persona 큐레이션
@@ -69,7 +69,7 @@ CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이
 
 | 엔티티 | 테이블 | 역할 | 비고 |
 |---|---|---|---|
-| **CITY** | `category(type=CITY)` + 카드메타 | 도시. 페이지 = `/region/{city}` = **CITY 스팟 ∩ theme (B-2)** | slug·카드메타·활성화·도시간이동만 신규(§3-7) |
+| **CITY** | `category(type=CITY)` + 카드메타 | 도시. 페이지 = `/region/{city}` = **CITY 스팟 ∩ theme (B-2)** | 카드메타·활성화·도시쌍·지역쌍 이동 신규, slug UI 없음(§3-7) |
 | **DETAIL_LOCATION** | `category(type=DETAIL_LOCATION)` | 스팟 분류 + (행정구형은) REGION의 묶음 단위 | 행정구59=묶음키 / 관광지81=스팟태그로 잔존 |
 | **REGION** | `region` + `region_has_detail_location` | 인지 구역. 페이지 = `/region/{city}/{zone}` | 행정구 detail_location 묶음, CITY 하위 평면 |
 | **legal_location** | `legal_location` | 지도 폴리곤·좌표판정 (기하 전용) | 행정구 DETAIL_LOCATION에 1:1 연결 |
@@ -108,7 +108,7 @@ CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이
 ```
 
 - **theme은 depth 3·4 두 곳에 leaf로 존재** — city×theme(`/{city}/{theme}`) + zone×theme(`/{city}/{zone}/{theme}`). 둘 다 풀 그리드 SEO 랜딩.
-- **3번째 칸 = zone/theme 공유 네임스페이스 (A안):** `/region/{city}/{X}`에서 X가 zone인지 theme인지를 **city별 슬러그 레지스트리**(`(city, slug) → {type: zone|theme, target_id}`, slug 유니크 PK)로 판정. 4번째 칸은 zone 확정 하의 theme이라 모호함 없음. zone=지명·theme=의도명사라 충돌 사실상 0, 어드민에서 zone↔master_theme 슬러그 충돌 생성 차단(가드).
+- **3번째 칸 = zone/theme 공유 경로:** `/region/{city}/{X}`에서 X가 zone인지 theme인지는 P2-T3 라우팅 리졸버가 판정. 4번째 칸은 zone 확정 하의 theme이라 모호함 없음. `/region` 어드민에는 slug 관련 입력·표시·검증 UI를 두지 않음.
 - **페이지 내 테마 섹션 = 캐러셀** (city·zone 공통): '더보기→리스트' 폐기(→ 이전 'W3: 더보기→리스트 흡수' 결정 **갱신**). **monthly best 상위 9개**(기존 컴포넌트 가정, 디자인 시 조정) 캐러셀 + 스팟이 더 있으면 **"전체 보기" → 해당 leaf**.
   - **city×테마**(`/region/{city}/{theme}`): 'seoul restaurants' 등 **대형 키워드(월 1만~10만)** 포획. **CITY 스팟 전체 ∩ 테마(B-2)** 를 페이지화 — 완전집합이라 콘텐츠 항상 충분.
   - **zone×테마**(`/region/{city}/{zone}/{theme}`): 'gangnam restaurants' 등 **롱테일(100~1천)**. 콘텐츠 편차 커 임계 게이트(아래)로 조건부 생성.
@@ -139,7 +139,7 @@ CITY(활성화)   ← slug·hero·tags·desc·도시간이동 / 활성화 게이
 ### 3-7. CITY tier (카드 메타만 저장, 스팟은 B-2로 뿌림)
 
 CITY는 상세 콘텐츠를 **저장하지 않는다.** 스팟은 **B-2 = 그 CITY에 `spot_has_category`로 연결된 스팟 전체 ∩ 테마**로 뿌린다:
-- **CITY가 저장하는 것**: `slug`(라우팅) · **카드 메타**(대표 이미지·태그·설명 — `/region` 인덱스 카드용) · **이동**(도시쌍 + **지역쌍** 테이블, 공항 노드 엔드포인트 — `[260831]` §1-2) · 폴리곤(시 경계). hero/긴 설명 같은 상세 에디토리얼은 저장 X.
+- **CITY가 저장하는 것**: `slug`(라우팅) · **카드 메타**(대표 이미지·태그·설명 — `/region` 인덱스 카드용) · **이동**(도시쌍 + **지역쌍** 테이블, 공항 제외 — `[260831]` §1-2) · 폴리곤(시 경계). hero/긴 설명 같은 상세 에디토리얼은 저장 X.
 - **CITY 상세 페이지 본문 = 파생**:
   - **스팟** = **그 CITY에 `spot_has_category`로 연결된 스팟 전체를 테마(home-nav MAIN_RESERVATION) 기준으로 묶어 노출(B-2)**. REGION 커버리지와 무관하게 완전집합이라 항상 충분.
   - **블로그** = theme와 **독립.** `블로그.detail_location → REGION → CITY` 경로로 집계해 **정렬 기준으로 별도 섹션** 노출(테마 묶음 아님).
@@ -149,7 +149,7 @@ CITY는 상세 콘텐츠를 **저장하지 않는다.** 스팟은 **B-2 = 그 CI
 ### 3-8. 어드민 `/region` 설계
 
 - **탭 [CITY | REGION]**
-- **CITY 탭**: `category(type=CITY)` 전체 테이블 → 활성화/비활성화(필수필드 게이트). **CITY 편집 화면 = 카드메타·slug·이동(도시쌍 + 지역쌍) 입력만** (REGION→CITY는 자동 도출, CITY 집계는 B-2·home-nav — 마스터 §3-3①·§5-2). REGION↔master_theme 매핑은 REGION 섹션 CMS에서.
+- **CITY 탭**: 자식 REGION을 보유한 `category(type=CITY)` 테이블 → 활성화/비활성화(필수필드 게이트). **CITY 편집 화면 = 카드메타·이동(도시쌍 + 지역쌍)·카테고리 순서 입력** (slug UI 없음, REGION→CITY는 자동 도출, CITY 집계는 B-2·home-nav — 마스터 §3-3①·§5-2).
 - **REGION 탭**: REGION 생성 + 행정구 detail_location 매핑 + 섹션 CMS + subway/blog/persona 큐레이션
 - 부수: detail_location 생성/수정에 **상위 도시(parent) 입력** 추가(고아 양산 차단), `createCategory` type 화이트리스트
 
@@ -238,7 +238,7 @@ r/koreatravel 10,001건 원문 대조. region/POI가 같은 위치 행정·법�
 | BE-3 | slug 라우팅·리졸버 + **city별 슬러그 레지스트리**(`(city,slug)→{zone|theme}`, 유니크) — `/region/{city}/{zone\|theme}`(3번째 칸 공유 판정) + zone×theme leaf `/{city}/{zone}/{theme}` |
 | BE-4 | **테마 leaf 쿼리**(지역 detail_location ∩ master_theme 카테고리, 멀티카테고리) + **테마 섹션 캐러셀 쿼리**(monthly best 상위 9) + **콘텐츠 임계 10·canonical**(`/spot/list?category=` 필터뷰 noindex 양보) |
 | BE-5 | **(재경량화 2026-09-02 미팅)** `region_category_order(scope_type[city\|zone], scope_id, parent_category, category_code, order)` — `parent_category` NULL=대카 순서 / 대카값=그 대카 leaf의 중카 순서. 도시·지역 상세에서 독립 설정(D). 미설정=폴백(대카 home-nav priority / 중카 category.priority, flat·상속無). ~~region_group 묶음·master_theme·section→master~~ **전부 폐기**(묶기 제거). 묶기 재도입은 후속(순서 저장 위 additive 레이어). 정본 `[260831]` §3-2 |
-| BE-6 | **CITY 카드메타+slug+이동 테이블(도시쌍 + 지역쌍, 공항 노드 엔드포인트 — `[260831]` §1-2)** + **상세 스팟 쿼리**(CITY 스팟 ∩ home-nav MAIN_RESERVATION, B-2) + `region.city` FK |
+| BE-6 | **CITY 카드메타+slug+이동 테이블(도시쌍 + 지역쌍, 공항 제외 — `[260831]` §1-2)** + **상세 스팟 쿼리**(CITY 스팟 ∩ home-nav MAIN_RESERVATION, B-2) + `region.city` FK |
 | BE-7 | subway('주요 역') · blog(detail_location 기준) · persona 큐레이션 영역 |
 | BE-8 | **CITY 블로그 섹션** — `블로그.detail_location → REGION → CITY` 집계, 정렬 기준 노출 (theme 독립) |
 
@@ -253,7 +253,7 @@ r/koreatravel 10,001건 원문 대조. region/POI가 같은 위치 행정·법�
 > **유저 페이지 배포 = Phase 2 데이터 생성 완료 후 일정** (D #3). 어드민으로 데이터부터 채우고, FE 공개는 그 다음.
 
 ### 어드민 (횡단)
-AD-1 `/region` 탭[CITY|REGION] · AD-2 CITY 활성화 게이트 · AD-3 REGION↔detail_location 매핑 · AD-4 섹션 CMS(생성/카테고리연결/순서) · AD-5 detail_location parent 입력 + createCategory type 화이트리스트 · AD-6 **슬러그 레지스트리 유니크 가드**(zone↔master_theme 슬러그 충돌 생성 차단)
+AD-1 `/region` 탭[CITY|REGION] · AD-2 CITY 활성화 게이트 · AD-3 REGION↔detail_location 매핑 · AD-4 콘텐츠 메타·이동 편집·카테고리 순서 · AD-5 detail_location parent 입력 + createCategory type 화이트리스트
 
 ### 검증
 CV-1 재태깅 대상 스팟 수 산정 · CV-2 성공지표(참여 11초→·유입·구역필터 사용률 / 스팟이동 5% 가드레일)
@@ -275,7 +275,7 @@ CV-1 재태깅 대상 스팟 수 산정 · CV-2 성공지표(참여 11초→·�
 - ✅ 동 18개 분류 → **관광지 버킷 흡수**(구 단위 아님). 부암동·평창동·송월동=무연결 삭제, 성수동×2=중복 통합과 겹침
 - ✅ **마스터 테마** → REGION 섹션은 자유 편성, REGION 섹션 CMS에서 master_theme에 매핑. **CITY 집계는 B-2**(CITY 스팟 ∩ 테마), REGION 그룹핑 불필요. 블로그는 theme 독립(detail_location 경로 정렬 섹션)
 - ✅ **테마 노출 = 캐러셀 + leaf (2026-06-25)** — city·zone 테마 섹션을 'monthly best 상위 9 캐러셀 + 전체보기→테마 leaf'로. 더보기→`/spot/list` 폐기(테마는 멀티카테고리라 단일필터 리스트 불가)
-- ✅ **city×테마 살림(A안) (2026-06-25)** — `/region/{city}/{theme}` 신설해 head 키워드(seoul restaurants 월 1만~10만) 포획. zone과 3번째 칸 공유는 **city별 슬러그 레지스트리 + 어드민 유니크 가드**로 판정(zone=지명·theme=의도명사라 충돌 0)
+- ✅ **city×테마 살림(A안) (2026-06-25)** — `/region/{city}/{theme}` 신설해 head 키워드(seoul restaurants 월 1만~10만) 포획. zone과 공유하는 3번째 경로의 타입 판정은 P2-T3 라우팅 리졸버 소관이며 어드민에는 slug 관련 UI를 두지 않음
 - ✅ **leaf 임계값 10 (2026-06-25)** — 스팟 10개(= 캐러셀 9+1)부터 테마 leaf 생성·색인. "캐러셀에 다 못 담으면 leaf" 단순 규칙, 비노출 구간 0. 정렬은 monthly best
 
 **남은 디테일 (구현 시)**
